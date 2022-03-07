@@ -6,6 +6,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField, Tooltip("La speed de déplacement du player")]private float m_speedMove = 10f;
     [SerializeField, Tooltip("La speed de déplacement du player")]private float m_speedCursor = 10f;
     [SerializeField, Tooltip("La camera du joueur")]private Camera m_camera;
+
     private Vector2 m_dir;
     private float m_mouseRotationX;
     private float m_mouseRotationY;
@@ -20,6 +21,7 @@ public class PlayerController : MonoBehaviour
     {
         if (Input.GetAxis("Horizontal") != 0 || Input.GetAxis("Vertical") != 0)
             DoMouvement();
+        
         DoCursorMouvement();
     }
 

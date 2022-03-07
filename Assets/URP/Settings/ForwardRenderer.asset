@@ -32,8 +32,8 @@ MonoBehaviour:
   m_Name: ForwardRenderer
   m_EditorClassIdentifier: 
   m_RendererFeatures:
-  - {fileID: 319465244764926961}
-  m_RendererFeatureMap: f1f34b90f2f76e04
+  - {fileID: 570757990853212192}
+  m_RendererFeatureMap: 207885615ebdeb07
   postProcessData: {fileID: 11400000, guid: 41439944d30ece34e96484bdb6645b55, type: 2}
   xrSystemData: {fileID: 11400000, guid: 60e1133243b97e347b653163a8c01b64, type: 2}
   shaders:
@@ -73,6 +73,25 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ea1b0d5ef3f011d43968a5907d71ebc7, type: 3}
   m_Name: NewBlit
+  m_EditorClassIdentifier: 
+  m_Active: 1
+  settings:
+    Event: 600
+    blitMaterial: {fileID: 2100000, guid: 2c0263addf79e91478c9821144827dfd, type: 2}
+    blitMaterialPassIndex: 0
+    destination: 0
+    textureId: _BlitPassTexture
+--- !u!114 &570757990853212192
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea1b0d5ef3f011d43968a5907d71ebc7, type: 3}
+  m_Name: Flou PostProcess
   m_EditorClassIdentifier: 
   m_Active: 1
   settings:
