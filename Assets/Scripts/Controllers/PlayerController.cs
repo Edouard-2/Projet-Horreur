@@ -35,10 +35,8 @@ public class PlayerController : MonoBehaviour
         m_xRotate -= m_mouseRotationY;
         m_xRotate = Mathf.Clamp(m_xRotate, -90f, 90f);
         
-        transform.Rotate(Vector3.up * m_mouseRotationX);
-        
         m_camera.transform.localRotation = Quaternion.Euler(m_xRotate,0,0);
-        
+        transform.Rotate(Vector3.up * m_mouseRotationX);
     }
 
     private void DoMouvement()
@@ -46,8 +44,8 @@ public class PlayerController : MonoBehaviour
         float xDir = Input.GetAxis("Horizontal") * m_speedMove * Time.deltaTime;
         float yDir = Input.GetAxis("Vertical") * m_speedMove * Time.deltaTime;
         
-        m_dir = m_camera.transform.right * xDir + m_camera.transform.forward * -yDir;
+        m_dir = transform.right * xDir + transform.forward * yDir;
         
-        m_charaController.Move(new Vector3(m_dir.x, 0, m_dir.y));
+        m_charaController.Move(m_dir);
     }
 }
