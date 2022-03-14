@@ -2,24 +2,25 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    [SerializeField, Tooltip("Le characontroller du player")]private CharacterController m_charaController;
-    [SerializeField, Tooltip("La speed de déplacement du player")]private float m_speedMove = 10f;
+    //Mouvement de Vision
     [SerializeField, Tooltip("La speed de déplacement du player")]private float m_speedCursor = 10f;
     [SerializeField, Tooltip("La camera du joueur")]private Camera m_camera;
 
-    [SerializeField, Tooltip("Courbe de pourcentage de flou au changement de vision")]
-    private AnimationCurve m_curveVision;
-    
     //Constante
     private const float m_gravity = -9.81f;
     
     //Mouvement
+    [SerializeField, Tooltip("Le characontroller du player")]private CharacterController m_charaController;
+    [SerializeField, Tooltip("La speed de déplacement du player")]private float m_speedMove = 10f;
     private Vector3 m_dir;
     private Vector3 m_velocity;
     private float m_mouseRotationX;
     private float m_mouseRotationY;
     private float m_xRotate = 0f;
     
+    //Changement de vision
+    [SerializeField, Tooltip("Courbe de pourcentage de flou au changement de vision")] private AnimationCurve m_curveVision;
+    [SerializeField, Tooltip("Material de flou pour le postprocess")] private Material m_matVision;
     private float m_timeVision;
     private bool m_resetTimeVision = false;
 
@@ -59,6 +60,7 @@ public class PlayerController : MonoBehaviour
         {
             Debug.Log(m_curveVision.Evaluate(  Time.time - m_timeVision));
             Debug.Log(Time.time - m_timeVision);
+            m_matVision.SetFloat("_BlurSize",Time.time - m_timeVision);
         }
     }
 
