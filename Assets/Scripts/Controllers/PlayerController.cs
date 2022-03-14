@@ -7,28 +7,58 @@ public class PlayerController : MonoBehaviour
     [SerializeField, Tooltip("La speed de déplacement du player")]private float m_speedCursor = 10f;
     [SerializeField, Tooltip("La camera du joueur")]private Camera m_camera;
 
+    [SerializeField, Tooltip("Courbe de pourcentage de flou au changement de vision")]
+    private AnimationCurve m_curveVision;
+    
+    //Constante
+    private const float m_gravity = -9.81f;
+    
+    //Mouvement
     private Vector3 m_dir;
     private Vector3 m_velocity;
-    private float m_gravity = -9.81f;
     private float m_mouseRotationX;
     private float m_mouseRotationY;
     private float m_xRotate = 0f;
+    
+    private float m_timeVision;
+    private bool m_resetTimeVision = false;
 
     private void Awake()
     {
         m_charaController = GetComponent<CharacterController>();
-        //Cursor.lockState = CursorLockMode.Locked;
+        Cursor.lockState = CursorLockMode.Locked;
     }
 
     private void Update()
     {
+        //Mouvement du Joueur
         if (Input.GetAxis("Horizontal") != 0 || Input.GetAxis("Vertical") != 0)
             DoMouvement();
         
+        //Rotation de la camera en fonction du curseur
         DoCursorMouvement();
-        if (!m_charaController.isGrounded)
+        
+        //Changement de vision
+        if (Input.GetKeyDown(KeyCode.U))
         {
-            Debug.Log("ground");
+            m_timeVision = Time.time;
+            m_resetTimeVision = true;
+        }
+        DoSwitchView();
+    }
+
+    private void DoSwitchView()
+    {
+        
+        if (Time.time - m_timeVision >= 5)
+        {
+            m_resetTimeVision = false;
+            return;
+        }
+        if (m_resetTimeVision)
+        {
+            Debug.Log(m_curveVision.Evaluate(  Time.time - m_timeVision));
+            Debug.Log(Time.time - m_timeVision);
         }
     }
 
