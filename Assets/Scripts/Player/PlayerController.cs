@@ -10,12 +10,12 @@ public class PlayerController : MonoBehaviour
     
     private void OnEnable()
     {
-        PlayerManager.Instance.DoMouvment += Mouvement;
+        PlayerManager.Instance.DoMouvmentHandler += Mouvement;
     }
 
     private void OnDisable()
     {
-        PlayerManager.Instance.DoMouvment -= Mouvement;
+        PlayerManager.Instance.DoMouvmentHandler -= Mouvement;
     }
     private void Awake()
     {

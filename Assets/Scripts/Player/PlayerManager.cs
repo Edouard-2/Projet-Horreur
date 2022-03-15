@@ -10,21 +10,25 @@ public class PlayerManager : Singleton<PlayerManager>
         get => m_gravity;
     }
 
-    public delegate void DelegateEvent();
+    public delegate void DoMouvment();
+    public delegate void DoCursorMouvement();
+    public delegate void DoSwitchView();
 
-    public DelegateEvent DoMouvment;
-    public DelegateEvent DoCursorMouvement;
-    public DelegateEvent DoSwitchView;
+    public DoMouvment DoMouvmentHandler;
+    public DoCursorMouvement DoCursorMouvementHandler;
+    public DoSwitchView DoSwitchViewHandler;
     private void Update()
     {
         //Mouvement du Joueur
         if (Input.GetAxis("Horizontal") != 0 || Input.GetAxis("Vertical") != 0)
-            DoMouvment?.Invoke();
+        {
+            DoMouvmentHandler?.Invoke();
+        }
         //Mouvement de la camera
-        DoCursorMouvement?.Invoke();
+        DoCursorMouvementHandler?.Invoke();
         
         //Input du changement de vision
-        DoSwitchView?.Invoke();
+        DoSwitchViewHandler?.Invoke();
     }
 
     protected override string GetSingletonName()

@@ -107,7 +107,10 @@ GameObject:
   - component: {fileID: 5898427543312060672}
   - component: {fileID: 8560944343188743135}
   - component: {fileID: 5577764659224647124}
+  - component: {fileID: 1739398479658060359}
   - component: {fileID: 5608393819760579455}
+  - component: {fileID: 5128347266043499178}
+  - component: {fileID: 5860533037316701792}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -198,6 +201,19 @@ CharacterController:
   m_SkinWidth: 0.1
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1739398479658060359
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2800280127000841989}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 70e0d28d686af914a98283c49bd35256, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_dontdestroyOnLoad: 1
 --- !u!114 &5608393819760579455
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -210,107 +226,124 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a378cca4f0ffa04db723542feb0d95e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_speedCursor: 10
-  m_camera: {fileID: 1674616961786738440}
   m_charaController: {fileID: 5577764659224647124}
   m_speedMove: 10
+--- !u!114 &5128347266043499178
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2800280127000841989}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a2930b518afbf6d48af09d751521827e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_speedCursor: 10
+  m_camera: {fileID: 1674616961786738440}
+--- !u!114 &5860533037316701792
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2800280127000841989}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 886323fc48b33004ea883c283fdb4ea1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
   m_curveVision:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
-      time: 0.00000021606684
-      value: 0.0000019381987
-      inSlope: 1.7232014
-      outSlope: 1.7232014
-      tangentMode: 0
+      time: 0
+      value: 0
+      inSlope: 17.391935
+      outSlope: 17.391935
+      tangentMode: 34
       weightedMode: 0
       inWeight: 0
-      outWeight: 0.18842158
+      outWeight: 0.33333334
     - serializedVersion: 3
-      time: 0.17964613
-      value: 0.45507222
-      inSlope: 2.5166745
-      outSlope: 2.5166745
+      time: 0.022701487
+      value: 0.39482278
+      inSlope: 13.581005
+      outSlope: 13.581005
       tangentMode: 0
       weightedMode: 0
-      inWeight: 0.14034836
-      outWeight: 0.30083585
-    - serializedVersion: 3
-      time: 0.28029287
-      value: 0.9976746
-      inSlope: 0.09275847
-      outSlope: 0.09275847
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 1
+      inWeight: 0.33333334
       outWeight: 1
     - serializedVersion: 3
-      time: 0.3717387
-      value: 0.21393226
-      inSlope: 0.0036977597
-      outSlope: 0.0036977597
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.9463053
-      outWeight: 0.73800683
-    - serializedVersion: 3
-      time: 0.48935187
-      value: 0.35286763
-      inSlope: 0.9986314
-      outSlope: 0.9986314
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.747269
-      outWeight: 0.063357495
-    - serializedVersion: 3
-      time: 0.65704817
-      value: 0.43572927
-      inSlope: -0.001598854
-      outSlope: -0.001598854
+      time: 0.03808041
+      value: 0.9640722
+      inSlope: 0.084517546
+      outSlope: 0.084517546
       tangentMode: 0
       weightedMode: 0
       inWeight: 0.33333334
-      outWeight: 0.33333334
+      outWeight: 0.7304438
     - serializedVersion: 3
-      time: 0.9916639
-      value: 0.3023543
-      inSlope: 0.0027947628
-      outSlope: 0.0027947628
+      time: 0.09413755
+      value: 0.29806256
+      inSlope: 0.20760016
+      outSlope: 0.20760016
       tangentMode: 0
       weightedMode: 0
       inWeight: 0.33333334
-      outWeight: 0.33333334
+      outWeight: 0.6773248
     - serializedVersion: 3
-      time: 1.3493001
-      value: 0.35540938
-      inSlope: 0.0049705952
-      outSlope: 0.0049705952
+      time: 0.174972
+      value: 0.53946775
+      inSlope: -0.10717626
+      outSlope: -0.10717626
       tangentMode: 0
       weightedMode: 0
       inWeight: 0.33333334
+      outWeight: 0.52531785
+    - serializedVersion: 3
+      time: 0.25904548
+      value: 0.3473366
+      inSlope: -0.32855162
+      outSlope: -0.32855162
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.15077941
+    - serializedVersion: 3
+      time: 0.49956983
+      value: 0.4844626
+      inSlope: -0.054483756
+      outSlope: -0.054483756
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.046269655
+    - serializedVersion: 3
+      time: 4.757388
+      value: 0.34139776
+      inSlope: -0.2309628
+      outSlope: -0.2309628
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.052709006
       outWeight: 0.33333334
     - serializedVersion: 3
-      time: 2.25
-      value: 0.3097164
-      inSlope: -0.0372668
-      outSlope: -0.0372668
-      tangentMode: 0
+      time: 5
+      value: 0
+      inSlope: -1.4071766
+      outSlope: -1.4071766
+      tangentMode: 34
       weightedMode: 0
-      inWeight: 0.048962742
-      outWeight: 0.2533709
-    - serializedVersion: 3
-      time: 3.25
-      value: -0.0009137038
-      inSlope: -0.67091507
-      outSlope: -0.67091507
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.05640375
+      inWeight: 0.33333334
       outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
   m_matVision: {fileID: 2100000, guid: e3c081d870709434bb6906fd16b35f64, type: 2}
+  m_matInvisibleVisible: {fileID: 2100000, guid: 1a346f22aa05442439f2eeb418dd15e4, type: 2}
+  m_matVisibleInvisible: {fileID: 2100000, guid: 804db1eb4e97eb94db95afef6c842e25, type: 2}
 --- !u!1001 &7424994880173637876
 PrefabInstance:
   m_ObjectHideFlags: 0

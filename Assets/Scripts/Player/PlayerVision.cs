@@ -12,12 +12,12 @@ public class PlayerVision : MonoBehaviour
 
     private void OnEnable()
     {
-        PlayerManager.Instance.DoSwitchView += IsInputDown;
+        PlayerManager.Instance.DoSwitchViewHandler += IsInputDown;
     }
 
     private void OnDisable()
     {
-        PlayerManager.Instance.DoSwitchView -= IsInputDown;
+        PlayerManager.Instance.DoSwitchViewHandler -= IsInputDown;
     }
 
     private void Awake()
