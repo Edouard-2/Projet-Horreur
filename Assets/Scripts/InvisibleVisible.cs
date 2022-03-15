@@ -17,3 +17,6 @@ public class InvisibleVisible : ScriptableObject
 
 //  Si finit    => désactiveobj?.invoke();
 //              => activeobj?.invoke();
+
+
+//Script qui a collider, autre script => fonction Activer et Désactiver
