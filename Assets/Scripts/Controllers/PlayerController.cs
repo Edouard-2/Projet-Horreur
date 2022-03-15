@@ -29,6 +29,7 @@ public class PlayerController : MonoBehaviour
     {
         m_charaController = GetComponent<CharacterController>();
         Cursor.lockState = CursorLockMode.Locked;
+        m_matVision.SetFloat("_BlurSize",0);
     }
 
     private void Update()
@@ -41,7 +42,7 @@ public class PlayerController : MonoBehaviour
         DoCursorMouvement();
         
         //Changement de vision
-        if (Input.GetKeyDown(KeyCode.U))
+        if (Input.GetKeyDown(KeyCode.Space))
         {
             m_timeVision = Time.time;
             m_resetTimeVision = true;
@@ -51,17 +52,17 @@ public class PlayerController : MonoBehaviour
 
     private void DoSwitchView()
     {
-        
-        if (Time.time - m_timeVision >= 5)
+        float tTime = Time.time - m_timeVision;
+        if (tTime > m_curveVision.keys[m_curveVision.length-1].time)
         {
             m_resetTimeVision = false;
             return;
         }
+        
         if (m_resetTimeVision)
         {
-            Debug.Log(m_curveVision.Evaluate(  Time.time - m_timeVision));
-            Debug.Log(Time.time - m_timeVision);
-            m_matVision.SetFloat("_BlurSize",Time.time - m_timeVision);
+            float blurValue = m_curveVision.Evaluate(tTime);
+            m_matVision.SetFloat("_BlurSize",blurValue);
         }
     }
 
