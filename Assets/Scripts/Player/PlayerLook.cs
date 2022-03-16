@@ -7,7 +7,7 @@ public class PlayerLook : MonoBehaviour
     [SerializeField, Tooltip("La camera du joueur")]private Camera m_camera;
     private float m_mouseRotationX;
     private float m_mouseRotationY;
-    private float m_xRotate = 0f;
+    private float m_xRotate = 0;
     
     private void OnEnable()
     {
@@ -18,7 +18,7 @@ public class PlayerLook : MonoBehaviour
     {
         PlayerManager.Instance.DoCursorHandler -= CursorMouvement;
     }
-    
+
     private void CursorMouvement()
     {
         //Mouvement de la vue
@@ -27,7 +27,7 @@ public class PlayerLook : MonoBehaviour
 
         m_xRotate -= m_mouseRotationY;
         m_xRotate = Mathf.Clamp(m_xRotate, -90f, 90f);
-        
+
         m_camera.transform.localRotation = Quaternion.Euler(m_xRotate,0,0);
         transform.Rotate(Vector3.up * m_mouseRotationX);
     }

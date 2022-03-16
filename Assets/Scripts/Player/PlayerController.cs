@@ -17,6 +17,7 @@ public class PlayerController : MonoBehaviour
     {
         PlayerManager.Instance.DoMouvmentHandler -= Mouvement;
     }
+
     private void Awake()
     {
         m_charaController = GetComponent<CharacterController>();
