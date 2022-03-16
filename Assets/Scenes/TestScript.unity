@@ -612,10 +612,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5366585129713404176, guid: 158313dc955e9d440918ddbf4232a7a0, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 1a346f22aa05442439f2eeb418dd15e4, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 158313dc955e9d440918ddbf4232a7a0, type: 3}
 --- !u!1 &795054506 stripped
@@ -701,10 +697,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Mur Invisible
       objectReference: {fileID: 0}
-    - target: {fileID: 1865762827350889155, guid: 663137607c28cbc429d64cc649a3f002, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 804db1eb4e97eb94db95afef6c842e25, type: 2}
     - target: {fileID: 1865762827350889181, guid: 663137607c28cbc429d64cc649a3f002, type: 3}
       propertyPath: m_RootOrder
       value: 5
@@ -903,6 +895,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1674616962079655763, guid: d76affee4e139c34f82c85ad49d98109, type: 3}
+      propertyPath: m_OcclusionCulling
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1674616962079655765, guid: d76affee4e139c34f82c85ad49d98109, type: 3}
+      propertyPath: m_ClearDepth
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1674616962079655765, guid: d76affee4e139c34f82c85ad49d98109, type: 3}
+      propertyPath: m_RenderPostProcessing
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2800280127000841989, guid: d76affee4e139c34f82c85ad49d98109, type: 3}
       propertyPath: m_Name
       value: Player
@@ -959,5 +963,41 @@ PrefabInstance:
       propertyPath: m_matVisibleInvisible
       value: 
       objectReference: {fileID: 2100000, guid: 804db1eb4e97eb94db95afef6c842e25, type: 2}
+    - target: {fileID: 5860533037316701792, guid: d76affee4e139c34f82c85ad49d98109, type: 3}
+      propertyPath: m_curveMatVision.m_Curve.Array.data[1].time
+      value: 1.0019281
+      objectReference: {fileID: 0}
+    - target: {fileID: 5860533037316701792, guid: d76affee4e139c34f82c85ad49d98109, type: 3}
+      propertyPath: m_curveMatVision.m_Curve.Array.data[0].value
+      value: -0.025939941
+      objectReference: {fileID: 0}
+    - target: {fileID: 5860533037316701792, guid: d76affee4e139c34f82c85ad49d98109, type: 3}
+      propertyPath: m_curveMatVision.m_Curve.Array.data[1].value
+      value: 1.5616103
+      objectReference: {fileID: 0}
+    - target: {fileID: 5860533037316701792, guid: d76affee4e139c34f82c85ad49d98109, type: 3}
+      propertyPath: m_curveMatVision.m_Curve.Array.data[0].inSlope
+      value: 1.5844952
+      objectReference: {fileID: 0}
+    - target: {fileID: 5860533037316701792, guid: d76affee4e139c34f82c85ad49d98109, type: 3}
+      propertyPath: m_curveMatVision.m_Curve.Array.data[1].inSlope
+      value: 1.5844952
+      objectReference: {fileID: 0}
+    - target: {fileID: 5860533037316701792, guid: d76affee4e139c34f82c85ad49d98109, type: 3}
+      propertyPath: m_curveMatVision.m_Curve.Array.data[0].outSlope
+      value: 1.5844952
+      objectReference: {fileID: 0}
+    - target: {fileID: 5860533037316701792, guid: d76affee4e139c34f82c85ad49d98109, type: 3}
+      propertyPath: m_curveMatVision.m_Curve.Array.data[1].inWeight
+      value: 0.33333334
+      objectReference: {fileID: 0}
+    - target: {fileID: 5860533037316701792, guid: d76affee4e139c34f82c85ad49d98109, type: 3}
+      propertyPath: m_curveMatVision.m_Curve.Array.data[1].outSlope
+      value: 1.5844952
+      objectReference: {fileID: 0}
+    - target: {fileID: 5860533037316701792, guid: d76affee4e139c34f82c85ad49d98109, type: 3}
+      propertyPath: m_curveMatVision.m_Curve.Array.data[0].outWeight
+      value: 0.33333334
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d76affee4e139c34f82c85ad49d98109, type: 3}
