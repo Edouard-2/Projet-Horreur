@@ -32,8 +32,9 @@ public class PlayerVision : MonoBehaviour
         {
             m_timeVision = Time.time;
             m_resetTimeVision = true;
-            DoSwitchView();
         }
+
+        DoSwitchView();
     }
     
     private void DoSwitchView()

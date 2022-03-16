@@ -11,12 +11,12 @@ public class PlayerLook : MonoBehaviour
     
     private void OnEnable()
     {
-        PlayerManager.Instance.DoMouvmentHandler += CursorMouvement;
+        PlayerManager.Instance.DoCursorHandler += CursorMouvement;
     }
 
     private void OnDisable()
     {
-        PlayerManager.Instance.DoMouvmentHandler -= CursorMouvement;
+        PlayerManager.Instance.DoCursorHandler -= CursorMouvement;
     }
     
     private void CursorMouvement()

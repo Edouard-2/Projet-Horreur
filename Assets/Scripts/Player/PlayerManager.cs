@@ -1,5 +1,6 @@
 using UnityEngine;
 
+[RequireComponent(typeof(PlayerLook)), RequireComponent(typeof(PlayerVision)),RequireComponent(typeof(PlayerController))]
 public class PlayerManager : Singleton<PlayerManager>
 {
     //Constante
@@ -11,12 +12,11 @@ public class PlayerManager : Singleton<PlayerManager>
     }
 
     public delegate void DoMouvment();
-    public delegate void DoCursorMouvement();
-    public delegate void DoSwitchView();
 
     public DoMouvment DoMouvmentHandler;
-    public DoCursorMouvement DoCursorMouvementHandler;
-    public DoSwitchView DoSwitchViewHandler;
+    public DoMouvment DoCursorHandler;
+    public DoMouvment DoSwitchViewHandler;
+
     private void Update()
     {
         //Mouvement du Joueur
@@ -24,8 +24,9 @@ public class PlayerManager : Singleton<PlayerManager>
         {
             DoMouvmentHandler?.Invoke();
         }
+
         //Mouvement de la camera
-        DoCursorMouvementHandler?.Invoke();
+        DoCursorHandler?.Invoke();
         
         //Input du changement de vision
         DoSwitchViewHandler?.Invoke();
