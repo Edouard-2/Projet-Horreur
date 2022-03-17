@@ -12,10 +12,12 @@ public class PlayerManager : Singleton<PlayerManager>
     }
 
     public delegate void DoMouvment();
-
     public DoMouvment DoMouvmentHandler;
     public DoMouvment DoCursorHandler;
     public DoMouvment DoSwitchViewHandler;
+
+    public delegate void DoVisionSwitch(bool p_start);
+    public DoVisionSwitch DoVisibleToInvisibleHandler;
 
     private void Update()
     {
