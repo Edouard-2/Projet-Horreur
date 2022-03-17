@@ -5,8 +5,7 @@ public class PlayerVision : MonoBehaviour
 {
     //Changement de vision
     [SerializeField, Tooltip("Courbe de pourcentage de flou au changement de vision")] private AnimationCurve m_curveVision;
-    [SerializeField, Tooltip("Courbe de pourcentage pour la transparence du matérial allé vers l'état modifié")] private AnimationCurve m_curveMatVisionVisible;
-    [SerializeField, Tooltip("Courbe de pourcentage pour la transparence du matérial retour à l'état normal")] private AnimationCurve m_curveMatVisionInvisible;
+    [SerializeField, Tooltip("Courbe de pourcentage pour la transparence du matérial allé vers l'état modifié")] private AnimationCurve m_curveMatVision;
 
     [SerializeField, Tooltip("Material de flou pour le postprocess")] private Material m_matVision;
     [SerializeField, Tooltip("Material des matérials Invisible en net et visible en flou")] private Material m_matInvisibleVisible;
@@ -14,6 +13,7 @@ public class PlayerVision : MonoBehaviour
     private float m_timeVision;
     private bool m_resetTimeVisionComp = false;
     private bool m_resetTimeVisionMat = false;
+    private int m_readyEnd = 0;
 
     private void OnEnable()
     {
@@ -35,13 +35,33 @@ public class PlayerVision : MonoBehaviour
         //Changement de vision
         if (Input.GetKeyDown(KeyCode.Space))
         {
+            m_readyEnd = 0;
             m_timeVision = Time.time;
             m_resetTimeVisionComp = true;
             m_resetTimeVisionMat = true;
         }
+        
         float tTime = Time.time - m_timeVision;
+
+        float startTimeSecMat = (m_curveVision.keys[m_curveVision.length - 1].time - m_curveMatVision.keys[m_curveMatVision.length - 1].time);
+        //Vision joueur
         DoSwitchView(tTime);
-        DoSwitchMaterial(tTime, m_curveMatVisionVisible);
+
+        //Chanagement obj en invisible dans le flou
+        if (m_readyEnd == 0)
+        {
+            Debug.Log("hey mat 1");
+            DoSwitchMaterial(tTime, m_curveMatVision, 0);
+        }
+
+        //Chanagement obj en Visible dans le flou
+        if ((int)tTime == (int)startTimeSecMat)
+        {
+            Debug.Log("hey mat 2");
+            m_readyEnd = 1;
+            m_resetTimeVisionMat = true;
+            DoSwitchMaterial(tTime, m_curveMatVision, startTimeSecMat);
+        }
     }
     
     private void DoSwitchView(float p_time)
@@ -51,13 +71,6 @@ public class PlayerVision : MonoBehaviour
             m_resetTimeVisionComp = false;
             return;
         }
-        
-        /*if((int)p_time == (int)(m_curveVision.keys[m_curveVision.length - 1].time - m_curveMatVisionVisible.keys[m_curveMatVisionVisible.length - 1].time) && m_readyEnd == 0)
-        {
-            m_resetTimeVisionMat = true;
-            m_readyEnd = 1;
-            Debug.Log("CHangement");
-        }*/
 
         if (m_resetTimeVisionComp)
         {
@@ -66,17 +79,30 @@ public class PlayerVision : MonoBehaviour
         }
     }
 
-    private void DoSwitchMaterial(float p_time, AnimationCurve p_dir)
+    private void DoSwitchMaterial(float p_time, AnimationCurve p_dir, float p_minusTime)
     {
-        if (p_time > p_dir.keys[p_dir.length - 1].time)
+        float time = Mathf.Abs(p_time - p_minusTime);
+        if (time > p_dir.keys[p_dir.length - 1].time)
         {
             m_resetTimeVisionMat = false;
+
+            if(p_minusTime != 0)
+            {
+                //Si visible
+                //Enlever ombre
+                //Enlever Collider
+                //zizi
+            }
+            else
+            {
+
+            }
             return;
         }
 
         if (m_resetTimeVisionMat)
         {
-            float matVisibilityValue = p_dir.Evaluate(p_time);
+            float matVisibilityValue = p_dir.Evaluate(time);
             m_matInvisibleVisible.SetFloat("_StepStrenght", matVisibilityValue);
             m_matVisibleInvisible.SetFloat("_StepStrenght", matVisibilityValue);
         }
