@@ -1,40 +1,36 @@
 using UnityEngine;
+using UnityEngine.Rendering;
 
 public class VisibleToInvisible : MonoBehaviour
 {
 
-    private MeshRenderer m_meshRenderer;
+    [SerializeField, Tooltip("True : l'objet est Visible puis Invisible / False : l'objet est Invisible puis Visible")]
+    private bool m_isVisibleToInvisible;
+    
+    [SerializeField, Tooltip("Mettre le MeshRenderer de l'objet")]private MeshRenderer m_meshRenderer;
 
-    private enum ColliderChoise
-    {
-        Box,
-        Sphere,
-        Mesh
-    }
-
-    ColliderChoise m_colliderChoise;
-
-    [SerializeField, Tooltip("Mettre le collider de l'obj si c'est un Box Collider")]private BoxCollider m_boxCollider;
-    [SerializeField, Tooltip("Mettre le collider de l'obj si c'est une Sphere Collider")] private SphereCollider m_sphereCollider;
-    [SerializeField, Tooltip("Mettre le collider de l'obj si c'est un Mesh Collider")] private MeshCollider m_meshCollider;
+    [SerializeField, Tooltip("Mettre le collider de l'objet")]private BoxCollider m_boxCollider;
 
     private void Awake()
     {
-        if(m_boxCollider != null)
+        if(m_boxCollider == null)
         {
-            m_colliderChoise = ColliderChoise.Box;
+            m_boxCollider = GetComponent<BoxCollider>();
+            
+            if(m_boxCollider == null)
+            {
+                Debug.LogError("Remplit le collider Gros Chien !!!", this);
+            }
         }
-        else if ( m_sphereCollider != null )
+        
+        if(m_meshRenderer == null)
         {
-            m_colliderChoise = ColliderChoise.Sphere;
-        }
-        else if( m_meshCollider != null )
-        {
-            m_colliderChoise = ColliderChoise.Mesh;
-        }
-        else
-        {
-            Debug.LogError("Remplit le collider Gros Chien !!!", this);
+            m_meshRenderer = GetComponent<MeshRenderer>();
+            
+            if(m_meshRenderer == null)
+            {
+                Debug.LogError("Remplit le collider Gros Chien !!!", this);
+            }
         }
     }
 
@@ -50,32 +46,42 @@ public class VisibleToInvisible : MonoBehaviour
 
     void DoVisibleToInvisible(bool p_start)
     {
+        //Allé
         if (p_start)
         {
-            //  Enlever ombre
-
-            switch (m_colliderChoise)
+            if (m_isVisibleToInvisible)
             {
-                case ColliderChoise.Box:
-
-                    break;
-
-                case ColliderChoise.Sphere:
-
-                    break;
-
-                case ColliderChoise.Mesh:
-
-                    break;
+                Hide();
+                return;
             }
-            //  Enlever Collider
 
+            Display();
+            return;
         }
-        else
+        
+        //Retour
+        if (m_isVisibleToInvisible)
         {
-            //  Mettre ombre
-            //  Mettre Collider
-
+            Display();
+            return;
         }
+
+        Hide();
+    }
+
+    void Display()
+    {
+        //  Mettre ombre
+        m_meshRenderer.shadowCastingMode = ShadowCastingMode.On;
+        //  Mettre Collider
+        m_boxCollider.enabled = true;
+    }
+
+    void Hide()
+    {
+        //  Enlever ombre
+        m_meshRenderer.shadowCastingMode = ShadowCastingMode.Off;
+        //  Enlever Collider
+        m_boxCollider.enabled = false;
     }
 }

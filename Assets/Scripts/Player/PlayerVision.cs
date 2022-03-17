@@ -88,26 +88,11 @@ public class PlayerVision : MonoBehaviour
 
             if(p_minusTime != 0)
             {
-                //Si visible à invisible
-                //  
-                //  Player.Instance.DelegateVisibleInvisible?.Invoke(true);
-
-                //Si invisible à visible 
-                //  Mettre Collider
-                //  Player.Instance.DelegateVisibleVisible?.Invoke(true);
-
-                
+                PlayerManager.Instance.DoVisibleToInvisibleHandler?.Invoke(true);
             }
             else
             {
-                //Si visible à invisible
-                //  Mettre ombre
-                //  Mettre Collider
-                //  Player.Instance.DelegateVisibleInvisible?.Invoke(false);
-
-                //Si invisible à visible 
-                //  Enlever Collider
-                //  Player.Instance.DelegateVisibleVisible?.Invoke(false);
+                PlayerManager.Instance.DoVisibleToInvisibleHandler?.Invoke(false);
             }
             return;
         }
