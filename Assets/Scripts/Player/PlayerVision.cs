@@ -13,7 +13,7 @@ public class PlayerVision : MonoBehaviour
     private float m_timeVision;
     private bool m_resetTimeVisionComp = false;
     private bool m_resetTimeVisionMat = false;
-    private int m_readyEnd = 0;
+    private int m_readyEnd = -1;
 
     private void OnEnable()
     {
@@ -50,14 +50,14 @@ public class PlayerVision : MonoBehaviour
         //Chanagement obj en invisible dans le flou
         if (m_readyEnd == 0)
         {
-            Debug.Log("hey mat 1");
+            //Debug.Log("hey mat 1");
             DoSwitchMaterial(tTime, m_curveMatVision, 0);
         }
 
         //Chanagement obj en Visible dans le flou
-        if ((int)tTime == (int)startTimeSecMat)
+        if ((int)tTime == (int)startTimeSecMat && m_resetTimeVisionComp)
         {
-            Debug.Log("hey mat 2");
+            //Debug.Log("hey mat 2");
             m_readyEnd = 1;
             m_resetTimeVisionMat = true;
             DoSwitchMaterial(tTime, m_curveMatVision, startTimeSecMat);
@@ -66,8 +66,10 @@ public class PlayerVision : MonoBehaviour
     
     private void DoSwitchView(float p_time)
     {
-        if (p_time > m_curveVision.keys[m_curveVision.length-1].time)
+        if (p_time > m_curveVision.keys[m_curveVision.length-1].time && m_resetTimeVisionComp)
         {
+            m_readyEnd = -1;
+            PlayerManager.Instance.LaunchDelegate();
             m_resetTimeVisionComp = false;
             return;
         }
@@ -82,18 +84,12 @@ public class PlayerVision : MonoBehaviour
     private void DoSwitchMaterial(float p_time, AnimationCurve p_dir, float p_minusTime)
     {
         float time = Mathf.Abs(p_time - p_minusTime);
-        if (time > p_dir.keys[p_dir.length - 1].time)
+        
+        if (time > p_dir.keys[p_dir.length - 1].time && m_resetTimeVisionMat)
         {
+            Debug.Log("Finish Material");
+            PlayerManager.Instance.LaunchDelegate();
             m_resetTimeVisionMat = false;
-
-            if(p_minusTime != 0)
-            {
-                PlayerManager.Instance.DoVisibleToInvisibleHandler?.Invoke(true);
-            }
-            else
-            {
-                PlayerManager.Instance.DoVisibleToInvisibleHandler?.Invoke(false);
-            }
             return;
         }
 

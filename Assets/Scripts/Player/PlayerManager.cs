@@ -16,7 +16,7 @@ public class PlayerManager : Singleton<PlayerManager>
     public DoMouvment DoCursorHandler;
     public DoMouvment DoSwitchViewHandler;
 
-    public delegate void DoVisionSwitch(bool p_start);
+    public delegate void DoVisionSwitch();
     public DoVisionSwitch DoVisibleToInvisibleHandler;
 
     private void Update()
@@ -32,6 +32,11 @@ public class PlayerManager : Singleton<PlayerManager>
         
         //Input du changement de vision
         DoSwitchViewHandler?.Invoke();
+    }
+
+    public void LaunchDelegate()
+    {
+        DoVisibleToInvisibleHandler?.Invoke();
     }
 
     protected override string GetSingletonName()
