@@ -27,14 +27,14 @@ public class PlayerManager : Singleton<PlayerManager>
     //Constante
     private const float m_gravity = -9.81f;
 
+    //Scripts
+    [SerializeField, Tooltip("Script player controller")] private PlayerController m_controllerScript;
+    [SerializeField, Tooltip("Script player look")] private PlayerLook m_lookScript;
+
     public float Gravity
     {
         get => m_gravity;
     }
-
-    public delegate void DoAction();
-    public DoAction DoMouvmentHandler;
-    public DoAction DoCursorHandler;
 
     public delegate void DoVisionSwitch();
     public DoVisionSwitch DoVisibleToInvisibleHandler;
@@ -42,6 +42,12 @@ public class PlayerManager : Singleton<PlayerManager>
     private void Awake()
     {
         m_matVision.SetFloat("_BlurSize",0);
+
+        if (m_controllerScript == null)
+            m_controllerScript = GetComponent<PlayerController>();
+
+        if (m_lookScript == null)
+            m_lookScript = GetComponent<PlayerLook>();
     }
     
     private void Update()
@@ -49,20 +55,18 @@ public class PlayerManager : Singleton<PlayerManager>
         //Mouvement du Joueur
         if (Input.GetAxis("Horizontal") != 0 || Input.GetAxis("Vertical") != 0)
         {
-            DoMouvmentHandler?.Invoke();
+            m_controllerScript.Mouvement();
         }
 
         //Mouvement de la camera
-        DoCursorHandler?.Invoke();
-        
+        m_lookScript.CursorMouvement();
+
         //Input Blur Effect
         IsInputDown();
     }
     
     private void IsInputDown()
     {
-
-
         float tTime = Time.time - m_timeVision;
 
         //Changement de vision
@@ -85,7 +89,7 @@ public class PlayerManager : Singleton<PlayerManager>
                 AddStepBV();
 
                 //Lancement de la consommation de BV
-                StartCoroutine(DecreaseBV());
+                DecreaseBV();
             }
         }
 
@@ -103,8 +107,6 @@ public class PlayerManager : Singleton<PlayerManager>
                 //DoSwitchMaterial(allé)
                 DoSwitchMaterial(tTime, m_curveMatVisionStart);
             }
-
-            
         }
 
         else if (m_readyEnd == 1)
@@ -161,14 +163,11 @@ public class PlayerManager : Singleton<PlayerManager>
         m_uiBv.fillAmount -= 0.5f;
     }
     
-     private IEnumerator DecreaseBV()
+    private void DecreaseBV()
     {
-        yield return new WaitForSeconds(m_speedDecreaseBV);
-
         if(m_uiBv.fillAmount >= 0 && m_resetTimeVisionComp)
         {
             m_uiBv.fillAmount -= 0.01f;
-            //StartCoroutine(DecreaseBV());
         }
         Death();
     }

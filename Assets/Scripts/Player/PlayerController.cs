@@ -7,24 +7,14 @@ public class PlayerController : MonoBehaviour
     [SerializeField, Tooltip("La speed de déplacement du player")]private float m_speedMove = 10f;
     private Vector3 m_dir;
     private Vector3 m_velocity;
-    
-    private void OnEnable()
-    {
-        PlayerManager.Instance.DoMouvmentHandler += Mouvement;
-    }
-
-    private void OnDisable()
-    {
-        PlayerManager.Instance.DoMouvmentHandler -= Mouvement;
-    }
-
+  
     private void Awake()
     {
         m_charaController = GetComponent<CharacterController>();
         Cursor.lockState = CursorLockMode.Locked;
     }
 
-    private void Mouvement()
+    public void Mouvement()
     {
         //Mouvement sur le sol
         float xDir = Input.GetAxis("Horizontal") * m_speedMove * Time.deltaTime;

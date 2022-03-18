@@ -13,6 +13,17 @@ public class VisibleToInvisible : MonoBehaviour
 
     private bool m_start = true;
 
+
+    private void OnEnable()
+    {
+        PlayerManager.Instance.DoVisibleToInvisibleHandler += DoVisibleToInvisible;
+    }
+
+    private void OnDisable()
+    {
+        PlayerManager.Instance.DoVisibleToInvisibleHandler -= DoVisibleToInvisible;
+    }
+
     private void Awake()
     {
         if(m_boxCollider == null)
@@ -34,16 +45,6 @@ public class VisibleToInvisible : MonoBehaviour
                 Debug.LogError("Remplit le collider Gros Chien !!!", this);
             }
         }
-    }
-
-    private void OnEnable()
-    {
-        PlayerManager.Instance.DoVisibleToInvisibleHandler += DoVisibleToInvisible;
-    }
-
-    private void OnDisable()
-    {
-        PlayerManager.Instance.DoVisibleToInvisibleHandler -= DoVisibleToInvisible;
     }
 
     void DoVisibleToInvisible()

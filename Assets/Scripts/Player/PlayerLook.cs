@@ -8,18 +8,8 @@ public class PlayerLook : MonoBehaviour
     private float m_mouseRotationX;
     private float m_mouseRotationY;
     private float m_xRotate = 0;
-    
-    private void OnEnable()
-    {
-        PlayerManager.Instance.DoCursorHandler += CursorMouvement;
-    }
 
-    private void OnDisable()
-    {
-        PlayerManager.Instance.DoCursorHandler -= CursorMouvement;
-    }
-
-    private void CursorMouvement()
+    public void CursorMouvement()
     {
         //Mouvement de la vue
         m_mouseRotationX = Input.GetAxis("Mouse X") * m_speedCursor;
