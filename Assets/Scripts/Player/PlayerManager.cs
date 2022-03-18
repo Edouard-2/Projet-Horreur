@@ -23,6 +23,11 @@ public class PlayerManager : Singleton<PlayerManager>
     //BV
     [SerializeField, Tooltip("BV visuel")] private Image m_uiBv;
     [SerializeField, Tooltip("La vitesse de consommation de la BV (en vision flou)")] private float m_speedDecreaseBV = 0.1f;
+    [SerializeField, Tooltip("le temps pendant lequel le joueur est aveugle")] private float m_blindTime = 10f;
+    [SerializeField, Tooltip("Lorsque le joueur perd de la BV max après avoir été aveugle")] private float m_lessBvMax = 0.1f;
+    private float m_BvMax = 1f;
+    private float m_currentBvMax = 1f;
+    private bool m_readyInitVision = true;
 
     //Constante
     private const float m_gravity = -9.81f;
@@ -68,13 +73,17 @@ public class PlayerManager : Singleton<PlayerManager>
     
     private void InitVariableChangement()
     {
-        m_timeVision = Time.time;
-        tTime = Time.time - m_timeVision;
+        if (m_readyInitVision)
+        {
+            Debug.Log("Init variable pour vision");
+            m_timeVision = Time.time;
+            tTime = Time.time - m_timeVision;
 
-        m_readyEnd = Mathf.Abs(m_readyEnd - 1);
+            m_readyEnd = Mathf.Abs(m_readyEnd - 1);
 
-        m_resetTimeVisionComp = true;
-        m_resetTimeVisionMat = true;
+            m_resetTimeVisionComp = true;
+            m_resetTimeVisionMat = true;
+        }
     }
 
     private void IsInputDown()
@@ -131,6 +140,7 @@ public class PlayerManager : Singleton<PlayerManager>
                 //DoSwitchMaterial(retour)
                 DoSwitchMaterial(tTime, m_curveMatVisionFinish);
             }
+            IncreaseBV();
         }
     }
     
@@ -174,11 +184,23 @@ public class PlayerManager : Singleton<PlayerManager>
     {
         if (m_uiBv.fillAmount > 0)
         {
-            m_uiBv.fillAmount -= 0.1f * Time.deltaTime;
+            m_uiBv.fillAmount -= m_speedDecreaseBV * Time.deltaTime;
             return;
         }
 
         BlindMoment();
+    }
+    private void IncreaseBV()
+    {
+        if (m_uiBv.fillAmount <= m_currentBvMax)
+        {
+            m_uiBv.fillAmount +=  m_speedDecreaseBV * Time.deltaTime * 1.5f;
+        }
+    }
+
+    public void ResetCurrentBV()
+    {
+        m_currentBvMax = m_BvMax;
     }
 
     private void BlindMoment()
@@ -186,7 +208,17 @@ public class PlayerManager : Singleton<PlayerManager>
         Debug.Log("BlindMoment");
         InitVariableChangement();
 
-        m_uiBv.fillAmount = 1;
+        m_currentBvMax -= m_lessBvMax;
+        m_uiBv.fillAmount = m_currentBvMax;
+
+        StartCoroutine(WaitStopBlind());
+    }
+
+    IEnumerator WaitStopBlind()
+    {
+        m_readyInitVision = false;
+        yield return new WaitForSeconds(m_blindTime);
+        m_readyInitVision = true;
     }
 
     protected override string GetSingletonName()
