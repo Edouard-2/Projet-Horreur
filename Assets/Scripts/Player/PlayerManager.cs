@@ -1,41 +1,19 @@
-using System.Collections;
 using UnityEngine;
-using UnityEngine.UI;
 
 [RequireComponent(typeof(PlayerController))]
 [RequireComponent(typeof(PlayerLook))]
+[RequireComponent(typeof(PlayerVision))]
 public class PlayerManager : Singleton<PlayerManager>
 {
-    //Courbe changement vision
-    [SerializeField, Tooltip("Courbe de pourcentage de flou au changement de vision au début de la compétence")] private AnimationCurve m_curveVisionStart;
-    [SerializeField, Tooltip("Courbe de pourcentage de flou au changement de vision à la fin de la compétence")] private AnimationCurve m_curveVisionFinish;
-    [SerializeField, Tooltip("Courbe de pourcentage pour la transparence du matérial allé vers l'état modifié au début de la compétence")] private AnimationCurve m_curveMatVisionStart;
-    [SerializeField, Tooltip("Courbe de pourcentage pour la transparence du matérial allé vers l'état modifié à la fin de la compétence")] private AnimationCurve m_curveMatVisionFinish;
-
-    [SerializeField, Tooltip("Material de flou pour le postprocess")] private Material m_matVision;
-    [SerializeField, Tooltip("Material des matérials Invisible en net et visible en flou")] private Material m_matInvisibleVisible;
-    [SerializeField, Tooltip("Material des matérials Visible en net et Invisible en flou")] private Material m_matVisibleInvisible;
-    private float m_timeVision;
-    private bool m_resetTimeVisionComp = false;
-    private bool m_resetTimeVisionMat = false;
-    private int m_readyEnd = 1;
-
-    //BV
-    [SerializeField, Tooltip("BV visuel")] private Image m_uiBv;
-    [SerializeField, Tooltip("La vitesse de consommation de la BV (en vision flou)")] private float m_speedDecreaseBV = 0.1f;
-    [SerializeField, Tooltip("le temps pendant lequel le joueur est aveugle")] private float m_blindTime = 10f;
-    [SerializeField, Tooltip("Lorsque le joueur perd de la BV max après avoir été aveugle")] private float m_lessBvMax = 0.1f;
-    private float m_BvMax = 1f;
-    private float m_currentBvMax = 1f;
-    private bool m_readyInitVision = true;
-
     //Constante
     private const float m_gravity = -9.81f;
 
     //Scripts
     [SerializeField, Tooltip("Script player controller")] private PlayerController m_controllerScript;
     [SerializeField, Tooltip("Script player look")] private PlayerLook m_lookScript;
+    [SerializeField, Tooltip("Script player vision")] private PlayerVision m_visionScript;
 
+    private float m_timeVision;
     private float tTime;
     public float Gravity
     {
@@ -47,13 +25,16 @@ public class PlayerManager : Singleton<PlayerManager>
     
     private void Awake()
     {
-        m_matVision.SetFloat("_BlurSize",0);
+        m_visionScript.m_matVision.SetFloat("_BlurSize",0);
 
         if (m_controllerScript == null)
             m_controllerScript = GetComponent<PlayerController>();
 
         if (m_lookScript == null)
             m_lookScript = GetComponent<PlayerLook>();
+
+        if (m_visionScript == null)
+            m_visionScript = GetComponent<PlayerVision>();
     }
     
     private void Update()
@@ -71,154 +52,79 @@ public class PlayerManager : Singleton<PlayerManager>
         IsInputDown();
     }
     
-    private void InitVariableChangement()
+    public void InitVariableChangement()
     {
-        if (m_readyInitVision)
+        if (m_visionScript.m_readyInitVision)
         {
             Debug.Log("Init variable pour vision");
             m_timeVision = Time.time;
             tTime = Time.time - m_timeVision;
 
-            m_readyEnd = Mathf.Abs(m_readyEnd - 1);
+            m_visionScript.m_readyEnd = Mathf.Abs(m_visionScript.m_readyEnd - 1);
 
-            m_resetTimeVisionComp = true;
-            m_resetTimeVisionMat = true;
+            m_visionScript.m_resetTimeVisionComp = true;
+            m_visionScript.m_resetTimeVisionMat = true;
+
+
+            DoVisibleToInvisibleHandler?.Invoke();
         }
     }
 
-    private void IsInputDown()
+    public void IsInputDown()
     {
         tTime = Time.time - m_timeVision;
 
         //Changement de vision
-        if (Input.GetKeyDown(KeyCode.Space) && !m_resetTimeVisionComp && !m_resetTimeVisionMat )
+        if (Input.GetKeyDown(KeyCode.Space) && !m_visionScript.m_resetTimeVisionComp && !m_visionScript.m_resetTimeVisionMat )
         {
 
             InitVariableChangement();
 
-            Debug.Log(m_readyEnd);
+            Debug.Log(m_visionScript.m_readyEnd);
 
-            if (m_readyEnd == 0)
+            if (m_visionScript.m_readyEnd == 0)
             {
                 Debug.Log("hey");
                 //Ajout du cran sur la BV
-                AddStepBV();
+                m_visionScript.AddStepBV();
             }
 
-            DoVisibleToInvisibleHandler?.Invoke();
         }
 
-        if (m_readyEnd == 0)
+        if (m_visionScript.m_readyEnd == 0)
         {
-            if (m_resetTimeVisionComp)
+            if (m_visionScript.m_resetTimeVisionComp)
             {
                 //Debug.Log("Start");
 
                 //DoSwitchView(allé)
-                DoSwitchView(tTime, m_curveVisionStart);
+                m_visionScript.DoSwitchView(tTime, m_visionScript.m_curveVisionStart);
             }
-            if (m_resetTimeVisionMat)
+            if (m_visionScript.m_resetTimeVisionMat)
             {
                 //DoSwitchMaterial(allé)
-                DoSwitchMaterial(tTime, m_curveMatVisionStart);
+                m_visionScript.DoSwitchMaterial(tTime, m_visionScript.m_curveMatVisionStart);
             }
 
             //Lancement de la consommation de BV
-            DecreaseBV();
+            m_visionScript.DecreaseBV();
         }
 
-        else if (m_readyEnd == 1)
+        else if (m_visionScript.m_readyEnd == 1)
         {
-            if (m_resetTimeVisionComp)
+            if (m_visionScript.m_resetTimeVisionComp)
             {
                 //Debug.Log("Fin");
                 //DoSwitchView(retour)
-                DoSwitchView(tTime, m_curveVisionFinish);
+                m_visionScript.DoSwitchView(tTime, m_visionScript.m_curveVisionFinish);
             }
-            if (m_resetTimeVisionMat)
+            if (m_visionScript.m_resetTimeVisionMat)
             {
                 //DoSwitchMaterial(retour)
-                DoSwitchMaterial(tTime, m_curveMatVisionFinish);
+                m_visionScript.DoSwitchMaterial(tTime, m_visionScript.m_curveMatVisionFinish);
             }
-            IncreaseBV();
+            m_visionScript.IncreaseBV();
         }
-    }
-    
-    private void DoSwitchView(float p_time, AnimationCurve p_curve)
-    {
-        if (p_time > p_curve.keys[p_curve.length-1].time && m_resetTimeVisionComp)
-        {
-            m_resetTimeVisionComp = false;
-            return;
-        }
-
-        if (m_resetTimeVisionComp)
-        {
-            float blurValue = p_curve.Evaluate(p_time);
-            m_matVision.SetFloat("_BlurSize", blurValue);
-        }
-    }
-
-    private void DoSwitchMaterial(float p_time, AnimationCurve p_dir)
-    {
-        if (p_time > p_dir.keys[p_dir.length - 1].time && m_resetTimeVisionMat)
-        {
-            m_resetTimeVisionMat = false;
-            return;
-        }
-
-        if (m_resetTimeVisionMat)
-        {
-            float matVisibilityValue = p_dir.Evaluate(p_time);
-            m_matInvisibleVisible.SetFloat("_StepStrenght", matVisibilityValue);
-            m_matVisibleInvisible.SetFloat("_StepStrenght", matVisibilityValue);
-        }
-    }
-
-    private void AddStepBV()
-    {
-        m_uiBv.fillAmount -= 0.1f;
-    }
-    
-    private void DecreaseBV()
-    {
-        if (m_uiBv.fillAmount > 0)
-        {
-            m_uiBv.fillAmount -= m_speedDecreaseBV * Time.deltaTime;
-            return;
-        }
-
-        BlindMoment();
-    }
-    private void IncreaseBV()
-    {
-        if (m_uiBv.fillAmount <= m_currentBvMax)
-        {
-            m_uiBv.fillAmount +=  m_speedDecreaseBV * Time.deltaTime * 1.5f;
-        }
-    }
-
-    public void ResetCurrentBV()
-    {
-        m_currentBvMax = m_BvMax;
-    }
-
-    private void BlindMoment()
-    {
-        Debug.Log("BlindMoment");
-        InitVariableChangement();
-
-        m_currentBvMax -= m_lessBvMax;
-        m_uiBv.fillAmount = m_currentBvMax;
-
-        StartCoroutine(WaitStopBlind());
-    }
-
-    IEnumerator WaitStopBlind()
-    {
-        m_readyInitVision = false;
-        yield return new WaitForSeconds(m_blindTime);
-        m_readyInitVision = true;
     }
 
     protected override string GetSingletonName()
