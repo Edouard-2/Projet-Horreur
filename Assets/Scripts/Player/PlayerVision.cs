@@ -5,14 +5,14 @@ using UnityEngine.UI;
 public class PlayerVision : MonoBehaviour
 {
     //Courbe changement vision
-    [SerializeField, Tooltip("Courbe de pourcentage de flou au changement de vision au début de la compétence")] public AnimationCurve m_curveVisionStart;
-    [SerializeField, Tooltip("Courbe de pourcentage de flou au changement de vision à la fin de la compétence")] public AnimationCurve m_curveVisionFinish;
-    [SerializeField, Tooltip("Courbe de pourcentage pour la transparence du matérial allé vers l'état modifié au début de la compétence")] public AnimationCurve m_curveMatVisionStart;
-    [SerializeField, Tooltip("Courbe de pourcentage pour la transparence du matérial allé vers l'état modifié à la fin de la compétence")] public AnimationCurve m_curveMatVisionFinish;
+    [SerializeField, Tooltip("Courbe de pourcentage de flou au changement de vision au dÃ©but de la compÃ©tence")] public AnimationCurve m_curveVisionStart;
+    [SerializeField, Tooltip("Courbe de pourcentage de flou au changement de vision Ã© la fin de la compÃ©tence")] public AnimationCurve m_curveVisionFinish;
+    [SerializeField, Tooltip("Courbe de pourcentage pour la transparence du matÃ©rial allÃ© vers l'Ã©tat modifiÃ© au dÃ©but de la compÃ©tence")] public AnimationCurve m_curveMatVisionStart;
+    [SerializeField, Tooltip("Courbe de pourcentage pour la transparence du matÃ©rial allÃ© vers l'Ã©tat modifiÃ© Ã  la fin de la compÃ©tence")] public AnimationCurve m_curveMatVisionFinish;
 
     [SerializeField, Tooltip("Material de flou pour le postprocess")] public Material m_matVision;
-    [SerializeField, Tooltip("Material des matérials Invisible en net et visible en flou")] public Material m_matInvisibleVisible;
-    [SerializeField, Tooltip("Material des matérials Visible en net et Invisible en flou")] public Material m_matVisibleInvisible;
+    [SerializeField, Tooltip("Material des matÃ©rials Invisible en net et visible en flou")] public Material m_matInvisibleVisible;
+    [SerializeField, Tooltip("Material des matÃ©rials Visible en net et Invisible en flou")] public Material m_matVisibleInvisible;
     public float m_timeVision;
     public bool m_resetTimeVisionComp = false;
     public bool m_resetTimeVisionMat = false;
@@ -23,7 +23,7 @@ public class PlayerVision : MonoBehaviour
     [SerializeField, Tooltip("La vitesse de consommation de la BV (en vision flou)")] public float m_speedDecreaseBV = 0.1f;
     [SerializeField, Tooltip("La vitesse de consommation de la BV (en vision flou)")] public float m_MultiplIncreaseBV = 2f;
     [SerializeField, Tooltip("le temps pendant lequel le joueur est aveugle")] public float m_blindTime = 10f;
-    [SerializeField, Tooltip("Lorsque le joueur perd de la BV max après avoir été aveugle")] public float m_lessBvMax = 0.1f;
+    [SerializeField, Tooltip("Lorsque le joueur perd de la BV max aprÃ©s avoir Ã©tÃ© aveugle")] public float m_lessBvMax = 0.1f;
     public float m_BvMax = 1f;
     public float m_currentBvMax = 1f;
     public bool m_readyInitVision = true;
