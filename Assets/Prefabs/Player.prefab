@@ -110,6 +110,7 @@ GameObject:
   - component: {fileID: 1739398479658060359}
   - component: {fileID: 5608393819760579455}
   - component: {fileID: 5128347266043499178}
+  - component: {fileID: 7154114867123462734}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -194,7 +195,7 @@ CharacterController:
   m_Enabled: 1
   serializedVersion: 2
   m_Height: 2
-  m_Radius: 0.5
+  m_Radius: 0.62
   m_SlopeLimit: 45
   m_StepOffset: 0.3
   m_SkinWidth: 0.1
@@ -213,150 +214,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_dontdestroyOnLoad: 1
-  m_curveVisionStart:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 12.668195
-      outSlope: 12.668195
-      tangentMode: 34
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 0.03116646
-      value: 0.39482278
-      inSlope: 13.581005
-      outSlope: 13.581005
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 1
-    - serializedVersion: 3
-      time: 0.046545383
-      value: 0.9640722
-      inSlope: 0.084517546
-      outSlope: 0.084517546
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.7304438
-    - serializedVersion: 3
-      time: 0.09413755
-      value: 0.29806256
-      inSlope: 0.20760016
-      outSlope: 0.20760016
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.6773248
-    - serializedVersion: 3
-      time: 0.22576183
-      value: 0.53946775
-      inSlope: -0.10717626
-      outSlope: -0.10717626
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.52531785
-    - serializedVersion: 3
-      time: 0.3098353
-      value: 0.3473366
-      inSlope: -0.32855162
-      outSlope: -0.32855162
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.15077941
-    - serializedVersion: 3
-      time: 0.55035967
-      value: 0.4844626
-      inSlope: -0.054483756
-      outSlope: -0.054483756
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.046269655
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  m_curveVisionFinish:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0.4
-      inSlope: -0.2309628
-      outSlope: -0.2309628
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.052709006
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 0.75
-      value: 0
-      inSlope: -0.53333336
-      outSlope: -0.53333336
-      tangentMode: 34
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  m_curveMatVisionStart:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: -0.025939941
-      inSlope: 1.5844952
-      outSlope: 1.5844952
-      tangentMode: 34
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 1.0019281
-      value: 1.5616103
-      inSlope: 1.5844952
-      outSlope: 1.5844952
-      tangentMode: 34
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  m_curveMatVisionFinish:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1.5550693
-      inSlope: -1.582019
-      outSlope: -1.582019
-      tangentMode: 34
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 1.0019281
-      value: -0.03
-      inSlope: -1.582019
-      outSlope: -1.582019
-      tangentMode: 34
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  m_matVision: {fileID: 2100000, guid: e3c081d870709434bb6906fd16b35f64, type: 2}
-  m_matInvisibleVisible: {fileID: 2100000, guid: 1a346f22aa05442439f2eeb418dd15e4, type: 2}
-  m_matVisibleInvisible: {fileID: 2100000, guid: 804db1eb4e97eb94db95afef6c842e25, type: 2}
+  m_controllerScript: {fileID: 0}
+  m_lookScript: {fileID: 0}
+  m_visionScript: {fileID: 0}
 --- !u!114 &5608393819760579455
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -385,6 +245,58 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_speedCursor: 10
   m_camera: {fileID: 1674616961786738440}
+--- !u!114 &7154114867123462734
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2800280127000841989}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 41e68517ed438c640b9a838c13ce24ec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_curveVisionStart:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  m_curveVisionFinish:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  m_curveMatVisionStart:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  m_curveMatVisionFinish:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  m_matVision: {fileID: 0}
+  m_matInvisibleVisible: {fileID: 0}
+  m_matVisibleInvisible: {fileID: 0}
+  m_timeVision: 0
+  m_resetTimeVisionComp: 0
+  m_resetTimeVisionMat: 0
+  m_readyEnd: 1
+  m_uiBv: {fileID: 0}
+  m_speedDecreaseBV: 0.1
+  m_MultiplIncreaseBV: 2
+  m_blindTime: 10
+  m_lessBvMax: 0.1
+  m_BvMax: 1
+  m_currentBvMax: 1
+  m_readyInitVision: 1
+  tTime: 0
 --- !u!1001 &7424994880173637876
 PrefabInstance:
   m_ObjectHideFlags: 0
