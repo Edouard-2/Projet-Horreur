@@ -21,6 +21,7 @@ public class PlayerVision : MonoBehaviour
     //BV
     [SerializeField, Tooltip("BV visuel")] public Image m_uiBv;
     [SerializeField, Tooltip("La vitesse de consommation de la BV (en vision flou)")] public float m_speedDecreaseBV = 0.1f;
+    [SerializeField, Tooltip("La vitesse de consommation de la BV (en vision flou)")] public float m_MultiplIncreaseBV = 2f;
     [SerializeField, Tooltip("le temps pendant lequel le joueur est aveugle")] public float m_blindTime = 10f;
     [SerializeField, Tooltip("Lorsque le joueur perd de la BV max après avoir été aveugle")] public float m_lessBvMax = 0.1f;
     public float m_BvMax = 1f;
@@ -80,7 +81,7 @@ public class PlayerVision : MonoBehaviour
     {
         if (m_uiBv.fillAmount <= m_currentBvMax)
         {
-            m_uiBv.fillAmount += m_speedDecreaseBV * Time.deltaTime * 1.5f;
+            m_uiBv.fillAmount += m_speedDecreaseBV * Time.deltaTime * m_MultiplIncreaseBV;
         }
     }
 
