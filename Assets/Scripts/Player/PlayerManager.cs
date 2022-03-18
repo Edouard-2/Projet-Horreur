@@ -1,10 +1,12 @@
+using System.Collections;
 using UnityEngine;
+using UnityEngine.UI;
 
 [RequireComponent(typeof(PlayerController))]
 [RequireComponent(typeof(PlayerLook))]
 public class PlayerManager : Singleton<PlayerManager>
 {
-    //Changement de vision
+    //Courbe changement vision
     [SerializeField, Tooltip("Courbe de pourcentage de flou au changement de vision au début de la compétence")] private AnimationCurve m_curveVisionStart;
     [SerializeField, Tooltip("Courbe de pourcentage de flou au changement de vision à la fin de la compétence")] private AnimationCurve m_curveVisionFinish;
     [SerializeField, Tooltip("Courbe de pourcentage pour la transparence du matérial allé vers l'état modifié au début de la compétence")] private AnimationCurve m_curveMatVisionStart;
@@ -17,7 +19,11 @@ public class PlayerManager : Singleton<PlayerManager>
     private bool m_resetTimeVisionComp = false;
     private bool m_resetTimeVisionMat = false;
     private int m_readyEnd = 1;
-    
+
+    //BV
+    [SerializeField, Tooltip("BV visuel")] private Image m_uiBv;
+    [SerializeField, Tooltip("La vitesse de consommation de la BV (en vision flou)")] private float m_speedDecreaseBV = 0.1f;
+
     //Constante
     private const float m_gravity = -9.81f;
 
@@ -50,7 +56,7 @@ public class PlayerManager : Singleton<PlayerManager>
         DoCursorHandler?.Invoke();
         
         //Input Blur Effect
-        //IsInputDown();
+        IsInputDown();
     }
     
     private void IsInputDown()
@@ -60,78 +66,67 @@ public class PlayerManager : Singleton<PlayerManager>
         float tTime = Time.time - m_timeVision;
 
         //Changement de vision
-        if (Input.GetKeyDown(KeyCode.Space) && !m_resetTimeVisionComp && !m_resetTimeVisionMat)
+        if (Input.GetKeyDown(KeyCode.Space) && !m_resetTimeVisionComp && !m_resetTimeVisionMat )
         {
 
             m_timeVision = Time.time;
+            tTime = Time.time - m_timeVision;
+
             m_readyEnd = Mathf.Abs(m_readyEnd - 1);
 
             m_resetTimeVisionComp = true;
             m_resetTimeVisionMat = true;
+
+            DoVisibleToInvisibleHandler?.Invoke();
+
+            if(m_readyEnd == 0)
+            {
+                //Ajout du cran sur la BV
+                AddStepBV();
+
+                //Lancement de la consommation de BV
+                StartCoroutine(DecreaseBV());
+            }
         }
 
-        /*if (m_readyEnd == 0)
+        if (m_readyEnd == 0)
         {
             if (m_resetTimeVisionComp)
             {
                 Debug.Log("Start");
 
                 //DoSwitchView(allé)
-                //DoSwitchView(tTime, m_curveVisionStart);
+                DoSwitchView(tTime, m_curveVisionStart);
             }
             if (m_resetTimeVisionMat)
             {
                 //DoSwitchMaterial(allé)
-                //DoSwitchMaterial(tTime, m_curveMatVisionStart);
-
+                DoSwitchMaterial(tTime, m_curveMatVisionStart);
             }
 
-            //DoVisibleToInvisibleHandler?.Invoke();
-
+            
         }
+
         else if (m_readyEnd == 1)
         {
             if (m_resetTimeVisionComp)
             {
                 Debug.Log("Fin");
                 //DoSwitchView(retour)
-                //DoSwitchView(tTime, m_curveVisionFinish);
+                DoSwitchView(tTime, m_curveVisionFinish);
             }
             if (m_resetTimeVisionMat)
             {
                 //DoSwitchMaterial(retour)
-                //DoSwitchMaterial(tTime, m_curveMatVisionFinish);
+                DoSwitchMaterial(tTime, m_curveMatVisionFinish);
             }
-
-            //DoVisibleToInvisibleHandler?.Invoke();
-        }*/
-
-
-        //Vision joueur
-        //DoSwitchView(tTime);
-
-        /*//Chanagement obj en invisible dans le flou
-        if (m_readyEnd == 0)
-        {
-            //Debug.Log("hey mat 1");
-            DoSwitchMaterial(tTime, m_curveMatVision, 0);
         }
-
-        //Chanagement obj en Visible dans le flou
-        if ((int)tTime == (int)startTimeSecMat && m_resetTimeVisionComp)
-        {
-            //Debug.Log("hey mat 2");
-            m_readyEnd = 1;
-            m_resetTimeVisionMat = true;
-            DoSwitchMaterial(tTime, m_curveMatVision, startTimeSecMat);
-        }*/
     }
     
     private void DoSwitchView(float p_time, AnimationCurve p_curve)
     {
         if (p_time > p_curve.keys[p_curve.length-1].time && m_resetTimeVisionComp)
         {
-            //DoVisibleToInvisibleHandler?.Invoke();
             m_resetTimeVisionComp = false;
             return;
         }
@@ -159,6 +154,29 @@ public class PlayerManager : Singleton<PlayerManager>
             m_matInvisibleVisible.SetFloat("_StepStrenght", matVisibilityValue);
             m_matVisibleInvisible.SetFloat("_StepStrenght", matVisibilityValue);
         }
+    }
+
+    private void AddStepBV()
+    {
+        m_uiBv.fillAmount -= 0.5f;
+    }
+    
+     private IEnumerator DecreaseBV()
+    {
+        yield return new WaitForSeconds(m_speedDecreaseBV);
+
+        if(m_uiBv.fillAmount >= 0 && m_resetTimeVisionComp)
+        {
+            m_uiBv.fillAmount -= 0.01f;
+            //StartCoroutine(DecreaseBV());
+        }
+        Death();
+    }
+
+    private void Death()
+    {
+        Debug.Log("Death");
+        m_uiBv.fillAmount = 1;
     }
 
     protected override string GetSingletonName()

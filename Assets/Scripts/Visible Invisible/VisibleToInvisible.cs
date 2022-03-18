@@ -59,8 +59,8 @@ public class VisibleToInvisible : MonoBehaviour
                 m_start = false;
                 return;
             }
-            m_start = false;
             Display();
+            m_start = false;
             return;
         }
         
@@ -73,8 +73,8 @@ public class VisibleToInvisible : MonoBehaviour
             return;
         }
         
-        m_start = true;
         Hide();
+        m_start = true;
     }
 
     void Display()
