@@ -49,11 +49,11 @@ public class VisibleToInvisible : MonoBehaviour
 
     void DoVisibleToInvisible()
     {
-        Debug.Log("Function");
+        //Debug.Log("Function");
         //Allé
         if (m_start)
         {
-            Debug.Log("Start");
+            //Debug.Log("Start");
             if (m_isVisibleToInvisible)
             {
                 Hide();
@@ -65,7 +65,7 @@ public class VisibleToInvisible : MonoBehaviour
             return;
         }
         
-        Debug.Log("None");
+        //.Log("None");
         //Retour
         if (m_isVisibleToInvisible)
         {
@@ -80,7 +80,7 @@ public class VisibleToInvisible : MonoBehaviour
 
     void Display()
     {
-        Debug.Log("Display");
+        //Debug.Log("Display");
         //  Mettre ombre
         m_meshRenderer.shadowCastingMode = ShadowCastingMode.On;
         //  Mettre Collider
@@ -89,7 +89,7 @@ public class VisibleToInvisible : MonoBehaviour
 
     void Hide()
     {
-        Debug.Log("Hide");
+        //Debug.Log("Hide");
         //  Enlever ombre
         m_meshRenderer.shadowCastingMode = ShadowCastingMode.Off;
         //  Enlever Collider

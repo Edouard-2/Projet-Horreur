@@ -31,6 +31,7 @@ public class PlayerManager : Singleton<PlayerManager>
     [SerializeField, Tooltip("Script player controller")] private PlayerController m_controllerScript;
     [SerializeField, Tooltip("Script player look")] private PlayerLook m_lookScript;
 
+    private float tTime;
     public float Gravity
     {
         get => m_gravity;
@@ -65,39 +66,44 @@ public class PlayerManager : Singleton<PlayerManager>
         IsInputDown();
     }
     
+    private void InitVariableChangement()
+    {
+        m_timeVision = Time.time;
+        tTime = Time.time - m_timeVision;
+
+        m_readyEnd = Mathf.Abs(m_readyEnd - 1);
+
+        m_resetTimeVisionComp = true;
+        m_resetTimeVisionMat = true;
+    }
+
     private void IsInputDown()
     {
-        float tTime = Time.time - m_timeVision;
+        tTime = Time.time - m_timeVision;
 
         //Changement de vision
         if (Input.GetKeyDown(KeyCode.Space) && !m_resetTimeVisionComp && !m_resetTimeVisionMat )
         {
 
-            m_timeVision = Time.time;
-            tTime = Time.time - m_timeVision;
+            InitVariableChangement();
 
-            m_readyEnd = Mathf.Abs(m_readyEnd - 1);
+            Debug.Log(m_readyEnd);
 
-            m_resetTimeVisionComp = true;
-            m_resetTimeVisionMat = true;
-
-            DoVisibleToInvisibleHandler?.Invoke();
-
-            if(m_readyEnd == 0)
+            if (m_readyEnd == 0)
             {
+                Debug.Log("hey");
                 //Ajout du cran sur la BV
                 AddStepBV();
-
-                //Lancement de la consommation de BV
-                DecreaseBV();
             }
+
+            DoVisibleToInvisibleHandler?.Invoke();
         }
 
         if (m_readyEnd == 0)
         {
             if (m_resetTimeVisionComp)
             {
-                Debug.Log("Start");
+                //Debug.Log("Start");
 
                 //DoSwitchView(allé)
                 DoSwitchView(tTime, m_curveVisionStart);
@@ -107,13 +113,16 @@ public class PlayerManager : Singleton<PlayerManager>
                 //DoSwitchMaterial(allé)
                 DoSwitchMaterial(tTime, m_curveMatVisionStart);
             }
+
+            //Lancement de la consommation de BV
+            DecreaseBV();
         }
 
         else if (m_readyEnd == 1)
         {
             if (m_resetTimeVisionComp)
             {
-                Debug.Log("Fin");
+                //Debug.Log("Fin");
                 //DoSwitchView(retour)
                 DoSwitchView(tTime, m_curveVisionFinish);
             }
@@ -144,8 +153,6 @@ public class PlayerManager : Singleton<PlayerManager>
     {
         if (p_time > p_dir.keys[p_dir.length - 1].time && m_resetTimeVisionMat)
         {
-            Debug.Log("Finish Material");
-            //DoVisibleToInvisibleHandler?.Invoke();
             m_resetTimeVisionMat = false;
             return;
         }
@@ -160,21 +167,25 @@ public class PlayerManager : Singleton<PlayerManager>
 
     private void AddStepBV()
     {
-        m_uiBv.fillAmount -= 0.5f;
+        m_uiBv.fillAmount -= 0.1f;
     }
     
     private void DecreaseBV()
     {
-        if(m_uiBv.fillAmount >= 0 && m_resetTimeVisionComp)
+        if (m_uiBv.fillAmount > 0)
         {
-            m_uiBv.fillAmount -= 0.01f;
+            m_uiBv.fillAmount -= 0.1f * Time.deltaTime;
+            return;
         }
-        Death();
+
+        BlindMoment();
     }
 
-    private void Death()
+    private void BlindMoment()
     {
-        Debug.Log("Death");
+        Debug.Log("BlindMoment");
+        InitVariableChangement();
+
         m_uiBv.fillAmount = 1;
     }
 

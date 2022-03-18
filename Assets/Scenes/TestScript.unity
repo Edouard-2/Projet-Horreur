@@ -1175,6 +1175,28 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 10, y: 2.220446e-16, z: 10}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1927890417 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5128347266043499178, guid: d76affee4e139c34f82c85ad49d98109, type: 3}
+  m_PrefabInstance: {fileID: 2110641411}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a2930b518afbf6d48af09d751521827e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1927890418 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5608393819760579455, guid: d76affee4e139c34f82c85ad49d98109, type: 3}
+  m_PrefabInstance: {fileID: 2110641411}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a378cca4f0ffa04db723542feb0d95e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1978482880 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6992505881052022033, guid: f2ff82087548ea34784d953781bc085e, type: 3}
@@ -1221,9 +1243,17 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 2100000, guid: e3c081d870709434bb6906fd16b35f64, type: 2}
     - target: {fileID: 1739398479658060359, guid: d76affee4e139c34f82c85ad49d98109, type: 3}
+      propertyPath: m_lookScript
+      value: 
+      objectReference: {fileID: 1927890417}
+    - target: {fileID: 1739398479658060359, guid: d76affee4e139c34f82c85ad49d98109, type: 3}
       propertyPath: m_speedDecreaseBV
       value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: 1739398479658060359, guid: d76affee4e139c34f82c85ad49d98109, type: 3}
+      propertyPath: m_controllerScript
+      value: 
+      objectReference: {fileID: 1927890418}
     - target: {fileID: 1739398479658060359, guid: d76affee4e139c34f82c85ad49d98109, type: 3}
       propertyPath: m_matInvisibleVisible
       value: 
