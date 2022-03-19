@@ -26,6 +26,8 @@ public class PlayerManager : Singleton<PlayerManager>
     private void Awake()
     {
         m_visionScript.m_matVision.SetFloat("_BlurSize",0);
+        m_visionScript.m_matInvisibleVisible.SetFloat("_StepStrenght",-0.03f);
+        m_visionScript.m_matVisibleInvisible.SetFloat("_StepStrenght",-0.03f);
 
         if (m_controllerScript == null)
             m_controllerScript = GetComponent<PlayerController>();

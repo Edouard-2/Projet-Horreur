@@ -13,10 +13,10 @@ public class PlayerVision : MonoBehaviour
     [SerializeField, Tooltip("Material de flou pour le postprocess")] public Material m_matVision;
     [SerializeField, Tooltip("Material des matérials Invisible en net et visible en flou")] public Material m_matInvisibleVisible;
     [SerializeField, Tooltip("Material des matérials Visible en net et Invisible en flou")] public Material m_matVisibleInvisible;
-    public float m_timeVision;
-    public bool m_resetTimeVisionComp = false;
-    public bool m_resetTimeVisionMat = false;
-    public int m_readyEnd = 1;
+    [HideInInspector]public float m_timeVision;
+    [HideInInspector]public bool m_resetTimeVisionComp = false;
+    [HideInInspector]public bool m_resetTimeVisionMat = false;
+    [HideInInspector]public int m_readyEnd = 1;
 
     //BV
     [SerializeField, Tooltip("BV visuel")] public Image m_uiBv;
@@ -24,11 +24,11 @@ public class PlayerVision : MonoBehaviour
     [SerializeField, Tooltip("La vitesse de consommation de la BV (en vision flou)")] public float m_MultiplIncreaseBV = 2f;
     [SerializeField, Tooltip("le temps pendant lequel le joueur est aveugle")] public float m_blindTime = 10f;
     [SerializeField, Tooltip("Lorsque le joueur perd de la BV max aprés avoir été aveugle")] public float m_lessBvMax = 0.1f;
-    public float m_BvMax = 1f;
-    public float m_currentBvMax = 1f;
-    public bool m_readyInitVision = true;
+    [HideInInspector]public float m_BvMax = 1f;
+    [HideInInspector]public float m_currentBvMax = 1f;
+    [HideInInspector]public bool m_readyInitVision = true;
 
-    public float tTime;
+    [HideInInspector]public float tTime;
 
 
     public void DoSwitchView(float p_time, AnimationCurve p_curve)
