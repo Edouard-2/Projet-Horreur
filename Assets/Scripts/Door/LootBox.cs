@@ -1,3 +1,5 @@
+using System;
+using System.Collections;
 using UnityEngine;
 
 public class LootBox : MonoBehaviour, ILootBox
@@ -7,11 +9,23 @@ public class LootBox : MonoBehaviour, ILootBox
 
     [SerializeField, Tooltip("L'animator du coffre")]
     private Animator m_doorAnimator;
-    
+
     [SerializeField, Tooltip("Le nom du trigger de l'animation")]
     private string m_openName;
 
     private int m_openHash;
+    private bool m_dir;
+    private float m_upFunction;
+
+    private void OnEnable()
+    {
+        PlayerManager.Instance.DoRotateKeys += RotateSelf;
+    }
+
+    private void OnDisable()
+    {
+        PlayerManager.Instance.DoRotateKeys -= RotateSelf;
+    }
 
     private void Awake()
     {
@@ -23,12 +37,18 @@ public class LootBox : MonoBehaviour, ILootBox
                 Debug.Log("Gros chien l'animator", this);
             }
         }
+
         m_openHash = Animator.StringToHash(m_openName);
 
         if (m_key)
         {
-            GetComponent<Renderer>().material.color = m_key.m_keyColor;
+            transform.GetChild(0).GetComponent<Renderer>().material.color = m_key.m_keyColor;
         }
+    }
+
+    private void RotateSelf()
+    {
+        transform.Rotate(0, 30f * Time.deltaTime, 0);
     }
 
     public bool OpenChest(out KeyType o_key)
@@ -44,10 +64,18 @@ public class LootBox : MonoBehaviour, ILootBox
             keyFounded = true;
             Debug.Log($"Tu a recu la clé {m_key}");
         }
+
         o_key = m_key;
         m_doorAnimator.SetTrigger(m_openHash);
-        
+
+        StartCoroutine(DestroySelf());
+
         return keyFounded;
     }
-    
+
+    IEnumerator DestroySelf()
+    {
+        yield return new WaitForSeconds(2f);
+        Destroy(gameObject);
+    }
 }

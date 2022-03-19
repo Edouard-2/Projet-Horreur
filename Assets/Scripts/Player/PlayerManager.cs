@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 [RequireComponent(typeof(PlayerController))]
@@ -27,6 +28,8 @@ public class PlayerManager : Singleton<PlayerManager>
         get => m_gravity;
     }
 
+    public delegate void RotateKeys();
+    public RotateKeys DoRotateKeys;
     public delegate void DoVisionSwitch();
     public DoVisionSwitch DoVisibleToInvisibleHandler;
     
@@ -48,7 +51,7 @@ public class PlayerManager : Singleton<PlayerManager>
         if (m_doorActivationScript == null)
             m_doorActivationScript = GetComponent<PlayerInteractions>();
     }
-    
+
     private void Update()
     {
         //Mouvement du Joueur
@@ -71,6 +74,8 @@ public class PlayerManager : Singleton<PlayerManager>
                 m_doorActivationScript.VerifyLayer(hit.transform);
             }
         }
+        
+        DoRotateKeys?.Invoke();
         
         //Input Blur Effect
         IsInputDown();
