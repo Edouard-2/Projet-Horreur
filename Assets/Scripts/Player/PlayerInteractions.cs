@@ -10,11 +10,11 @@ public class PlayerInteractions : MonoBehaviour
     [SerializeField, Tooltip("Trousseau de clé")]
     private List<KeyType> m_trousseauKey = new List<KeyType>();
 
-    private void OnTriggerEnter(Collider other)
+    public void VerifyLayer(Transform p_target)
     {
-        /*if ((m_layerChest.value & (1 << other.gameObject.layer)) > 0 )
+        if ((m_layerChest.value & (1 << p_target.gameObject.layer)) > 0 )
         {
-            LootBox myLootBox = other.GetComponent<LootBox>();
+            LootBox myLootBox = p_target.GetComponent<LootBox>();
             if( myLootBox && myLootBox.OpenChest(out KeyType key))
             {
                 if (!m_trousseauKey.Contains(key))
@@ -24,17 +24,17 @@ public class PlayerInteractions : MonoBehaviour
             }
         }
 
-        else if ((m_layerDoor.value & (1 << other.gameObject.layer)) > 0 ) 
+        else if ((m_layerDoor.value & (1 << p_target.gameObject.layer)) > 0 ) 
         {
-            Door myDoor =  other.GetComponent<Door>();
+            Door myDoor =  p_target.GetComponent<Door>();
             if (myDoor)
             {
-                myDoor.OpenDoor(m_trousseauKey, other.gameObject);
+                myDoor.OpenDoor(m_trousseauKey, p_target.gameObject);
             }
-        }*/
-        
-        
-        
-        
+        }
+        else
+        {
+            Debug.Log("Rien pour intéragir");
+        }
     }
 }

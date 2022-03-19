@@ -9,12 +9,17 @@ public class PlayerManager : Singleton<PlayerManager>
     //Constante
     private const float m_gravity = -9.81f;
 
+    //Camera
+    [SerializeField, Tooltip("Camera Principale")] private Camera m_camera;
+    
     //Scripts
     [SerializeField, Tooltip("Script player controller")] private PlayerController m_controllerScript;
     [SerializeField, Tooltip("Script player look")] private PlayerLook m_lookScript;
     [SerializeField, Tooltip("Script player vision")] private PlayerVision m_visionScript;
     [SerializeField, Tooltip("Script player door")] private PlayerInteractions m_doorActivationScript;
 
+    public float m_radiusVision;
+    
     private float m_timeVision;
     private float tTime;
     public float Gravity
@@ -55,7 +60,17 @@ public class PlayerManager : Singleton<PlayerManager>
         //Mouvement de la camera
         m_lookScript.CursorMouvement();
 
-        
+        //Interaction avec des objets
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            RaycastHit hit;
+            Ray ray = m_camera.ScreenPointToRay(Input.mousePosition);
+
+            if (Physics.Raycast(ray, out hit, m_radiusVision))
+            {
+                m_doorActivationScript.VerifyLayer(hit.transform);
+            }
+        }
         
         //Input Blur Effect
         IsInputDown();
