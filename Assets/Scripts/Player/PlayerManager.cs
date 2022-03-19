@@ -3,6 +3,7 @@ using UnityEngine;
 [RequireComponent(typeof(PlayerController))]
 [RequireComponent(typeof(PlayerLook))]
 [RequireComponent(typeof(PlayerVision))]
+[RequireComponent(typeof(PlayerInteractions))]
 public class PlayerManager : Singleton<PlayerManager>
 {
     //Constante
@@ -12,6 +13,7 @@ public class PlayerManager : Singleton<PlayerManager>
     [SerializeField, Tooltip("Script player controller")] private PlayerController m_controllerScript;
     [SerializeField, Tooltip("Script player look")] private PlayerLook m_lookScript;
     [SerializeField, Tooltip("Script player vision")] private PlayerVision m_visionScript;
+    [SerializeField, Tooltip("Script player door")] private PlayerInteractions m_doorActivationScript;
 
     private float m_timeVision;
     private float tTime;
@@ -37,6 +39,9 @@ public class PlayerManager : Singleton<PlayerManager>
 
         if (m_visionScript == null)
             m_visionScript = GetComponent<PlayerVision>();
+        
+        if (m_doorActivationScript == null)
+            m_doorActivationScript = GetComponent<PlayerInteractions>();
     }
     
     private void Update()
@@ -50,6 +55,8 @@ public class PlayerManager : Singleton<PlayerManager>
         //Mouvement de la camera
         m_lookScript.CursorMouvement();
 
+        
+        
         //Input Blur Effect
         IsInputDown();
     }
@@ -66,8 +73,7 @@ public class PlayerManager : Singleton<PlayerManager>
 
             m_visionScript.m_resetTimeVisionComp = true;
             m_visionScript.m_resetTimeVisionMat = true;
-
-
+            
             DoVisibleToInvisibleHandler?.Invoke();
         }
     }
