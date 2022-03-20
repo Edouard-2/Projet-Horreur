@@ -25,7 +25,7 @@ public class Door : MonoBehaviour, IDoor
         m_openHash = Animator.StringToHash(m_openName);
         if (m_neededKey)
         {
-            GetComponent<Renderer>().material.color = m_neededKey.m_keyColor;
+            GetComponent<Renderer>().material = m_neededKey.m_keyMat;
         }
     }
 

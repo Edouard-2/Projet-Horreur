@@ -75,6 +75,19 @@ public class PlayerManager : Singleton<PlayerManager>
             }
         }
         
+        RaycastHit hitInteract;
+        Ray rayInteract = m_camera.ScreenPointToRay(Input.mousePosition);
+
+        if (Physics.Raycast(rayInteract, out hitInteract, m_radiusVision))
+        {
+            m_doorActivationScript.VerifyFeedbackInteract(hitInteract.transform);
+            
+        }
+        else
+        {
+            m_doorActivationScript.ResetFeedbackInteract();
+        }
+        
         DoRotateKeys?.Invoke();
         
         //Input Blur Effect

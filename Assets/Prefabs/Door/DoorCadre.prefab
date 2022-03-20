@@ -44,7 +44,6 @@ GameObject:
   - component: {fileID: 2639579993358455444}
   - component: {fileID: 754301467463263578}
   - component: {fileID: 350275149676265497}
-  - component: {fileID: 4238871016828371534}
   - component: {fileID: 5841730288258442636}
   m_Layer: 8
   m_Name: Door
@@ -144,19 +143,6 @@ MonoBehaviour:
   m_neededKey: {fileID: 0}
   m_doorAnimator: {fileID: 0}
   m_openName: Open
---- !u!135 &4238871016828371534
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7808642927286322802}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.39
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!95 &5841730288258442636
 Animator:
   serializedVersion: 3

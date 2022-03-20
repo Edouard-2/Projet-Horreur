@@ -10,7 +10,44 @@ public class PlayerInteractions : MonoBehaviour
     [SerializeField, Tooltip("UI de la clés ingame")] private Image m_KeyUI;
 
     private GameObject m_keyObject;
+    private Material m_currentAimObject;
 
+    public void VerifyFeedbackInteract(Transform p_target)
+    {
+        //Verifier si c'est une door ou une clé
+        //Récupérer le scriptableObject
+        //Changer la valeur en fonction
+        
+        if ((m_layerChest.value & (1 << p_target.gameObject.layer)) > 0)
+        {
+            Material targetMaterial = p_target.GetComponent<LootBox>().m_key.m_keyMat;
+            
+            if (targetMaterial != null && targetMaterial.GetFloat("_isAim") != 1)
+            {
+                m_currentAimObject = targetMaterial;
+                targetMaterial.SetFloat("_isAim", 1);
+            }
+        }
+        else if ((m_layerDoor.value & (1 << p_target.gameObject.layer)) > 0 )
+        {
+            Material targetMaterial = p_target.GetComponent<Renderer>().material;
+            
+            if (targetMaterial != null && targetMaterial.GetFloat("_isAim") != 1)
+            {
+                m_currentAimObject = targetMaterial;
+                targetMaterial.SetFloat("_isAim", 1);
+            }
+        }
+    }
+
+    public void ResetFeedbackInteract()
+    {
+        if(m_currentAimObject != null && m_currentAimObject.GetFloat("_isAim") != 0)
+        {
+            m_currentAimObject.SetFloat("_isAim", 0);
+        }
+    }
+    
     public void VerifyLayer(Transform p_target)
     {
         if ((m_layerChest.value & (1 << p_target.gameObject.layer)) > 0 )
@@ -56,10 +93,9 @@ public class PlayerInteractions : MonoBehaviour
 
     private void SetUIKey(LootBox p_key)
     {
-        Debug.Log(p_key.m_key.m_keyColor);
+        Debug.Log(p_key.m_key.m_keyMat);
 
-        m_KeyUI.color = new Vector4(p_key.m_key.m_keyColor.r,p_key.m_key.m_keyColor.g,p_key.m_key.m_keyColor.b,1);
-
+        m_KeyUI.color = new Vector4(p_key.m_key.m_keyMat.GetColor("_BaseColor").r,p_key.m_key.m_keyMat.GetColor("_BaseColor").g,p_key.m_key.m_keyMat.GetColor("_BaseColor").b,1);
     }
     
     private void EjectKey()
