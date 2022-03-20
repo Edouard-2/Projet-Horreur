@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class LootBox : MonoBehaviour, ILootBox
 {
-    [SerializeField, Tooltip("La clé du coffre")]
-    private KeyType m_key;
+    [Tooltip("La clé du coffre")]
+    public KeyType m_key;
 
     [SerializeField, Tooltip("L'animator du coffre")]
     private Animator m_doorAnimator;
@@ -66,16 +66,16 @@ public class LootBox : MonoBehaviour, ILootBox
         }
 
         o_key = m_key;
-        m_doorAnimator.SetTrigger(m_openHash);
+        //m_doorAnimator.SetTrigger(m_openHash);
 
         StartCoroutine(DestroySelf());
 
         return keyFounded;
     }
 
-    IEnumerator DestroySelf()
+    public IEnumerator DestroySelf()
     {
-        yield return new WaitForSeconds(2f);
-        Destroy(gameObject);
+        yield return new WaitForSeconds(0f);
+        transform.position = new Vector3(10000, 10000, 10000);
     }
 }

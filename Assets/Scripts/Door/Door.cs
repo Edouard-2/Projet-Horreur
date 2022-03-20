@@ -29,19 +29,20 @@ public class Door : MonoBehaviour, IDoor
         }
     }
 
-    public void OpenDoor(List<KeyType> p_playerKeys, GameObject p_door)
+    public bool OpenDoor(KeyType p_playerKey, GameObject p_door)
     {
         if (m_neededKey)
         {
             //Si le joueur n'a pas la clé necessaire
-            if (p_playerKeys == null || !p_playerKeys.Contains(m_neededKey))
+            if (p_playerKey == null || p_playerKey != m_neededKey)
             {
                 Debug.Log($"La cle {m_neededKey.name} est nécessaire");
-                return;
+                return false;
             }
         }
         //On ouvre la porte
         Debug.Log("Je m'ouvre");
         m_doorAnimator?.SetTrigger(m_openHash);
+        return true;
     }
 }
