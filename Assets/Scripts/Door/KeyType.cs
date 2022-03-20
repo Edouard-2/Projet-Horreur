@@ -4,4 +4,5 @@ using UnityEngine;
 public class KeyType : ScriptableObject 
 {
     public Material m_keyMat;
+    public Material m_doorMat;
 }
