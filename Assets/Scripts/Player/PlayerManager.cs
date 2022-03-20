@@ -13,6 +13,8 @@ public class PlayerManager : Singleton<PlayerManager>
     //Camera
     [SerializeField, Tooltip("Camera Principale")] private Camera m_camera;
     
+    [SerializeField, Tooltip("Layer Invisible")] private LayerMask m_layerInvisible;
+    
     //Scripts
     [SerializeField, Tooltip("Script player controller")] private PlayerController m_controllerScript;
     [SerializeField, Tooltip("Script player look")] private PlayerLook m_lookScript;
@@ -71,23 +73,50 @@ public class PlayerManager : Singleton<PlayerManager>
 
             if (Physics.Raycast(ray, out hit, m_radiusVision))
             {
-                m_doorActivationScript.VerifyLayer(hit.transform);
+                //Verification si le joueur est en vision flou
+                if (m_visionScript.m_readyEnd == 0)
+                {
+                    //Si oui est ce que l'obj est visible (net) en mode flou
+                    if((m_layerInvisible.value & (1 << hit.transform.gameObject.layer)) > 0)
+                    {
+                        m_doorActivationScript.VerifyLayer(hit.transform);
+                    }
+                }
+                else
+                {
+                    m_doorActivationScript.VerifyLayer(hit.transform);
+                }
             }
         }
         
+        
         RaycastHit hitInteract;
         Ray rayInteract = m_camera.ScreenPointToRay(Input.mousePosition);
-
+        
+        //Changement de materiaux si l'obj est interactif et visé par le joueur
         if (Physics.Raycast(rayInteract, out hitInteract, m_radiusVision))
-        {
-            m_doorActivationScript.VerifyFeedbackInteract(hitInteract.transform);
-            
+        { 
+            //Verification si le joueur est en vision flou
+            if (m_visionScript.m_readyEnd == 0)
+            {
+                //Si oui est ce que l'obj est visible (net) en mode flou
+                if((m_layerInvisible.value & (1 << hitInteract.transform.gameObject.layer)) > 0)
+                {
+                    m_doorActivationScript.VerifyFeedbackInteract(hitInteract.transform);
+                }
+            }
+            else
+            {
+                m_doorActivationScript.VerifyFeedbackInteract(hitInteract.transform);
+            }
         }
+        //Sinon on remet le materiaux de base
         else
         {
             m_doorActivationScript.ResetFeedbackInteract();
         }
         
+        //Rotation de toutes les clés (feedback interactif) pour le fun
         DoRotateKeys?.Invoke();
         
         //Input Blur Effect
