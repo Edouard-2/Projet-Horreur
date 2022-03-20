@@ -43,7 +43,6 @@ public class LootBox : MonoBehaviour, ILootBox
         if (m_key)
         {
             transform.GetChild(0).GetComponent<Renderer>().material = m_key.m_keyMat;
-            //transform.GetChild(0).GetComponent<Renderer>().material.color = m_key.m_keyColor;
         }
     }
 

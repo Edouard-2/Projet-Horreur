@@ -30,6 +30,9 @@ public class PlayerVision : MonoBehaviour
 
     [HideInInspector]public float tTime;
 
+    public delegate void ChangeMaterial(float p_time);
+    public ChangeMaterial DoChangeMaterial;
+    
 
     public void DoSwitchView(float p_time, AnimationCurve p_curve)
     {
@@ -57,8 +60,10 @@ public class PlayerVision : MonoBehaviour
         if (m_resetTimeVisionMat)
         {
             float matVisibilityValue = p_dir.Evaluate(p_time);
-            m_matInvisibleVisible.SetFloat("_StepStrenght", matVisibilityValue);
-            m_matVisibleInvisible.SetFloat("_StepStrenght", matVisibilityValue);
+            //m_matInvisibleVisible.SetFloat("_StepStrenght", matVisibilityValue);
+            //m_matVisibleInvisible.SetFloat("_StepStrenght", matVisibilityValue);
+            
+            DoChangeMaterial?.Invoke(matVisibilityValue);
         }
     }
 

@@ -3,8 +3,13 @@ using UnityEngine;
 
 public class PlayerInteractions : MonoBehaviour
 {
-    [SerializeField, Tooltip("Le layer des portes")] private LayerMask m_layerDoor;
-    [SerializeField, Tooltip("Le layer des coffres")] private LayerMask m_layerChest;
+    //LayerMask Visible
+    [SerializeField, Tooltip("Layer pour les door")] private LayerMask m_layerDoor;
+    [SerializeField, Tooltip("Layer pour les key")] private LayerMask m_layerKey;
+    
+    //LayerMaske Invisible
+    [SerializeField, Tooltip("Layer pour les doorInvisible")] private LayerMask m_layerDoorInvisible;
+    [SerializeField, Tooltip("Layer pour les keyInvisible")] private LayerMask m_layerKeyInvisible;
 
     [SerializeField, Tooltip("Trousseau de clé")] private KeyType m_trousseauKey;
     [SerializeField, Tooltip("UI de la clés ingame")] private Image m_KeyUI;
@@ -14,11 +19,7 @@ public class PlayerInteractions : MonoBehaviour
 
     public void VerifyFeedbackInteract(Transform p_target)
     {
-        //Verifier si c'est une door ou une clé
-        //Récupérer le scriptableObject
-        //Changer la valeur en fonction
-        
-        if ((m_layerChest.value & (1 << p_target.gameObject.layer)) > 0)
+        if ((m_layerKey.value & (1 << p_target.gameObject.layer)) > 0 || (m_layerKeyInvisible.value & (1 << p_target.gameObject.layer)) > 0)
         {
             Material targetMaterial = p_target.GetComponent<LootBox>().m_key.m_keyMat;
             
@@ -28,7 +29,7 @@ public class PlayerInteractions : MonoBehaviour
                 targetMaterial.SetFloat("_isAim", 1);
             }
         }
-        else if ((m_layerDoor.value & (1 << p_target.gameObject.layer)) > 0 )
+        else if ((m_layerDoor.value & (1 << p_target.gameObject.layer)) > 0 || (m_layerDoorInvisible.value & (1 << p_target.gameObject.layer)) > 0)
         {
             Material targetMaterial = p_target.GetComponent<Renderer>().material;
             
@@ -50,7 +51,7 @@ public class PlayerInteractions : MonoBehaviour
     
     public void VerifyLayer(Transform p_target)
     {
-        if ((m_layerChest.value & (1 << p_target.gameObject.layer)) > 0 )
+        if ((m_layerKey.value & (1 << p_target.gameObject.layer)) > 0 || (m_layerKeyInvisible.value & (1 << p_target.gameObject.layer)) > 0)
         {
             LootBox myLootBox = p_target.GetComponent<LootBox>();
             if( myLootBox && myLootBox.OpenChest(out KeyType key))
@@ -72,7 +73,7 @@ public class PlayerInteractions : MonoBehaviour
             }
         }
 
-        else if ((m_layerDoor.value & (1 << p_target.gameObject.layer)) > 0 ) 
+        else if ((m_layerDoor.value & (1 << p_target.gameObject.layer)) > 0 || (m_layerDoorInvisible.value & (1 << p_target.gameObject.layer)) > 0) 
         {
             Door myDoor =  p_target.GetComponent<Door>();
             if (myDoor)

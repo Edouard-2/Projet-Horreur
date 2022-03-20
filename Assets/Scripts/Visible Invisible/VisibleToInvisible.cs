@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.Rendering;
 
+[RequireComponent(typeof(VisibleToInvisibleMaterial))]
 public class VisibleToInvisible : MonoBehaviour
 {
 

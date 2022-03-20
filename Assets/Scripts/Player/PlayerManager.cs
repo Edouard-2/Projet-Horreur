@@ -13,12 +13,14 @@ public class PlayerManager : Singleton<PlayerManager>
     //Camera
     [SerializeField, Tooltip("Camera Principale")] private Camera m_camera;
     
-    [SerializeField, Tooltip("Layer Invisible")] private LayerMask m_layerInvisible;
+    //LayerMask
+    [SerializeField, Tooltip("Layer pour les keyInvisible")] private LayerMask m_keyLayerInvisible;
+    [SerializeField, Tooltip("Layer pour les doorInvisible")] private LayerMask m_doorLayerInvisible;
     
     //Scripts
     [SerializeField, Tooltip("Script player controller")] private PlayerController m_controllerScript;
     [SerializeField, Tooltip("Script player look")] private PlayerLook m_lookScript;
-    [SerializeField, Tooltip("Script player vision")] private PlayerVision m_visionScript;
+    [SerializeField, Tooltip("Script player vision")] public PlayerVision m_visionScript;
     [SerializeField, Tooltip("Script player door")] private PlayerInteractions m_doorActivationScript;
 
     public float m_radiusVision;
@@ -77,7 +79,7 @@ public class PlayerManager : Singleton<PlayerManager>
                 if (m_visionScript.m_readyEnd == 0)
                 {
                     //Si oui est ce que l'obj est visible (net) en mode flou
-                    if((m_layerInvisible.value & (1 << hit.transform.gameObject.layer)) > 0)
+                    if((m_keyLayerInvisible.value & (1 << hit.transform.gameObject.layer)) > 0 || (m_doorLayerInvisible.value & (1 << hit.transform.gameObject.layer)) > 0)
                     {
                         m_doorActivationScript.VerifyLayer(hit.transform);
                     }
@@ -100,7 +102,7 @@ public class PlayerManager : Singleton<PlayerManager>
             if (m_visionScript.m_readyEnd == 0)
             {
                 //Si oui est ce que l'obj est visible (net) en mode flou
-                if((m_layerInvisible.value & (1 << hitInteract.transform.gameObject.layer)) > 0)
+                if((m_keyLayerInvisible.value & (1 << hitInteract.transform.gameObject.layer)) > 0 || (m_doorLayerInvisible.value & (1 << hitInteract.transform.gameObject.layer)) > 0)
                 {
                     m_doorActivationScript.VerifyFeedbackInteract(hitInteract.transform);
                 }
