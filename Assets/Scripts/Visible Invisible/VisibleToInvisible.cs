@@ -20,11 +20,6 @@ public class VisibleToInvisible : MonoBehaviour
         PlayerManager.Instance.DoVisibleToInvisibleHandler += DoVisibleToInvisible;
     }
 
-    private void OnDisable()
-    {
-        PlayerManager.Instance.DoVisibleToInvisibleHandler -= DoVisibleToInvisible;
-    }
-
     private void Awake()
     {
         if(m_boxCollider == null)

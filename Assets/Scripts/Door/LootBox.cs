@@ -22,11 +22,6 @@ public class LootBox : MonoBehaviour, ILootBox
         PlayerManager.Instance.DoRotateKeys += RotateSelf;
     }
 
-    private void OnDisable()
-    {
-        PlayerManager.Instance.DoRotateKeys -= RotateSelf;
-    }
-
     private void Awake()
     {
         if (m_doorAnimator == null)
