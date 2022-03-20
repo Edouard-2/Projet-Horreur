@@ -33,7 +33,7 @@ public class PlayerInteractions : MonoBehaviour
         else if ((m_layerDoor.value & (1 << p_target.gameObject.layer)) > 0 || (m_layerDoorInvisible.value & (1 << p_target.gameObject.layer)) > 0)
         {
             Debug.Log("porte");
-            Material targetMaterial = p_target.GetComponent<Renderer>().material;
+            Material targetMaterial = p_target.GetComponent<Door>().m_neededKey.m_doorMat;
             
             if (targetMaterial != null && targetMaterial.GetFloat("_isAim") != 1)
             {

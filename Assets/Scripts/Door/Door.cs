@@ -4,7 +4,7 @@ using UnityEngine;
 public class Door : MonoBehaviour, IDoor
 {
     [SerializeField, Tooltip("Type de clés")]
-    private KeyType m_neededKey;
+    public KeyType m_neededKey;
 
     [SerializeField, Tooltip("L'animator de la porte")] 
     private Animator m_doorAnimator;
