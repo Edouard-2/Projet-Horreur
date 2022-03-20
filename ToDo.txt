@@ -1,0 +1,27 @@
+✔
+To Do: 
+✔ Faire que le trousseau soit 1 seul clé
+✔ Déposer la clé précédente si on en prend une autre
+✔ Changement de couleur quand passé sur la clé / porte si possible d'intéragir
+✔ Mode flou pas d'intéraction possible avec obj flou
+-Keys préfab de visibles et invisibles
+-Door préfab de visibles et invisibles
+
+-feedback visuel si aveugle
+
+-Compléter le Risk and Rewards
+-Compléter l'équilibrage (voir si besoin d'attendre le LD)
+
+-Transvaseur
+________________________________________________________________________
+
+Reflexion:
+
+//Tt les mériaux InvToVisi et VisiToInv sont avec le shader dédié
+//Plein d'instance de mat ducoup
+
+//Delegate de tt les obj qui on un mat InvToVisi et VisiToInv 
+//Avec un paramètre qui est t (comme le lerp)
+
+// déclaration du delegate dans le PlayerVision
+//Pour s'initialiser PlayerManger.Instanse.m_visionScrypt.FunctionDelegate += truc;
