@@ -103,7 +103,7 @@ public class PlayerInteractions : MonoBehaviour
         else if ((m_layerTransvaseur.value & (1 << p_target.gameObject.layer)) > 0 ||
                   (m_layerTransvaseurInvisible.value & (1 << p_target.gameObject.layer)) > 0)
         {
-            
+            //Transvaseur things
         }
         //Si rien n'est intéractible
         else
