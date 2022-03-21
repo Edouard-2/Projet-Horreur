@@ -38,6 +38,8 @@ public class LootBox : MonoBehaviour, ILootBox
         if (m_key)
         {
             transform.GetChild(0).GetComponent<Renderer>().material = m_key.m_keyMat;
+            m_key.m_doorMat.SetFloat("_isAim", 0);
+            m_key.m_keyMat.SetFloat("_isAim", 0);
         }
     }
 

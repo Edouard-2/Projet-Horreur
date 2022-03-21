@@ -34,6 +34,12 @@ public class PlayerInteractions : MonoBehaviour
             targetMaterial = p_target.GetComponent<Door>().m_neededKey.m_doorMat;
 
         }
+
+        if (m_currentAimObject != null && m_currentAimObject != targetMaterial)
+        {
+            ResetFeedbackInteract();
+        }
+        
         //Changer le matérial choisi
         if (targetMaterial != null && targetMaterial.GetFloat("_isAim") != 1)
         {
@@ -108,8 +114,19 @@ public class PlayerInteractions : MonoBehaviour
     {
         //Ejecter la clé
         Debug.Log("clear");
+        
+        RaycastHit hitInteract;
+        Ray rayInteract = PlayerManager.Instance.m_camera.ScreenPointToRay(Input.mousePosition);
+        
+        //Changement de materiaux si l'obj est interactif et visé par le joueur
+        if (!Physics.Raycast(rayInteract, out hitInteract, 1))
+        {
+            m_keyObject.transform.position = transform.forward;
+        }
+        
+        m_keyObject.transform.position += transform.position;
+        
         m_trousseauKey = null;
-        m_keyObject.transform.position = transform.position + transform.forward;
         m_keyObject = null;
         m_KeyUI.color = Color.clear;
     }

@@ -12,7 +12,7 @@ public class PlayerManager : Singleton<PlayerManager>
     private const float m_gravity = -9.81f;
 
     //Camera
-    [SerializeField, Tooltip("Camera Principale")] private Camera m_camera;
+    [SerializeField, Tooltip("Camera Principale")] public Camera m_camera;
     
     //LayerMask
     [SerializeField, Tooltip("Layer pour les keyInvisible")] private LayerMask m_keyLayerInvisible;

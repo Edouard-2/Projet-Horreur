@@ -26,6 +26,8 @@ public class Door : MonoBehaviour, IDoor
         if (m_neededKey)
         {
             GetComponent<Renderer>().material = m_neededKey.m_doorMat;
+            m_neededKey.m_doorMat.SetFloat("_isAim", 0);
+            m_neededKey.m_keyMat.SetFloat("_isAim", 0);
         }
     }
 
