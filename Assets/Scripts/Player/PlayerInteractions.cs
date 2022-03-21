@@ -23,14 +23,14 @@ public class PlayerInteractions : MonoBehaviour
         //Recupérer le mat de la clé
         if ((m_layerKey.value & (1 << p_target.gameObject.layer)) > 0 || (m_layerKeyInvisible.value & (1 << p_target.gameObject.layer)) > 0)
         {
-            Debug.Log("key");
+            //Debug.Log("key");
             targetMaterial = p_target.GetComponent<LootBox>().m_key.m_keyMat;
 
         }
         //Récupérer le mat de la porte
         else if ((m_layerDoor.value & (1 << p_target.gameObject.layer)) > 0 || (m_layerDoorInvisible.value & (1 << p_target.gameObject.layer)) > 0)
         {
-            Debug.Log("porte");
+            //Debug.Log("porte");
             targetMaterial = p_target.GetComponent<Door>().m_neededKey.m_doorMat;
 
         }
