@@ -6,10 +6,12 @@ public class PlayerInteractions : MonoBehaviour
     //LayerMask Visible
     [SerializeField, Tooltip("Layer pour les door")] private LayerMask m_layerDoor;
     [SerializeField, Tooltip("Layer pour les key")] private LayerMask m_layerKey;
+    [SerializeField, Tooltip("Layer pour les transvaseur")] private LayerMask m_layerTransvaseur;
     
     //LayerMaske Invisible
     [SerializeField, Tooltip("Layer pour les doorInvisible")] private LayerMask m_layerDoorInvisible;
     [SerializeField, Tooltip("Layer pour les keyInvisible")] public LayerMask m_layerKeyInvisible;
+    [SerializeField, Tooltip("Layer pour les transvaseurInvisible")] public LayerMask m_layerTransvaseurInvisible;
 
     [SerializeField, Tooltip("Trousseau de clé")] public KeyType m_trousseauKey;
     [SerializeField, Tooltip("UI de la clés ingame")] private Image m_KeyUI;
@@ -59,7 +61,8 @@ public class PlayerInteractions : MonoBehaviour
     public void VerifyLayer(Transform p_target)
     {
         //Si c'est la clé
-        if ((m_layerKey.value & (1 << p_target.gameObject.layer)) > 0 || (m_layerKeyInvisible.value & (1 << p_target.gameObject.layer)) > 0)
+        if ((m_layerKey.value & (1 << p_target.gameObject.layer)) > 0 || 
+            (m_layerKeyInvisible.value & (1 << p_target.gameObject.layer)) > 0)
         {
             LootBox myLootBox = p_target.GetComponent<LootBox>();
             if( myLootBox && myLootBox.OpenChest(out KeyType key))
@@ -82,7 +85,8 @@ public class PlayerInteractions : MonoBehaviour
         }
         
         //Si c'est la porte
-        else if ((m_layerDoor.value & (1 << p_target.gameObject.layer)) > 0 || (m_layerDoorInvisible.value & (1 << p_target.gameObject.layer)) > 0) 
+        else if ((m_layerDoor.value & (1 << p_target.gameObject.layer)) > 0 || 
+                 (m_layerDoorInvisible.value & (1 << p_target.gameObject.layer)) > 0) 
         {
             Door myDoor =  p_target.GetComponent<Door>();
             if (myDoor)
@@ -95,7 +99,12 @@ public class PlayerInteractions : MonoBehaviour
                 }
             }
         }
-        
+        //Si c'est le transvaseur
+        else if ((m_layerTransvaseur.value & (1 << p_target.gameObject.layer)) > 0 ||
+                  (m_layerTransvaseurInvisible.value & (1 << p_target.gameObject.layer)) > 0)
+        {
+            
+        }
         //Si rien n'est intéractible
         else
         {
@@ -115,16 +124,16 @@ public class PlayerInteractions : MonoBehaviour
         //Ejecter la clé
         Debug.Log("clear");
         
+        m_keyObject.transform.position = transform.position;
+        
         RaycastHit hitInteract;
         Ray rayInteract = PlayerManager.Instance.m_camera.ScreenPointToRay(Input.mousePosition);
         
         //Changement de materiaux si l'obj est interactif et visé par le joueur
         if (!Physics.Raycast(rayInteract, out hitInteract, 1))
         {
-            m_keyObject.transform.position = transform.forward;
+            m_keyObject.transform.position += transform.forward;
         }
-        
-        m_keyObject.transform.position += transform.position;
         
         m_trousseauKey = null;
         m_keyObject = null;

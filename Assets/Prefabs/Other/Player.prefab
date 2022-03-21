@@ -168,15 +168,15 @@ MonoBehaviour:
   m_camera: {fileID: 1674616961786738440}
   m_keyLayerInvisible:
     serializedVersion: 2
-    m_Bits: 512
+    m_Bits: 1024
   m_doorLayerInvisible:
     serializedVersion: 2
-    m_Bits: 1024
+    m_Bits: 2048
   m_controllerScript: {fileID: 5608393819760579455}
   m_lookScript: {fileID: 5128347266043499178}
   m_visionScript: {fileID: 7154114867123462734}
   m_interactionsScript: {fileID: 0}
-  m_radiusVision: 6.89
+  m_radiusVision: 2.1
 --- !u!114 &5608393819760579455
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -366,7 +366,7 @@ MonoBehaviour:
   m_resetTimeVisionMat: 0
   m_readyEnd: 1
   m_uiBv: {fileID: 0}
-  m_speedDecreaseBV: 0.1
+  m_speedDecreaseBV: 0.05
   m_MultiplIncreaseBV: 0.3
   m_blindTime: 10
   m_lessBvMax: 0.1
@@ -392,12 +392,18 @@ MonoBehaviour:
   m_layerKey:
     serializedVersion: 2
     m_Bits: 128
-  m_layerDoorInvisible:
-    serializedVersion: 2
-    m_Bits: 1024
-  m_layerKeyInvisible:
+  m_layerTransvaseur:
     serializedVersion: 2
     m_Bits: 512
+  m_layerDoorInvisible:
+    serializedVersion: 2
+    m_Bits: 2048
+  m_layerKeyInvisible:
+    serializedVersion: 2
+    m_Bits: 1024
+  m_layerTransvaseurInvisible:
+    serializedVersion: 2
+    m_Bits: 4096
   m_trousseauKey: {fileID: 0}
   m_KeyUI: {fileID: 0}
   m_keyObject: {fileID: 0}
@@ -547,7 +553,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8086088612128622503, guid: 06d99f458a182bf408ff4c6011bb10e5, type: 3}
       propertyPath: m_CullingMask.m_Bits
-      value: 1600
+      value: 7232
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 06d99f458a182bf408ff4c6011bb10e5, type: 3}
