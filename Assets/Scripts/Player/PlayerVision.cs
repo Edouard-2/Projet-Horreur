@@ -16,7 +16,7 @@ public class PlayerVision : MonoBehaviour
     [HideInInspector]public float m_timeVision;
     [HideInInspector]public bool m_resetTimeVisionComp = false;
     [HideInInspector]public bool m_resetTimeVisionMat = false;
-    [HideInInspector]public int m_readyEnd = 1;
+    public int m_readyEnd = 1;
 
     //BV
     [SerializeField, Tooltip("BV visuel")] public Image m_uiBv;
@@ -102,6 +102,8 @@ public class PlayerVision : MonoBehaviour
 
         m_currentBvMax -= m_lessBvMax;
         m_uiBv.fillAmount = m_currentBvMax;
+
+        PlayerManager.Instance.CheckCurrentKey(m_readyEnd);
 
         StartCoroutine(WaitStopBlind());
     }

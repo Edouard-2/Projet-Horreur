@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 [RequireComponent(typeof(PlayerController))]
 [RequireComponent(typeof(PlayerLook))]
@@ -21,7 +22,7 @@ public class PlayerManager : Singleton<PlayerManager>
     [SerializeField, Tooltip("Script player controller")] private PlayerController m_controllerScript;
     [SerializeField, Tooltip("Script player look")] private PlayerLook m_lookScript;
     [SerializeField, Tooltip("Script player vision")] public PlayerVision m_visionScript;
-    [SerializeField, Tooltip("Script player door")] private PlayerInteractions m_doorActivationScript;
+    [SerializeField, Tooltip("Script player door")] private PlayerInteractions m_interactionsScript;
 
     public float m_radiusVision;
     
@@ -52,8 +53,8 @@ public class PlayerManager : Singleton<PlayerManager>
         if (m_visionScript == null)
             m_visionScript = GetComponent<PlayerVision>();
         
-        if (m_doorActivationScript == null)
-            m_doorActivationScript = GetComponent<PlayerInteractions>();
+        if (m_interactionsScript == null)
+            m_interactionsScript = GetComponent<PlayerInteractions>();
     }
 
     private void Update()
@@ -81,12 +82,12 @@ public class PlayerManager : Singleton<PlayerManager>
                     //Si oui est ce que l'obj est visible (net) en mode flou
                     if((m_keyLayerInvisible.value & (1 << hit.transform.gameObject.layer)) > 0 || (m_doorLayerInvisible.value & (1 << hit.transform.gameObject.layer)) > 0)
                     {
-                        m_doorActivationScript.VerifyLayer(hit.transform);
+                        m_interactionsScript.VerifyLayer(hit.transform);
                     }
                 }
                 else
                 {
-                    m_doorActivationScript.VerifyLayer(hit.transform);
+                    m_interactionsScript.VerifyLayer(hit.transform);
                 }
             }
         }
@@ -104,18 +105,18 @@ public class PlayerManager : Singleton<PlayerManager>
                 //Si oui est ce que l'obj est visible (net) en mode flou
                 if((m_keyLayerInvisible.value & (1 << hitInteract.transform.gameObject.layer)) > 0 || (m_doorLayerInvisible.value & (1 << hitInteract.transform.gameObject.layer)) > 0)
                 {
-                    m_doorActivationScript.VerifyFeedbackInteract(hitInteract.transform);
+                    m_interactionsScript.VerifyFeedbackInteract(hitInteract.transform);
                 }
             }
             else
             {
-                m_doorActivationScript.VerifyFeedbackInteract(hitInteract.transform);
+                m_interactionsScript.VerifyFeedbackInteract(hitInteract.transform);
             }
         }
         //Sinon on remet le materiaux de base
         else
         {
-            m_doorActivationScript.ResetFeedbackInteract();
+            m_interactionsScript.ResetFeedbackInteract();
         }
         
         //Rotation de toutes les clés (feedback interactif) pour le fun
@@ -139,6 +140,11 @@ public class PlayerManager : Singleton<PlayerManager>
             m_visionScript.m_resetTimeVisionMat = true;
             
             DoVisibleToInvisibleHandler?.Invoke();
+            
+            if (m_interactionsScript.m_keyObject != null)
+            {
+                CheckCurrentKey(m_visionScript.m_readyEnd);
+            }
         }
     }
 
@@ -196,6 +202,20 @@ public class PlayerManager : Singleton<PlayerManager>
                 m_visionScript.DoSwitchMaterial(tTime, m_visionScript.m_curveMatVisionFinish);
             }
             m_visionScript.IncreaseBV();
+            
+            
+        }
+    }
+
+    public void CheckCurrentKey(int p_readyEnd)
+    {
+        if (p_readyEnd == 1 && m_interactionsScript.m_trousseauKey != null)
+        {
+            if((m_interactionsScript.m_layerKeyInvisible & (1 << m_interactionsScript.m_keyObject.layer)) > 0)
+            {
+                Debug.Log("Jeter la clé");
+                m_interactionsScript.EjectKey();
+            }
         }
     }
 

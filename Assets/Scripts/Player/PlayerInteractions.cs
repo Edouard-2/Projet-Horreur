@@ -9,37 +9,36 @@ public class PlayerInteractions : MonoBehaviour
     
     //LayerMaske Invisible
     [SerializeField, Tooltip("Layer pour les doorInvisible")] private LayerMask m_layerDoorInvisible;
-    [SerializeField, Tooltip("Layer pour les keyInvisible")] private LayerMask m_layerKeyInvisible;
+    [SerializeField, Tooltip("Layer pour les keyInvisible")] public LayerMask m_layerKeyInvisible;
 
-    [SerializeField, Tooltip("Trousseau de clé")] private KeyType m_trousseauKey;
+    [SerializeField, Tooltip("Trousseau de clé")] public KeyType m_trousseauKey;
     [SerializeField, Tooltip("UI de la clés ingame")] private Image m_KeyUI;
 
-    private GameObject m_keyObject;
+    public GameObject m_keyObject;
     private Material m_currentAimObject;
 
     public void VerifyFeedbackInteract(Transform p_target)
     {
+        Material targetMaterial = null;
+        //Recupérer le mat de la clé
         if ((m_layerKey.value & (1 << p_target.gameObject.layer)) > 0 || (m_layerKeyInvisible.value & (1 << p_target.gameObject.layer)) > 0)
         {
             Debug.Log("key");
-            Material targetMaterial = p_target.GetComponent<LootBox>().m_key.m_keyMat;
-            
-            if (targetMaterial != null && targetMaterial.GetFloat("_isAim") != 1)
-            {
-                m_currentAimObject = targetMaterial;
-                targetMaterial.SetFloat("_isAim", 1);
-            }
+            targetMaterial = p_target.GetComponent<LootBox>().m_key.m_keyMat;
+
         }
+        //Récupérer le mat de la porte
         else if ((m_layerDoor.value & (1 << p_target.gameObject.layer)) > 0 || (m_layerDoorInvisible.value & (1 << p_target.gameObject.layer)) > 0)
         {
             Debug.Log("porte");
-            Material targetMaterial = p_target.GetComponent<Door>().m_neededKey.m_doorMat;
-            
-            if (targetMaterial != null && targetMaterial.GetFloat("_isAim") != 1)
-            {
-                m_currentAimObject = targetMaterial;
-                targetMaterial.SetFloat("_isAim", 1);
-            }
+            targetMaterial = p_target.GetComponent<Door>().m_neededKey.m_doorMat;
+
+        }
+        //Changer le matérial choisi
+        if (targetMaterial != null && targetMaterial.GetFloat("_isAim") != 1)
+        {
+            m_currentAimObject = targetMaterial;
+            targetMaterial.SetFloat("_isAim", 1);
         }
     }
 
@@ -53,6 +52,7 @@ public class PlayerInteractions : MonoBehaviour
     
     public void VerifyLayer(Transform p_target)
     {
+        //Si c'est la clé
         if ((m_layerKey.value & (1 << p_target.gameObject.layer)) > 0 || (m_layerKeyInvisible.value & (1 << p_target.gameObject.layer)) > 0)
         {
             LootBox myLootBox = p_target.GetComponent<LootBox>();
@@ -74,7 +74,8 @@ public class PlayerInteractions : MonoBehaviour
                 }
             }
         }
-
+        
+        //Si c'est la porte
         else if ((m_layerDoor.value & (1 << p_target.gameObject.layer)) > 0 || (m_layerDoorInvisible.value & (1 << p_target.gameObject.layer)) > 0) 
         {
             Door myDoor =  p_target.GetComponent<Door>();
@@ -88,6 +89,8 @@ public class PlayerInteractions : MonoBehaviour
                 }
             }
         }
+        
+        //Si rien n'est intéractible
         else
         {
             Debug.Log("Rien pour intéragir");
@@ -101,11 +104,13 @@ public class PlayerInteractions : MonoBehaviour
         m_KeyUI.color = new Vector4(p_key.m_key.m_keyMat.GetColor("_BaseColor").r,p_key.m_key.m_keyMat.GetColor("_BaseColor").g,p_key.m_key.m_keyMat.GetColor("_BaseColor").b,1);
     }
     
-    private void EjectKey()
+    public void EjectKey()
     {
         //Ejecter la clé
         Debug.Log("clear");
+        m_trousseauKey = null;
         m_keyObject.transform.position = transform.position + transform.forward;
+        m_keyObject = null;
         m_KeyUI.color = Color.clear;
     }
 }
