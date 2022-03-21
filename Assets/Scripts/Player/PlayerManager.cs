@@ -1,18 +1,31 @@
+using System;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 [RequireComponent(typeof(PlayerController))]
 [RequireComponent(typeof(PlayerLook))]
 [RequireComponent(typeof(PlayerVision))]
+[RequireComponent(typeof(PlayerInteractions))]
 public class PlayerManager : Singleton<PlayerManager>
 {
     //Constante
     private const float m_gravity = -9.81f;
 
+    //Camera
+    [SerializeField, Tooltip("Camera Principale")] public Camera m_camera;
+    
+    //LayerMask
+    [SerializeField, Tooltip("Layer pour les keyInvisible")] private LayerMask m_keyLayerInvisible;
+    [SerializeField, Tooltip("Layer pour les doorInvisible")] private LayerMask m_doorLayerInvisible;
+    
     //Scripts
     [SerializeField, Tooltip("Script player controller")] private PlayerController m_controllerScript;
     [SerializeField, Tooltip("Script player look")] private PlayerLook m_lookScript;
-    [SerializeField, Tooltip("Script player vision")] private PlayerVision m_visionScript;
+    [SerializeField, Tooltip("Script player vision")] public PlayerVision m_visionScript;
+    [SerializeField, Tooltip("Script player door")] private PlayerInteractions m_interactionsScript;
 
+    public float m_radiusVision;
+    
     private float m_timeVision;
     private float tTime;
     public float Gravity
@@ -20,6 +33,8 @@ public class PlayerManager : Singleton<PlayerManager>
         get => m_gravity;
     }
 
+    public delegate void RotateKeys();
+    public RotateKeys DoRotateKeys;
     public delegate void DoVisionSwitch();
     public DoVisionSwitch DoVisibleToInvisibleHandler;
     
@@ -37,8 +52,11 @@ public class PlayerManager : Singleton<PlayerManager>
 
         if (m_visionScript == null)
             m_visionScript = GetComponent<PlayerVision>();
+        
+        if (m_interactionsScript == null)
+            m_interactionsScript = GetComponent<PlayerInteractions>();
     }
-    
+
     private void Update()
     {
         //Mouvement du Joueur
@@ -50,6 +68,60 @@ public class PlayerManager : Singleton<PlayerManager>
         //Mouvement de la camera
         m_lookScript.CursorMouvement();
 
+        //Interaction avec des objets
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            RaycastHit hit;
+            Ray ray = m_camera.ScreenPointToRay(Input.mousePosition);
+
+            if (Physics.Raycast(ray, out hit, m_radiusVision))
+            {
+                //Verification si le joueur est en vision flou
+                if (m_visionScript.m_readyEnd == 0)
+                {
+                    //Si oui est ce que l'obj est visible (net) en mode flou
+                    if((m_keyLayerInvisible.value & (1 << hit.transform.gameObject.layer)) > 0 || (m_doorLayerInvisible.value & (1 << hit.transform.gameObject.layer)) > 0)
+                    {
+                        m_interactionsScript.VerifyLayer(hit.transform);
+                    }
+                }
+                else
+                {
+                    m_interactionsScript.VerifyLayer(hit.transform);
+                }
+            }
+        }
+        
+        
+        RaycastHit hitInteract;
+        Ray rayInteract = m_camera.ScreenPointToRay(Input.mousePosition);
+        
+        //Changement de materiaux si l'obj est interactif et visé par le joueur
+        if (Physics.Raycast(rayInteract, out hitInteract, m_radiusVision))
+        { 
+            //Verification si le joueur est en vision flou
+            if (m_visionScript.m_readyEnd == 0)
+            {
+                //Si oui est ce que l'obj est visible (net) en mode flou
+                if((m_keyLayerInvisible.value & (1 << hitInteract.transform.gameObject.layer)) > 0 || (m_doorLayerInvisible.value & (1 << hitInteract.transform.gameObject.layer)) > 0)
+                {
+                    m_interactionsScript.VerifyFeedbackInteract(hitInteract.transform);
+                }
+            }
+            else
+            {
+                m_interactionsScript.VerifyFeedbackInteract(hitInteract.transform);
+            }
+        }
+        //Sinon on remet le materiaux de base
+        else
+        {
+            m_interactionsScript.ResetFeedbackInteract();
+        }
+        
+        //Rotation de toutes les clés (feedback interactif) pour le fun
+        DoRotateKeys?.Invoke();
+        
         //Input Blur Effect
         IsInputDown();
     }
@@ -66,9 +138,13 @@ public class PlayerManager : Singleton<PlayerManager>
 
             m_visionScript.m_resetTimeVisionComp = true;
             m_visionScript.m_resetTimeVisionMat = true;
-
-
+            
             DoVisibleToInvisibleHandler?.Invoke();
+            
+            if (m_interactionsScript.m_keyObject != null)
+            {
+                CheckCurrentKey(m_visionScript.m_readyEnd);
+            }
         }
     }
 
@@ -126,6 +202,20 @@ public class PlayerManager : Singleton<PlayerManager>
                 m_visionScript.DoSwitchMaterial(tTime, m_visionScript.m_curveMatVisionFinish);
             }
             m_visionScript.IncreaseBV();
+            
+            
+        }
+    }
+
+    public void CheckCurrentKey(int p_readyEnd)
+    {
+        if (p_readyEnd == 1 && m_interactionsScript.m_trousseauKey != null)
+        {
+            if((m_interactionsScript.m_layerKeyInvisible & (1 << m_interactionsScript.m_keyObject.layer)) > 0)
+            {
+                Debug.Log("Jeter la clé");
+                m_interactionsScript.EjectKey();
+            }
         }
     }
 

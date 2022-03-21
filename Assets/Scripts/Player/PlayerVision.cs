@@ -16,7 +16,7 @@ public class PlayerVision : MonoBehaviour
     [HideInInspector]public float m_timeVision;
     [HideInInspector]public bool m_resetTimeVisionComp = false;
     [HideInInspector]public bool m_resetTimeVisionMat = false;
-    [HideInInspector]public int m_readyEnd = 1;
+    public int m_readyEnd = 1;
 
     //BV
     [SerializeField, Tooltip("BV visuel")] public Image m_uiBv;
@@ -30,6 +30,9 @@ public class PlayerVision : MonoBehaviour
 
     [HideInInspector]public float tTime;
 
+    public delegate void ChangeMaterial(float p_time);
+    public ChangeMaterial DoChangeMaterial;
+    
 
     public void DoSwitchView(float p_time, AnimationCurve p_curve)
     {
@@ -57,8 +60,10 @@ public class PlayerVision : MonoBehaviour
         if (m_resetTimeVisionMat)
         {
             float matVisibilityValue = p_dir.Evaluate(p_time);
-            m_matInvisibleVisible.SetFloat("_StepStrenght", matVisibilityValue);
-            m_matVisibleInvisible.SetFloat("_StepStrenght", matVisibilityValue);
+            //m_matInvisibleVisible.SetFloat("_StepStrenght", matVisibilityValue);
+            //m_matVisibleInvisible.SetFloat("_StepStrenght", matVisibilityValue);
+            
+            DoChangeMaterial?.Invoke(matVisibilityValue);
         }
     }
 
@@ -97,6 +102,8 @@ public class PlayerVision : MonoBehaviour
 
         m_currentBvMax -= m_lessBvMax;
         m_uiBv.fillAmount = m_currentBvMax;
+
+        PlayerManager.Instance.CheckCurrentKey(m_readyEnd);
 
         StartCoroutine(WaitStopBlind());
     }

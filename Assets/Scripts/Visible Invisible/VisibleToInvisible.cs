@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.Rendering;
 
+[RequireComponent(typeof(VisibleToInvisibleMaterial))]
 public class VisibleToInvisible : MonoBehaviour
 {
 
@@ -17,11 +18,6 @@ public class VisibleToInvisible : MonoBehaviour
     private void OnEnable()
     {
         PlayerManager.Instance.DoVisibleToInvisibleHandler += DoVisibleToInvisible;
-    }
-
-    private void OnDisable()
-    {
-        PlayerManager.Instance.DoVisibleToInvisibleHandler -= DoVisibleToInvisible;
     }
 
     private void Awake()
