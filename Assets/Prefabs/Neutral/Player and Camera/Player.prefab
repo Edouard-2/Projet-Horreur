@@ -401,6 +401,9 @@ MonoBehaviour:
   m_layerKeyInvisible:
     serializedVersion: 2
     m_Bits: 1024
+  m_layerKeyVisible:
+    serializedVersion: 2
+    m_Bits: 8192
   m_layerTransvaseurInvisible:
     serializedVersion: 2
     m_Bits: 4096
@@ -553,7 +556,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8086088612128622503, guid: 06d99f458a182bf408ff4c6011bb10e5, type: 3}
       propertyPath: m_CullingMask.m_Bits
-      value: 7232
+      value: 15424
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 06d99f458a182bf408ff4c6011bb10e5, type: 3}

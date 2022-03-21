@@ -209,14 +209,26 @@ public class PlayerManager : Singleton<PlayerManager>
 
     public void CheckCurrentKey(int p_readyEnd)
     {
-        if (p_readyEnd == 1 && m_interactionsScript.m_trousseauKey != null)
+        if (m_interactionsScript.m_trousseauKey != null)
         {
-            if((m_interactionsScript.m_layerKeyInvisible & (1 << m_interactionsScript.m_keyObject.layer)) > 0)
+            if (p_readyEnd == 0 )
             {
-                Debug.Log("Jeter la clé");
-                m_interactionsScript.EjectKey();
+                if((m_interactionsScript.m_layerKeyVisible & (1 << m_interactionsScript.m_keyObject.layer)) > 0)
+                {
+                    Debug.Log("Jeter la clé");
+                    m_interactionsScript.EjectKey();
+                }
+            }
+            else if (p_readyEnd == 1 )
+            {
+                if((m_interactionsScript.m_layerKeyInvisible & (1 << m_interactionsScript.m_keyObject.layer)) > 0)
+                {
+                    Debug.Log("Jeter la clé");
+                    m_interactionsScript.EjectKey();
+                }
             }
         }
+        
     }
 
     protected override string GetSingletonName()

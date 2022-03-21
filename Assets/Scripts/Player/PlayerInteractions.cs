@@ -5,12 +5,13 @@ public class PlayerInteractions : MonoBehaviour
 {
     //LayerMask Visible
     [SerializeField, Tooltip("Layer pour les door")] private LayerMask m_layerDoor;
-    [SerializeField, Tooltip("Layer pour les key")] private LayerMask m_layerKey;
+    [SerializeField, Tooltip("Layer pour les key")] public LayerMask m_layerKey;
     [SerializeField, Tooltip("Layer pour les transvaseur")] private LayerMask m_layerTransvaseur;
     
     //LayerMaske Invisible
     [SerializeField, Tooltip("Layer pour les doorInvisible")] private LayerMask m_layerDoorInvisible;
-    [SerializeField, Tooltip("Layer pour les keyInvisible")] public LayerMask m_layerKeyInvisible;
+    [SerializeField, Tooltip("Layer pour les keyInvisibleToVisible")] public LayerMask m_layerKeyInvisible;
+    [SerializeField, Tooltip("Layer pour les keyVisibleToInvisible")] public LayerMask m_layerKeyVisible;
     [SerializeField, Tooltip("Layer pour les transvaseurInvisible")] public LayerMask m_layerTransvaseurInvisible;
 
     [SerializeField, Tooltip("Trousseau de clé")] public KeyType m_trousseauKey;
@@ -23,14 +24,17 @@ public class PlayerInteractions : MonoBehaviour
     {
         Material targetMaterial = null;
         //Recupérer le mat de la clé
-        if ((m_layerKey.value & (1 << p_target.gameObject.layer)) > 0 || (m_layerKeyInvisible.value & (1 << p_target.gameObject.layer)) > 0)
+        if ((m_layerKey.value & (1 << p_target.gameObject.layer)) > 0 || 
+            (m_layerKeyInvisible.value & (1 << p_target.gameObject.layer)) > 0|| 
+            (m_layerKeyVisible.value & (1 << p_target.gameObject.layer)) > 0)
         {
             //Debug.Log("key");
             targetMaterial = p_target.GetComponent<LootBox>().m_key.m_keyMat;
 
         }
         //Récupérer le mat de la porte
-        else if ((m_layerDoor.value & (1 << p_target.gameObject.layer)) > 0 || (m_layerDoorInvisible.value & (1 << p_target.gameObject.layer)) > 0)
+        else if ((m_layerDoor.value & (1 << p_target.gameObject.layer)) > 0 || 
+                 (m_layerDoorInvisible.value & (1 << p_target.gameObject.layer)) > 0)
         {
             //Debug.Log("porte");
             targetMaterial = p_target.GetComponent<Door>().m_neededKey.m_doorMat;
@@ -62,7 +66,8 @@ public class PlayerInteractions : MonoBehaviour
     {
         //Si c'est la clé
         if ((m_layerKey.value & (1 << p_target.gameObject.layer)) > 0 || 
-            (m_layerKeyInvisible.value & (1 << p_target.gameObject.layer)) > 0)
+            (m_layerKeyInvisible.value & (1 << p_target.gameObject.layer)) > 0|| 
+            (m_layerKeyVisible.value & (1 << p_target.gameObject.layer)) > 0)
         {
             LootBox myLootBox = p_target.GetComponent<LootBox>();
             if( myLootBox && myLootBox.OpenChest(out KeyType key))
