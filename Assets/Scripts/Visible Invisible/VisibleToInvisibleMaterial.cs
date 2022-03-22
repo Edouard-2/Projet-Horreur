@@ -2,7 +2,13 @@ using UnityEngine;
 
 public class VisibleToInvisibleMaterial : MonoBehaviour
 {
-    [SerializeField, Tooltip("Le material de l'objet")] Material m_material;
+    [SerializeField, Tooltip("False : Mettre le MeshRenderer de l'objet")]
+    bool m_needMaterial;
+
+    [SerializeField, Tooltip("Le material de l'objet")]
+    Material m_material;
+
+    private Renderer m_renderer;
 
     private void OnEnable()
     {
@@ -11,19 +17,30 @@ public class VisibleToInvisibleMaterial : MonoBehaviour
 
     private void Awake()
     {
-        if (m_material == null)
+        if (m_material == null && !m_needMaterial)
         {
-            m_material = GetComponent<Renderer>().material;
+            m_renderer = GetComponent<Renderer>();
+            if (m_renderer != null)
+            {
+                m_material = m_renderer.material;
+            }
+
             if (m_material == null)
             {
-                Debug.LogError("Faut mettre le matérial sur l'objet stp !!!");
+                Debug.LogWarning("Faut mettre le matérial sur l'objet stp !!!");
+                PlayerManager.Instance.m_visionScript.DoChangeMaterial -= SwitchInvisibleMaterial;
+                return;
             }
+            SwitchInvisibleMaterial( -0.03f);
         }
-        m_material.SetFloat("_StepStrenght", -0.03f);
     }
 
     private void SwitchInvisibleMaterial(float p_time)
     {
-        m_material.SetFloat("_StepStrenght", p_time);
+        if (!m_needMaterial)
+        {
+            Debug.Log(name, this);
+            m_material.SetFloat("_StepStrenght", p_time);
+        }
     }
 }

@@ -8,11 +8,13 @@ public class PlayerInteractions : MonoBehaviour
     [SerializeField, Tooltip("Layer pour les key")] public LayerMask m_layerKey;
     [SerializeField, Tooltip("Layer pour les transvaseur")] private LayerMask m_layerTransvaseur;
     
-    //LayerMaske Invisible
+    //LayerMaske Invisible To Visible
     [SerializeField, Tooltip("Layer pour les doorInvisible")] private LayerMask m_layerDoorInvisible;
     [SerializeField, Tooltip("Layer pour les keyInvisibleToVisible")] public LayerMask m_layerKeyInvisible;
-    [SerializeField, Tooltip("Layer pour les keyVisibleToInvisible")] public LayerMask m_layerKeyVisible;
     [SerializeField, Tooltip("Layer pour les transvaseurInvisible")] public LayerMask m_layerTransvaseurInvisible;
+    
+    //LayerMaske Visible To Invisible
+    [SerializeField, Tooltip("Layer pour les keyVisibleToInvisible")] public LayerMask m_layerKeyVisible;
 
     [SerializeField, Tooltip("Trousseau de clé")] public KeyType m_trousseauKey;
     [SerializeField, Tooltip("UI de la clés ingame")] private Image m_KeyUI;
@@ -108,7 +110,19 @@ public class PlayerInteractions : MonoBehaviour
         else if ((m_layerTransvaseur.value & (1 << p_target.gameObject.layer)) > 0 ||
                   (m_layerTransvaseurInvisible.value & (1 << p_target.gameObject.layer)) > 0)
         {
-            //Transvaseur things
+            Recepteur myRecepteur = p_target.GetComponent<Recepteur>();
+            if (myRecepteur)
+            {
+                if (m_keyObject != null)
+                {
+                    myRecepteur.TeleportObject(m_keyObject.transform);
+                    EjectKey(false);
+                }
+                else
+                {
+                    Debug.Log("Pas d'objet a transférer");
+                }
+            }
         }
         //Si rien n'est intéractible
         else
@@ -124,20 +138,23 @@ public class PlayerInteractions : MonoBehaviour
         m_KeyUI.color = new Vector4(p_key.m_key.m_keyMat.GetColor("_BaseColor").r,p_key.m_key.m_keyMat.GetColor("_BaseColor").g,p_key.m_key.m_keyMat.GetColor("_BaseColor").b,1);
     }
     
-    public void EjectKey()
+    public void EjectKey(bool p_position = true)
     {
         //Ejecter la clé
-        Debug.Log("clear");
-        
-        m_keyObject.transform.position = transform.position;
-        
-        RaycastHit hitInteract;
-        Ray rayInteract = PlayerManager.Instance.m_camera.ScreenPointToRay(Input.mousePosition);
-        
-        //Changement de materiaux si l'obj est interactif et visé par le joueur
-        if (!Physics.Raycast(rayInteract, out hitInteract, 1))
+        Debug.Log("Clear key");
+
+        if (p_position)
         {
-            m_keyObject.transform.position += transform.forward;
+            m_keyObject.transform.position = transform.position;
+            
+            RaycastHit hitInteract;
+            Ray rayInteract = PlayerManager.Instance.m_camera.ScreenPointToRay(Input.mousePosition);
+        
+            //Changement de materiaux si l'obj est interactif et visé par le joueur
+            if (!Physics.Raycast(rayInteract, out hitInteract, 1))
+            {
+                m_keyObject.transform.position += transform.forward;
+            }
         }
         
         m_trousseauKey = null;

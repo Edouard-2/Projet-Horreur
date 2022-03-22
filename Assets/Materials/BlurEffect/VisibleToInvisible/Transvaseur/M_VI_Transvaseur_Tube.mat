@@ -7,8 +7,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: M_VI_KeySelection_Red
-  m_Shader: {fileID: -6465566751694194690, guid: a7be069c8566a8f4f875e46b99d240c9, type: 3}
+  m_Name: M_VI_Transvaseur_Tube
+  m_Shader: {fileID: -6465566751694194690, guid: 034f3f8fe2a6b6549bda6b5b98bb2542, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -33,8 +33,8 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Floats:
     - Boolean_e6682e3f40c142909da21f320d085631: 1
-    - _StepStrenght: -0.01767683
+    - _StepStrenght: -0.03
     - _isAim: 0
     m_Colors:
-    - _BaseColor: {r: 0.8301887, g: 0.29369885, b: 0.29369885, a: 0}
+    - _BaseColor: {r: 0.427451, g: 0.43137258, b: 0.427451, a: 0}
   m_BuildTextureStacks: []
