@@ -172,6 +172,9 @@ MonoBehaviour:
   m_doorLayerInvisible:
     serializedVersion: 2
     m_Bits: 2048
+  m_transvaseurLayerInvisible:
+    serializedVersion: 2
+    m_Bits: 16384
   m_controllerScript: {fileID: 5608393819760579455}
   m_lookScript: {fileID: 5128347266043499178}
   m_visionScript: {fileID: 7154114867123462734}
@@ -404,8 +407,12 @@ MonoBehaviour:
   m_layerTransvaseurInvisible:
     serializedVersion: 2
     m_Bits: 4096
+  m_layerKeyVisible:
+    serializedVersion: 2
+    m_Bits: 8192
   m_trousseauKey: {fileID: 0}
   m_KeyUI: {fileID: 0}
+  m_pool: {fileID: 748363144396712071, guid: b7f2abd95d8a42344a119c5dc2cf45fb, type: 3}
   m_keyObject: {fileID: 0}
 --- !u!1 &6380790541469819084
 GameObject:
@@ -549,11 +556,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8086088611352311804, guid: 06d99f458a182bf408ff4c6011bb10e5, type: 3}
       propertyPath: m_CullingMask.m_Bits
-      value: 439
+      value: 951
       objectReference: {fileID: 0}
     - target: {fileID: 8086088612128622503, guid: 06d99f458a182bf408ff4c6011bb10e5, type: 3}
       propertyPath: m_CullingMask.m_Bits
-      value: 7232
+      value: 31808
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 06d99f458a182bf408ff4c6011bb10e5, type: 3}

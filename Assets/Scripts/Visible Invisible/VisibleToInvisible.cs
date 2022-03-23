@@ -8,9 +8,11 @@ public class VisibleToInvisible : MonoBehaviour
     [SerializeField, Tooltip("True : l'objet est Visible puis Invisible / False : l'objet est Invisible puis Visible")]
     private bool m_isVisibleToInvisible;
     
-    [SerializeField, Tooltip("Mettre le MeshRenderer de l'objet")]private MeshRenderer m_meshRenderer;
+    [ Tooltip("Est ce que l'objet a besoin du renderer")]public bool m_needRenderer;
+    [SerializeField, Tooltip("False : Mettre le MeshRenderer de l'objet")]private MeshRenderer m_meshRenderer;
 
-    [SerializeField, Tooltip("Mettre le collider de l'objet")]private BoxCollider m_boxCollider;
+    [ Tooltip("Est ce que l'objet a besoin du collider ?")]public bool m_needCollider;
+    [SerializeField, Tooltip("False : Mettre le collider de l'objet")]private BoxCollider m_boxCollider;
 
     private bool m_start = true;
 
@@ -22,7 +24,7 @@ public class VisibleToInvisible : MonoBehaviour
 
     private void Awake()
     {
-        if(m_boxCollider == null)
+        if(m_boxCollider == null && !m_needCollider)
         {
             m_boxCollider = GetComponent<BoxCollider>();
             
@@ -32,13 +34,13 @@ public class VisibleToInvisible : MonoBehaviour
             }
         }
         
-        if(m_meshRenderer == null)
+        if(m_meshRenderer == null && !m_needRenderer)
         {
             m_meshRenderer = GetComponent<MeshRenderer>();
             
             if(m_meshRenderer == null)
             {
-                Debug.LogError("Remplit le collider Gros Chien !!!", this);
+                Debug.LogError("Remplit le Renderer Gros Chien !!!", this);
             }
         }
     }
@@ -76,19 +78,30 @@ public class VisibleToInvisible : MonoBehaviour
 
     void Display()
     {
-        //Debug.Log("Display");
         //  Mettre ombre
-        m_meshRenderer.shadowCastingMode = ShadowCastingMode.On;
+        if (!m_needRenderer)
+        {
+            m_meshRenderer.shadowCastingMode = ShadowCastingMode.On;
+        }
         //  Mettre Collider
-        m_boxCollider.enabled = true;
+        if (!m_needCollider)
+        {
+            m_boxCollider.enabled = true;
+        }
     }
 
     void Hide()
     {
-        //Debug.Log("Hide");
         //  Enlever ombre
-        m_meshRenderer.shadowCastingMode = ShadowCastingMode.Off;
+        if (!m_needRenderer)
+        {
+            m_meshRenderer.shadowCastingMode = ShadowCastingMode.Off;
+        }
+
         //  Enlever Collider
-        m_boxCollider.enabled = false;
+        if (!m_needCollider)
+        {
+            m_boxCollider.enabled = false;
+        }
     }
 }
