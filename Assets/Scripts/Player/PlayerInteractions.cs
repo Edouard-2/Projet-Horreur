@@ -16,8 +16,12 @@ public class PlayerInteractions : MonoBehaviour
     //LayerMaske Visible To Invisible
     [SerializeField, Tooltip("Layer pour les keyVisibleToInvisible")] public LayerMask m_layerKeyVisible;
 
+    //Layer raycast de proximité
+    [SerializeField, Tooltip("Les layers qui seront choisis pour la détection du raycast de proximité")] public LayerMask m_targetLayer;
+    
     [SerializeField, Tooltip("Trousseau de clé")] public KeyType m_trousseauKey;
     [SerializeField, Tooltip("UI de la clés ingame")] private Image m_KeyUI;
+    [SerializeField, Tooltip("La piscine de toutes les clés")] private Transform m_pool;
 
     public GameObject m_keyObject;
     private Material m_currentAimObject;
@@ -134,7 +138,9 @@ public class PlayerInteractions : MonoBehaviour
     private void SetUIKey(LootBox p_key)
     {
         Debug.Log(p_key.m_key.m_keyMat);
-
+        p_key.transform.SetParent(m_pool);
+        p_key.transform.localPosition = Vector3.zero;
+        
         m_KeyUI.color = new Vector4(p_key.m_key.m_keyMat.GetColor("_BaseColor").r,p_key.m_key.m_keyMat.GetColor("_BaseColor").g,p_key.m_key.m_keyMat.GetColor("_BaseColor").b,1);
     }
     
@@ -142,16 +148,17 @@ public class PlayerInteractions : MonoBehaviour
     {
         //Ejecter la clé
         Debug.Log("Clear key");
-
+        m_keyObject.transform.parent = null;
         if (p_position)
         {
-            m_keyObject.transform.position = transform.position;
+            Debug.Log("je reset ma poisition");
+            m_keyObject.transform.position = gameObject.transform.position;
             
             RaycastHit hitInteract;
             Ray rayInteract = PlayerManager.Instance.m_camera.ScreenPointToRay(Input.mousePosition);
         
             //Changement de materiaux si l'obj est interactif et visé par le joueur
-            if (!Physics.Raycast(rayInteract, out hitInteract, 1))
+            if (!Physics.Raycast(rayInteract, out hitInteract, 1, m_targetLayer))
             {
                 m_keyObject.transform.position += transform.forward;
             }

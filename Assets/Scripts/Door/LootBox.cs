@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using UnityEngine;
 
@@ -7,16 +6,6 @@ public class LootBox : MonoBehaviour, ILootBox
     [Tooltip("La clé du coffre")]
     public KeyType m_key;
 
-    [SerializeField, Tooltip("L'animator du coffre")]
-    private Animator m_doorAnimator;
-
-    [SerializeField, Tooltip("Le nom du trigger de l'animation")]
-    private string m_openName;
-
-    private int m_openHash;
-    private bool m_dir;
-    private float m_upFunction;
-
     private void OnEnable()
     {
         PlayerManager.Instance.DoRotateKeys += RotateSelf;
@@ -24,17 +13,6 @@ public class LootBox : MonoBehaviour, ILootBox
 
     private void Awake()
     {
-        if (m_doorAnimator == null)
-        {
-            m_doorAnimator = GetComponent<Animator>();
-            if (m_doorAnimator == null)
-            {
-                Debug.Log("Gros chien l'animator", this);
-            }
-        }
-
-        m_openHash = Animator.StringToHash(m_openName);
-
         if (m_key)
         {
             transform.GetChild(0).GetComponent<Renderer>().material = m_key.m_keyMat;
