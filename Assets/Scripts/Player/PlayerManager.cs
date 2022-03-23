@@ -17,6 +17,7 @@ public class PlayerManager : Singleton<PlayerManager>
     //LayerMask
     [SerializeField, Tooltip("Layer pour les keyInvisible")] private LayerMask m_keyLayerInvisible;
     [SerializeField, Tooltip("Layer pour les doorInvisible")] private LayerMask m_doorLayerInvisible;
+    [SerializeField, Tooltip("Layer pour les transvaseurInvisibles")] private LayerMask m_transvaseurLayerInvisible;
     
     //Scripts
     [SerializeField, Tooltip("Script player controller")] private PlayerController m_controllerScript;
@@ -80,7 +81,9 @@ public class PlayerManager : Singleton<PlayerManager>
                 if (m_visionScript.m_readyEnd == 0)
                 {
                     //Si oui est ce que l'obj est visible (net) en mode flou
-                    if((m_keyLayerInvisible.value & (1 << hit.transform.gameObject.layer)) > 0 || (m_doorLayerInvisible.value & (1 << hit.transform.gameObject.layer)) > 0)
+                    if((m_keyLayerInvisible.value & (1 << hit.transform.gameObject.layer)) > 0 
+                       || (m_doorLayerInvisible.value & (1 << hit.transform.gameObject.layer)) > 0 
+                       || (m_transvaseurLayerInvisible.value & (1 << hit.transform.gameObject.layer)) > 0)
                     {
                         m_interactionsScript.VerifyLayer(hit.transform);
                     }
@@ -103,7 +106,9 @@ public class PlayerManager : Singleton<PlayerManager>
             if (m_visionScript.m_readyEnd == 0)
             {
                 //Si oui est ce que l'obj est visible (net) en mode flou
-                if((m_keyLayerInvisible.value & (1 << hitInteract.transform.gameObject.layer)) > 0 || (m_doorLayerInvisible.value & (1 << hitInteract.transform.gameObject.layer)) > 0)
+                if((m_keyLayerInvisible.value & (1 << hitInteract.transform.gameObject.layer)) > 0 
+                   || (m_doorLayerInvisible.value & (1 << hitInteract.transform.gameObject.layer)) > 0 
+                   || (m_transvaseurLayerInvisible.value & (1 << hitInteract.transform.gameObject.layer)) > 0)
                 {
                     m_interactionsScript.VerifyFeedbackInteract(hitInteract.transform);
                 }
