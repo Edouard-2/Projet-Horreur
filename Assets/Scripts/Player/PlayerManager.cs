@@ -41,6 +41,10 @@ public class PlayerManager : Singleton<PlayerManager>
     
     private void Awake()
     {
+        GameManager.Instance.SetState(GameManager.States.PLAYING);
+        
+        Cursor.lockState = CursorLockMode.Locked;
+        
         m_visionScript.m_matVision.SetFloat("_BlurSize",0);
         m_visionScript.m_matInvisibleVisible.SetFloat("_StepStrenght",-0.03f);
         m_visionScript.m_matVisibleInvisible.SetFloat("_StepStrenght",-0.03f);
@@ -60,42 +64,39 @@ public class PlayerManager : Singleton<PlayerManager>
 
     private void Update()
     {
-        //Mouvement du Joueur
-        if (Input.GetAxis("Horizontal") != 0 || Input.GetAxis("Vertical") != 0)
+        if (Input.GetKeyDown(KeyCode.Escape))
         {
-            m_controllerScript.Mouvement();
+            GameManager.Instance.SwitchPauseGame();
         }
-
-        //Mouvement de la camera
-        m_lookScript.CursorMouvement();
-
-        //Interaction avec des objets
-        if (Input.GetKeyDown(KeyCode.E))
+        
+        if (GameManager.Instance.State == GameManager.States.PLAYING)
         {
-            RaycastHit hit;
-            Ray ray = m_camera.ScreenPointToRay(Input.mousePosition);
-
-            if (Physics.Raycast(ray, out hit, m_radiusVision))
+            //Mouvement du Joueur
+            if (Input.GetAxis("Horizontal") != 0 || Input.GetAxis("Vertical") != 0)
             {
-                //Verification si le joueur est en vision flou
-                if (m_visionScript.m_readyEnd == 0)
-                {
-                    //Si oui est ce que l'obj est visible (net) en mode flou
-                    if((m_keyLayerInvisible.value & (1 << hit.transform.gameObject.layer)) > 0 
-                       || (m_doorLayerInvisible.value & (1 << hit.transform.gameObject.layer)) > 0 
-                       || (m_transvaseurLayerInvisible.value & (1 << hit.transform.gameObject.layer)) > 0)
-                    {
-                        m_interactionsScript.VerifyLayer(hit.transform);
-                    }
-                }
-                else
-                {
-                    m_interactionsScript.VerifyLayer(hit.transform);
-                }
+                m_controllerScript.Mouvement();
             }
+        
+            //Interaction avec des objets
+            if (Input.GetKeyDown(KeyCode.E))
+            {
+                UpdateCheckInteraction();
+            }
+
+            //Mettre le jeu en pause
+
+            UpdateCheckFeedbackInteract();
+        
+            IsInputDown();
+            
+            m_lookScript.CursorMouvement();
+            
+            DoRotateKeys?.Invoke();
         }
-        
-        
+    }
+
+    private void UpdateCheckFeedbackInteract()
+    {
         RaycastHit hitInteract;
         Ray rayInteract = m_camera.ScreenPointToRay(Input.mousePosition);
         
@@ -123,12 +124,31 @@ public class PlayerManager : Singleton<PlayerManager>
         {
             m_interactionsScript.ResetFeedbackInteract();
         }
-        
-        //Rotation de toutes les clés (feedback interactif) pour le fun
-        DoRotateKeys?.Invoke();
-        
-        //Input Blur Effect
-        IsInputDown();
+    }
+    
+    private void UpdateCheckInteraction()
+    {
+        RaycastHit hit;
+        Ray ray = m_camera.ScreenPointToRay(Input.mousePosition);
+
+        if (Physics.Raycast(ray, out hit, m_radiusVision))
+        {
+            //Verification si le joueur est en vision flou
+            if (m_visionScript.m_readyEnd == 0)
+            {
+                //Si oui est ce que l'obj est visible (net) en mode flou
+                if((m_keyLayerInvisible.value & (1 << hit.transform.gameObject.layer)) > 0 
+                   || (m_doorLayerInvisible.value & (1 << hit.transform.gameObject.layer)) > 0 
+                   || (m_transvaseurLayerInvisible.value & (1 << hit.transform.gameObject.layer)) > 0)
+                {
+                    m_interactionsScript.VerifyLayer(hit.transform);
+                }
+            }
+            else
+            {
+                m_interactionsScript.VerifyLayer(hit.transform);
+            }
+        }
     }
     
     public void InitVariableChangement()

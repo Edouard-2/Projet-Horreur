@@ -410,6 +410,9 @@ MonoBehaviour:
   m_layerKeyVisible:
     serializedVersion: 2
     m_Bits: 8192
+  m_targetLayer:
+    serializedVersion: 2
+    m_Bits: 0
   m_trousseauKey: {fileID: 0}
   m_KeyUI: {fileID: 0}
   m_pool: {fileID: 748363144396712071, guid: b7f2abd95d8a42344a119c5dc2cf45fb, type: 3}
@@ -512,11 +515,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8086088611352311795, guid: 06d99f458a182bf408ff4c6011bb10e5, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.4230001
+      value: 0.428
       objectReference: {fileID: 0}
     - target: {fileID: 8086088611352311795, guid: 06d99f458a182bf408ff4c6011bb10e5, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.186
+      value: 0.053
       objectReference: {fileID: 0}
     - target: {fileID: 8086088611352311795, guid: 06d99f458a182bf408ff4c6011bb10e5, type: 3}
       propertyPath: m_LocalRotation.w
