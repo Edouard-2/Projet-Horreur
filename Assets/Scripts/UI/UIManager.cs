@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 public class UIManager : Singleton<UIManager>
@@ -27,6 +26,11 @@ public class UIManager : Singleton<UIManager>
         GameManager.Instance.DoUiActivePauseGame -= ActivePauseUI;
     }
 
+    private void Start()
+    {
+        DoDisplayUIGamePause?.Invoke(false);
+    }
+    
     private void ActivePauseUI(bool p_isActive = true)
     {
         DoDisplayUIGamePause?.Invoke(p_isActive);
