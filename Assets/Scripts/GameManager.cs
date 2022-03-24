@@ -14,8 +14,10 @@ public class GameManager : Singleton<GameManager>
     }
 
     private States m_state;
+    private States m_prevState;
 
     public States State => m_state;
+    public States PrevState => m_prevState;
 
     public delegate void UiActivePauseGame(bool p_isActive = true);
 
@@ -23,6 +25,7 @@ public class GameManager : Singleton<GameManager>
 
     public void SwitchPauseGame()
     {
+        m_prevState = m_state;
         if (m_state == States.PLAYING)
         {
             m_state = States.PAUSE;
@@ -35,6 +38,7 @@ public class GameManager : Singleton<GameManager>
     
     public void SetState( States p_state)
     {
+        m_prevState = m_state;
         m_state = p_state;
     }
     
