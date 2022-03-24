@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
@@ -32,7 +33,18 @@ public class PlayerVision : MonoBehaviour
 
     public delegate void ChangeMaterial(float p_time);
     public ChangeMaterial DoChangeMaterial;
-    
+
+    private bool m_isVariableReady = true;
+
+    private void Awake()
+    {
+        if (m_uiBv == null)
+        {
+            Debug.LogError("Faut mettre l'ui de la BV", this);
+            m_isVariableReady = false;
+        }
+    }
+
 
     public void DoSwitchView(float p_time, AnimationCurve p_curve)
     {
@@ -69,24 +81,33 @@ public class PlayerVision : MonoBehaviour
 
     public void AddStepBV()
     {
-        m_uiBv.fillAmount -= 0.1f;
+        if (m_isVariableReady)
+        {
+            m_uiBv.fillAmount -= 0.1f;
+        }
     }
 
     public void DecreaseBV()
     {
-        if (m_uiBv.fillAmount > 0)
+        if (m_isVariableReady)
         {
-            m_uiBv.fillAmount -= m_speedDecreaseBV * Time.deltaTime;
-            return;
-        }
+            if (m_uiBv.fillAmount > 0)
+            {
+                m_uiBv.fillAmount -= m_speedDecreaseBV * Time.deltaTime;
+                return;
+            }
 
-        BlindMoment();
+            BlindMoment();
+        }
     }
     public void IncreaseBV()
     {
-        if (m_uiBv.fillAmount <= m_currentBvMax)
+        if (m_isVariableReady)
         {
-            m_uiBv.fillAmount += m_speedDecreaseBV * Time.deltaTime * m_MultiplIncreaseBV;
+            if (m_uiBv.fillAmount <= m_currentBvMax)
+            {
+                m_uiBv.fillAmount += m_speedDecreaseBV * Time.deltaTime * m_MultiplIncreaseBV;
+            }
         }
     }
 
@@ -97,15 +118,18 @@ public class PlayerVision : MonoBehaviour
 
     public void BlindMoment()
     {
-        Debug.Log("BlindMoment");
-        PlayerManager.Instance.InitVariableChangement();
+        if (m_isVariableReady)
+        {
+            Debug.Log("BlindMoment");
+            PlayerManager.Instance.InitVariableChangement();
 
-        m_currentBvMax -= m_lessBvMax;
-        m_uiBv.fillAmount = m_currentBvMax;
+            m_currentBvMax -= m_lessBvMax;
+            m_uiBv.fillAmount = m_currentBvMax;
 
-        PlayerManager.Instance.CheckCurrentKey(m_readyEnd);
+            PlayerManager.Instance.CheckCurrentKey(m_readyEnd);
 
-        StartCoroutine(WaitStopBlind());
+            StartCoroutine(WaitStopBlind());
+        }
     }
 
     public IEnumerator WaitStopBlind()

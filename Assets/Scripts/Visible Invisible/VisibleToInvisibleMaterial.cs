@@ -39,7 +39,6 @@ public class VisibleToInvisibleMaterial : MonoBehaviour
     {
         if (!m_needMaterial)
         {
-            Debug.Log(name, this);
             m_material.SetFloat("_StepStrenght", p_time);
         }
     }

@@ -23,7 +23,8 @@ public class UIManager : Singleton<UIManager>
     }
     private void OnDisable()
     {
-        GameManager.Instance.DoUiActivePauseGame -= ActivePauseUI;
+        if (GameManager.Instance != null)
+            GameManager.Instance.DoUiActivePauseGame -= ActivePauseUI;
     }
 
     private void Start()

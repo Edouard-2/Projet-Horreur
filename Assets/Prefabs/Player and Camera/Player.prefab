@@ -174,11 +174,11 @@ MonoBehaviour:
     m_Bits: 2048
   m_transvaseurLayerInvisible:
     serializedVersion: 2
-    m_Bits: 16384
+    m_Bits: 4096
   m_controllerScript: {fileID: 5608393819760579455}
   m_lookScript: {fileID: 5128347266043499178}
   m_visionScript: {fileID: 7154114867123462734}
-  m_interactionsScript: {fileID: 0}
+  m_interactionsScript: {fileID: 7320104021563004540}
   m_radiusVision: 2.1
 --- !u!114 &5608393819760579455
 MonoBehaviour:
@@ -412,10 +412,10 @@ MonoBehaviour:
     m_Bits: 8192
   m_targetLayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 7031
   m_trousseauKey: {fileID: 0}
   m_KeyUI: {fileID: 0}
-  m_pool: {fileID: 748363144396712071, guid: b7f2abd95d8a42344a119c5dc2cf45fb, type: 3}
+  m_pool: {fileID: 0}
   m_keyObject: {fileID: 0}
 --- !u!1 &6380790541469819084
 GameObject:

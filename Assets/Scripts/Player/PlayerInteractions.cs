@@ -1,3 +1,4 @@
+using System.Net.Mime;
 using UnityEngine.UI;
 using UnityEngine;
 
@@ -25,6 +26,22 @@ public class PlayerInteractions : MonoBehaviour
 
     public GameObject m_keyObject;
     private Material m_currentAimObject;
+
+    private bool m_isVariablesReady = true;
+
+    private void Awake()
+    {
+        if (m_KeyUI == null)
+        {
+            Debug.LogError("Il faut mettre la clé UI", this);
+            m_isVariablesReady = false;
+        }
+        if (m_pool == null)
+        {
+            Debug.LogError("Il faut mettre la Pool", this);
+            m_isVariablesReady = false;
+        }
+    }
 
     public void VerifyFeedbackInteract(Transform p_target)
     {
@@ -70,102 +87,111 @@ public class PlayerInteractions : MonoBehaviour
     
     public void VerifyLayer(Transform p_target)
     {
-        //Si c'est la clé
-        if ((m_layerKey.value & (1 << p_target.gameObject.layer)) > 0 || 
-            (m_layerKeyInvisible.value & (1 << p_target.gameObject.layer)) > 0|| 
-            (m_layerKeyVisible.value & (1 << p_target.gameObject.layer)) > 0)
+        if (m_isVariablesReady)
         {
-            LootBox myLootBox = p_target.GetComponent<LootBox>();
-            if( myLootBox && myLootBox.OpenChest(out KeyType key))
+            //Si c'est la clé
+            if ((m_layerKey.value & (1 << p_target.gameObject.layer)) > 0 ||
+                (m_layerKeyInvisible.value & (1 << p_target.gameObject.layer)) > 0 ||
+                (m_layerKeyVisible.value & (1 << p_target.gameObject.layer)) > 0)
             {
-                if (m_trousseauKey == null)
+                LootBox myLootBox = p_target.GetComponent<LootBox>();
+                if (myLootBox && myLootBox.OpenChest(out KeyType key))
                 {
-                    m_trousseauKey = key;
-                    m_keyObject = p_target.gameObject;
-                    SetUIKey(myLootBox);
-                }
-                else
-                {
-                    //Enlever la précedente clé
-                    EjectKey();
-                    m_trousseauKey = key;
-                    m_keyObject = p_target.gameObject;
-                    SetUIKey(myLootBox);
+                    if (m_trousseauKey == null)
+                    {
+                        m_trousseauKey = key;
+                        m_keyObject = p_target.gameObject;
+                        SetUIKey(myLootBox);
+                    }
+                    else
+                    {
+                        //Enlever la précedente clé
+                        EjectKey();
+                        m_trousseauKey = key;
+                        m_keyObject = p_target.gameObject;
+                        SetUIKey(myLootBox);
+                    }
                 }
             }
-        }
-        
-        //Si c'est la porte
-        else if ((m_layerDoor.value & (1 << p_target.gameObject.layer)) > 0 || 
-                 (m_layerDoorInvisible.value & (1 << p_target.gameObject.layer)) > 0) 
-        {
-            Door myDoor =  p_target.GetComponent<Door>();
-            if (myDoor)
+
+            //Si c'est la porte
+            else if ((m_layerDoor.value & (1 << p_target.gameObject.layer)) > 0 ||
+                     (m_layerDoorInvisible.value & (1 << p_target.gameObject.layer)) > 0)
             {
-                if (myDoor.OpenDoor(m_trousseauKey, p_target.gameObject))
+                Door myDoor = p_target.GetComponent<Door>();
+                if (myDoor)
                 {
-                    m_trousseauKey = null;
-                    StartCoroutine(m_keyObject.GetComponent<LootBox>().DestroySelf());
-                    m_KeyUI.color = Color.clear;
+                    if (myDoor.OpenDoor(m_trousseauKey, p_target.gameObject))
+                    {
+                        m_trousseauKey = null;
+                        StartCoroutine(m_keyObject.GetComponent<LootBox>().DestroySelf());
+                        m_KeyUI.color = Color.clear;
+                    }
                 }
             }
-        }
-        //Si c'est le transvaseur
-        else if ((m_layerTransvaseur.value & (1 << p_target.gameObject.layer)) > 0 ||
-                  (m_layerTransvaseurInvisible.value & (1 << p_target.gameObject.layer)) > 0)
-        {
-            Recepteur myRecepteur = p_target.GetComponent<Recepteur>();
-            if (myRecepteur)
+            //Si c'est le transvaseur
+            else if ((m_layerTransvaseur.value & (1 << p_target.gameObject.layer)) > 0 ||
+                     (m_layerTransvaseurInvisible.value & (1 << p_target.gameObject.layer)) > 0)
             {
-                if (m_keyObject != null)
+                Recepteur myRecepteur = p_target.GetComponent<Recepteur>();
+                if (myRecepteur)
                 {
-                    myRecepteur.TeleportObject(m_keyObject.transform);
-                    EjectKey(false);
-                }
-                else
-                {
-                    Debug.Log("Pas d'objet a transférer");
+                    if (m_keyObject != null)
+                    {
+                        myRecepteur.TeleportObject(m_keyObject.transform);
+                        EjectKey(false);
+                    }
+                    else
+                    {
+                        Debug.Log("Pas d'objet a transférer");
+                    }
                 }
             }
-        }
-        //Si rien n'est intéractible
-        else
-        {
-            Debug.Log("Rien pour intéragir");
+            //Si rien n'est intéractible
+            else
+            {
+                Debug.Log("Rien pour intéragir");
+            }
         }
     }
 
     private void SetUIKey(LootBox p_key)
     {
-        Debug.Log(p_key.m_key.m_keyMat);
-        p_key.transform.SetParent(m_pool);
-        p_key.transform.localPosition = Vector3.zero;
-        
-        m_KeyUI.color = new Vector4(p_key.m_key.m_keyMat.GetColor("_BaseColor").r,p_key.m_key.m_keyMat.GetColor("_BaseColor").g,p_key.m_key.m_keyMat.GetColor("_BaseColor").b,1);
+        if (m_isVariablesReady)
+        {
+            Debug.Log(p_key.m_key.m_keyMat);
+            p_key.transform.SetParent(m_pool);
+            p_key.transform.localPosition = Vector3.zero;
+            
+            m_KeyUI.color = new Vector4(p_key.m_key.m_keyMat.GetColor("_BaseColor").r,p_key.m_key.m_keyMat.GetColor("_BaseColor").g,p_key.m_key.m_keyMat.GetColor("_BaseColor").b,1);
+        }
     }
     
     public void EjectKey(bool p_position = true)
     {
-        //Ejecter la clé
-        Debug.Log("Clear key");
-        m_keyObject.transform.parent = null;
-        if (p_position)
+        if (m_isVariablesReady)
         {
-            Debug.Log("je reset ma poisition");
-            m_keyObject.transform.position = gameObject.transform.position;
-            
-            RaycastHit hitInteract;
-            Ray rayInteract = PlayerManager.Instance.m_camera.ScreenPointToRay(Input.mousePosition);
-        
-            //Changement de materiaux si l'obj est interactif et visé par le joueur
-            if (!Physics.Raycast(rayInteract, out hitInteract, 1, m_targetLayer))
+            //Ejecter la clé
+            Debug.Log("Clear key");
+            m_keyObject.transform.parent = null;
+            if (p_position)
             {
-                m_keyObject.transform.position += transform.forward;
+                Debug.Log("je reset ma poisition");
+                m_keyObject.transform.position = gameObject.transform.position;
+
+                RaycastHit hitInteract;
+                Ray rayInteract = PlayerManager.Instance.m_camera.ScreenPointToRay(Input.mousePosition);
+
+                //Changement de materiaux si l'obj est interactif et visé par le joueur
+                if (!Physics.Raycast(rayInteract, out hitInteract, 1, m_targetLayer))
+                {
+                    m_keyObject.transform.position += transform.forward;
+                }
             }
+
+            m_trousseauKey = null;
+            m_keyObject = null;
+            m_KeyUI.color = Color.clear;
         }
-        
-        m_trousseauKey = null;
-        m_keyObject = null;
-        m_KeyUI.color = Color.clear;
     }
 }
