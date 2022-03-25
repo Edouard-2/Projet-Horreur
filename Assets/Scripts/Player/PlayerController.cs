@@ -16,6 +16,16 @@ public class PlayerController : MonoBehaviour
 
     public void Mouvement()
     {
+
+        if (Input.GetKeyDown(KeyCode.LeftShift))
+        {
+            m_speedMove *= 2;
+        }
+        if (Input.GetKeyUp(KeyCode.LeftShift))
+        {
+            m_speedMove /= 2;
+        }
+        
         //Mouvement sur le sol
         float xDir = Input.GetAxis("Horizontal") * m_speedMove * Time.deltaTime;
         float yDir = Input.GetAxis("Vertical") * m_speedMove * Time.deltaTime;
