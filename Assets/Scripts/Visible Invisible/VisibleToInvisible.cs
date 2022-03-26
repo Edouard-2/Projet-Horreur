@@ -45,9 +45,14 @@ public class VisibleToInvisible : MonoBehaviour
         }
     }
 
-    void DoVisibleToInvisible()
+    void DoVisibleToInvisible(bool p_start = false)
     {
-        //Debug.Log("Function");
+        if (p_start)
+        {
+            Debug.Log("hye start");
+            m_start = !m_start;
+        }
+        
         //Allé
         if (m_start)
         {
@@ -63,7 +68,6 @@ public class VisibleToInvisible : MonoBehaviour
             return;
         }
         
-        //.Log("None");
         //Retour
         if (m_isVisibleToInvisible)
         {

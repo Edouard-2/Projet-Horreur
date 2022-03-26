@@ -44,8 +44,7 @@ public class PlayerVision : MonoBehaviour
             m_isVariableReady = false;
         }
     }
-
-
+    
     public void DoSwitchView(float p_time, AnimationCurve p_curve)
     {
         if (p_time > p_curve.keys[p_curve.length - 1].time && m_resetTimeVisionComp)
@@ -72,8 +71,6 @@ public class PlayerVision : MonoBehaviour
         if (m_resetTimeVisionMat)
         {
             float matVisibilityValue = p_dir.Evaluate(p_time);
-            //m_matInvisibleVisible.SetFloat("_StepStrenght", matVisibilityValue);
-            //m_matVisibleInvisible.SetFloat("_StepStrenght", matVisibilityValue);
             
             DoChangeMaterial?.Invoke(matVisibilityValue);
         }

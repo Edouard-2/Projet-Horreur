@@ -53,7 +53,7 @@ public class PlayerManager : Singleton<PlayerManager>
 
     public RotateKeys DoRotateKeys;
 
-    public delegate void DoVisionSwitch();
+    public delegate void DoVisionSwitch(bool p_start = false);
 
     public DoVisionSwitch DoVisibleToInvisibleHandler;
 
@@ -85,6 +85,10 @@ public class PlayerManager : Singleton<PlayerManager>
         //Mettre le jeu en pause
         if (Input.GetKeyDown(KeyCode.Escape))
         {
+            if (m_controllerScript.m_speedMove != m_controllerScript.m_baseSpeed)
+            {
+                m_controllerScript.m_speedMove = m_controllerScript.m_baseSpeed;
+            }
             GameManager.Instance.SwitchPauseGame();
         }
 
@@ -176,19 +180,23 @@ public class PlayerManager : Singleton<PlayerManager>
     {
         if (m_visionScript.m_readyInitVision || !p_next)
         {
-            Debug.Log("Init variable pour vision");
+            
             m_timeVision = Time.time;
             tTime = Time.time - m_timeVision;
-
-            if (p_next)
-            {
-                m_visionScript.m_readyEnd = Mathf.Abs(m_visionScript.m_readyEnd - 1);
-            }
 
             m_visionScript.m_resetTimeVisionComp = true;
             m_visionScript.m_resetTimeVisionMat = true;
 
-            DoVisibleToInvisibleHandler?.Invoke();
+            if (p_next)
+            {
+                m_visionScript.m_readyEnd = Mathf.Abs(m_visionScript.m_readyEnd - 1);
+                DoVisibleToInvisibleHandler?.Invoke();
+            }
+            else
+            {
+                DoVisibleToInvisibleHandler?.Invoke(true);
+            }
+
 
             if (m_interactionsScript.m_keyObject != null)
             {
@@ -211,8 +219,6 @@ public class PlayerManager : Singleton<PlayerManager>
             
             InitVariableChangement(false);
 
-            Debug.Log(m_visionScript.m_readyEnd);
-
             if (m_visionScript.m_readyEnd == 0)
             {
                 Debug.Log("hey");
@@ -225,11 +231,9 @@ public class PlayerManager : Singleton<PlayerManager>
         {
             InitVariableChangement();
 
-            Debug.Log(m_visionScript.m_readyEnd);
-
             if (m_visionScript.m_readyEnd == 0)
             {
-                Debug.Log("hey");
+                
                 //Ajout du cran sur la BV
                 m_visionScript.AddStepBV();
             }

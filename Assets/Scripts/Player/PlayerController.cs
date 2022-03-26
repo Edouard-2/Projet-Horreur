@@ -4,13 +4,16 @@ public class PlayerController : MonoBehaviour
 {
     //Mouvement
     [SerializeField, Tooltip("Le characontroller du player")]private CharacterController m_charaController;
-    [SerializeField, Tooltip("La speed de déplacement du player")]private float m_speedMove = 10f;
+    [SerializeField, Tooltip("La speed de déplacement du player")]public float m_speedMove = 10f;
+    [SerializeField, Tooltip("Le multiplicateur de la speed de base lorsqu'on cours")]public float m_multiplSpeed = 2f;
     private Vector3 m_dir;
     private Vector3 m_velocity;
+    [HideInInspector]public float m_baseSpeed;
   
     private void Awake()
     {
         m_charaController = GetComponent<CharacterController>();
+        m_baseSpeed = m_speedMove;
     }
 
     public void Mouvement()
@@ -18,11 +21,11 @@ public class PlayerController : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.LeftShift))
         {
-            m_speedMove *= 2;
+            m_speedMove *= m_multiplSpeed;
         }
         if (Input.GetKeyUp(KeyCode.LeftShift))
         {
-            m_speedMove /= 2;
+            m_speedMove = m_baseSpeed;
         }
         
         //Mouvement sur le sol
