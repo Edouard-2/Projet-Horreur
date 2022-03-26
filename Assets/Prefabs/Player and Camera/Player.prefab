@@ -206,7 +206,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a2930b518afbf6d48af09d751521827e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_speedCursor: 10
+  m_speedCursor: 5
   m_camera: {fileID: 1674616961786738440}
 --- !u!114 &7154114867123462734
 MonoBehaviour:
@@ -519,7 +519,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8086088611352311795, guid: 06d99f458a182bf408ff4c6011bb10e5, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.053
+      value: -0.13
       objectReference: {fileID: 0}
     - target: {fileID: 8086088611352311795, guid: 06d99f458a182bf408ff4c6011bb10e5, type: 3}
       propertyPath: m_LocalRotation.w
