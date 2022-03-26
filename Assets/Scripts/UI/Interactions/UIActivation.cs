@@ -18,7 +18,6 @@ public class UIActivation : MonoBehaviour
     {
         if (m_isMainMenu)
         {
-            Debug.Log("Main Menu ");
             UIManager.Instance.DoDisplayUIMainMenu += SetVisible;
             return;
         }
@@ -30,7 +29,6 @@ public class UIActivation : MonoBehaviour
         {
             if (m_isMainMenu)
             {
-                Debug.Log("Main Menu ");
                 UIManager.Instance.DoDisplayUIMainMenu -= SetVisible;
                 return;
             }
