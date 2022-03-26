@@ -24,6 +24,8 @@ public class VisibleToInvisible : MonoBehaviour
 
     private void Awake()
     {
+        m_needRenderer = !m_needRenderer;
+        m_needCollider = !m_needCollider;
         if(m_boxCollider == null && !m_needCollider)
         {
             m_boxCollider = GetComponent<BoxCollider>();

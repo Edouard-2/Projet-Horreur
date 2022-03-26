@@ -17,6 +17,7 @@ public class VisibleToInvisibleMaterial : MonoBehaviour
 
     private void Awake()
     {
+        m_needMaterial = !m_needMaterial;
         if (m_material == null && !m_needMaterial)
         {
             m_renderer = GetComponent<Renderer>();
