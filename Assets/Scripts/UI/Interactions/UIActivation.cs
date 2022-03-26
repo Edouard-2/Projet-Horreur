@@ -40,6 +40,8 @@ public class UIActivation : MonoBehaviour
 
     private void Awake()
     {
+        
+        
         if (m_imageComponent == null)
         {
             m_imageComponent = GetComponent<Image>();

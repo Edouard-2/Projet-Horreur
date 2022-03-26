@@ -27,7 +27,7 @@ public class UIManager : Singleton<UIManager>
             GameManager.Instance.DoUiActivePauseGame -= ActivePauseUI;
     }
 
-    private void Start()
+    private void Awake()
     {
         DoDisplayUIGamePause?.Invoke(false);
     }

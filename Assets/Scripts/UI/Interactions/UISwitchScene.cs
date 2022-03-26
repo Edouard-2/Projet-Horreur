@@ -9,6 +9,13 @@ public class UISwitchScene : MonoBehaviour, IPointerClickHandler
     
     public void OnPointerClick(PointerEventData eventData)
     {
+        if (m_levelIndex == 0)
+        {
+            Destroy(PlayerManager.Instance.gameObject);
+            Destroy(UIManager.Instance.gameObject);
+            Destroy(GameManager.Instance.gameObject);
+        }
+        
         SceneManager.LoadSceneAsync(m_levelIndex);
     }
 }

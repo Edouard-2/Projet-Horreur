@@ -9,7 +9,7 @@ public class GameManager : Singleton<GameManager>
         LOADING,
         MAIN_MENU,
         PLAYING,
-        PAUSE, 
+        PAUSE,
         CINEMATIC
     }
 
@@ -22,6 +22,7 @@ public class GameManager : Singleton<GameManager>
     public delegate void UiActivePauseGame(bool p_isActive = true);
 
     public UiActivePauseGame DoUiActivePauseGame;
+    
 
     public void SwitchPauseGame()
     {
@@ -32,16 +33,17 @@ public class GameManager : Singleton<GameManager>
             DoUiActivePauseGame?.Invoke();
             return;
         }
+
         m_state = States.PLAYING;
         DoUiActivePauseGame?.Invoke(false);
     }
-    
-    public void SetState( States p_state)
+
+    public void SetState(States p_state)
     {
         m_prevState = m_state;
         m_state = p_state;
     }
-    
+
     protected override string GetSingletonName()
     {
         return "GameManager";
