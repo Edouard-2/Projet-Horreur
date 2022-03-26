@@ -90,7 +90,6 @@ public class PlayerManager : Singleton<PlayerManager>
 
         if (GameManager.Instance != null && GameManager.Instance.State == GameManager.States.PLAYING)
         {
-            
             //Mouvement du Joueur
             if (Input.GetAxis("Horizontal") != 0 || Input.GetAxis("Vertical") != 0)
             {
@@ -205,7 +204,8 @@ public class PlayerManager : Singleton<PlayerManager>
         //Changement de vision
         if (GameManager.Instance != null 
             && GameManager.Instance.PrevState == GameManager.States.PAUSE
-            && m_prevStateReady)
+            && m_prevStateReady
+            && m_visionScript.m_resetTimeVisionMat)
         {
             m_prevStateReady = false;
             

@@ -96,7 +96,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e7623531750f80747807b30c0dcbd9b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_needMaterial: 0
+  m_needMaterial: 1
   m_material: {fileID: 2100000, guid: c8595a1ff6ea7d846b74137eb5314a24, type: 2}
 --- !u!114 &439906565291036915
 MonoBehaviour:
@@ -111,9 +111,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_isVisibleToInvisible: 0
-  m_needRenderer: 0
+  m_needRenderer: 1
   m_meshRenderer: {fileID: 7828368460641556816}
-  m_needCollider: 0
+  m_needCollider: 1
   m_boxCollider: {fileID: 2717343768496447427}
 --- !u!95 &474993634092124080
 Animator:

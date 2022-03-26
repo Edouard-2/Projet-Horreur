@@ -177,7 +177,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_isVisibleToInvisible: 1
+  m_needRenderer: 1
   m_meshRenderer: {fileID: 2639579993358455444}
+  m_needCollider: 1
   m_boxCollider: {fileID: 754301467463263578}
 --- !u!114 &2669384959591201653
 MonoBehaviour:
@@ -191,4 +193,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e7623531750f80747807b30c0dcbd9b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_needMaterial: 1
   m_material: {fileID: 2100000, guid: 0abefeca15c428340b4ea00bbb8b433e, type: 2}
