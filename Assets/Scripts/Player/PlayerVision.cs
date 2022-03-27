@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
@@ -12,8 +11,6 @@ public class PlayerVision : MonoBehaviour
     [SerializeField, Tooltip("Courbe de pourcentage pour la transparence du matérial allé vers l'état modifié à la fin de la compétence")] public AnimationCurve m_curveMatVisionFinish;
 
     [SerializeField, Tooltip("Material de flou pour le postprocess")] public Material m_matVision;
-    [SerializeField, Tooltip("Material des matérials Invisible en net et visible en flou")] public Material m_matInvisibleVisible;
-    [SerializeField, Tooltip("Material des matérials Visible en net et Invisible en flou")] public Material m_matVisibleInvisible;
     [HideInInspector]public float m_timeVision;
     [HideInInspector]public bool m_resetTimeVisionComp = false;
     [HideInInspector]public bool m_resetTimeVisionMat = false;
@@ -45,7 +42,7 @@ public class PlayerVision : MonoBehaviour
         }
     }
     
-    public void DoSwitchView(float p_time, AnimationCurve p_curve)
+    private void DoSwitchView(float p_time, AnimationCurve p_curve)
     {
         if (p_time > p_curve.keys[p_curve.length - 1].time && m_resetTimeVisionComp)
         {
@@ -60,7 +57,7 @@ public class PlayerVision : MonoBehaviour
         }
     }
 
-    public void DoSwitchMaterial(float p_time, AnimationCurve p_dir)
+    private void DoSwitchMaterial(float p_time, AnimationCurve p_dir)
     {
         if (p_time > p_dir.keys[p_dir.length - 1].time && m_resetTimeVisionMat)
         {
@@ -76,6 +73,47 @@ public class PlayerVision : MonoBehaviour
         }
     }
 
+    public void IncreaseOrDecreaseMat()
+    {
+        if (m_readyEnd == 0)
+        {
+            if (m_resetTimeVisionComp)
+            {
+                //Debug.Log("Start");
+
+                //DoSwitchView(allé)
+                DoSwitchView(tTime, m_curveVisionStart);
+            }
+
+            if (m_resetTimeVisionMat)
+            {
+                //DoSwitchMaterial(allé)
+                DoSwitchMaterial(tTime, m_curveMatVisionStart);
+            }
+
+            //Lancement de la consommation de BV
+            DecreaseBV();
+        }
+
+        else if (m_readyEnd == 1)
+        {
+            if (m_resetTimeVisionComp)
+            {
+                //Debug.Log("Fin");
+                //DoSwitchView(retour)
+                DoSwitchView(tTime, m_curveVisionFinish);
+            }
+
+            if (m_resetTimeVisionMat)
+            {
+                //DoSwitchMaterial(retour)
+                DoSwitchMaterial(tTime, m_curveMatVisionFinish);
+            }
+
+            IncreaseBV();
+        }
+    }
+
     public void AddStepBV()
     {
         if (m_isVariableReady)
@@ -84,7 +122,7 @@ public class PlayerVision : MonoBehaviour
         }
     }
 
-    public void DecreaseBV()
+    private void DecreaseBV()
     {
         if (m_isVariableReady)
         {
@@ -97,7 +135,7 @@ public class PlayerVision : MonoBehaviour
             BlindMoment();
         }
     }
-    public void IncreaseBV()
+    private void IncreaseBV()
     {
         if (m_isVariableReady)
         {
@@ -113,7 +151,7 @@ public class PlayerVision : MonoBehaviour
         m_currentBvMax = m_BvMax;
     }
 
-    public void BlindMoment()
+    private void BlindMoment()
     {
         if (m_isVariableReady)
         {
@@ -129,7 +167,7 @@ public class PlayerVision : MonoBehaviour
         }
     }
 
-    public IEnumerator WaitStopBlind()
+    private IEnumerator WaitStopBlind()
     {
         m_readyInitVision = false;
         yield return new WaitForSeconds(m_blindTime);
