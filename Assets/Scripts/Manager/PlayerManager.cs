@@ -97,6 +97,11 @@ public class PlayerManager : Singleton<PlayerManager>
             {
                 m_controllerScript.Mouvement();
             }
+            
+            m_lookScript.CursorMouvement();
+            
+            //Changement de vision
+            VisionUpdate();
 
             //Interaction avec des objets
             if (Input.GetKeyDown(KeyCode.E))
@@ -106,11 +111,7 @@ public class PlayerManager : Singleton<PlayerManager>
             
             //FeedBack D'Interaction
             UpdateCheckFeedbackOrInteract();
-            
-            VisionUpdate();
-            
-            m_lookScript.CursorMouvement();
-            
+
             DoRotateKeys?.Invoke();
         }
         
