@@ -7,8 +7,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: M_IV_DoorSelection_Green
-  m_Shader: {fileID: -6465566751694194690, guid: 17ab7b4697b48ad438997188e1a8557d, type: 3}
+  m_Name: M_Luminosity
+  m_Shader: {fileID: 4800000, guid: 9d285c8599328be4dba8366a45060a9e, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -19,22 +19,11 @@ Material:
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
-    - unity_Lightmaps:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - unity_LightmapsInd:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - unity_ShadowMasks:
+    - _MainTex:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
-    - Boolean_e6682e3f40c142909da21f320d085631: 0
-    - _StepStrenght: 1.554397
-    - _isAim: 0
-    m_Colors:
-    - _BaseColor: {r: 0.26319346, g: 0.8301887, b: 0.2232111, a: 0}
+    - _LuminosityStrength: 1
+    m_Colors: []
   m_BuildTextureStacks: []
