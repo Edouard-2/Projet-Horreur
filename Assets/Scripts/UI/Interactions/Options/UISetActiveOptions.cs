@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -12,19 +13,38 @@ public class UISetActiveOptions : MonoBehaviour, IPointerClickHandler
     [SerializeField, Tooltip("L'UI Présent en même temps que le bouton OPTIONS (lui même y compris)")]
     private List<GameObject> m_listUIFront;
 
+    private void OnEnable()
+    {
+        GameManager.Instance.DoUiActivePauseGame += ActiveOrDesactive;
+    }
+    private void OnDisable()
+    {
+        GameManager.Instance.DoUiActivePauseGame -= ActiveOrDesactive;
+    }
+
     public void OnPointerClick(PointerEventData eventData)
     {
         Debug.Log("Open  Game");
+        ActiveOrDesactive(2);
+    }
 
-        if (m_optionPanel.activeSelf)
+    private void ActiveOrDesactive(int p_i = 1)
+    {
+        if (p_i == 2)
         {
-            HideOrDispalyOtherUI();
-            m_optionPanel.SetActive(false);
-            return;
-        }
+            Debug.Log("hey option escape");
+            if (m_optionPanel.activeSelf)
+            {
+                UIManager.Instance.m_isOption = false;
+                HideOrDispalyOtherUI();
+                m_optionPanel.SetActive(false);
+                return;
+            }
 
-        HideOrDispalyOtherUI();
-        m_optionPanel.SetActive(true);
+            UIManager.Instance.m_isOption = true;
+            HideOrDispalyOtherUI();
+            m_optionPanel.SetActive(true);
+        }
     }
 
     private void HideOrDispalyOtherUI()

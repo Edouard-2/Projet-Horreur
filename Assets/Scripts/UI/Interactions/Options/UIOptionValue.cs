@@ -13,6 +13,11 @@ public class UIOptionValue : ScriptableObject
     {
         return m_volume.ToString();
     }
+    
+    public int GetIntValue()
+    {
+        return m_volume;
+    }
     public void SetValue(int p_value)
     {
         m_volume += p_value;
