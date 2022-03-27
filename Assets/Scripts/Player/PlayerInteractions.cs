@@ -1,4 +1,5 @@
 using System.Net.Mime;
+using TMPro;
 using UnityEngine.UI;
 using UnityEngine;
 
@@ -20,9 +21,12 @@ public class PlayerInteractions : MonoBehaviour
     //Layer raycast de proximité
     [SerializeField, Tooltip("Les layers qui seront choisis pour la détection du raycast de proximité")] public LayerMask m_targetLayer;
     
+    //Objects
     [SerializeField, Tooltip("Trousseau de clé")] public KeyType m_trousseauKey;
     [SerializeField, Tooltip("UI de la clés ingame")] private Image m_KeyUI;
     [SerializeField, Tooltip("La piscine de toutes les clés")] private Transform m_pool;
+    [SerializeField, Tooltip("Feedback visuel Cursor")] private GameObject m_cursorSelection;
+    [SerializeField, Tooltip("Feedback visuel Text nom obj")] private TextMeshProUGUI m_textSelection;
 
     public GameObject m_keyObject;
     private Material m_currentAimObject;
@@ -63,6 +67,14 @@ public class PlayerInteractions : MonoBehaviour
             targetMaterial = p_target.GetComponent<Door>().m_neededKey.m_doorMat;
 
         }
+        //Récupérer le mat du transvaseur
+        else if ((m_layerTransvaseur.value & (1 << p_target.gameObject.layer)) > 0 || 
+                 (m_layerTransvaseurInvisible.value & (1 << p_target.gameObject.layer)) > 0)
+        {
+            //Debug.Log("porte");
+            targetMaterial = p_target.GetComponent<Recepteur>().m_material;
+
+        }
 
         if (m_currentAimObject != null && m_currentAimObject != targetMaterial)
         {
@@ -72,8 +84,13 @@ public class PlayerInteractions : MonoBehaviour
         //Changer le matérial choisi
         if (targetMaterial != null && targetMaterial.GetFloat("_isAim") != 1)
         {
+            //Material
             m_currentAimObject = targetMaterial;
             targetMaterial.SetFloat("_isAim", 1);
+            
+            //Cursor
+            m_textSelection.text = p_target.name;
+            m_cursorSelection.SetActive(true);
         }
     }
 
@@ -81,6 +98,7 @@ public class PlayerInteractions : MonoBehaviour
     {
         if(m_currentAimObject != null && m_currentAimObject.GetFloat("_isAim") != 0)
         {
+            m_cursorSelection.SetActive(false);
             m_currentAimObject.SetFloat("_isAim", 0);
         }
     }

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
@@ -11,7 +12,6 @@ public class PlayerVision : MonoBehaviour
     [SerializeField, Tooltip("Courbe de pourcentage pour la transparence du matérial allé vers l'état modifié à la fin de la compétence")] public AnimationCurve m_curveMatVisionFinish;
 
     [SerializeField, Tooltip("Material de flou pour le postprocess")] public Material m_matVision;
-    [HideInInspector]public float m_timeVision;
     [HideInInspector]public bool m_resetTimeVisionComp = false;
     [HideInInspector]public bool m_resetTimeVisionMat = false;
     public int m_readyEnd = 1;
@@ -25,8 +25,6 @@ public class PlayerVision : MonoBehaviour
     [HideInInspector]public float m_BvMax = 1f;
     [HideInInspector]public float m_currentBvMax = 1f;
     [HideInInspector]public bool m_readyInitVision = true;
-
-    [HideInInspector]public float tTime;
 
     public delegate void ChangeMaterial(float p_time);
     public ChangeMaterial DoChangeMaterial;
@@ -42,7 +40,7 @@ public class PlayerVision : MonoBehaviour
         }
     }
     
-    private void DoSwitchView(float p_time, AnimationCurve p_curve)
+    public void DoSwitchView(float p_time, AnimationCurve p_curve)
     {
         if (p_time > p_curve.keys[p_curve.length - 1].time && m_resetTimeVisionComp)
         {
@@ -57,7 +55,7 @@ public class PlayerVision : MonoBehaviour
         }
     }
 
-    private void DoSwitchMaterial(float p_time, AnimationCurve p_dir)
+    public void DoSwitchMaterial(float p_time, AnimationCurve p_dir)
     {
         if (p_time > p_dir.keys[p_dir.length - 1].time && m_resetTimeVisionMat)
         {
@@ -73,7 +71,7 @@ public class PlayerVision : MonoBehaviour
         }
     }
 
-    public void IncreaseOrDecreaseMat()
+    public void IncreaseOrDecreaseMat(float p_time)
     {
         if (m_readyEnd == 0)
         {
@@ -82,13 +80,13 @@ public class PlayerVision : MonoBehaviour
                 //Debug.Log("Start");
 
                 //DoSwitchView(allé)
-                DoSwitchView(tTime, m_curveVisionStart);
+                DoSwitchView(p_time, m_curveVisionStart);
             }
 
             if (m_resetTimeVisionMat)
             {
                 //DoSwitchMaterial(allé)
-                DoSwitchMaterial(tTime, m_curveMatVisionStart);
+                DoSwitchMaterial(p_time, m_curveMatVisionStart);
             }
 
             //Lancement de la consommation de BV
@@ -101,13 +99,13 @@ public class PlayerVision : MonoBehaviour
             {
                 //Debug.Log("Fin");
                 //DoSwitchView(retour)
-                DoSwitchView(tTime, m_curveVisionFinish);
+                DoSwitchView(p_time, m_curveVisionFinish);
             }
 
             if (m_resetTimeVisionMat)
             {
                 //DoSwitchMaterial(retour)
-                DoSwitchMaterial(tTime, m_curveMatVisionFinish);
+                DoSwitchMaterial(p_time, m_curveMatVisionFinish);
             }
 
             IncreaseBV();
@@ -122,7 +120,7 @@ public class PlayerVision : MonoBehaviour
         }
     }
 
-    private void DecreaseBV()
+    public void DecreaseBV()
     {
         if (m_isVariableReady)
         {
@@ -135,7 +133,7 @@ public class PlayerVision : MonoBehaviour
             BlindMoment();
         }
     }
-    private void IncreaseBV()
+    public void IncreaseBV()
     {
         if (m_isVariableReady)
         {
@@ -151,7 +149,7 @@ public class PlayerVision : MonoBehaviour
         m_currentBvMax = m_BvMax;
     }
 
-    private void BlindMoment()
+    public void BlindMoment()
     {
         if (m_isVariableReady)
         {
@@ -167,7 +165,7 @@ public class PlayerVision : MonoBehaviour
         }
     }
 
-    private IEnumerator WaitStopBlind()
+    public IEnumerator WaitStopBlind()
     {
         m_readyInitVision = false;
         yield return new WaitForSeconds(m_blindTime);

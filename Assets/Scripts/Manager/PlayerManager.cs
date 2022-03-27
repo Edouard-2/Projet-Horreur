@@ -97,12 +97,6 @@ public class PlayerManager : Singleton<PlayerManager>
             {
                 m_controllerScript.Mouvement();
             }
-            
-            m_lookScript.CursorMouvement();
-            
-            //Changement de vision
-            VisionUpdate();
-
             //Interaction avec des objets
             if (Input.GetKeyDown(KeyCode.E))
             {
@@ -111,6 +105,11 @@ public class PlayerManager : Singleton<PlayerManager>
             
             //FeedBack D'Interaction
             UpdateCheckFeedbackOrInteract();
+            
+            //Changement de vision
+            VisionUpdate();
+            
+            m_lookScript.CursorMouvement();
 
             DoRotateKeys?.Invoke();
         }
@@ -192,7 +191,7 @@ public class PlayerManager : Singleton<PlayerManager>
         }
     }
 
-    public void VisionUpdate()
+    private void VisionUpdate()
     {
         tTime = Time.time - m_timeVision;
 
@@ -223,9 +222,11 @@ public class PlayerManager : Singleton<PlayerManager>
                 m_visionScript.AddStepBV();
             }
         }
-
-        m_visionScript.IncreaseOrDecreaseMat();
+        
+        m_visionScript.IncreaseOrDecreaseMat(tTime);
     }
+    
+    
 
     public void CheckCurrentKey(int p_readyEnd)
     {

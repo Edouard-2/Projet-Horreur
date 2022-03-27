@@ -194,6 +194,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_charaController: {fileID: 5577764659224647124}
   m_speedMove: 10
+  m_multiplSpeed: 2
+  m_baseSpeed: 0
 --- !u!114 &5128347266043499178
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -362,9 +364,6 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   m_matVision: {fileID: 2100000, guid: e3c081d870709434bb6906fd16b35f64, type: 2}
-  m_matInvisibleVisible: {fileID: 2100000, guid: 1a346f22aa05442439f2eeb418dd15e4, type: 2}
-  m_matVisibleInvisible: {fileID: 2100000, guid: 804db1eb4e97eb94db95afef6c842e25, type: 2}
-  m_timeVision: 0
   m_resetTimeVisionComp: 0
   m_resetTimeVisionMat: 0
   m_readyEnd: 1
@@ -376,7 +375,6 @@ MonoBehaviour:
   m_BvMax: 1
   m_currentBvMax: 1
   m_readyInitVision: 1
-  tTime: 0
 --- !u!114 &7320104021563004540
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -416,6 +414,8 @@ MonoBehaviour:
   m_trousseauKey: {fileID: 0}
   m_KeyUI: {fileID: 0}
   m_pool: {fileID: 0}
+  m_cursorSelection: {fileID: 0}
+  m_textSelection: {fileID: 0}
   m_keyObject: {fileID: 0}
 --- !u!1 &6380790541469819084
 GameObject:

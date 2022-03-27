@@ -2,6 +2,9 @@ using UnityEngine;
 
 public class Recepteur : MonoBehaviour
 {
+    [SerializeField, Tooltip("Material global du transvaseur")]
+    public Material m_material;
+    
     [SerializeField, Tooltip("L'autre Recepteur du Transvaseur")]
     private Recepteur m_otherRecepeteur;
     
