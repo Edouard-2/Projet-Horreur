@@ -71,9 +71,9 @@ public class PlayerInteractions : MonoBehaviour
         else if ((m_layerTransvaseur.value & (1 << p_target.gameObject.layer)) > 0 || 
                  (m_layerTransvaseurInvisible.value & (1 << p_target.gameObject.layer)) > 0)
         {
-            //Debug.Log("porte");
+            
             targetMaterial = p_target.GetComponent<Recepteur>().m_material;
-
+            //Debug.Log(targetMaterial.GetFloat("_isAim"));
         }
 
         if (m_currentAimObject != null && m_currentAimObject != targetMaterial)
@@ -84,6 +84,7 @@ public class PlayerInteractions : MonoBehaviour
         //Changer le matérial choisi
         if (targetMaterial != null && targetMaterial.GetFloat("_isAim") != 1)
         {
+            Debug.Log("transvaseur");
             //Material
             m_currentAimObject = targetMaterial;
             targetMaterial.SetFloat("_isAim", 1);
