@@ -27,15 +27,17 @@ public class PlayerController : MonoBehaviour
         {
             m_speedMove = m_baseSpeed;
         }
-        
-        //Mouvement sur le sol
-        float xDir = Input.GetAxis("Horizontal") * m_speedMove * Time.deltaTime;
-        float yDir = Input.GetAxis("Vertical") * m_speedMove * Time.deltaTime;
-        
-        m_dir = transform.right * xDir + transform.forward * yDir;
-        
-        m_charaController.Move(m_dir);
 
+        if (Input.GetAxis("Horizontal") != 0 || Input.GetAxis("Vertical") != 0)
+        {
+            //Mouvement sur le sol
+            float xDir = Input.GetAxis("Horizontal") * m_speedMove * Time.deltaTime;
+            float yDir = Input.GetAxis("Vertical") * m_speedMove * Time.deltaTime;
+
+            m_dir = transform.right * xDir + transform.forward * yDir;
+
+            m_charaController.Move(m_dir);
+        }
         //Simulation de gravité
         m_velocity.y += PlayerManager.Instance.Gravity * Time.deltaTime;
         m_charaController.Move(m_velocity * Time.deltaTime);

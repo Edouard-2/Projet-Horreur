@@ -48,22 +48,33 @@ public class MonsterManager : Singleton<MonsterManager>
 
     private void Update()
     {
-        if (m_startIA)
+        if (GameManager.Instance.State == GameManager.States.PLAYING)
         {
-            //Les trucs de l'IA
-            if (m_waypointsArray.Count != 0)
+            if (m_startIA)
             {
-                if (m_currentWayPoint == null || Vector3.Distance(transform.position, m_currentWayPoint.position) < 1)
+                //Les trucs de l'IA
+                if (m_waypointsArray.Count != 0)
                 {
-                    if (m_currentWayPoint != m_prevWayPoint)
+                    if (m_currentWayPoint == null || Vector3.Distance(transform.position, m_currentWayPoint.position) < 1)
                     {
-                        m_prevWayPoint = m_currentWayPoint;
-                    }
+                        if (m_currentWayPoint != m_prevWayPoint)
+                        {
+                            m_prevWayPoint = m_currentWayPoint;
+                        }
                     
-                    m_currentWayPoint = GetRandomWayPoint();
+                        m_currentWayPoint = GetRandomWayPoint();
+                    }
+                    m_navMeshAgent.SetDestination(m_currentWayPoint.position);
                 }
-                m_navMeshAgent.SetDestination(m_currentWayPoint.position);
             }
+            else
+            {
+                m_navMeshAgent.SetDestination(transform.position);
+            }
+        }
+        else
+        {
+            m_navMeshAgent.SetDestination(transform.position);
         }
     }
 

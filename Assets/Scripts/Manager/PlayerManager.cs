@@ -93,10 +93,8 @@ public class PlayerManager : Singleton<PlayerManager>
         if (GameManager.Instance != null && GameManager.Instance.State == GameManager.States.PLAYING)
         {
             //Mouvement du Joueur
-            if (Input.GetAxis("Horizontal") != 0 || Input.GetAxis("Vertical") != 0)
-            {
-                m_controllerScript.Mouvement();
-            }
+            m_controllerScript.Mouvement();
+            
             //Interaction avec des objets
             if (Input.GetKeyDown(KeyCode.E))
             {

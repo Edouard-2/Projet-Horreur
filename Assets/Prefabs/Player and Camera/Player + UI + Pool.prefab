@@ -202,6 +202,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7348930268121412843}
     m_Modifications:
+    - target: {fileID: 1674616962079655763, guid: d76affee4e139c34f82c85ad49d98109, type: 3}
+      propertyPath: m_CullingMask.m_Bits
+      value: 64576
+      objectReference: {fileID: 0}
     - target: {fileID: 2800280127000841989, guid: d76affee4e139c34f82c85ad49d98109, type: 3}
       propertyPath: m_Name
       value: Player
