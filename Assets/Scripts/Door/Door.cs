@@ -23,6 +23,7 @@ public class Door : MonoBehaviour, IDoor
 
     private bool m_isOpen;
 
+    [SerializeField, Tooltip("Material de la Porte")]
     public Material m_doorMat;
 
     private void Awake()
@@ -47,8 +48,13 @@ public class Door : MonoBehaviour, IDoor
         }
         else
         {
-            m_doorMat = GetComponent<Renderer>().material;
+            if (m_doorMat == null)
+            {
+                Debug.LogError("Faut mettre le material dans les portes scripts !!!", this);
+            }
         }
+        
+        m_doorMat.SetFloat("_isAim", 0);
     }
 
     public bool OpenDoor(KeyType p_playerKey, GameObject p_door)
@@ -70,6 +76,7 @@ public class Door : MonoBehaviour, IDoor
             m_doorAnimator?.SetTrigger(m_openHash);
             m_isOpen = true;
         }
+
         return true;
     }
 
