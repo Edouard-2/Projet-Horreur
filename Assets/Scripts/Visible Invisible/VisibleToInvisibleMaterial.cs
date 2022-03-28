@@ -17,7 +17,7 @@ public class VisibleToInvisibleMaterial : MonoBehaviour
 
     private void Awake()
     {
-        if (m_material == null && !m_needMaterial)
+        if (m_material == null && m_needMaterial)
         {
             m_renderer = GetComponent<Renderer>();
             if (m_renderer != null)
@@ -27,7 +27,7 @@ public class VisibleToInvisibleMaterial : MonoBehaviour
 
             if (m_material == null)
             {
-                Debug.LogWarning("Faut mettre le matérial sur l'objet stp !!!");
+                Debug.LogWarning("Faut mettre le matérial sur l'objet stp !!!", this);
                 PlayerManager.Instance.m_visionScript.DoChangeMaterial -= SwitchInvisibleMaterial;
                 return;
             }
@@ -37,9 +37,8 @@ public class VisibleToInvisibleMaterial : MonoBehaviour
 
     private void SwitchInvisibleMaterial(float p_time)
     {
-        if (!m_needMaterial)
+        if (m_needMaterial)
         {
-            Debug.Log(name, this);
             m_material.SetFloat("_StepStrenght", p_time);
         }
     }

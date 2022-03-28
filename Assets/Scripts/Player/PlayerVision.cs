@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
@@ -11,9 +12,6 @@ public class PlayerVision : MonoBehaviour
     [SerializeField, Tooltip("Courbe de pourcentage pour la transparence du matérial allé vers l'état modifié à la fin de la compétence")] public AnimationCurve m_curveMatVisionFinish;
 
     [SerializeField, Tooltip("Material de flou pour le postprocess")] public Material m_matVision;
-    [SerializeField, Tooltip("Material des matérials Invisible en net et visible en flou")] public Material m_matInvisibleVisible;
-    [SerializeField, Tooltip("Material des matérials Visible en net et Invisible en flou")] public Material m_matVisibleInvisible;
-    [HideInInspector]public float m_timeVision;
     [HideInInspector]public bool m_resetTimeVisionComp = false;
     [HideInInspector]public bool m_resetTimeVisionMat = false;
     public int m_readyEnd = 1;
@@ -28,12 +26,20 @@ public class PlayerVision : MonoBehaviour
     [HideInInspector]public float m_currentBvMax = 1f;
     [HideInInspector]public bool m_readyInitVision = true;
 
-    [HideInInspector]public float tTime;
-
     public delegate void ChangeMaterial(float p_time);
     public ChangeMaterial DoChangeMaterial;
-    
 
+    private bool m_isVariableReady = true;
+
+    private void Awake()
+    {
+        if (m_uiBv == null)
+        {
+            Debug.LogError("Faut mettre l'ui de la BV", this);
+            m_isVariableReady = false;
+        }
+    }
+    
     public void DoSwitchView(float p_time, AnimationCurve p_curve)
     {
         if (p_time > p_curve.keys[p_curve.length - 1].time && m_resetTimeVisionComp)
@@ -60,33 +66,81 @@ public class PlayerVision : MonoBehaviour
         if (m_resetTimeVisionMat)
         {
             float matVisibilityValue = p_dir.Evaluate(p_time);
-            //m_matInvisibleVisible.SetFloat("_StepStrenght", matVisibilityValue);
-            //m_matVisibleInvisible.SetFloat("_StepStrenght", matVisibilityValue);
             
             DoChangeMaterial?.Invoke(matVisibilityValue);
         }
     }
 
+    public void IncreaseOrDecreaseMat(float p_time)
+    {
+        if (m_readyEnd == 0)
+        {
+            if (m_resetTimeVisionComp)
+            {
+                //Debug.Log("Start");
+
+                //DoSwitchView(allé)
+                DoSwitchView(p_time, m_curveVisionStart);
+            }
+
+            if (m_resetTimeVisionMat)
+            {
+                //DoSwitchMaterial(allé)
+                DoSwitchMaterial(p_time, m_curveMatVisionStart);
+            }
+
+            //Lancement de la consommation de BV
+            DecreaseBV();
+        }
+
+        else if (m_readyEnd == 1)
+        {
+            if (m_resetTimeVisionComp)
+            {
+                //Debug.Log("Fin");
+                //DoSwitchView(retour)
+                DoSwitchView(p_time, m_curveVisionFinish);
+            }
+
+            if (m_resetTimeVisionMat)
+            {
+                //DoSwitchMaterial(retour)
+                DoSwitchMaterial(p_time, m_curveMatVisionFinish);
+            }
+
+            IncreaseBV();
+        }
+    }
+
     public void AddStepBV()
     {
-        m_uiBv.fillAmount -= 0.1f;
+        if (m_isVariableReady)
+        {
+            m_uiBv.fillAmount -= 0.1f;
+        }
     }
 
     public void DecreaseBV()
     {
-        if (m_uiBv.fillAmount > 0)
+        if (m_isVariableReady)
         {
-            m_uiBv.fillAmount -= m_speedDecreaseBV * Time.deltaTime;
-            return;
-        }
+            if (m_uiBv.fillAmount > 0)
+            {
+                m_uiBv.fillAmount -= m_speedDecreaseBV * Time.deltaTime;
+                return;
+            }
 
-        BlindMoment();
+            BlindMoment();
+        }
     }
     public void IncreaseBV()
     {
-        if (m_uiBv.fillAmount <= m_currentBvMax)
+        if (m_isVariableReady)
         {
-            m_uiBv.fillAmount += m_speedDecreaseBV * Time.deltaTime * m_MultiplIncreaseBV;
+            if (m_uiBv.fillAmount <= m_currentBvMax)
+            {
+                m_uiBv.fillAmount += m_speedDecreaseBV * Time.deltaTime * m_MultiplIncreaseBV;
+            }
         }
     }
 
@@ -97,15 +151,18 @@ public class PlayerVision : MonoBehaviour
 
     public void BlindMoment()
     {
-        Debug.Log("BlindMoment");
-        PlayerManager.Instance.InitVariableChangement();
+        if (m_isVariableReady)
+        {
+            Debug.Log("BlindMoment");
+            PlayerManager.Instance.InitVariableChangement();
 
-        m_currentBvMax -= m_lessBvMax;
-        m_uiBv.fillAmount = m_currentBvMax;
+            m_currentBvMax -= m_lessBvMax;
+            m_uiBv.fillAmount = m_currentBvMax;
 
-        PlayerManager.Instance.CheckCurrentKey(m_readyEnd);
+            PlayerManager.Instance.CheckCurrentKey(m_readyEnd);
 
-        StartCoroutine(WaitStopBlind());
+            StartCoroutine(WaitStopBlind());
+        }
     }
 
     public IEnumerator WaitStopBlind()

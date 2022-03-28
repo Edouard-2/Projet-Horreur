@@ -24,7 +24,7 @@ public class VisibleToInvisible : MonoBehaviour
 
     private void Awake()
     {
-        if(m_boxCollider == null && !m_needCollider)
+        if(m_boxCollider == null && m_needCollider)
         {
             m_boxCollider = GetComponent<BoxCollider>();
             
@@ -34,7 +34,7 @@ public class VisibleToInvisible : MonoBehaviour
             }
         }
         
-        if(m_meshRenderer == null && !m_needRenderer)
+        if(m_meshRenderer == null && m_needRenderer)
         {
             m_meshRenderer = GetComponent<MeshRenderer>();
             
@@ -45,9 +45,14 @@ public class VisibleToInvisible : MonoBehaviour
         }
     }
 
-    void DoVisibleToInvisible()
+    void DoVisibleToInvisible(bool p_start = false)
     {
-        //Debug.Log("Function");
+        if (p_start)
+        {
+            Debug.Log("hye start");
+            m_start = !m_start;
+        }
+        
         //Allé
         if (m_start)
         {
@@ -63,7 +68,6 @@ public class VisibleToInvisible : MonoBehaviour
             return;
         }
         
-        //.Log("None");
         //Retour
         if (m_isVisibleToInvisible)
         {
@@ -79,12 +83,12 @@ public class VisibleToInvisible : MonoBehaviour
     void Display()
     {
         //  Mettre ombre
-        if (!m_needRenderer)
+        if (m_needRenderer)
         {
             m_meshRenderer.shadowCastingMode = ShadowCastingMode.On;
         }
         //  Mettre Collider
-        if (!m_needCollider)
+        if (m_needCollider)
         {
             m_boxCollider.enabled = true;
         }
@@ -93,13 +97,13 @@ public class VisibleToInvisible : MonoBehaviour
     void Hide()
     {
         //  Enlever ombre
-        if (!m_needRenderer)
+        if (m_needRenderer)
         {
             m_meshRenderer.shadowCastingMode = ShadowCastingMode.Off;
         }
 
         //  Enlever Collider
-        if (!m_needCollider)
+        if (m_needCollider)
         {
             m_boxCollider.enabled = false;
         }

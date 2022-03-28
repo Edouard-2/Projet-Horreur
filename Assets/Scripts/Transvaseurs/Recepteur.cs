@@ -1,8 +1,10 @@
-using System;
 using UnityEngine;
 
 public class Recepteur : MonoBehaviour
 {
+    [SerializeField, Tooltip("Material global du transvaseur")]
+    public Material m_material;
+    
     [SerializeField, Tooltip("L'autre Recepteur du Transvaseur")]
     private Recepteur m_otherRecepeteur;
     
@@ -19,6 +21,8 @@ public class Recepteur : MonoBehaviour
                 Debug.LogError("Il faut mettre un Spawn pour le recepteur (mettre un empty enfant du Recepteur)", this);
             }
         }
+        
+        m_material.SetFloat("_isAim",0);
     }
 
     //Fonction du Transvaseur
