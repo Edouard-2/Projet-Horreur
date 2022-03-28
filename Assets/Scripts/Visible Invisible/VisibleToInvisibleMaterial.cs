@@ -31,8 +31,9 @@ public class VisibleToInvisibleMaterial : MonoBehaviour
                 PlayerManager.Instance.m_visionScript.DoChangeMaterial -= SwitchInvisibleMaterial;
                 return;
             }
-            SwitchInvisibleMaterial( -0.03f);
+            
         }
+        SwitchInvisibleMaterial( -0.03f);
     }
 
     private void SwitchInvisibleMaterial(float p_time)
