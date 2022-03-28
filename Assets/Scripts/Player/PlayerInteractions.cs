@@ -64,7 +64,7 @@ public class PlayerInteractions : MonoBehaviour
                  (m_layerDoorInvisible.value & (1 << p_target.gameObject.layer)) > 0)
         {
             //Debug.Log("porte");
-            targetMaterial = p_target.GetComponent<Door>().m_neededKey.m_doorMat;
+            targetMaterial = p_target.GetComponent<Door>().m_doorMat;
 
         }
         //Récupérer le mat du transvaseur
@@ -142,9 +142,12 @@ public class PlayerInteractions : MonoBehaviour
                 {
                     if (myDoor.OpenDoor(m_trousseauKey, p_target.gameObject))
                     {
-                        m_trousseauKey = null;
-                        StartCoroutine(m_keyObject.GetComponent<LootBox>().DestroySelf());
-                        m_KeyUI.color = Color.clear;
+                        if (myDoor.m_neededKey)
+                        {
+                            m_trousseauKey = null;
+                            StartCoroutine(m_keyObject.GetComponent<LootBox>().DestroySelf());
+                            m_KeyUI.color = Color.clear;
+                        }
                     }
                 }
             }
