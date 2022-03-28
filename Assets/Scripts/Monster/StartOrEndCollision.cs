@@ -10,8 +10,6 @@ public class StartOrEndCollision : MonoBehaviour
     private bool m_readyActiveMonster = true;
     private void OnTriggerEnter(Collider other)
     {
-        //Joueur qui collide ?
-        //Lancer le foncitiomment de l'IA
         if ((m_layerPlayer.value & (1 << other.gameObject.layer)) > 0 && m_readyActiveMonster)
         {
             m_readyActiveMonster = false;
