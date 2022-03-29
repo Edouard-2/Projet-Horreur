@@ -2,7 +2,9 @@ using UnityEngine;
 
 public class StateMachine : MonoBehaviour
 {
-    private BaseState m_currentState;
+    protected BaseState m_currentState;
+    
+    public BaseState m_lastState;
 
     private void Start()
     {
@@ -18,6 +20,7 @@ public class StateMachine : MonoBehaviour
         if (m_currentState != null)
         {
             m_currentState.UpdateLogic();
+            m_currentState.UpdateFunction();
         }
     }
 
@@ -32,7 +35,9 @@ public class StateMachine : MonoBehaviour
     public void NextState(BaseState p_newState)
     {
         m_currentState.Exit();
-
+        
+        m_lastState = m_currentState;
+        
         m_currentState = p_newState;
         
         m_currentState.Enter();

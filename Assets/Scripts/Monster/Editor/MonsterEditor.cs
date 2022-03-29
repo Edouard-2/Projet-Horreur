@@ -1,15 +1,16 @@
 using UnityEditor;
 using UnityEngine;
 
-[CustomEditor(typeof(MonsterManager))]
+[CustomEditor(typeof(MonsterSM))]
 public class MonsterEditor : Editor
 {
     public override void OnInspectorGUI()
     {
+        MonsterSM targetMonster =  (MonsterSM)target;
         
         if (GUILayout.Button("Create Waypoint"))
         {
-            MonsterManager.Instance.CreateWayPoint();
+            targetMonster.CreateWayPoint();
         }
         base.OnInspectorGUI();
     }

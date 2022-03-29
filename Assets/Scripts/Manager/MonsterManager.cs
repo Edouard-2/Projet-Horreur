@@ -4,7 +4,6 @@ using UnityEngine;
 using UnityEngine.AI;
 using Random = UnityEngine.Random;
 
-[RequireComponent(typeof(MonsterSM))]
 public class MonsterManager : Singleton<MonsterManager>
 {
     [SerializeField, Tooltip("Tableau des waypoints du monstre")] private List<Transform> m_waypointsArray;

@@ -19,9 +19,11 @@ public class Chase : BaseState
     {
         base.UpdateLogic();
         Debug.Log("CHASE LOL");
-        if (Time.time > 10)
-        {
-            m_sm.NextState(m_sm.m_patrol);
-        }
+    }
+
+    public override void Exit()
+    {
+        base.Exit();
+        m_sm.m_lastState = this;
     }
 }

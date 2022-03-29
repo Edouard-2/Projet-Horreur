@@ -17,4 +17,10 @@ public class Hook : BaseState
     {
         base.UpdateLogic();
     }
+
+    public override void Exit()
+    {
+        base.Exit();
+        m_sm.m_lastState = this;
+    }
 }

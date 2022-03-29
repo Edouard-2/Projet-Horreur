@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 2852353882194063839}
   - component: {fileID: 4183031474250267072}
-  - component: {fileID: 3547468918314138386}
   - component: {fileID: 6280753773334939127}
   - component: {fileID: 3607036525893490900}
   m_Layer: 15
@@ -49,30 +48,6 @@ CapsuleCollider:
   m_Height: 1.99
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &3547468918314138386
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 941335419821653527}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3b5db3384fdce1b408fc6efaf1974fea, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_dontdestroyOnLoad: 0
-  m_waypointsArray:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  m_waypointPrefab: {fileID: 8054100727188809770, guid: d95312ac274fe924da12c40833679057, type: 3}
-  m_parentWaypoint: {fileID: 0}
-  m_wayPointStart: {fileID: 0}
-  m_wayPointEnd: {fileID: 0}
-  m_navMeshAgent: {fileID: 3607036525893490900}
 --- !u!114 &6280753773334939127
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -85,6 +60,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77d5f3358e882aa4b8db36d38403e710, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_waypointsArray:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  m_waypointPrefab: {fileID: 8054100727188809770, guid: d95312ac274fe924da12c40833679057, type: 3}
+  m_parentWaypoint: {fileID: 0}
+  m_wayPointStart: {fileID: 0}
+  m_wayPointEnd: {fileID: 0}
+  m_navMeshAgent: {fileID: 3607036525893490900}
+  m_eventStart: {fileID: 11400000, guid: 8b3564dcdd7a9a54281fbcd6aca6c0a3, type: 2}
+  m_eventEnd: {fileID: 11400000, guid: b1f9f439b62041c4e96ee3b150a853e6, type: 2}
 --- !u!195 &3607036525893490900
 NavMeshAgent:
   m_ObjectHideFlags: 0

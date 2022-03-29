@@ -11,6 +11,7 @@ public class BaseState
 
     public virtual void Enter(){}
     public virtual void UpdateLogic(){}
+    public virtual void UpdateFunction(){}
     public virtual void UpdatePhysics(){}
     public virtual void Exit(){}
 }
