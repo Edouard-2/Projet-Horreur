@@ -1,5 +1,25 @@
+using System.Diagnostics;
+using UnityEngine;
+
 public class GameManager : Singleton<GameManager>
 {
+
+    [Header("EVENTS MONSTER")]
+    [SerializeField, Tooltip("Event arret du monstre")]private EventsTrigger m_monsterEventEnd;
+    [SerializeField, Tooltip("Event relancement du monstre")]private EventsTrigger m_monsterEventStart;
+    
+    private States m_state;
+    private States m_prevState;
+
+    [HideInInspector]
+    public States State => m_state;
+    [HideInInspector]
+    public States PrevState => m_prevState;
+
+    public delegate void UiActivePauseGame(int p_isActive = 1);
+
+    public UiActivePauseGame DoUiActivePauseGame;
+    
     public enum States
     {
         NULL,
@@ -9,17 +29,6 @@ public class GameManager : Singleton<GameManager>
         PAUSE,
         CINEMATIC
     }
-
-    private States m_state;
-    private States m_prevState;
-
-    public States State => m_state;
-    public States PrevState => m_prevState;
-
-    public delegate void UiActivePauseGame(int p_isActive = 1);
-
-    public UiActivePauseGame DoUiActivePauseGame;
-    
 
     public void SwitchPauseGame()
     {
@@ -33,11 +42,15 @@ public class GameManager : Singleton<GameManager>
         }
         if (m_state == States.PLAYING)
         {
+            m_monsterEventEnd.Raise();
+            
             m_state = States.PAUSE;
             DoUiActivePauseGame?.Invoke();
             return;
         }
 
+        m_monsterEventStart.Raise();
+        
         m_state = States.PLAYING;
         DoUiActivePauseGame?.Invoke(0);
     }

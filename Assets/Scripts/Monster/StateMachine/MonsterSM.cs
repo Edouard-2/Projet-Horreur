@@ -83,7 +83,10 @@ public class MonsterSM : StateMachine
     
     private void StartIA()
     {
-        NextState(m_patrol);
+        if (m_lastState == m_patrol)
+        {
+            NextState(m_patrol);
+        }
     }
     
     private void EndIA()
