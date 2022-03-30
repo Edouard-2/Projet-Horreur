@@ -4,7 +4,7 @@ using UnityEngine.AI;
 
 public class MonsterSM : StateMachine
 {
-    //--------------OTHER--------------//
+    //--------------WAYPOINTS--------------//
     [Header("WAYPOINTS")]
     [SerializeField, Tooltip("Tableau des waypoints du monstre")] 
     private List<Transform> m_waypointsArray;
@@ -33,6 +33,15 @@ public class MonsterSM : StateMachine
     
     [SerializeField, Tooltip("Scriptable de l'event pour arreter l'IA monstre")] 
     private EventsTrigger m_eventEnd;
+    
+    //--------------Other--------------//
+    [Header("OTHER")]
+    [SerializeField, Tooltip("LayerMask du joueur")] 
+    private LayerMask m_layerPlayer;
+    
+    [SerializeField, Tooltip("Radius du champs de vision générale du monstre")] 
+    public float m_radiusVision;
+
     
     private bool m_startIA;
     
@@ -75,7 +84,7 @@ public class MonsterSM : StateMachine
         }
         
         m_pause = new Pause(this);
-        m_patrol = new Patrol(this, m_waypointsArray,m_navMeshAgent);
+        m_patrol = new Patrol(this, m_waypointsArray,m_navMeshAgent,m_radiusVision, m_layerPlayer);
         m_Hook = new Hook(this);
         m_chase = new Chase(this);
         m_escape = new Escape(this);

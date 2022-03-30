@@ -13,17 +13,4 @@ public class Pause : BaseState
     {
         Debug.Log("PAUSE");
     }
-
-    public override void UpdateLogic()
-    {
-        if (GameManager.Instance.State == GameManager.States.LOADING)
-        {
-            m_sm.NextState(m_sm.m_lastState);
-        }
-    }
-
-    public override void UpdatePhysics()
-    {
-        
-    }
 }

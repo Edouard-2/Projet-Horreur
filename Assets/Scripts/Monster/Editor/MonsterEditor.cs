@@ -1,3 +1,4 @@
+using System;
 using UnityEditor;
 using UnityEngine;
 
@@ -13,5 +14,12 @@ public class MonsterEditor : Editor
             targetMonster.CreateWayPoint();
         }
         base.OnInspectorGUI();
+    }
+
+    private void OnSceneGUI()
+    {
+        MonsterSM targetMonster =  (MonsterSM)target;
+        Handles.color = Color.white;
+        Handles.DrawWireArc(targetMonster.transform.position, Vector3.up, Vector3.forward,360,targetMonster.m_radiusVision);
     }
 }
