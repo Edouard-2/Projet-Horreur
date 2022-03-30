@@ -11,13 +11,11 @@ public class Pause : BaseState
 
     public override void Enter()
     {
-        base.Enter();
         Debug.Log("PAUSE");
     }
 
     public override void UpdateLogic()
     {
-        base.UpdateLogic();
         if (GameManager.Instance.State == GameManager.States.LOADING)
         {
             m_sm.NextState(m_sm.m_lastState);

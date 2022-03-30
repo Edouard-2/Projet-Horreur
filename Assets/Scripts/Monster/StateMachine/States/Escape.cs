@@ -10,17 +10,16 @@ public class Escape : BaseState
     
      public override void Enter()
     {
-        base.Enter();
+        
     }
 
     public override void UpdateLogic()
     {
-        base.UpdateLogic();
+        
     }
 
     public override void Exit()
     {
-        base.Exit();
         m_sm.m_lastState = this;
     }
 }

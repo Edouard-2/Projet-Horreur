@@ -19,7 +19,6 @@ public class Patrol : BaseState
 
     public override void Enter()
     {
-        base.Enter();
         Debug.Log("¨PATROL");
         
         if (m_currentWayPoint == null)
@@ -32,7 +31,6 @@ public class Patrol : BaseState
 
     public override void UpdateLogic()
     {
-        base.UpdateLogic();
         //Mettre le m_ms.NextState(BaseState); Dans cette Update
     }
 
@@ -56,7 +54,6 @@ public class Patrol : BaseState
 
     public override void Exit()
     {
-        base.Exit();
         m_navMeshAgent.SetDestination(m_sm.transform.position);
     }
     

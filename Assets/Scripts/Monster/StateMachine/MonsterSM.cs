@@ -81,15 +81,21 @@ public class MonsterSM : StateMachine
         m_escape = new Escape(this);
     }
     
-    private void StartIA()
+    private void StartIA(bool p_idStart = true)
     {
-        if (m_lastState == m_patrol)
+        if (!p_idStart)
         {
-            NextState(m_patrol);
+            if (m_lastState == m_patrol)
+            {
+                NextState(m_patrol);
+            }
+
+            return;
         }
+        NextState(m_patrol);
     }
     
-    private void EndIA()
+    private void EndIA(bool p_idStart = true)
     {
         NextState(m_pause);
     }

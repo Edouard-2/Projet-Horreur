@@ -48,8 +48,8 @@ public class GameManager : Singleton<GameManager>
             DoUiActivePauseGame?.Invoke();
             return;
         }
-
-        m_monsterEventStart.Raise();
+        
+        m_monsterEventStart.Raise(false);
         
         m_state = States.PLAYING;
         DoUiActivePauseGame?.Invoke(0);
