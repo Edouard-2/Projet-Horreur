@@ -12,12 +12,12 @@ public class Chase : BaseState
     
      public override void Enter()
     {
-        
+        Debug.Log("CHASE");
     }
 
     public override void UpdateLogic()
     {
-        Debug.Log("CHASE LOL");
+        
     }
 
     public override void Exit()
