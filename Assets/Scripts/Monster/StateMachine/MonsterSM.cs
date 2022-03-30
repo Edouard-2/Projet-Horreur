@@ -41,6 +41,12 @@ public class MonsterSM : StateMachine
     
     [SerializeField, Tooltip("Radius du champs de vision générale du monstre")] 
     public float m_radiusVision;
+    
+    [SerializeField, Tooltip("Angle Vertical de detection du joueur si le monstre est regardé par le joueur")] 
+    [Range(1,180)] private float m_angleVertical = 10;
+    
+    [SerializeField, Tooltip("Angle Horizontal de detection du joueur si le monstre est regardé par le joueur")] 
+    [Range(1,180)] private float m_angleHorizontal = 10;
 
     
     private bool m_startIA;
@@ -84,7 +90,7 @@ public class MonsterSM : StateMachine
         }
         
         m_pause = new Pause(this);
-        m_patrol = new Patrol(this, m_waypointsArray,m_navMeshAgent,m_radiusVision, m_layerPlayer);
+        m_patrol = new Patrol(this, m_waypointsArray,m_navMeshAgent,m_radiusVision, m_layerPlayer,m_angleHorizontal,m_angleVertical);
         m_Hook = new Hook(this);
         m_chase = new Chase(this);
         m_escape = new Escape(this);

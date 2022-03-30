@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 public class PlayerVision : MonoBehaviour
@@ -14,7 +15,7 @@ public class PlayerVision : MonoBehaviour
     [SerializeField, Tooltip("Material de flou pour le postprocess")] public Material m_matVision;
     [HideInInspector]public bool m_resetTimeVisionComp = false;
     [HideInInspector]public bool m_resetTimeVisionMat = false;
-    public int m_readyEnd = 1;
+    [FormerlySerializedAs("m_readyEnd")][HideInInspector] public int m_isBlurVision = 1;
 
     //BV
     [SerializeField, Tooltip("BV visuel")] public Image m_uiBv;
@@ -73,7 +74,7 @@ public class PlayerVision : MonoBehaviour
 
     public void IncreaseOrDecreaseMat(float p_time)
     {
-        if (m_readyEnd == 0)
+        if (m_isBlurVision == 0)
         {
             if (m_resetTimeVisionComp)
             {
@@ -93,7 +94,7 @@ public class PlayerVision : MonoBehaviour
             DecreaseBV();
         }
 
-        else if (m_readyEnd == 1)
+        else if (m_isBlurVision == 1)
         {
             if (m_resetTimeVisionComp)
             {
@@ -159,7 +160,7 @@ public class PlayerVision : MonoBehaviour
             m_currentBvMax -= m_lessBvMax;
             m_uiBv.fillAmount = m_currentBvMax;
 
-            PlayerManager.Instance.CheckCurrentKey(m_readyEnd);
+            PlayerManager.Instance.CheckCurrentKey(m_isBlurVision);
 
             StartCoroutine(WaitStopBlind());
         }

@@ -128,7 +128,7 @@ public class PlayerManager : Singleton<PlayerManager>
         if (Physics.Raycast(rayInteract, out hitInteract, m_radiusVision))
         {
             //Verification si le joueur est en vision flou
-            if (m_visionScript.m_readyEnd == 0)
+            if (m_visionScript.m_isBlurVision == 0)
             {
                 //Si oui est ce que l'obj est visible (net) en mode flou
                 if ((m_keyLayerInvisible.value & (1 << hitInteract.transform.gameObject.layer)) > 0
@@ -174,7 +174,7 @@ public class PlayerManager : Singleton<PlayerManager>
 
             if (p_next)
             {
-                m_visionScript.m_readyEnd = Mathf.Abs(m_visionScript.m_readyEnd - 1);
+                m_visionScript.m_isBlurVision = Mathf.Abs(m_visionScript.m_isBlurVision - 1);
                 DoVisibleToInvisibleHandler?.Invoke();
             }
             else
@@ -184,7 +184,7 @@ public class PlayerManager : Singleton<PlayerManager>
 
             if (m_interactionsScript.m_keyObject != null)
             {
-                CheckCurrentKey(m_visionScript.m_readyEnd);
+                CheckCurrentKey(m_visionScript.m_isBlurVision);
             }
         }
     }
@@ -201,7 +201,7 @@ public class PlayerManager : Singleton<PlayerManager>
             
             InitVariableChangement(false);
 
-            if (m_visionScript.m_readyEnd == 0)
+            if (m_visionScript.m_isBlurVision == 0)
             {
                 Debug.Log("hey");
                 //Ajout du cran sur la BV
@@ -214,7 +214,7 @@ public class PlayerManager : Singleton<PlayerManager>
         {
             InitVariableChangement();
 
-            if (m_visionScript.m_readyEnd == 0)
+            if (m_visionScript.m_isBlurVision == 0)
             {
                 //Ajout du cran sur la BV
                 m_visionScript.AddStepBV();

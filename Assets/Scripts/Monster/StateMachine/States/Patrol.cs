@@ -5,11 +5,18 @@ using UnityEngine.AI;
 public class Patrol : BaseState
 {
     private List<Transform> m_wayPointsList = new List<Transform>();
+    
     private NavMeshAgent m_navMeshAgent;
+    
     private Transform m_prevWayPoint;
     private Transform m_currentWayPoint;
+    
     private float m_radiusVision;
+    private float m_angleVertical;
+    private float m_angleHorizontal;
+    
     private LayerMask m_layerPlayer;
+    
     private MonsterSM m_sm;
 
     /// <summary>
@@ -20,13 +27,18 @@ public class Patrol : BaseState
     /// <param name="p_navMeshAgent"></param>
     /// <param name="p_radiusVision"> Radius de vision générale </param>
     /// <param name="p_layerPlayer"> Layer du joueur </param>
-    public Patrol(MonsterSM p_stateMachine, List<Transform> p_wayPointsList, NavMeshAgent p_navMeshAgent, float p_radiusVision, LayerMask p_layerPlayer) : base("Patrol", p_stateMachine)
+    /// <param name="p_angleHorizontal"> Angle horizontal de detection du joueur si le monstre est regardé par le joueur </param>
+    /// <param name="p_angleVertical"> Angle Vertical de detection du joueur si le monstre est regardé par le joueur </param>
+    public Patrol(MonsterSM p_stateMachine,List<Transform> p_wayPointsList, NavMeshAgent p_navMeshAgent, 
+        float p_radiusVision, LayerMask p_layerPlayer, float p_angleHorizontal, float p_angleVertical) : base("Patrol", p_stateMachine)
     {
         m_sm = p_stateMachine;
         m_wayPointsList = p_wayPointsList;
         m_navMeshAgent = p_navMeshAgent;
         m_radiusVision = p_radiusVision;
         m_layerPlayer = p_layerPlayer;
+        m_angleVertical = p_angleVertical;
+        m_angleHorizontal = p_angleHorizontal;
     }
 
     public override void Enter()
@@ -47,32 +59,38 @@ public class Patrol : BaseState
         
         //Si le joueur regarde le monstre => Hook ou Fuite / => Raycast 
         
+        
         float angleHorizontale = Vector3.Angle(PlayerManager.Instance.transform.forward, -(PlayerManager.Instance.transform.position - m_sm.transform.position).normalized);
-
-        if (Mathf.Abs(angleHorizontale) < 20)
+        
+        if (Mathf.Abs(angleHorizontale) < m_angleHorizontal)
         {
             float angleVertical =Vector3.Angle(PlayerManager.Instance.m_camera.transform.up, m_sm.transform.up);
-            if (Mathf.Abs(angleVertical) < 20)
+            
+            if (Mathf.Abs(angleVertical) < m_angleVertical)
             {
+                Vector3 vectorPlayerMonster = (PlayerManager.Instance.transform.position - m_sm.transform.position).normalized;
+
+                Debug.Log(angleHorizontale);
+                Debug.Log(angleVertical);
                 
-                Ray ray = new Ray(m_sm.transform.position,(PlayerManager.Instance.transform.position - m_sm.transform.position).normalized);
+                Ray ray = new Ray(m_sm.transform.position,vectorPlayerMonster);
                 RaycastHit hit;
                 if (Physics.Raycast(ray, out hit, m_radiusVision))
                 {
                     if((m_layerPlayer.value & (1 << hit.collider.gameObject.layer)) > 0)
                     {
                         Debug.Log("Je te voix");
-                        Debug.DrawRay(m_sm.transform.position,(PlayerManager.Instance.transform.position - m_sm.transform.position).normalized * Vector3.Distance(hit.point,m_sm.transform.position),Color.blue);
+                        Debug.DrawRay(m_sm.transform.position,vectorPlayerMonster * Vector3.Distance(hit.point,m_sm.transform.position),Color.blue);
                         return;
                     }
-                    Debug.Log("Je te voix");
-                    Debug.DrawRay(m_sm.transform.position,(PlayerManager.Instance.transform.position - m_sm.transform.position).normalized * Vector3.Distance(hit.point,m_sm.transform.position),Color.red);
+                    Debug.Log("Je te voix Pas");
+                    Debug.DrawRay(m_sm.transform.position,vectorPlayerMonster * Vector3.Distance(hit.point,m_sm.transform.position),Color.red);
                     return;
                 }
+                Debug.DrawRay(m_sm.transform.position,vectorPlayerMonster * Vector3.Distance(hit.point,m_sm.transform.position),Color.white);
+
             }
         }
-        Debug.DrawRay(m_sm.transform.position,m_sm.transform.forward * m_radiusVision,Color.white);
-
         //Si le joueur est dans le champs de vision du monstre => Chase ou Fuite /=> RayCast + verif distance
         //Si le joueur est à côté de nous (très proche = zone de perception) / => Raycast + verif distance
         
