@@ -24,6 +24,12 @@ public class Chase : BaseState
     {
         //LookAt joueur
         m_sm.transform.LookAt(PlayerManager.Instance.transform);
+        
+        //Si joueur dans champs de vision aller vers lui
+        //Sinon Aller a la dernière position
+        //=> attendre x sec pour voir si le joueur sort 
+        //=> partir en mode patrol
+        
         if (PlayerManager.Instance.m_visionScript.m_isBlurVision == 0)
         {
             m_sm.NextState(m_sm.m_escape);
