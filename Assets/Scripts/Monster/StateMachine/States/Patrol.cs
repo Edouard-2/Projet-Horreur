@@ -80,6 +80,7 @@ public class Patrol : BaseState
                     if((m_layerPlayer.value & (1 << hit.collider.gameObject.layer)) > 0)
                     {
                         Debug.Log("Je te voix");
+                        PlayerManager.Instance.m_visionScript.m_isBlurVision;
                         m_sm. NextState(m_sm.m_chase);
                         Debug.DrawRay(m_sm.transform.position,vectorPlayerMonster * Vector3.Distance(hit.point,m_sm.transform.position),Color.blue);
                         return;
