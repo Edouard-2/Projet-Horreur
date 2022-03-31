@@ -5,10 +5,13 @@ public class PlayerController : MonoBehaviour
     //Mouvement
     [SerializeField, Tooltip("Le characontroller du player")]private CharacterController m_charaController;
     [SerializeField, Tooltip("La speed de déplacement du player")]public float m_speedMove = 10f;
+    
     private Vector3 m_dir;
     private Vector3 m_velocity;
-    [HideInInspector]public float m_baseSpeed;
-  
+    
+    [HideInInspector]
+    public float m_baseSpeed;
+
     private void Awake()
     {
         m_charaController = GetComponent<CharacterController>();
@@ -23,8 +26,15 @@ public class PlayerController : MonoBehaviour
             float xDir = Input.GetAxis("Horizontal") * m_speedMove * Time.deltaTime;
             float yDir = Input.GetAxis("Vertical") * m_speedMove * Time.deltaTime;
 
-            m_dir = transform.right * xDir + transform.forward * yDir;
+            if (!PlayerManager.Instance.m_isHooked)
+            {
+                m_dir = transform.right * xDir + transform.forward * yDir;
 
+            }
+            else
+            {
+                m_dir = transform.right * xDir;
+            }
             m_charaController.Move(m_dir);
         }
         //Simulation de gravité

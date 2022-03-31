@@ -39,8 +39,14 @@ public class MonsterSM : StateMachine
     [SerializeField, Tooltip("LayerMask du joueur")] 
     public LayerMask m_layerPlayer;
     
+    [SerializeField, Tooltip("Speed de déplacement du joueur et du monstre lorsque le monstre hook le joueur")] 
+    public float m_speedHook;
+    
     [SerializeField, Tooltip("Radius du champs de vision générale du monstre")] 
     public float m_radiusVision;
+    
+    [SerializeField, Tooltip("Radius de detection du joueur si il est dans cette zone")] 
+    public float m_radiusDetection;
     
     [SerializeField, Tooltip("Angle Vertical de detection du joueur si le monstre est regardé par le joueur")] 
     [Range(1,180)] private float m_angleVertical = 10;
@@ -50,6 +56,8 @@ public class MonsterSM : StateMachine
 
     
     private bool m_startIA;
+    
+    private bool m_isPlayerDead;
     
     private Transform m_currentWayPoint;
     private Transform m_prevWayPoint;
@@ -89,9 +97,11 @@ public class MonsterSM : StateMachine
             }
         }
         
+        m_isPlayerDead = false;
+        
         m_pause = new Pause(this);
         m_patrol = new Patrol(this, m_waypointsArray,m_navMeshAgent,m_radiusVision, m_layerPlayer,m_angleHorizontal,m_angleVertical);
-        m_hook = new Hook(this);
+        m_hook = new Hook(this, m_speedHook);
         m_chase = new Chase(this);
         m_escape = new Escape(this);
     }
@@ -114,12 +124,21 @@ public class MonsterSM : StateMachine
     {
         NextState(m_pause);
     }
-    
+
     public void CreateWayPoint()
     {
         GameObject go = Instantiate(m_waypointPrefab, Vector3.zero, Quaternion.identity);
         go.transform.SetParent(m_parentWaypoint.transform);
         m_waypointsArray.Add(go.transform);
+    }
+
+    protected override void VerifyDeathPlayer()
+    {
+        if (Vector3.Distance(transform.position, PlayerManager.Instance.transform.position) < m_radiusDetection && !m_isPlayerDead)
+        {
+            m_isPlayerDead = true;
+            Debug.Log("Tu vas mourir");
+        }
     }
 
     protected override BaseState GetInitialState()

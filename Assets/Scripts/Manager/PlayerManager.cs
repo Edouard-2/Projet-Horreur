@@ -25,7 +25,7 @@ public class PlayerManager : Singleton<PlayerManager>
 
     //Scripts
     [SerializeField, Tooltip("Script player controller")]
-    private PlayerController m_controllerScript;
+    public PlayerController m_controllerScript;
 
     [SerializeField, Tooltip("Script player look")]
     private PlayerLook m_lookScript;
@@ -35,6 +35,9 @@ public class PlayerManager : Singleton<PlayerManager>
 
     [SerializeField, Tooltip("Script player door")]
     private PlayerInteractions m_interactionsScript;
+    
+    [HideInInspector]
+    public bool m_isHooked;
 
     public float m_radiusVision;
 

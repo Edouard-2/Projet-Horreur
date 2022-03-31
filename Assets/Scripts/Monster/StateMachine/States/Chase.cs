@@ -20,6 +20,16 @@ public class Chase : BaseState
         
     }
 
+    public override void UpdateFunction()
+    {
+        //LookAt joueur
+        m_sm.transform.LookAt(PlayerManager.Instance.transform);
+        if (PlayerManager.Instance.m_visionScript.m_isBlurVision == 0)
+        {
+            m_sm.NextState(m_sm.m_escape);
+        }
+    }
+
     public override void Exit()
     {
         m_sm.m_lastState = this;

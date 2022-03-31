@@ -114,6 +114,8 @@ public class Patrol : BaseState
                 m_navMeshAgent.SetDestination(m_currentWayPoint.position);
             }
         }
+        //LookAt joueur
+        m_sm.transform.LookAt(PlayerManager.Instance.transform);
     }
 
     public override void Exit()

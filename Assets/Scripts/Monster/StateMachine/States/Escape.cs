@@ -15,7 +15,10 @@ public class Escape : BaseState
 
     public override void UpdateLogic()
     {
-        
+        if (PlayerManager.Instance.m_visionScript.m_isBlurVision == 1)
+        {
+            m_sm.NextState(m_sm.m_patrol);
+        }
     }
 
     public override void Exit()

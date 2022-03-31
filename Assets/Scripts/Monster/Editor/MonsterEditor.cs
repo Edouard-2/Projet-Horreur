@@ -21,5 +21,6 @@ public class MonsterEditor : Editor
         MonsterSM targetMonster =  (MonsterSM)target;
         Handles.color = Color.white;
         Handles.DrawWireArc(targetMonster.transform.position, Vector3.up, Vector3.forward,360,targetMonster.m_radiusVision);
+        Handles.DrawWireArc(targetMonster.transform.position, Vector3.up, Vector3.forward,360,targetMonster.m_radiusDetection);
     }
 }

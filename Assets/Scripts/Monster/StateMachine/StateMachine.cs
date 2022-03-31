@@ -21,6 +21,7 @@ public class StateMachine : MonoBehaviour
         {
             m_currentState.UpdateLogic();
             m_currentState.UpdateFunction();
+            VerifyDeathPlayer();
         }
     }
 
@@ -43,6 +44,8 @@ public class StateMachine : MonoBehaviour
         m_currentState.Enter();
 
     }
+    
+    protected virtual void VerifyDeathPlayer(){}
 
     protected virtual BaseState GetInitialState()
     {

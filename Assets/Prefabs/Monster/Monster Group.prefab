@@ -742,7 +742,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3607036525893490900, guid: e80b420a2a3c75041a495a947e63cf54, type: 3}
       propertyPath: m_Speed
-      value: 0
+      value: 3.5
       objectReference: {fileID: 0}
     - target: {fileID: 3607036525893490900, guid: e80b420a2a3c75041a495a947e63cf54, type: 3}
       propertyPath: m_Height
@@ -751,6 +751,10 @@ PrefabInstance:
     - target: {fileID: 3607036525893490900, guid: e80b420a2a3c75041a495a947e63cf54, type: 3}
       propertyPath: m_BaseOffset
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6280753773334939127, guid: e80b420a2a3c75041a495a947e63cf54, type: 3}
+      propertyPath: m_speedHook
+      value: 200
       objectReference: {fileID: 0}
     - target: {fileID: 6280753773334939127, guid: e80b420a2a3c75041a495a947e63cf54, type: 3}
       propertyPath: m_wayPointEnd
@@ -775,6 +779,10 @@ PrefabInstance:
     - target: {fileID: 6280753773334939127, guid: e80b420a2a3c75041a495a947e63cf54, type: 3}
       propertyPath: m_angleHorizontal
       value: 35
+      objectReference: {fileID: 0}
+    - target: {fileID: 6280753773334939127, guid: e80b420a2a3c75041a495a947e63cf54, type: 3}
+      propertyPath: m_radiusDetection
+      value: 1.38
       objectReference: {fileID: 0}
     - target: {fileID: 6280753773334939127, guid: e80b420a2a3c75041a495a947e63cf54, type: 3}
       propertyPath: m_layerPlayer.m_Bits
