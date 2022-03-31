@@ -10,7 +10,7 @@ public class Escape : BaseState
     
      public override void Enter()
     {
-        
+        Debug.Log("ESCAPE");
     }
 
     public override void UpdateLogic()

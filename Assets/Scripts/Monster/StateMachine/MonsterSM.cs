@@ -37,7 +37,7 @@ public class MonsterSM : StateMachine
     //--------------Other--------------//
     [Header("OTHER")]
     [SerializeField, Tooltip("LayerMask du joueur")] 
-    private LayerMask m_layerPlayer;
+    public LayerMask m_layerPlayer;
     
     [SerializeField, Tooltip("Radius du champs de vision générale du monstre")] 
     public float m_radiusVision;
@@ -60,7 +60,7 @@ public class MonsterSM : StateMachine
     [HideInInspector]
     public Patrol m_patrol;
     [HideInInspector]
-    public Hook m_Hook;
+    public Hook m_hook;
     [HideInInspector]
     public Chase m_chase;
     [HideInInspector]
@@ -91,7 +91,7 @@ public class MonsterSM : StateMachine
         
         m_pause = new Pause(this);
         m_patrol = new Patrol(this, m_waypointsArray,m_navMeshAgent,m_radiusVision, m_layerPlayer,m_angleHorizontal,m_angleVertical);
-        m_Hook = new Hook(this);
+        m_hook = new Hook(this);
         m_chase = new Chase(this);
         m_escape = new Escape(this);
     }

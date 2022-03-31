@@ -70,9 +70,6 @@ public class Patrol : BaseState
             {
                 Vector3 vectorPlayerMonster = (PlayerManager.Instance.transform.position - m_sm.transform.position).normalized;
 
-                Debug.Log(angleHorizontale);
-                Debug.Log(angleVertical);
-                
                 Ray ray = new Ray(m_sm.transform.position,vectorPlayerMonster);
                 RaycastHit hit;
                 if (Physics.Raycast(ray, out hit, m_radiusVision))
@@ -80,9 +77,15 @@ public class Patrol : BaseState
                     if((m_layerPlayer.value & (1 << hit.collider.gameObject.layer)) > 0)
                     {
                         Debug.Log("Je te voix");
-                        PlayerManager.Instance.m_visionScript.m_isBlurVision;
-                        m_sm. NextState(m_sm.m_chase);
-                        Debug.DrawRay(m_sm.transform.position,vectorPlayerMonster * Vector3.Distance(hit.point,m_sm.transform.position),Color.blue);
+                        
+                        if(PlayerManager.Instance.m_visionScript.m_isBlurVision == 0)
+                        {
+                            m_sm. NextState(m_sm.m_escape);
+                            return;
+                        }
+                        m_sm. NextState(m_sm.m_hook);
+                        
+                        Debug.DrawRay(m_sm.transform.position,vectorPlayerMonster * Vector3.Distance(hit.point,m_sm.transform.position),Color.blue,1);
                         return;
                     }
                     Debug.DrawRay(m_sm.transform.position,vectorPlayerMonster * Vector3.Distance(hit.point,m_sm.transform.position),Color.red);
@@ -92,9 +95,7 @@ public class Patrol : BaseState
 
             }
         }
-        //Si le joueur est dans le champs de vision du monstre => Chase ou Fuite /=> RayCast + verif distance
         //Si le joueur est à côté de nous (très proche = zone de perception) / => Raycast + verif distance
-        
     }
 
     public override void UpdateFunction()
