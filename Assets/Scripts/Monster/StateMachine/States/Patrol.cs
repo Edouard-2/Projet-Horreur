@@ -6,8 +6,6 @@ public class Patrol : BaseState
 {
     private List<Transform> m_wayPointsList = new List<Transform>();
     
-    private NavMeshAgent m_navMeshAgent;
-    
     private Transform m_prevWayPoint;
     private Transform m_currentWayPoint;
     
@@ -28,12 +26,11 @@ public class Patrol : BaseState
     /// <param name="p_layerPlayer"> Layer du joueur </param>
     /// <param name="p_angleHorizontal"> Angle horizontal de detection du joueur si le monstre est regardé par le joueur </param>
     /// <param name="p_angleVertical"> Angle Vertical de detection du joueur si le monstre est regardé par le joueur </param>
-    public Patrol(MonsterSM p_stateMachine,List<Transform> p_wayPointsList, NavMeshAgent p_navMeshAgent, 
+    public Patrol(MonsterSM p_stateMachine,List<Transform> p_wayPointsList, 
         LayerMask p_layerPlayer, float p_angleHorizontal, float p_angleVertical) : base("Patrol", p_stateMachine)
     {
         m_sm = p_stateMachine;
         m_wayPointsList = p_wayPointsList;
-        m_navMeshAgent = p_navMeshAgent;
         m_layerPlayer = p_layerPlayer;
         m_angleVertical = p_angleVertical;
         m_angleHorizontal = p_angleHorizontal;
@@ -48,7 +45,7 @@ public class Patrol : BaseState
             m_currentWayPoint = GetRandomWayPoint();
         }
         
-        m_navMeshAgent.SetDestination(m_currentWayPoint.position);
+        m_sm.m_navMeshAgent.SetDestination(m_currentWayPoint.position);
     }
 
     public override void UpdateLogic()
@@ -100,8 +97,8 @@ public class Patrol : BaseState
     {
         if (m_wayPointsList.Count != 0)
         {
-            //Debug.Log(Vector3.Distance(m_navMeshAgent.transform.position, m_currentWayPoint.position));
-            if (Vector3.Distance(m_navMeshAgent.transform.position, m_currentWayPoint.position) < 1)
+            //Debug.Log(Vector3.Distance(m_sm.m_navMeshAgent.transform.position, m_currentWayPoint.position));
+            if (Vector3.Distance(m_sm.m_navMeshAgent.transform.position, m_currentWayPoint.position) < 1)
             {
                 if (m_currentWayPoint != m_prevWayPoint)
                 {
@@ -109,8 +106,8 @@ public class Patrol : BaseState
                 }
                 m_currentWayPoint = GetRandomWayPoint();
                 
-                m_navMeshAgent.SetDestination(m_currentWayPoint.position);
-                Debug.Log(m_navMeshAgent.CalculatePath(m_currentWayPoint.position,m_navMeshAgent.path));
+                m_sm.m_navMeshAgent.SetDestination(m_currentWayPoint.position);
+                Debug.Log(m_sm.m_navMeshAgent.CalculatePath(m_currentWayPoint.position,m_sm.m_navMeshAgent.path));
             }
         }
         //LookAt joueur
@@ -119,7 +116,7 @@ public class Patrol : BaseState
 
     public override void Exit()
     {
-        m_navMeshAgent.SetDestination(m_sm.transform.position);
+        m_sm.m_navMeshAgent.SetDestination(m_sm.transform.position);
     }
     
     private Transform GetRandomWayPoint()

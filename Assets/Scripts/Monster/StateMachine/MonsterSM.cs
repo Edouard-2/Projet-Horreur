@@ -101,7 +101,7 @@ public class MonsterSM : StateMachine
         m_isPlayerDead = false;
         
         m_pause = new Pause(this);
-        m_patrol = new Patrol(this, m_waypointsArray,m_navMeshAgent, m_layerPlayer,m_angleHorizontal,m_angleVertical);
+        m_patrol = new Patrol(this, m_waypointsArray, m_layerPlayer,m_angleHorizontal,m_angleVertical);
         m_hook = new Hook(this, m_speedHook);
         m_chase = new Chase(this);
         m_escape = new Escape(this);

@@ -48,7 +48,7 @@ public class Hook : BaseState
         float tTime = Time.time - initTime;
         
         //Attirer le joueur vers sois même et nous même avancer vers lui
-        m_sm.transform.position = Vector3.MoveTowards(m_sm.transform.position, PlayerManager.Instance.transform.position,tTime/m_speedHook);
+        //m_sm.transform.position = Vector3.MoveTowards(m_sm.transform.position, PlayerManager.Instance.transform.position,tTime/m_speedHook);
         PlayerManager.Instance.transform.position = Vector3.MoveTowards(PlayerManager.Instance.transform.position, m_sm.transform.position,tTime/m_speedHook);
         
         //Le joueur et le monstre se fixent

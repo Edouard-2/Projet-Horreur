@@ -18,6 +18,7 @@ public class Chase : BaseState
     {
         Debug.Log("CHASE");
         m_sm.m_navMeshAgent.SetDestination(PlayerManager.Instance.transform.position);
+        m_sm.m_navMeshAgent.speed *= 1.2f;
     }
 
     public override void UpdateLogic()
@@ -75,5 +76,6 @@ public class Chase : BaseState
     {
         m_sm.m_lastState = this;
         m_sm.m_navMeshAgent.SetDestination(m_sm.transform.position);
+        m_sm.m_navMeshAgent.speed /= 1.2f;
     }
 }
