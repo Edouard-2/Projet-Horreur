@@ -1,13 +1,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.SceneManagement;
 
 public class MonsterSM : StateMachine
 {
     //--------------WAYPOINTS--------------//
     [Header("WAYPOINTS")]
     [SerializeField, Tooltip("Tableau des waypoints du monstre")] 
-    private List<Transform> m_waypointsArray;
+    public List<Transform> m_waypointsArray;
     
     [SerializeField, Tooltip("Prefab pour creer un waypoint")] 
     private GameObject m_waypointPrefab;
@@ -24,7 +25,7 @@ public class MonsterSM : StateMachine
     //--------------IA--------------//
     [Header("IA")]
     [SerializeField, Tooltip("NavMeshAgent de l'IA monstre")] 
-    private NavMeshAgent m_navMeshAgent;
+    public NavMeshAgent m_navMeshAgent;
     
     //--------------EVENTS--------------//
     [Header("EVENTS")]
@@ -100,7 +101,7 @@ public class MonsterSM : StateMachine
         m_isPlayerDead = false;
         
         m_pause = new Pause(this);
-        m_patrol = new Patrol(this, m_waypointsArray,m_navMeshAgent,m_radiusVision, m_layerPlayer,m_angleHorizontal,m_angleVertical);
+        m_patrol = new Patrol(this, m_waypointsArray,m_navMeshAgent, m_layerPlayer,m_angleHorizontal,m_angleVertical);
         m_hook = new Hook(this, m_speedHook);
         m_chase = new Chase(this);
         m_escape = new Escape(this);
@@ -138,6 +139,7 @@ public class MonsterSM : StateMachine
         {
             m_isPlayerDead = true;
             Debug.Log("Tu vas mourir");
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
     }
 

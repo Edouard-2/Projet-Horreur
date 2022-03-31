@@ -11,7 +11,6 @@ public class Patrol : BaseState
     private Transform m_prevWayPoint;
     private Transform m_currentWayPoint;
     
-    private float m_radiusVision;
     private float m_angleVertical;
     private float m_angleHorizontal;
     
@@ -30,12 +29,11 @@ public class Patrol : BaseState
     /// <param name="p_angleHorizontal"> Angle horizontal de detection du joueur si le monstre est regardé par le joueur </param>
     /// <param name="p_angleVertical"> Angle Vertical de detection du joueur si le monstre est regardé par le joueur </param>
     public Patrol(MonsterSM p_stateMachine,List<Transform> p_wayPointsList, NavMeshAgent p_navMeshAgent, 
-        float p_radiusVision, LayerMask p_layerPlayer, float p_angleHorizontal, float p_angleVertical) : base("Patrol", p_stateMachine)
+        LayerMask p_layerPlayer, float p_angleHorizontal, float p_angleVertical) : base("Patrol", p_stateMachine)
     {
         m_sm = p_stateMachine;
         m_wayPointsList = p_wayPointsList;
         m_navMeshAgent = p_navMeshAgent;
-        m_radiusVision = p_radiusVision;
         m_layerPlayer = p_layerPlayer;
         m_angleVertical = p_angleVertical;
         m_angleHorizontal = p_angleHorizontal;
@@ -72,7 +70,7 @@ public class Patrol : BaseState
 
                 Ray ray = new Ray(m_sm.transform.position,vectorPlayerMonster);
                 RaycastHit hit;
-                if (Physics.Raycast(ray, out hit, m_radiusVision))
+                if (Physics.Raycast(ray, out hit, m_sm.m_radiusVision))
                 {
                     if((m_layerPlayer.value & (1 << hit.collider.gameObject.layer)) > 0)
                     {
@@ -112,6 +110,7 @@ public class Patrol : BaseState
                 m_currentWayPoint = GetRandomWayPoint();
                 
                 m_navMeshAgent.SetDestination(m_currentWayPoint.position);
+                Debug.Log(m_navMeshAgent.CalculatePath(m_currentWayPoint.position,m_navMeshAgent.path));
             }
         }
         //LookAt joueur
