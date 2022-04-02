@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-public class Door : MonoBehaviour, IDoor
+public class Door : MonoBehaviour
 {
     [SerializeField, Tooltip("Type de clés")]
     public KeyType m_neededKey;

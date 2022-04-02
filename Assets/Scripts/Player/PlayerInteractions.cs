@@ -56,7 +56,7 @@ public class PlayerInteractions : MonoBehaviour
             (m_layerKeyVisible.value & (1 << p_target.gameObject.layer)) > 0)
         {
             //Debug.Log("key");
-            targetMaterial = p_target.GetComponent<LootBox>().m_key.m_keyMat;
+            targetMaterial = p_target.GetComponent<Key>().m_key.m_keyMat;
 
         }
         //Récupérer le mat de la porte
@@ -113,14 +113,14 @@ public class PlayerInteractions : MonoBehaviour
                 (m_layerKeyInvisible.value & (1 << p_target.gameObject.layer)) > 0 ||
                 (m_layerKeyVisible.value & (1 << p_target.gameObject.layer)) > 0)
             {
-                LootBox myLootBox = p_target.GetComponent<LootBox>();
-                if (myLootBox && myLootBox.OpenChest(out KeyType key))
+                Key myKey = p_target.GetComponent<Key>();
+                if (myKey && myKey.OpenChest(out KeyType key))
                 {
                     if (m_trousseauKey == null)
                     {
                         m_trousseauKey = key;
                         m_keyObject = p_target.gameObject;
-                        SetUIKey(myLootBox);
+                        SetUIKey(myKey);
                     }
                     else
                     {
@@ -128,7 +128,7 @@ public class PlayerInteractions : MonoBehaviour
                         EjectKey();
                         m_trousseauKey = key;
                         m_keyObject = p_target.gameObject;
-                        SetUIKey(myLootBox);
+                        SetUIKey(myKey);
                     }
                 }
             }
@@ -145,7 +145,7 @@ public class PlayerInteractions : MonoBehaviour
                         if (myDoor.m_neededKey)
                         {
                             m_trousseauKey = null;
-                            StartCoroutine(m_keyObject.GetComponent<LootBox>().DestroySelf());
+                            StartCoroutine(m_keyObject.GetComponent<Key>().DestroySelf());
                             m_KeyUI.color = Color.clear;
                         }
                     }
@@ -177,7 +177,7 @@ public class PlayerInteractions : MonoBehaviour
         }
     }
 
-    private void SetUIKey(LootBox p_key)
+    private void SetUIKey(Key p_key)
     {
         if (m_isVariablesReady)
         {

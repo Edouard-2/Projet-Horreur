@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-public class LootBox : MonoBehaviour, ILootBox
+public class Key : MonoBehaviour
 {
     [Tooltip("La clé du coffre")]
     public KeyType m_key;
