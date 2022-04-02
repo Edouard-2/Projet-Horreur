@@ -29,6 +29,9 @@ public class MonsterSM : StateMachine
     
     //--------------EVENTS--------------//
     [Header("EVENTS")]
+    [SerializeField, Tooltip("True: Le monstre commence par Idle")] 
+    private bool m_isIdleStart;
+    
     [SerializeField, Tooltip("Scriptable de l'event pour déclancher l'IA monstre")] 
     private EventsTrigger m_eventStart;
     
@@ -73,6 +76,8 @@ public class MonsterSM : StateMachine
     [HideInInspector]
     public Chase m_chase;
     [HideInInspector]
+    public Idle m_idle;
+    [HideInInspector]
     public Defense m_defense;
 
     private void OnEnable()
@@ -101,6 +106,7 @@ public class MonsterSM : StateMachine
         m_isPlayerDead = false;
         
         m_pause = new Pause(this);
+        m_idle = new Idle(this);
         m_patrol = new Patrol(this, m_waypointsArray, m_layerPlayer,m_angleHorizontal,m_angleVertical);
         m_hook = new Hook(this, m_speedHook);
         m_chase = new Chase(this);
@@ -109,13 +115,14 @@ public class MonsterSM : StateMachine
     
     private void StartIA(bool p_idStart = true)
     {
-        if (!p_idStart)
+        if (m_lastState != null)
         {
-            if (m_lastState == m_patrol)
-            {
-                NextState(m_patrol);
-            }
-
+            NextState(m_lastState);
+            return;
+        }
+        if (m_isIdleStart)
+        {
+            NextState(m_idle);
             return;
         }
         NextState(m_patrol);

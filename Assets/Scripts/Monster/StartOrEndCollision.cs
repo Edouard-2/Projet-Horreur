@@ -12,6 +12,7 @@ public class StartOrEndCollision : MonoBehaviour
         if ((m_layerPlayer.value & (1 << other.gameObject.layer)) > 0)
         {
             m_event.Raise();
+            gameObject.SetActive(false);
         }
     }
 }

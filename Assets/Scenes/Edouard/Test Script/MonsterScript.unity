@@ -1820,6 +1820,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 1453213926203195308, guid: 0072aae6ed274a8428e5766fe3a50a49, type: 3}
+      propertyPath: m_isIdleStart
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1453213926203195308, guid: 0072aae6ed274a8428e5766fe3a50a49, type: 3}
       propertyPath: m_radiusDetection
       value: 1.4
       objectReference: {fileID: 0}
