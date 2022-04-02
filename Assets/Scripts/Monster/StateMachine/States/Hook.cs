@@ -21,7 +21,7 @@ public class Hook : BaseState
     {
         if (PlayerManager.Instance.m_visionScript.m_isBlurVision == 0)
         {
-            m_sm.NextState(m_sm.m_escape);
+            m_sm.NextState(m_sm.m_defense);
             return;
         }
         

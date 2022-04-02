@@ -73,7 +73,7 @@ public class MonsterSM : StateMachine
     [HideInInspector]
     public Chase m_chase;
     [HideInInspector]
-    public Escape m_escape;
+    public Defense m_defense;
 
     private void OnEnable()
     {
@@ -104,7 +104,7 @@ public class MonsterSM : StateMachine
         m_patrol = new Patrol(this, m_waypointsArray, m_layerPlayer,m_angleHorizontal,m_angleVertical);
         m_hook = new Hook(this, m_speedHook);
         m_chase = new Chase(this);
-        m_escape = new Escape(this);
+        m_defense = new Defense(this);
     }
     
     private void StartIA(bool p_idStart = true)
