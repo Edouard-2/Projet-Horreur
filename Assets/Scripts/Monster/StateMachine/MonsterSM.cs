@@ -35,7 +35,10 @@ public class MonsterSM : StateMachine
     [SerializeField, Tooltip("True: Le monstre commence par Idle")]
     private bool m_isIdleStart;
 
-    [SerializeField, Tooltip("Scriptable de l'event pour déclancher l'IA monstre")]
+    [SerializeField, Tooltip("Scriptable de l'event Alerter avec le son l'IA monstre")]
+    private EventsTriggerPos m_eventAlertSound;
+    
+    [SerializeField, Tooltip("Scriptable de l'event pour placer l'IA monstre")]
     private List<EventsTriggerPos> m_eventPosList;
 
     [SerializeField, Tooltip("Scriptable de l'event pour déclancher l'IA monstre")]
@@ -66,7 +69,8 @@ public class MonsterSM : StateMachine
     [Range(1, 180)]
     private float m_angleHorizontal = 10;
 
-
+    [HideInInspector] public Vector3 m_soundAlertPosition;
+    
     private bool m_startIA;
 
     private bool m_isPlayerDead;
@@ -83,9 +87,12 @@ public class MonsterSM : StateMachine
     [HideInInspector] public Chase m_chase;
     [HideInInspector] public Idle m_idle;
     [HideInInspector] public Defense m_defense;
+    [HideInInspector] public AlertSound m_alertSound;
 
     private void OnEnable()
     {
+        m_eventAlertSound.OnTrigger += SoundAlertIA;
+        
         foreach (EventsTriggerPos elem in m_eventPosList)
         {
             elem.OnTrigger += SetPosIA;
@@ -102,6 +109,8 @@ public class MonsterSM : StateMachine
 
     private void OnDisable()
     {
+        m_eventAlertSound.OnTrigger -= SoundAlertIA;
+        
         foreach (EventsTriggerPos elem in m_eventPosList)
         {
             elem.OnTrigger -= SetPosIA;
@@ -120,6 +129,7 @@ public class MonsterSM : StateMachine
     {
         TurnOffAI();
         
+        //Récupérer le navMeshAgent si null
         if (m_navMeshAgent == null)
         {
             m_navMeshAgent = GetComponent<NavMeshAgent>();
@@ -128,6 +138,8 @@ public class MonsterSM : StateMachine
                 Debug.LogError("Il faut mettre le Nav Mesh Agent sur L'IA !!!", this);
             }
         }
+        
+        //Récupérer le collider si null
         if (m_collider == null)
         {
             m_collider = GetComponent<CapsuleCollider>();
@@ -139,12 +151,20 @@ public class MonsterSM : StateMachine
 
         m_isPlayerDead = false;
 
+        //Initialisations des states
         m_pause = new Pause(this);
         m_idle = new Idle(this);
         m_patrol = new Patrol(this, m_waypointsArray, m_layerPlayer, m_angleHorizontal, m_angleVertical);
         m_hook = new Hook(this, m_speedHook);
         m_chase = new Chase(this);
         m_defense = new Defense(this);
+        m_alertSound = new AlertSound(this);
+    }
+
+    private void SoundAlertIA(Vector3 p_pos)
+    {
+        m_alertSound.m_FirstPos = p_pos;
+        NextState(m_alertSound);
     }
 
     private void TurnOffAI()
@@ -178,7 +198,6 @@ public class MonsterSM : StateMachine
             NextState(m_idle);
             return;
         }
-
         NextState(m_patrol);
     }
 

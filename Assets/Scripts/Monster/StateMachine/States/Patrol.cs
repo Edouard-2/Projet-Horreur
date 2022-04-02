@@ -50,11 +50,6 @@ public class Patrol : BaseState
 
     public override void UpdateLogic()
     {
-        //Mettre le m_ms.NextState(BaseState); Dans cette Update
-        
-        //Si le joueur regarde le monstre => Hook ou Fuite / => Raycast 
-        
-        
         float angleHorizontale = Vector3.Angle(PlayerManager.Instance.transform.forward, -(PlayerManager.Instance.transform.position - m_sm.transform.position).normalized);
         
         if (Mathf.Abs(angleHorizontale) < m_angleHorizontal)
@@ -90,7 +85,6 @@ public class Patrol : BaseState
 
             }
         }
-        //Si le joueur est à côté de nous (très proche = zone de perception) / => Raycast + verif distance
     }
 
     public override void UpdateFunction()

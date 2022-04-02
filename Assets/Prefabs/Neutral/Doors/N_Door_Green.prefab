@@ -141,8 +141,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_neededKey: {fileID: 11400000, guid: bf4b84cb79cc39746845864a6b5878e2, type: 2}
+  m_soundEvent: {fileID: 11400000, guid: 51ba3b65073b3b54aa44f726688f5b37, type: 2}
   m_doorAnimator: {fileID: 5841730288258442636}
+  m_layerMonstre:
+    serializedVersion: 2
+    m_Bits: 0
   m_openName: Open
+  m_closeName: Close
+  m_doorMat: {fileID: 0}
 --- !u!95 &5841730288258442636
 Animator:
   serializedVersion: 3

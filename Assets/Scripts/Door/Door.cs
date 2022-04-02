@@ -5,6 +5,9 @@ public class Door : MonoBehaviour, IDoor
 {
     [SerializeField, Tooltip("Type de clés")]
     public KeyType m_neededKey;
+    
+    [SerializeField, Tooltip("Event du sound")]
+    public EventsTriggerPos m_soundEvent;
 
     [SerializeField, Tooltip("L'animator de la porte")]
     private Animator m_doorAnimator;
@@ -74,6 +77,9 @@ public class Door : MonoBehaviour, IDoor
             //On ouvre la porte
             Debug.Log("Je m'ouvre");
             m_doorAnimator?.SetTrigger(m_openHash);
+            
+            m_soundEvent.Raise(PlayerManager.Instance.transform.position);
+            
             m_isOpen = true;
         }
 

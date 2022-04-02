@@ -1,18 +1,42 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class AlertSound : MonoBehaviour
+public class AlertSound : BaseState
 {
-    // Start is called before the first frame update
-    void Start()
+    private MonsterSM m_sm;
+    private WaitForSeconds m_waitPatrol = new WaitForSeconds(3f);
+    public Vector3 m_FirstPos;
+    
+    public AlertSound(MonsterSM p_stateMachine) : base("AlertSound", p_stateMachine)
     {
-        
+        m_sm = p_stateMachine;
     }
 
-    // Update is called once per frame
-    void Update()
+    public override void Enter()
     {
+        Debug.Log("Alert");
+        m_sm.m_navMeshAgent.speed *= 1.5f;
+        m_sm.m_navMeshAgent.SetDestination(m_FirstPos);
+    }
+
+    public override void UpdateFunction()
+    {
+        if (Vector3.Distance(m_FirstPos, m_sm.transform.position) < 1)
+        {
+            m_sm.StartCoroutine(LaunchPatrol());
+        }
         
+        m_sm.m_patrol.UpdateLogic();
+    }
+
+    IEnumerator LaunchPatrol()
+    {
+        yield return m_waitPatrol;
+        m_sm.NextState(m_sm.m_patrol);
+    }
+
+    public override void Exit()
+    {
+        m_sm.m_navMeshAgent.speed /= 1.5f;
     }
 }
