@@ -17,4 +17,9 @@ public class Idle : BaseState
     {
         m_sm.m_patrol.UpdateLogic();
     }
+
+    public override void Exit()
+    {
+        m_sm.m_navMeshAgent.SetDestination(m_sm.transform.position);
+    }
 }
