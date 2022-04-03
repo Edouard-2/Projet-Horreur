@@ -17,7 +17,7 @@ public class Hook : BaseState
         
         PlayerManager.Instance.m_isHooked = true;
         
-        m_sm.m_navMeshAgent.SetDestination(PlayerManager.Instance.transform.position);
+        m_sm.m_navMeshAgent.SetDestination(m_sm.transform.position);
     }
 
     public override void UpdateLogic()
@@ -67,7 +67,8 @@ public class Hook : BaseState
         m_sm.m_lastState = this;
         
         PlayerManager.Instance.m_isHooked = false ;
-        m_sm.m_navMeshAgent.SetDestination(PlayerManager.Instance.transform.position);
+        
+        m_sm.m_navMeshAgent.SetDestination(m_sm.transform.position);
         
         initTime = 0;
     }

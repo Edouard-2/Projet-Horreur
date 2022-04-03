@@ -4,7 +4,7 @@ public class CheckPoint : MonoBehaviour
 {
     private void OnTriggerEnter(Collider other)
     {
-        PlayerManager.Instance.SetCheckPoint(transform.position);
+        PlayerManager.Instance.SetCheckPoint(PlayerManager.Instance.transform.position);
         gameObject.SetActive(false);
     }
 }
