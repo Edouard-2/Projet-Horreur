@@ -6,13 +6,24 @@ public class Key : MonoBehaviour
     [Tooltip("La clé du coffre")]
     public KeyType m_key;
 
+    private Vector3 m_initPos;
+
     private void OnEnable()
     {
         PlayerManager.Instance.DoRotateKeys += RotateSelf;
+        PlayerManager.Instance.UpdateFirstPos += RotateSelf;
+    }
+    
+    private void OnDisable()
+    {
+        PlayerManager.Instance.DoRotateKeys -= RotateSelf;
+        PlayerManager.Instance.UpdateFirstPos -= SetInitPos;
     }
 
     private void Awake()
     {
+        m_initPos = transform.position;
+        
         if (m_key)
         {
             transform.GetChild(0).GetComponent<Renderer>().material = m_key.m_keyMat;
@@ -26,6 +37,11 @@ public class Key : MonoBehaviour
         transform.Rotate(0, 30f * Time.deltaTime, 0);
     }
 
+    private void SetInitPos()
+    {
+        transform.position = m_initPos;
+    }
+    
     public bool OpenChest(out KeyType o_key)
     {
         bool keyFounded = false;

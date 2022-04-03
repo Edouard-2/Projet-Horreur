@@ -80,6 +80,10 @@ public class PlayerManager : Singleton<PlayerManager>
 
     public DoVisionSwitch DoVisibleToInvisibleHandler;
 
+    public delegate void FirstKeyPos();
+
+    public event FirstKeyPos UpdateFirstPos;
+
     private void Awake()
     {
         //Initialisation des variables d'animation
@@ -265,8 +269,7 @@ public class PlayerManager : Singleton<PlayerManager>
 
         m_visionScript.IncreaseOrDecreaseMat(tTime);
     }
-
-
+    
     public void CheckCurrentKey(int p_readyEnd)
     {
         if (m_interactionsScript.m_trousseauKey != null)
@@ -320,11 +323,16 @@ public class PlayerManager : Singleton<PlayerManager>
         m_deathUI.SetActive(true);
         
         //Vider son inventaire
+        m_interactionsScript.EjectKey();
+        
         //Mettre les clés à leur enplacement de base
+        UpdateFirstPos?.Invoke();
         
         //Mettre le monstre à son emplacement
         
+        
         //Mettre le joueur à la position du dernier checkpoint
+        transform.position = m_checkPointPos;
 
         Cursor.lockState = CursorLockMode.Confined;
     }

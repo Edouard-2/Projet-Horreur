@@ -106,7 +106,7 @@ public class PlayerInteractions : MonoBehaviour
     
     public void VerifyLayer(Transform p_target)
     {
-        if (m_isVariablesReady)
+        if (m_isVariablesReady && m_trousseauKey != null)
         {
             //Si c'est la clé
             if ((m_layerKey.value & (1 << p_target.gameObject.layer)) > 0 ||
@@ -191,7 +191,7 @@ public class PlayerInteractions : MonoBehaviour
     
     public void EjectKey(bool p_position = true)
     {
-        if (m_isVariablesReady)
+        if (m_isVariablesReady )
         {
             //Ejecter la clé
             Debug.Log("Clear key");

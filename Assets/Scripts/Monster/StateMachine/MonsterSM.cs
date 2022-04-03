@@ -77,6 +77,8 @@ public class MonsterSM : StateMachine
     
     private bool m_isStartIA;
 
+    private Vector3 m_initPos;
+
     private Transform m_currentWayPoint;
     private Transform m_prevWayPoint;
 
@@ -92,6 +94,8 @@ public class MonsterSM : StateMachine
     private void OnEnable()
     {
         m_eventAlertSound.OnTrigger += SoundAlertIA;
+
+        PlayerManager.Instance.UpdateFirstPos += SetInitPos;
         
         foreach (EventsTriggerPos elem in m_eventPosList)
         {
@@ -110,6 +114,8 @@ public class MonsterSM : StateMachine
     private void OnDisable()
     {
         m_eventAlertSound.OnTrigger -= SoundAlertIA;
+        
+        PlayerManager.Instance.UpdateFirstPos -= SetInitPos;
         
         foreach (EventsTriggerPos elem in m_eventPosList)
         {
@@ -161,6 +167,11 @@ public class MonsterSM : StateMachine
         m_alertSound = new AlertSound(this);
     }
 
+    private void SetInitPos()
+    {
+        m_navMeshAgent.nextPosition = m_initPos;
+    }
+
     private void SoundAlertIA(Vector3 p_pos)
     {
         m_alertSound.m_FirstPos = p_pos;
@@ -178,6 +189,9 @@ public class MonsterSM : StateMachine
     private void SetPosIA(Vector3 p_pos)
     {
         Debug.Log("position");
+        
+        m_initPos = p_pos;
+        
         m_navMeshAgent.nextPosition = p_pos;
     }
 
