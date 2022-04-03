@@ -14,7 +14,10 @@ public class Hook : BaseState
      public override void Enter()
     {
         Debug.Log("HOOK");
+        
         PlayerManager.Instance.m_isHooked = true;
+        
+        m_sm.m_navMeshAgent.SetDestination(PlayerManager.Instance.transform.position);
     }
 
     public override void UpdateLogic()
@@ -62,7 +65,10 @@ public class Hook : BaseState
     public override void Exit()
     {
         m_sm.m_lastState = this;
+        
         PlayerManager.Instance.m_isHooked = false ;
+        m_sm.m_navMeshAgent.SetDestination(PlayerManager.Instance.transform.position);
+        
         initTime = 0;
     }
 }

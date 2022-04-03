@@ -58,7 +58,7 @@ public class PlayerManager : Singleton<PlayerManager>
     [SerializeField, Tooltip("Temps avant de relancer le jeu apres la mort")]
     public float m_DeathWaitingTime;
     
-    private WaitForSeconds m_waitFade = new WaitForSeconds(1);
+    private WaitForSeconds m_waitFade = new WaitForSeconds(0.5f);
     
     private WaitForSeconds m_waitDeath;
     
@@ -308,6 +308,8 @@ public class PlayerManager : Singleton<PlayerManager>
         
         //Fade in
         Debug.Log("Fade In Death");
+        
+        m_fadeAnimator.ResetTrigger(m_fadeOut);
         m_fadeAnimator.SetTrigger(m_fadeIn);
 
         //Bloquer les mouvement du joueur => curseur + movements
@@ -338,6 +340,7 @@ public class PlayerManager : Singleton<PlayerManager>
         
         m_deathUI.SetActive(false);
         
+        m_fadeAnimator.ResetTrigger(m_fadeIn);
         m_fadeAnimator.SetTrigger(m_fadeOut);
         
         //Mettre les clés et le monstre à leurs emplacements de base
