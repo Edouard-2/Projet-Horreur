@@ -221,8 +221,7 @@ public class MonsterSM : StateMachine
             && m_isStartIA)
         {
             m_isPlayerDead = true;
-            Debug.Log("Tu vas mourir");
-            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            PlayerManager.Instance.Death();
         }
     }
 

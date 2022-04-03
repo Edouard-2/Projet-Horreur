@@ -27,7 +27,7 @@ public class GameManager : Singleton<GameManager>
         MAIN_MENU,
         PLAYING,
         PAUSE,
-        CINEMATIC
+        DEATH
     }
 
     public void SwitchPauseGame()
