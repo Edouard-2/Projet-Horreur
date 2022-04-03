@@ -55,7 +55,12 @@ public class PlayerManager : Singleton<PlayerManager>
     [SerializeField, Tooltip("Radius de vision du joueur")]
     public float m_radiusVision;
     
+    [SerializeField, Tooltip("Temps avant de relancer le jeu apres la mort")]
+    public float m_DeathWaitingTime;
+    
     private WaitForSeconds m_waitFade = new WaitForSeconds(1);
+    
+    private WaitForSeconds m_waitDeath;
     
     [HideInInspector] public bool m_isHooked;
     
@@ -86,6 +91,8 @@ public class PlayerManager : Singleton<PlayerManager>
 
     private void Awake()
     {
+        m_waitDeath = new WaitForSeconds(m_DeathWaitingTime);
+        
         //Initialisation des variables d'animation
         m_fadeIn = Animator.StringToHash("FadeIn");
         m_fadeOut = Animator.StringToHash("FadeOut");
@@ -305,16 +312,6 @@ public class PlayerManager : Singleton<PlayerManager>
         StartCoroutine(ResetLevel());
     }
     
-    public void RestartLastSave()
-    {
-        //Fade Out
-        m_deathUI.SetActive(false);
-        
-        m_fadeAnimator.SetTrigger(m_fadeOut);
-        
-        StartCoroutine(AllowMovementPlayer());
-    }
-
     IEnumerator ResetLevel()
     {
         yield return m_waitFade;
@@ -333,8 +330,8 @@ public class PlayerManager : Singleton<PlayerManager>
         
         //Mettre le joueur à la position du dernier checkpoint
         transform.position = m_checkPointPos;
-
-        Cursor.lockState = CursorLockMode.Confined;
+        
+        StartCoroutine(WaitUntilReset());
     }
     
     IEnumerator AllowMovementPlayer()
@@ -344,7 +341,18 @@ public class PlayerManager : Singleton<PlayerManager>
         //Remettre les movements au joueur
         GameManager.Instance.SetState(GameManager.States.PLAYING);
         
-        Cursor.lockState = CursorLockMode.Locked;
+        StartCoroutine(WaitUntilReset());
+    }
+
+    IEnumerator WaitUntilReset()
+    {
+        yield return m_waitDeath;
+        
+        m_deathUI.SetActive(false);
+        
+        m_fadeAnimator.SetTrigger(m_fadeOut);
+        
+        StartCoroutine(AllowMovementPlayer());
     }
     
     public void SetCheckPoint(Vector3 p_pos)
