@@ -73,7 +73,7 @@ public class MonsterSM : StateMachine
     
     private bool m_startIA;
 
-    private bool m_isPlayerDead;
+    [HideInInspector]public bool m_isPlayerDead;
     
     private bool m_isStartIA;
 
@@ -135,6 +135,8 @@ public class MonsterSM : StateMachine
     {
         TurnOffAI();
         
+        m_initPos = transform.position;
+        
         //Récupérer le navMeshAgent si null
         if (m_navMeshAgent == null)
         {
@@ -169,7 +171,9 @@ public class MonsterSM : StateMachine
 
     private void SetInitPos()
     {
+        NextState(m_pause);
         m_navMeshAgent.nextPosition = m_initPos;
+        NextState(m_patrol);
     }
 
     private void SoundAlertIA(Vector3 p_pos)
@@ -189,8 +193,6 @@ public class MonsterSM : StateMachine
     private void SetPosIA(Vector3 p_pos)
     {
         Debug.Log("position");
-        
-        m_initPos = p_pos;
         
         m_navMeshAgent.nextPosition = p_pos;
     }
@@ -235,6 +237,8 @@ public class MonsterSM : StateMachine
             && m_isStartIA)
         {
             m_isPlayerDead = true;
+            
+            NextState(m_pause);
             PlayerManager.Instance.Death();
         }
     }

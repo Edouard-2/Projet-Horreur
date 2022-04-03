@@ -1,4 +1,3 @@
-using System.Collections;
 using UnityEngine;
 
 public class Door : MonoBehaviour
@@ -60,7 +59,7 @@ public class Door : MonoBehaviour
         m_doorMat.SetFloat("_isAim", 0);
     }
 
-    public bool OpenDoor(KeyType p_playerKey, GameObject p_door)
+    public bool OpenDoor(KeyType p_playerKey)
     {
         if (m_neededKey)
         {

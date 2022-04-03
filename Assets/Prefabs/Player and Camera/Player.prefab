@@ -179,7 +179,11 @@ MonoBehaviour:
   m_lookScript: {fileID: 5128347266043499178}
   m_visionScript: {fileID: 7154114867123462734}
   m_interactionsScript: {fileID: 7320104021563004540}
+  m_fadeAnimator: {fileID: 0}
+  m_deathUI: {fileID: 0}
   m_radiusVision: 2.1
+  m_DeathWaitingTime: 5
+  m_isHooked: 0
 --- !u!114 &5608393819760579455
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -194,7 +198,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_charaController: {fileID: 5577764659224647124}
   m_speedMove: 10
-  m_multiplSpeed: 2
   m_baseSpeed: 0
 --- !u!114 &5128347266043499178
 MonoBehaviour:
@@ -366,7 +369,7 @@ MonoBehaviour:
   m_matVision: {fileID: 2100000, guid: e3c081d870709434bb6906fd16b35f64, type: 2}
   m_resetTimeVisionComp: 0
   m_resetTimeVisionMat: 0
-  m_readyEnd: 1
+  m_isBlurVision: 1
   m_uiBv: {fileID: 0}
   m_speedDecreaseBV: 0.05
   m_MultiplIncreaseBV: 0.3
@@ -375,6 +378,7 @@ MonoBehaviour:
   m_BvMax: 1
   m_currentBvMax: 1
   m_readyInitVision: 1
+  m_soundEvent: {fileID: 11400000, guid: 51ba3b65073b3b54aa44f726688f5b37, type: 2}
 --- !u!114 &7320104021563004540
 MonoBehaviour:
   m_ObjectHideFlags: 0

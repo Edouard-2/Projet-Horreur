@@ -59,6 +59,7 @@ public class PlayerInteractions : MonoBehaviour
             targetMaterial = p_target.GetComponent<Key>().m_key.m_keyMat;
 
         }
+        
         //Récupérer le mat de la porte
         else if ((m_layerDoor.value & (1 << p_target.gameObject.layer)) > 0 || 
                  (m_layerDoorInvisible.value & (1 << p_target.gameObject.layer)) > 0)
@@ -67,6 +68,7 @@ public class PlayerInteractions : MonoBehaviour
             targetMaterial = p_target.GetComponent<Door>().m_doorMat;
 
         }
+        
         //Récupérer le mat du transvaseur
         else if ((m_layerTransvaseur.value & (1 << p_target.gameObject.layer)) > 0 || 
                  (m_layerTransvaseurInvisible.value & (1 << p_target.gameObject.layer)) > 0)
@@ -84,7 +86,6 @@ public class PlayerInteractions : MonoBehaviour
         //Changer le matérial choisi
         if (targetMaterial != null && targetMaterial.GetFloat("_isAim") != 1)
         {
-            Debug.Log("transvaseur");
             //Material
             m_currentAimObject = targetMaterial;
             targetMaterial.SetFloat("_isAim", 1);
@@ -106,7 +107,7 @@ public class PlayerInteractions : MonoBehaviour
     
     public void VerifyLayer(Transform p_target)
     {
-        if (m_isVariablesReady && m_trousseauKey != null)
+        if (m_isVariablesReady)
         {
             //Si c'est la clé
             if ((m_layerKey.value & (1 << p_target.gameObject.layer)) > 0 ||
@@ -137,10 +138,11 @@ public class PlayerInteractions : MonoBehaviour
             else if ((m_layerDoor.value & (1 << p_target.gameObject.layer)) > 0 ||
                      (m_layerDoorInvisible.value & (1 << p_target.gameObject.layer)) > 0)
             {
+                Debug.Log("Door ");
                 Door myDoor = p_target.GetComponent<Door>();
                 if (myDoor)
                 {
-                    if (myDoor.OpenDoor(m_trousseauKey, p_target.gameObject))
+                    if (myDoor.OpenDoor(m_trousseauKey))
                     {
                         if (myDoor.m_neededKey)
                         {
@@ -191,7 +193,7 @@ public class PlayerInteractions : MonoBehaviour
     
     public void EjectKey(bool p_position = true)
     {
-        if (m_isVariablesReady )
+        if (m_isVariablesReady && m_trousseauKey!= null)
         {
             //Ejecter la clé
             Debug.Log("Clear key");

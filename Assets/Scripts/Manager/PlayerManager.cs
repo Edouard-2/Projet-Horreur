@@ -91,6 +91,8 @@ public class PlayerManager : Singleton<PlayerManager>
 
     private void Awake()
     {
+        m_checkPointPos = transform.position;
+        
         m_waitDeath = new WaitForSeconds(m_DeathWaitingTime);
         
         //Initialisation des variables d'animation
@@ -302,6 +304,8 @@ public class PlayerManager : Singleton<PlayerManager>
 
     public void Death()
     {
+        m_visionScript.ResetCurrentBV();
+        
         //Fade in
         Debug.Log("Fade In Death");
         m_fadeAnimator.SetTrigger(m_fadeIn);
@@ -322,28 +326,12 @@ public class PlayerManager : Singleton<PlayerManager>
         //Vider son inventaire
         m_interactionsScript.EjectKey();
         
-        //Mettre les clés à leur enplacement de base
-        UpdateFirstPos?.Invoke();
-        
-        //Mettre le monstre à son emplacement
-        
-        
         //Mettre le joueur à la position du dernier checkpoint
         transform.position = m_checkPointPos;
         
         StartCoroutine(WaitUntilReset());
     }
     
-    IEnumerator AllowMovementPlayer()
-    {
-        yield return m_waitFade;
-        
-        //Remettre les movements au joueur
-        GameManager.Instance.SetState(GameManager.States.PLAYING);
-        
-        StartCoroutine(WaitUntilReset());
-    }
-
     IEnumerator WaitUntilReset()
     {
         yield return m_waitDeath;
@@ -352,7 +340,18 @@ public class PlayerManager : Singleton<PlayerManager>
         
         m_fadeAnimator.SetTrigger(m_fadeOut);
         
+        //Mettre les clés et le monstre à leurs emplacements de base
+        UpdateFirstPos?.Invoke();
+        
         StartCoroutine(AllowMovementPlayer());
+    }
+    
+    IEnumerator AllowMovementPlayer()
+    {
+        yield return m_waitFade;
+        
+        //Remettre les movements au joueur
+        GameManager.Instance.SetState(GameManager.States.PLAYING);
     }
     
     public void SetCheckPoint(Vector3 p_pos)

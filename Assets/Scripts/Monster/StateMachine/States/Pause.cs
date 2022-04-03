@@ -12,5 +12,6 @@ public class Pause : BaseState
     public override void Enter()
     {
         Debug.Log("PAUSE");
+        m_sm.m_isPlayerDead = false;
     }
 }

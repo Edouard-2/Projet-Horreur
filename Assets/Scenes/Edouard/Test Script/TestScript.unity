@@ -2630,6 +2630,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3728061652707604405, guid: 0f1b85b21d6b8994cac287ae922b97cf, type: 3}
   m_PrefabInstance: {fileID: 1491885996}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1497336778 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7328687019076623137, guid: 6af10fac150567440acd2778aa855d03, type: 3}
+  m_PrefabInstance: {fileID: 36755898}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &1517020023 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1517020023, guid: 6af10fac150567440acd2778aa855d03, type: 3}
@@ -3146,6 +3151,11 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 10, y: 2.220446e-16, z: 10}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!95 &1851780425 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 7074807432293625460, guid: 6af10fac150567440acd2778aa855d03, type: 3}
+  m_PrefabInstance: {fileID: 36755898}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1900466623 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3728061652707604405, guid: 33c95a7a579fbb742947cf75241e9d4c, type: 3}
@@ -3243,6 +3253,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1739398479658060359, guid: d76affee4e139c34f82c85ad49d98109, type: 3}
+      propertyPath: m_deathUI
+      value: 
+      objectReference: {fileID: 1497336778}
+    - target: {fileID: 1739398479658060359, guid: d76affee4e139c34f82c85ad49d98109, type: 3}
+      propertyPath: m_fadeAnimator
+      value: 
+      objectReference: {fileID: 1851780425}
     - target: {fileID: 2800280127000841989, guid: d76affee4e139c34f82c85ad49d98109, type: 3}
       propertyPath: m_Name
       value: Player
