@@ -1,9 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-public class UIVFXSoundSettings : MonoBehaviour
+public class UISettingsEvent : MonoBehaviour
 {
     [SerializeField, Tooltip("Le scryptable objet qui contient la valeur, et qui sera lier au boutton UI")]
     private UIOptionValue m_optionValue;
@@ -42,7 +40,5 @@ public class UIVFXSoundSettings : MonoBehaviour
     private void UpdateText()
     {
         m_textMeshPro.SetText(m_optionValue.GetStringValue());
-        
-        //Changer le son VFX
     }
 }
