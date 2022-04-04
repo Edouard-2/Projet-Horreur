@@ -5,12 +5,14 @@ public class UIManager : Singleton<UIManager>
     public delegate void DisplayUIGamePause(bool p_active = true);
     public DisplayUIGamePause DoDisplayUIGamePause;
     
-    public bool m_isOption = false;
+    public bool m_isOption;
     
     private void OnEnable()
     {
+        m_reInstance = false;
         GameManager.Instance.DoUiActivePauseGame += ActivePauseUI;
     }
+    
     private void OnDisable()
     {
         if (GameManager.Instance != null)
