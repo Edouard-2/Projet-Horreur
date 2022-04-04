@@ -1,3 +1,4 @@
+using System;
 using System.Diagnostics;
 using UnityEngine;
 
@@ -19,7 +20,12 @@ public class GameManager : Singleton<GameManager>
     public delegate void UiActivePauseGame(int p_isActive = 1);
 
     public UiActivePauseGame DoUiActivePauseGame;
-    
+
+    private void OnEnable()
+    {
+        m_reInstance = false;
+    }
+
     public enum States
     {
         NULL,

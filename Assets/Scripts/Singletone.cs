@@ -5,13 +5,15 @@ public abstract class Singleton<T> : MonoBehaviour where T : MonoBehaviour
 {
     protected static T m_instance = null;
 
-    [SerializeField][Tooltip("Ne pas détruire au chargement")] private bool m_dontdestroyOnLoad = true;
+    protected static bool m_reInstance = true;
+
+    [SerializeField][Tooltip("Ne pas détruire au chargement")] private bool m_dontdestroyOnLoad = false;
     
     public static T Instance
     {
         get
         {
-            if (m_instance == null)
+            if (m_instance == null && m_reInstance)
             {
                 FindOrCreateInstance();
             }
