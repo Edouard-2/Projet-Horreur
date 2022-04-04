@@ -133,6 +133,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!95 &563625896335729658 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 7074807432293625460, guid: 6af10fac150567440acd2778aa855d03, type: 3}
+  m_PrefabInstance: {fileID: 7348930266157206926}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &20300453967222447 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7328687019076623137, guid: 6af10fac150567440acd2778aa855d03, type: 3}
+  m_PrefabInstance: {fileID: 7348930266157206926}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &7348930266416556252
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -206,6 +216,14 @@ PrefabInstance:
       propertyPath: m_CullingMask.m_Bits
       value: 64576
       objectReference: {fileID: 0}
+    - target: {fileID: 1739398479658060359, guid: d76affee4e139c34f82c85ad49d98109, type: 3}
+      propertyPath: m_deathUI
+      value: 
+      objectReference: {fileID: 20300453967222447}
+    - target: {fileID: 1739398479658060359, guid: d76affee4e139c34f82c85ad49d98109, type: 3}
+      propertyPath: m_fadeAnimator
+      value: 
+      objectReference: {fileID: 563625896335729658}
     - target: {fileID: 2800280127000841989, guid: d76affee4e139c34f82c85ad49d98109, type: 3}
       propertyPath: m_Name
       value: Player

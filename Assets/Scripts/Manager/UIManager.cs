@@ -5,15 +5,14 @@ public class UIManager : Singleton<UIManager>
     public delegate void DisplayUIGamePause(bool p_active = true);
     public DisplayUIGamePause DoDisplayUIGamePause;
     
-    public delegate void DisplayUIMainMenu(bool p_active = true);
-    public DisplayUIMainMenu DoDisplayUIMainMenu;
-
-    public bool m_isOption = false;
+    public bool m_isOption;
     
     private void OnEnable()
     {
+        m_reInstance = false;
         GameManager.Instance.DoUiActivePauseGame += ActivePauseUI;
     }
+    
     private void OnDisable()
     {
         if (GameManager.Instance != null)
@@ -29,7 +28,6 @@ public class UIManager : Singleton<UIManager>
     {
         if (p_isActive == 0)
         {
-            
             Cursor.lockState = CursorLockMode.Locked;
             DoDisplayUIGamePause?.Invoke(false);
             
@@ -38,7 +36,6 @@ public class UIManager : Singleton<UIManager>
         }
         else if (p_isActive == 1)
         {
-            
             DoDisplayUIGamePause?.Invoke();
             Cursor.lockState = CursorLockMode.Confined;
             

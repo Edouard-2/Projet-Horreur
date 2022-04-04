@@ -100,7 +100,10 @@ public class PlayerManager : Singleton<PlayerManager>
         m_fadeOut = Animator.StringToHash("FadeOut");
 
         //Désactivation de l'UI DEath
-        m_deathUI.SetActive(false);
+        if (m_deathUI != null)
+        {
+            m_deathUI.SetActive(false);
+        }
         
         //State jouable
         GameManager.Instance.SetState(GameManager.States.PLAYING);
@@ -130,8 +133,8 @@ public class PlayerManager : Singleton<PlayerManager>
         //Mettre le jeu en pause
         if (Input.GetKeyDown(KeyCode.Escape) 
             && GameManager.Instance != null 
-            && GameManager.Instance.State == GameManager.States.PLAYING 
-            || GameManager.Instance.State == GameManager.States.PAUSE)
+            && ( GameManager.Instance.State == GameManager.States.PLAYING 
+            || GameManager.Instance.State == GameManager.States.PAUSE))
         {
             if (m_controllerScript.m_speedMove != m_controllerScript.m_baseSpeed)
             {
