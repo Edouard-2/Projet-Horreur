@@ -15,7 +15,6 @@ public class UISwitchScene : MonoBehaviour, IPointerClickHandler
             Destroy(UIManager.Instance.gameObject);
             Destroy(GameManager.Instance.gameObject);
         }
-        
         SceneManager.LoadSceneAsync(m_levelIndex);
     }
 }

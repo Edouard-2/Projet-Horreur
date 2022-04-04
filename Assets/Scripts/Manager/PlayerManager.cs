@@ -54,10 +54,10 @@ public class PlayerManager : Singleton<PlayerManager>
     
     //Other
     [Header("Other")]
-    [SerializeField, Tooltip("Radius de vision du joueur")]
+    [Range(0,100), Tooltip("Radius de vision du joueur")]
     public float m_radiusVision;
     
-    [SerializeField, Tooltip("Temps avant de relancer le jeu apres la mort")]
+    [Range(0,20), SerializeField, Tooltip("Temps avant de relancer le jeu apres la mort")]
     public float m_DeathWaitingTime;
     
     private WaitForSeconds m_waitFade = new WaitForSeconds(0.5f);
