@@ -13,12 +13,6 @@ public class Key : MonoBehaviour
         PlayerManager.Instance.DoRotateKeys += RotateSelf;
         PlayerManager.Instance.UpdateFirstPos += RotateSelf;
     }
-    
-    private void OnDisable()
-    {
-        PlayerManager.Instance.DoRotateKeys -= RotateSelf;
-        PlayerManager.Instance.UpdateFirstPos -= SetInitPos;
-    }
 
     private void Awake()
     {
