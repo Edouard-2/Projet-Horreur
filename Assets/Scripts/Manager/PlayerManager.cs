@@ -41,6 +41,7 @@ public class PlayerManager : Singleton<PlayerManager>
     [SerializeField, Tooltip("Script player door")]
     private PlayerInteractions m_interactionsScript;
     
+    //Death Screen
     [Header("Death Screen")]
     [SerializeField, Tooltip("Animator du fade out / in")]
     private Animator m_fadeAnimator;
@@ -50,7 +51,8 @@ public class PlayerManager : Singleton<PlayerManager>
 
     private int m_fadeIn;
     private int m_fadeOut;
-
+    
+    //Other
     [Header("Other")]
     [SerializeField, Tooltip("Radius de vision du joueur")]
     public float m_radiusVision;
