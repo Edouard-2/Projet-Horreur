@@ -160,7 +160,7 @@ public class PlayerInteractions : MonoBehaviour
                 Recepteur myRecepteur = p_target.GetComponent<Recepteur>();
                 if (myRecepteur)
                 {
-                    if (m_keyObject != null)
+                    if (m_trousseauKey != null)
                     {
                         myRecepteur.TeleportObject(m_keyObject.transform);
                         EjectKey(false);
