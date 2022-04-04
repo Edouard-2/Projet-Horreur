@@ -1,22 +1,26 @@
 using System;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 public class PlayerVision : MonoBehaviour
 {
     //Courbe changement vision
+    [Header("Animation Curves")]
     [SerializeField, Tooltip("Courbe de pourcentage de flou au changement de vision au début de la compétence")] public AnimationCurve m_curveVisionStart;
     [SerializeField, Tooltip("Courbe de pourcentage de flou au changement de vision é la fin de la compétence")] public AnimationCurve m_curveVisionFinish;
     [SerializeField, Tooltip("Courbe de pourcentage pour la transparence du matérial allé vers l'état modifié au début de la compétence")] public AnimationCurve m_curveMatVisionStart;
     [SerializeField, Tooltip("Courbe de pourcentage pour la transparence du matérial allé vers l'état modifié à la fin de la compétence")] public AnimationCurve m_curveMatVisionFinish;
 
+    [Header("Material")]
     [SerializeField, Tooltip("Material de flou pour le postprocess")] public Material m_matVision;
     [HideInInspector]public bool m_resetTimeVisionComp = false;
     [HideInInspector]public bool m_resetTimeVisionMat = false;
-    public int m_readyEnd = 1;
+    [FormerlySerializedAs("m_readyEnd")][HideInInspector] public int m_isBlurVision = 1;
 
     //BV
+    [Header("BV")]
     [SerializeField, Tooltip("BV visuel")] public Image m_uiBv;
     [SerializeField, Tooltip("La vitesse de consommation de la BV (en vision flou)")] public float m_speedDecreaseBV = 0.1f;
     [SerializeField, Tooltip("La vitesse de consommation de la BV (en vision flou)")] public float m_MultiplIncreaseBV = 2f;
@@ -25,6 +29,10 @@ public class PlayerVision : MonoBehaviour
     [HideInInspector]public float m_BvMax = 1f;
     [HideInInspector]public float m_currentBvMax = 1f;
     [HideInInspector]public bool m_readyInitVision = true;
+
+    [Header("Event")]
+    [SerializeField, Tooltip("Event du sound")]
+    public EventsTriggerPos m_soundEvent;
 
     public delegate void ChangeMaterial(float p_time);
     public ChangeMaterial DoChangeMaterial;
@@ -73,7 +81,7 @@ public class PlayerVision : MonoBehaviour
 
     public void IncreaseOrDecreaseMat(float p_time)
     {
-        if (m_readyEnd == 0)
+        if (m_isBlurVision == 0)
         {
             if (m_resetTimeVisionComp)
             {
@@ -93,7 +101,7 @@ public class PlayerVision : MonoBehaviour
             DecreaseBV();
         }
 
-        else if (m_readyEnd == 1)
+        else if (m_isBlurVision == 1)
         {
             if (m_resetTimeVisionComp)
             {
@@ -154,12 +162,15 @@ public class PlayerVision : MonoBehaviour
         if (m_isVariableReady)
         {
             Debug.Log("BlindMoment");
+            
+            m_soundEvent.Raise(PlayerManager.Instance.transform.position);
+            
             PlayerManager.Instance.InitVariableChangement();
 
             m_currentBvMax -= m_lessBvMax;
             m_uiBv.fillAmount = m_currentBvMax;
 
-            PlayerManager.Instance.CheckCurrentKey(m_readyEnd);
+            PlayerManager.Instance.CheckCurrentKey(m_isBlurVision);
 
             StartCoroutine(WaitStopBlind());
         }

@@ -56,17 +56,19 @@ public class PlayerInteractions : MonoBehaviour
             (m_layerKeyVisible.value & (1 << p_target.gameObject.layer)) > 0)
         {
             //Debug.Log("key");
-            targetMaterial = p_target.GetComponent<LootBox>().m_key.m_keyMat;
+            targetMaterial = p_target.GetComponent<Key>().m_key.m_keyMat;
 
         }
+        
         //Récupérer le mat de la porte
         else if ((m_layerDoor.value & (1 << p_target.gameObject.layer)) > 0 || 
                  (m_layerDoorInvisible.value & (1 << p_target.gameObject.layer)) > 0)
         {
             //Debug.Log("porte");
-            targetMaterial = p_target.GetComponent<Door>().m_neededKey.m_doorMat;
+            targetMaterial = p_target.GetComponent<Door>().m_doorMat;
 
         }
+        
         //Récupérer le mat du transvaseur
         else if ((m_layerTransvaseur.value & (1 << p_target.gameObject.layer)) > 0 || 
                  (m_layerTransvaseurInvisible.value & (1 << p_target.gameObject.layer)) > 0)
@@ -84,7 +86,6 @@ public class PlayerInteractions : MonoBehaviour
         //Changer le matérial choisi
         if (targetMaterial != null && targetMaterial.GetFloat("_isAim") != 1)
         {
-            Debug.Log("transvaseur");
             //Material
             m_currentAimObject = targetMaterial;
             targetMaterial.SetFloat("_isAim", 1);
@@ -113,14 +114,14 @@ public class PlayerInteractions : MonoBehaviour
                 (m_layerKeyInvisible.value & (1 << p_target.gameObject.layer)) > 0 ||
                 (m_layerKeyVisible.value & (1 << p_target.gameObject.layer)) > 0)
             {
-                LootBox myLootBox = p_target.GetComponent<LootBox>();
-                if (myLootBox && myLootBox.OpenChest(out KeyType key))
+                Key myKey = p_target.GetComponent<Key>();
+                if (myKey && myKey.OpenChest(out KeyType key))
                 {
                     if (m_trousseauKey == null)
                     {
                         m_trousseauKey = key;
                         m_keyObject = p_target.gameObject;
-                        SetUIKey(myLootBox);
+                        SetUIKey(myKey);
                     }
                     else
                     {
@@ -128,7 +129,7 @@ public class PlayerInteractions : MonoBehaviour
                         EjectKey();
                         m_trousseauKey = key;
                         m_keyObject = p_target.gameObject;
-                        SetUIKey(myLootBox);
+                        SetUIKey(myKey);
                     }
                 }
             }
@@ -137,14 +138,18 @@ public class PlayerInteractions : MonoBehaviour
             else if ((m_layerDoor.value & (1 << p_target.gameObject.layer)) > 0 ||
                      (m_layerDoorInvisible.value & (1 << p_target.gameObject.layer)) > 0)
             {
+                Debug.Log("Door ");
                 Door myDoor = p_target.GetComponent<Door>();
                 if (myDoor)
                 {
-                    if (myDoor.OpenDoor(m_trousseauKey, p_target.gameObject))
+                    if (myDoor.OpenDoor(m_trousseauKey))
                     {
-                        m_trousseauKey = null;
-                        StartCoroutine(m_keyObject.GetComponent<LootBox>().DestroySelf());
-                        m_KeyUI.color = Color.clear;
+                        if (myDoor.m_neededKey)
+                        {
+                            m_trousseauKey = null;
+                            StartCoroutine(m_keyObject.GetComponent<Key>().DestroySelf());
+                            m_KeyUI.color = Color.clear;
+                        }
                     }
                 }
             }
@@ -174,7 +179,7 @@ public class PlayerInteractions : MonoBehaviour
         }
     }
 
-    private void SetUIKey(LootBox p_key)
+    private void SetUIKey(Key p_key)
     {
         if (m_isVariablesReady)
         {
@@ -188,7 +193,7 @@ public class PlayerInteractions : MonoBehaviour
     
     public void EjectKey(bool p_position = true)
     {
-        if (m_isVariablesReady)
+        if (m_isVariablesReady && m_trousseauKey!= null)
         {
             //Ejecter la clé
             Debug.Log("Clear key");

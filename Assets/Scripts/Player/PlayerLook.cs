@@ -15,10 +15,18 @@ public class PlayerLook : MonoBehaviour
         m_mouseRotationX = Input.GetAxis("Mouse X") * m_speedCursor;
         m_mouseRotationY =  Input.GetAxis("Mouse Y") * m_speedCursor;
 
-        m_xRotate -= m_mouseRotationY;
-        m_xRotate = Mathf.Clamp(m_xRotate, -90f, 90f);
+        if (!PlayerManager.Instance.m_isHooked)
+        {
+            m_xRotate -= m_mouseRotationY;
+            m_xRotate = Mathf.Clamp(m_xRotate, -90f, 90f);
 
-        m_camera.transform.localRotation = Quaternion.Euler(m_xRotate,0,0);
-        transform.Rotate(Vector3.up * m_mouseRotationX);
+            m_camera.transform.localRotation = Quaternion.Euler(m_xRotate,0,0);
+            transform.Rotate(Vector3.up * m_mouseRotationX);
+        }
+        else
+        {
+            
+        }
+
     }
 }
