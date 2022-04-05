@@ -41,6 +41,7 @@ public class PlayerManager : Singleton<PlayerManager>
     [SerializeField, Tooltip("Script player door")]
     private PlayerInteractions m_interactionsScript;
     
+    //Death Screen
     [Header("Death Screen")]
     [SerializeField, Tooltip("Animator du fade out / in")]
     private Animator m_fadeAnimator;
@@ -50,12 +51,13 @@ public class PlayerManager : Singleton<PlayerManager>
 
     private int m_fadeIn;
     private int m_fadeOut;
-
+    
+    //Other
     [Header("Other")]
-    [SerializeField, Tooltip("Radius de vision du joueur")]
+    [Range(0,100), Tooltip("Radius de vision du joueur")]
     public float m_radiusVision;
     
-    [SerializeField, Tooltip("Temps avant de relancer le jeu apres la mort")]
+    [Range(0,20), SerializeField, Tooltip("Temps avant de relancer le jeu apres la mort")]
     public float m_DeathWaitingTime;
     
     private WaitForSeconds m_waitFade = new WaitForSeconds(0.5f);
@@ -130,6 +132,7 @@ public class PlayerManager : Singleton<PlayerManager>
 
     private void Update()
     {
+        Debug.Log(GameManager.Instance.State);
         //Mettre le jeu en pause
         if (Input.GetKeyDown(KeyCode.Escape) 
             && GameManager.Instance != null 

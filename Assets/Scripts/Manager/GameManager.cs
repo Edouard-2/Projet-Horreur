@@ -24,6 +24,7 @@ public class GameManager : Singleton<GameManager>
     private void OnEnable()
     {
         m_reInstance = false;
+        m_state = States.PLAYING;
     }
 
     public enum States

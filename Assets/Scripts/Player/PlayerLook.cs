@@ -3,12 +3,34 @@ using UnityEngine;
 public class PlayerLook : MonoBehaviour
 {
     //Mouvement de Vision
-    [SerializeField, Tooltip("La speed de déplacement du player")]private float m_speedCursor = 10f;
+
+    //Other
+    [Header("Event")]
+    [SerializeField, Tooltip("Sensibilité du joueur")]
+    public UIOptionValue m_eventSensivity;
+    
+    [Header("Other")]
+    [SerializeField, Tooltip("La speed de déplacement du player")]private float m_speedCursor = 5f;
     [SerializeField, Tooltip("La camera du joueur")]private Camera m_camera;
     private float m_mouseRotationX;
     private float m_mouseRotationY;
-    private float m_xRotate = 0;
+    private float m_xRotate;
 
+    private void OnEnable()
+    {
+        m_eventSensivity.OnUpdateText += UpdateSensitivity;
+    }
+
+    private void OnDisable()
+    {
+        m_eventSensivity.OnUpdateText -= UpdateSensitivity;
+    }
+
+    private void UpdateSensitivity()
+    {
+        m_speedCursor = (float)m_eventSensivity.GetIntValue() / 4;
+    }
+    
     public void CursorMouvement()
     {
         //Mouvement de la vue

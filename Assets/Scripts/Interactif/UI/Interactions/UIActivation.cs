@@ -1,5 +1,3 @@
-using System;
-using System.Collections.Generic;
 using UnityEngine.UI;
 using UnityEngine;
 
@@ -19,7 +17,6 @@ public class UIActivation : MonoBehaviour
     {
         if (UIManager.Instance != null)
         {
-            
             UIManager.Instance.DoDisplayUIGamePause -= SetVisible;
         }
     }
