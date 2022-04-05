@@ -132,6 +132,7 @@ public class PlayerManager : Singleton<PlayerManager>
 
     private void Update()
     {
+        Debug.Log(GameManager.Instance.State);
         //Mettre le jeu en pause
         if (Input.GetKeyDown(KeyCode.Escape) 
             && GameManager.Instance != null 
