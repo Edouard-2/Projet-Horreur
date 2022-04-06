@@ -25,6 +25,7 @@ public class UIActivation : MonoBehaviour
     {
         if (m_imageComponent == null)
         {
+            Debug.Log("pas image");
             m_imageComponent = GetComponent<Image>();
             if (m_imageComponent == null)
             {

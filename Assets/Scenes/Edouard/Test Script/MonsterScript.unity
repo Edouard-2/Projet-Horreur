@@ -1840,6 +1840,56 @@ Transform:
   m_Father: {fileID: 386356849}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1805630606
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1805630608}
+  - component: {fileID: 1805630607}
+  m_Layer: 0
+  m_Name: Project
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!119 &1805630607
+Projector:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1805630606}
+  m_Enabled: 1
+  serializedVersion: 2
+  m_NearClipPlane: 0.1
+  m_FarClipPlane: 100
+  m_FieldOfView: 60
+  m_AspectRatio: 1
+  m_Orthographic: 0
+  m_OrthographicSize: 10
+  m_Material: {fileID: 0}
+  m_IgnoreLayers:
+    serializedVersion: 2
+    m_Bits: 0
+--- !u!4 &1805630608
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1805630606}
+  m_LocalRotation: {x: 0.686651, y: -0, z: -0, w: 0.7269873}
+  m_LocalPosition: {x: -1.0840435, y: 6.85, z: -1.03}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 10
+  m_LocalEulerAnglesHint: {x: 86.731, y: 0, z: 0}
 --- !u!1001 &2055638865
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2070,9 +2120,21 @@ PrefabInstance:
       value: -15.6
       objectReference: {fileID: 0}
     - target: {fileID: 1453213926203195308, guid: 0072aae6ed274a8428e5766fe3a50a49, type: 3}
+      propertyPath: m_isIdleStart
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1453213926203195308, guid: 0072aae6ed274a8428e5766fe3a50a49, type: 3}
+      propertyPath: m_radiusVision
+      value: 10.91
+      objectReference: {fileID: 0}
+    - target: {fileID: 1453213926203195308, guid: 0072aae6ed274a8428e5766fe3a50a49, type: 3}
       propertyPath: m_eventAlertSound
       value: 
       objectReference: {fileID: 11400000, guid: 51ba3b65073b3b54aa44f726688f5b37, type: 2}
+    - target: {fileID: 1453213926203195308, guid: 0072aae6ed274a8428e5766fe3a50a49, type: 3}
+      propertyPath: m_radiusDetection
+      value: 1.04
+      objectReference: {fileID: 0}
     - target: {fileID: 6155589858365358415, guid: 0072aae6ed274a8428e5766fe3a50a49, type: 3}
       propertyPath: m_Name
       value: Monster

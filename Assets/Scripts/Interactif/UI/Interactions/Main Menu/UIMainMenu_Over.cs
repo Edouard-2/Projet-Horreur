@@ -1,24 +1,32 @@
 using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
 public class UIMainMenu_Over : MonoBehaviour
 {
     private Vector3 m_scale;
-    
+
     [SerializeField, Tooltip("Le textMeshPro de l'objet")]
     private TextMeshPro m_textMeshPro;
     
-    [SerializeField, Tooltip("List de tout les waitForSeconds pour le glitch")]
-    private List<WaitForSeconds> m_listWaitForSecond;
+    [SerializeField, Tooltip("Est ce que le text est un bouton")]
+    private bool m_isButton;
+    
+    [SerializeField, Tooltip("Est ce que le text est glitcher")]
+    private bool m_isGlitched = true;
+
+    private WaitForSeconds m_waitForSecond = new WaitForSeconds(1f);
 
     private int m_randomIndex;
-    
-    private string m_text;
-    
-    private bool m_readyEnumerator;
-    
+
+    private string m_initText;
+    private string m_text = "Error 404";
+
+    private string m_baseString =
+        "&é'(-è_çà)=azertyuiop^$qsdfghjklmù*wxcvbn,;:!'1234567890°+£¨µ%§/ML?KIOPUJNBHYTGVCFREDXSWZQA<";
+
+    private bool m_readyEnumerator = true;
+
     private void Awake()
     {
         m_scale = gameObject.transform.localScale;
@@ -28,36 +36,93 @@ public class UIMainMenu_Over : MonoBehaviour
             m_textMeshPro = GetComponent<TextMeshPro>();
             if (m_textMeshPro == null)
             {
-                Debug.Log("Il faut mettre le textMeshPro !!");
+                Debug.LogError("Il faut mettre le textMeshPro !!", this);
             }
-            m_text = "Error 404";
         }
         else
         {
             m_text = m_textMeshPro.text;
+            m_initText = m_text;
         }
     }
 
     private void OnMouseOver()
     {
-        gameObject.transform.localScale = m_scale * 2;
+        if (m_isButton)
+        {
+            gameObject.transform.localScale = m_scale * 1.1f;
+        }
 
-        if (m_readyEnumerator)
+        if (m_readyEnumerator && m_isGlitched)
         {
             m_readyEnumerator = false;
-            m_randomIndex = Random.Range(2, m_listWaitForSecond.Count);
+            
+            int chooseNumberLetter = Random.Range(1, m_text.Length);
+
+            int[] tabIndexChoseLetter = new int[chooseNumberLetter];
+            
+            for (int i = 0; i < tabIndexChoseLetter.Length; i++)
+            {
+                int rand = Random.Range(0, m_text.Length - 1);
+                
+                if (tabIndexChoseLetter[i] != rand)
+                {
+                    tabIndexChoseLetter[i] = rand;
+                }
+            }
+            
+            tabIndexChoseLetter = TriArraye(tabIndexChoseLetter);
+
+            string Test = "";
+
+            for (int i = 0; i < m_text.Length; i++)
+            {
+                if ( tabIndexChoseLetter.Length > i && i == tabIndexChoseLetter[i] )
+                {
+                    
+                    Test += m_baseString[Random.Range(0, m_baseString.Length)];
+                }
+                else
+                {
+                    Test += m_text[i];
+                }
+            }
+
+            m_textMeshPro.SetText(Test);
             StartCoroutine(ActiveGlitchText());
         }
     }
 
-    IEnumerator ActiveGlitchText()
+    static int[] TriArraye(int[] p_tab)
     {
-        yield return m_listWaitForSecond[m_randomIndex];
+        int n = p_tab.Length - 1;
+        for (int i = n; i >= 1; i--)
+        {
+            for (int j = 2; j <= i; j++)
+            {
+                if (p_tab[j - 1] > p_tab[j])
+                {
+                    (p_tab[j-1], p_tab[j]) = (p_tab[j], p_tab[j-1]);
+                }
+            }
+        }
+        return p_tab;
+    }
+    private void OnMouseExit()
+    {
+        if (m_isButton)
+        {
+            gameObject.transform.localScale = m_scale;
+        }
+
+        m_textMeshPro.SetText(m_initText);
+        
         m_readyEnumerator = true;
     }
 
-    private void OnMouseExit()
-     {
-         gameObject.transform.localScale = Vector3.one;
-     }
- }
+    IEnumerator ActiveGlitchText()
+    {
+        yield return m_waitForSecond;
+        m_readyEnumerator = true;
+    }
+}
