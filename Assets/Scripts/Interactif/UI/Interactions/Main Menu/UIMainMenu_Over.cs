@@ -11,6 +11,9 @@ public class UIMainMenu_Over : MonoBehaviour
     
     [SerializeField, Tooltip("Est ce que le text est un bouton")]
     private bool m_isButton;
+    
+    [SerializeField, Tooltip("Est ce que le text est glitcher")]
+    private bool m_isGlitched = true;
 
     private WaitForSeconds m_waitForSecond = new WaitForSeconds(1f);
 
@@ -33,7 +36,7 @@ public class UIMainMenu_Over : MonoBehaviour
             m_textMeshPro = GetComponent<TextMeshPro>();
             if (m_textMeshPro == null)
             {
-                Debug.Log("Il faut mettre le textMeshPro !!");
+                Debug.LogError("Il faut mettre le textMeshPro !!", this);
             }
         }
         else
@@ -50,7 +53,7 @@ public class UIMainMenu_Over : MonoBehaviour
             gameObject.transform.localScale = m_scale * 1.1f;
         }
 
-        if (m_readyEnumerator)
+        if (m_readyEnumerator && m_isGlitched)
         {
             m_readyEnumerator = false;
             
