@@ -3952,6 +3952,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1658337801118708265, guid: 67c9a6862de4b0b46be7a9685f6e1ad0, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1658337802337321675, guid: 67c9a6862de4b0b46be7a9685f6e1ad0, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7348930268121412840, guid: 67c9a6862de4b0b46be7a9685f6e1ad0, type: 3}
       propertyPath: m_Name
       value: Player + UI + Pool
@@ -3999,6 +4007,14 @@ PrefabInstance:
     - target: {fileID: 7348930268121412843, guid: 67c9a6862de4b0b46be7a9685f6e1ad0, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7444772112377852628, guid: 67c9a6862de4b0b46be7a9685f6e1ad0, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 22.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8704277045016513332, guid: 67c9a6862de4b0b46be7a9685f6e1ad0, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 456.97
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 67c9a6862de4b0b46be7a9685f6e1ad0, type: 3}
