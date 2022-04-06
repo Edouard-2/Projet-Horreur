@@ -324,12 +324,55 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1343140356021556968, guid: 6af10fac150567440acd2778aa855d03, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -10.171875
+      objectReference: {fileID: 0}
+    - target: {fileID: 2073311766134115718, guid: 6af10fac150567440acd2778aa855d03, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2073311766134115718, guid: 6af10fac150567440acd2778aa855d03, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0.7264099
+      objectReference: {fileID: 0}
+    - target: {fileID: 2518564733747008724, guid: 6af10fac150567440acd2778aa855d03, type: 3}
+      propertyPath: m_isRightToLeft
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5065432455850144362, guid: 6af10fac150567440acd2778aa855d03, type: 3}
       propertyPath: m_Name
       value: UI InGame
       objectReference: {fileID: 0}
+    - target: {fileID: 5460531565265135351, guid: 6af10fac150567440acd2778aa855d03, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 2.318695
+      objectReference: {fileID: 0}
+    - target: {fileID: 5506937568780883324, guid: 6af10fac150567440acd2778aa855d03, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 6879c543b27b81244927cbde10d12b14, type: 3}
+    - target: {fileID: 5506937568780883324, guid: 6af10fac150567440acd2778aa855d03, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5821721117816466317, guid: 6af10fac150567440acd2778aa855d03, type: 3}
+      propertyPath: m_imageComponent
+      value: 
+      objectReference: {fileID: 36755899}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6af10fac150567440acd2778aa855d03, type: 3}
+--- !u!114 &36755899 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5506937568780883324, guid: 6af10fac150567440acd2778aa855d03, type: 3}
+  m_PrefabInstance: {fileID: 36755898}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &68406205
 PrefabInstance:
   m_ObjectHideFlags: 0
