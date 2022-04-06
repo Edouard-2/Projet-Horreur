@@ -23,6 +23,9 @@ public class UIDisplayHideEvent : MonoBehaviour
     
     [SerializeField, Tooltip("Temps avant que l'obj soit destroy")]
     private float m_waitEndValue = 1;
+
+    private int m_fadeInHash = Animator.StringToHash("FadeIn");
+    private int m_fadeOutHash = Animator.StringToHash("FadeOut");
     
     private WaitForSeconds m_waitEndAnimation;
 
@@ -57,11 +60,11 @@ public class UIDisplayHideEvent : MonoBehaviour
         {
             if (p_bool)
             {
-            
-                m_image.enabled = true;
+                m_animator.SetTrigger(m_fadeInHash);
                 return;
             }
-            m_image.enabled = true;
+            m_animator.ResetTrigger(m_fadeInHash);
+            m_animator.SetTrigger(m_fadeOutHash);
             StartCoroutine(HideObject());
             return;
         }
