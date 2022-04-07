@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Net.Mime;
 using TMPro;
 using UnityEngine.UI;
@@ -6,28 +7,34 @@ using UnityEngine;
 public class PlayerInteractions : MonoBehaviour
 {
     //LayerMask Visible
+    [Header("Layer Neutral")]
     [SerializeField, Tooltip("Layer pour les door")] private LayerMask m_layerDoor;
     [SerializeField, Tooltip("Layer pour les key")] public LayerMask m_layerKey;
     [SerializeField, Tooltip("Layer pour les transvaseur")] private LayerMask m_layerTransvaseur;
     
     //LayerMaske Invisible To Visible
+    [Header("Layer Invisinble")]
     [SerializeField, Tooltip("Layer pour les doorInvisible")] private LayerMask m_layerDoorInvisible;
     [SerializeField, Tooltip("Layer pour les keyInvisibleToVisible")] public LayerMask m_layerKeyInvisible;
     [SerializeField, Tooltip("Layer pour les transvaseurInvisible")] public LayerMask m_layerTransvaseurInvisible;
     
     //LayerMaske Visible To Invisible
+    [Header("Layer Visinble")]
     [SerializeField, Tooltip("Layer pour les keyVisibleToInvisible")] public LayerMask m_layerKeyVisible;
 
     //Layer raycast de proximité
+    [Header("Layer Raycast")]
     [SerializeField, Tooltip("Les layers qui seront choisis pour la détection du raycast de proximité")] public LayerMask m_targetLayer;
     
     //Objects
+    [Header("Other")]
     [SerializeField, Tooltip("Trousseau de clé")] public KeyType m_trousseauKey;
     [SerializeField, Tooltip("UI de la clés ingame")] private Image m_KeyUI;
     [SerializeField, Tooltip("La piscine de toutes les clés")] private Transform m_pool;
     [SerializeField, Tooltip("Feedback visuel Cursor")] private GameObject m_cursorSelection;
     [SerializeField, Tooltip("Feedback visuel Text nom obj")] private TextMeshProUGUI m_textSelection;
-
+    [SerializeField, Tooltip("Temps entre l'animation de sortie de la carte et d'entré")] private float m_waitForAnimationCompleteKeyValue;
+    private WaitForSeconds m_waitForAnimationCompleteKey;
     public GameObject m_keyObject;
     private Material m_currentAimObject;
 
@@ -35,6 +42,8 @@ public class PlayerInteractions : MonoBehaviour
 
     private void Awake()
     {
+        m_waitForAnimationCompleteKey = new WaitForSeconds(m_waitForAnimationCompleteKeyValue);
+        
         if (m_KeyUI == null)
         {
             Debug.LogError("Il faut mettre la clé UI", this);
@@ -183,12 +192,24 @@ public class PlayerInteractions : MonoBehaviour
     {
         if (m_isVariablesReady)
         {
+            if (m_trousseauKey != null)
+            {
+                //Lancer le retour
+                //Lancer la coroutine de dépard
+            }
+            
             Debug.Log(p_key.m_key.m_keyMat);
             p_key.transform.SetParent(m_pool);
             p_key.transform.localPosition = Vector3.zero;
             
             m_KeyUI.color = new Vector4(p_key.m_key.m_keyMat.GetColor("_BaseColor").r,p_key.m_key.m_keyMat.GetColor("_BaseColor").g,p_key.m_key.m_keyMat.GetColor("_BaseColor").b,1);
         }
+    }
+
+    IEnumerator WaitUntilSetUiKey(Key p_key)
+    {
+        yield return m_waitForAnimationCompleteKey;
+        SetUIKey(p_key);
     }
     
     public void EjectKey(bool p_position = true)
