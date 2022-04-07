@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -54,6 +55,9 @@ public class PlayerManager : Singleton<PlayerManager>
     
     //Other
     [Header("Other")]
+    [SerializeField, Tooltip("True: Le joueur commence en flou")]
+    public bool m_isStartBlur;
+    
     [Range(0,100), Tooltip("Radius de vision du joueur")]
     public float m_radiusVision;
     
@@ -113,9 +117,6 @@ public class PlayerManager : Singleton<PlayerManager>
         //Cacher le curseur
         Cursor.lockState = CursorLockMode.Locked;
 
-        //Commencer sans vision flou
-        m_visionScript.m_matVision.SetFloat("_BlurSize", 0);
-
         //Verifier que les variables de scripts ne son pas vide
         if (m_controllerScript == null)
             m_controllerScript = GetComponent<PlayerController>();
@@ -128,6 +129,22 @@ public class PlayerManager : Singleton<PlayerManager>
 
         if (m_interactionsScript == null)
             m_interactionsScript = GetComponent<PlayerInteractions>();
+    }
+
+    private void Start()
+    {
+        //Commencer avec vision flou
+        if (m_isStartBlur)
+        {
+            m_visionScript.m_matVision.SetFloat("_BlurSize", 0.35f);
+            m_visionScript.m_isBlurVision = Mathf.Abs(m_visionScript.m_isBlurVision - 1);
+            m_visionScript.DoChangeMaterial(1.5f);
+        }
+        //Commencer sans vision flou
+        else
+        {
+            m_visionScript.m_matVision.SetFloat("_BlurSize", 0);
+        }
     }
 
     private void Update()
@@ -272,6 +289,8 @@ public class PlayerManager : Singleton<PlayerManager>
         if (Input.GetKeyDown(KeyCode.Space) && !m_visionScript.m_resetTimeVisionComp &&
             !m_visionScript.m_resetTimeVisionMat)
         {
+            m_isStartBlur = false;
+            
             InitVariableChangement();
 
             if (m_visionScript.m_isBlurVision == 0)
