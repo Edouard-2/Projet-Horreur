@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -63,6 +64,8 @@ public class PlayerManager : Singleton<PlayerManager>
     
     [Range(0,20), SerializeField, Tooltip("Temps avant de relancer le jeu apres la mort")]
     public float m_DeathWaitingTime;
+
+    public TextMeshProUGUI m_textState;
     
     private WaitForSeconds m_waitFade = new WaitForSeconds(0.5f);
     
@@ -138,6 +141,7 @@ public class PlayerManager : Singleton<PlayerManager>
         {
             m_visionScript.m_matVision.SetFloat("_BlurSize", 0.35f);
             m_visionScript.m_isBlurVision = Mathf.Abs(m_visionScript.m_isBlurVision - 1);
+            DoVisibleToInvisibleHandler?.Invoke();
             m_visionScript.DoChangeMaterial(1.5f);
         }
         //Commencer sans vision flou
@@ -149,9 +153,9 @@ public class PlayerManager : Singleton<PlayerManager>
 
     private void Update()
     {
+        m_textState.text = GameManager.Instance.State.ToString();
         //Mettre le jeu en pause
         if (Input.GetKeyDown(KeyCode.Escape) 
-            && GameManager.Instance != null 
             && ( GameManager.Instance.State == GameManager.States.PLAYING 
             || GameManager.Instance.State == GameManager.States.PAUSE))
         {
@@ -187,7 +191,7 @@ public class PlayerManager : Singleton<PlayerManager>
         }
 
         //Reset de variable
-        else if (GameManager.Instance != null && GameManager.Instance.State == GameManager.States.PAUSE)
+        else if (GameManager.Instance.State == GameManager.States.PAUSE)
         {
             m_prevStateReady = true;
         }
@@ -270,8 +274,7 @@ public class PlayerManager : Singleton<PlayerManager>
         tTime = Time.time - m_timeVision;
 
         //Changement de vision si le jeu était en pause et revien en play
-        if (GameManager.Instance != null && GameManager.Instance.PrevState == GameManager.States.PAUSE
-                                         && m_prevStateReady && m_visionScript.m_resetTimeVisionMat)
+        if (GameManager.Instance.PrevState == GameManager.States.PAUSE && m_prevStateReady && m_visionScript.m_resetTimeVisionMat)
         {
             m_prevStateReady = false;
 
@@ -286,8 +289,9 @@ public class PlayerManager : Singleton<PlayerManager>
         }
 
         //Input changement de vision
-        if (Input.GetKeyDown(KeyCode.Space) && !m_visionScript.m_resetTimeVisionComp &&
-            !m_visionScript.m_resetTimeVisionMat)
+        if (Input.GetKeyDown(KeyCode.Space) 
+            && !m_visionScript.m_resetTimeVisionComp 
+            && !m_visionScript.m_resetTimeVisionMat)
         {
             m_isStartBlur = false;
             

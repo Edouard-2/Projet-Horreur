@@ -5,7 +5,6 @@ public class UIMainMenu_Exit : MonoBehaviour
 {
     private void OnMouseDown()
     {
-        UnityEditor.EditorApplication.isPlaying = false;
-        Application.Quit();
+        //Application.Quit();
     }
 }
