@@ -64,8 +64,6 @@ public class PlayerManager : Singleton<PlayerManager>
     
     [Range(0,20), SerializeField, Tooltip("Temps avant de relancer le jeu apres la mort")]
     public float m_DeathWaitingTime;
-
-    public TextMeshProUGUI m_textState;
     
     private WaitForSeconds m_waitFade = new WaitForSeconds(0.5f);
     
@@ -153,7 +151,6 @@ public class PlayerManager : Singleton<PlayerManager>
 
     private void Update()
     {
-        m_textState.text = GameManager.Instance.State.ToString();
         //Mettre le jeu en pause
         if (Input.GetKeyDown(KeyCode.Escape) 
             && ( GameManager.Instance.State == GameManager.States.PLAYING 

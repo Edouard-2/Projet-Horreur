@@ -5,6 +5,6 @@ public class UIMainMenu_Exit : MonoBehaviour
 {
     private void OnMouseDown()
     {
-        //Application.Quit();
+        Application.Quit();
     }
 }
