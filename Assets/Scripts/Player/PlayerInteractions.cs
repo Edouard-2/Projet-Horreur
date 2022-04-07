@@ -213,6 +213,10 @@ public class PlayerInteractions : MonoBehaviour
             //Mettre le bon matérial
             m_keyUiRenderer.material = p_key.m_key.m_keyMat;
             
+            Material temp = m_keyUiRenderer.gameObject.GetComponent<MeshRenderer>().material;
+            
+            temp.SetFloat("_isAim", 0);
+            
             //Mettre la carte ingame dans la pool
             p_key.transform.SetParent(m_pool);
             p_key.transform.localPosition = Vector3.zero;
