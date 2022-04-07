@@ -4031,6 +4031,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4798185561322476617, guid: 67c9a6862de4b0b46be7a9685f6e1ad0, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7348930268121412840, guid: 67c9a6862de4b0b46be7a9685f6e1ad0, type: 3}
       propertyPath: m_Name
       value: Player + UI + Pool
@@ -4078,6 +4082,10 @@ PrefabInstance:
     - target: {fileID: 7348930268121412843, guid: 67c9a6862de4b0b46be7a9685f6e1ad0, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8601714955357707110, guid: 67c9a6862de4b0b46be7a9685f6e1ad0, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -10.171936
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 67c9a6862de4b0b46be7a9685f6e1ad0, type: 3}
