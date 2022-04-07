@@ -2,20 +2,23 @@ using UnityEngine;
 
 public class UIManager : Singleton<UIManager>
 {
+    public GameManager m_gameManager;
+    
     public delegate void DisplayUIGamePause(bool p_active = true);
     public DisplayUIGamePause DoDisplayUIGamePause;
     
+    [HideInInspector]
     public bool m_isOption;
     
     private void OnEnable()
     {
-        GameManager.Instance.DoUiActivePauseGame += ActivePauseUI;
+        m_gameManager.DoUiActivePauseGame += ActivePauseUI;
     }
     
     private void OnDisable()
     {
-        if (GameManager.Instance != null)
-            GameManager.Instance.DoUiActivePauseGame -= ActivePauseUI;
+        if (m_gameManager != null)
+            m_gameManager.DoUiActivePauseGame -= ActivePauseUI;
     }
 
     private void Awake()
@@ -29,7 +32,6 @@ public class UIManager : Singleton<UIManager>
         {
             Cursor.lockState = CursorLockMode.Locked;
             DoDisplayUIGamePause?.Invoke(false);
-            
             //Enlever l'UI du menu pause
             Debug.Log("Remise en place du jeu");
         }
@@ -37,7 +39,6 @@ public class UIManager : Singleton<UIManager>
         {
             DoDisplayUIGamePause?.Invoke();
             Cursor.lockState = CursorLockMode.Confined;
-            
             //Activer l'ui du menu pause
             Debug.Log("Activation de l'UI");
         }

@@ -12,9 +12,7 @@ public class GameManager : Singleton<GameManager>
     private States m_state;
     private States m_prevState;
 
-    [HideInInspector]
     public States State => m_state;
-    [HideInInspector]
     public States PrevState => m_prevState;
 
     public delegate void UiActivePauseGame(int p_isActive = 1);
@@ -47,10 +45,10 @@ public class GameManager : Singleton<GameManager>
             DoUiActivePauseGame?.Invoke(2);
             return;
         }
+        
         if (m_state == States.PLAYING)
         {
             m_monsterEventEnd.Raise();
-            
             m_state = States.PAUSE;
             DoUiActivePauseGame?.Invoke();
             return;

@@ -130,7 +130,7 @@ public class PlayerVision : MonoBehaviour
 
     public void DecreaseBV()
     {
-        if (m_isVariableReady)
+        if (m_isVariableReady && !PlayerManager.Instance.m_isStartBlur)
         {
             if (m_uiBv.fillAmount > 0)
             {

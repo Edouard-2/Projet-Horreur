@@ -1,4 +1,6 @@
+using System;
 using System.Collections;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -54,6 +56,9 @@ public class PlayerManager : Singleton<PlayerManager>
     
     //Other
     [Header("Other")]
+    [SerializeField, Tooltip("True: Le joueur commence en flou")]
+    public bool m_isStartBlur;
+    
     [Range(0,100), Tooltip("Radius de vision du joueur")]
     public float m_radiusVision;
     
@@ -113,9 +118,6 @@ public class PlayerManager : Singleton<PlayerManager>
         //Cacher le curseur
         Cursor.lockState = CursorLockMode.Locked;
 
-        //Commencer sans vision flou
-        m_visionScript.m_matVision.SetFloat("_BlurSize", 0);
-
         //Verifier que les variables de scripts ne son pas vide
         if (m_controllerScript == null)
             m_controllerScript = GetComponent<PlayerController>();
@@ -130,11 +132,27 @@ public class PlayerManager : Singleton<PlayerManager>
             m_interactionsScript = GetComponent<PlayerInteractions>();
     }
 
+    private void Start()
+    {
+        //Commencer avec vision flou
+        if (m_isStartBlur)
+        {
+            m_visionScript.m_matVision.SetFloat("_BlurSize", 0.35f);
+            m_visionScript.m_isBlurVision = Mathf.Abs(m_visionScript.m_isBlurVision - 1);
+            DoVisibleToInvisibleHandler?.Invoke();
+            m_visionScript.DoChangeMaterial(1.5f);
+        }
+        //Commencer sans vision flou
+        else
+        {
+            m_visionScript.m_matVision.SetFloat("_BlurSize", 0);
+        }
+    }
+
     private void Update()
     {
         //Mettre le jeu en pause
         if (Input.GetKeyDown(KeyCode.Escape) 
-            && GameManager.Instance != null 
             && ( GameManager.Instance.State == GameManager.States.PLAYING 
             || GameManager.Instance.State == GameManager.States.PAUSE))
         {
@@ -170,7 +188,7 @@ public class PlayerManager : Singleton<PlayerManager>
         }
 
         //Reset de variable
-        else if (GameManager.Instance != null && GameManager.Instance.State == GameManager.States.PAUSE)
+        else if (GameManager.Instance.State == GameManager.States.PAUSE)
         {
             m_prevStateReady = true;
         }
@@ -253,8 +271,7 @@ public class PlayerManager : Singleton<PlayerManager>
         tTime = Time.time - m_timeVision;
 
         //Changement de vision si le jeu était en pause et revien en play
-        if (GameManager.Instance != null && GameManager.Instance.PrevState == GameManager.States.PAUSE
-                                         && m_prevStateReady && m_visionScript.m_resetTimeVisionMat)
+        if (GameManager.Instance.PrevState == GameManager.States.PAUSE && m_prevStateReady && m_visionScript.m_resetTimeVisionMat)
         {
             m_prevStateReady = false;
 
@@ -269,9 +286,12 @@ public class PlayerManager : Singleton<PlayerManager>
         }
 
         //Input changement de vision
-        if (Input.GetKeyDown(KeyCode.Space) && !m_visionScript.m_resetTimeVisionComp &&
-            !m_visionScript.m_resetTimeVisionMat)
+        if (Input.GetKeyDown(KeyCode.Space) 
+            && !m_visionScript.m_resetTimeVisionComp 
+            && !m_visionScript.m_resetTimeVisionMat)
         {
+            m_isStartBlur = false;
+            
             InitVariableChangement();
 
             if (m_visionScript.m_isBlurVision == 0)
