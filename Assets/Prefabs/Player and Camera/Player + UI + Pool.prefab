@@ -1132,6 +1132,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 737851433734978357, guid: d76affee4e139c34f82c85ad49d98109, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: -7313418362541956282, guid: 01f613774f4fcb5429ec0f6c55fcf303, type: 3}
     - target: {fileID: 1674616961786738440, guid: d76affee4e139c34f82c85ad49d98109, type: 3}
       propertyPath: m_CullingMask.m_Bits
       value: 33687
@@ -1175,6 +1179,18 @@ PrefabInstance:
     - target: {fileID: 2844684432006699567, guid: d76affee4e139c34f82c85ad49d98109, type: 3}
       propertyPath: m_RootOrder
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2844684432006699567, guid: d76affee4e139c34f82c85ad49d98109, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2844684432006699567, guid: d76affee4e139c34f82c85ad49d98109, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2844684432006699567, guid: d76affee4e139c34f82c85ad49d98109, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 2844684432006699567, guid: d76affee4e139c34f82c85ad49d98109, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1243,11 +1259,11 @@ PrefabInstance:
     - target: {fileID: 7320104021563004540, guid: d76affee4e139c34f82c85ad49d98109, type: 3}
       propertyPath: m_keyUiAnimator
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 371637025}
     - target: {fileID: 7320104021563004540, guid: d76affee4e139c34f82c85ad49d98109, type: 3}
       propertyPath: m_keyUiRenderer
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 7499942003945667712}
     - target: {fileID: 7320104021563004540, guid: d76affee4e139c34f82c85ad49d98109, type: 3}
       propertyPath: m_textSelection
       value: 
@@ -1258,7 +1274,7 @@ PrefabInstance:
       objectReference: {fileID: 7348930266108326775}
     - target: {fileID: 7320104021563004540, guid: d76affee4e139c34f82c85ad49d98109, type: 3}
       propertyPath: m_waitForAnimationCompleteKeyValue
-      value: 1
+      value: 0.3
       objectReference: {fileID: 0}
     - target: {fileID: 9177805610398923538, guid: d76affee4e139c34f82c85ad49d98109, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1287,6 +1303,11 @@ Transform:
 --- !u!1 &7830966334915196886 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 671470927696591878, guid: d76affee4e139c34f82c85ad49d98109, type: 3}
+  m_PrefabInstance: {fileID: 7348930268061944784}
+  m_PrefabAsset: {fileID: 0}
+--- !u!23 &7499942003945667712 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 1002473818356496208, guid: d76affee4e139c34f82c85ad49d98109, type: 3}
   m_PrefabInstance: {fileID: 7348930268061944784}
   m_PrefabAsset: {fileID: 0}
 --- !u!95 &371637025

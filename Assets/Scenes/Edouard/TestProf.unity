@@ -977,16 +977,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8dc244cb634afde4096890b09a16860b, type: 3}
---- !u!23 &371637023 stripped
-MeshRenderer:
-  m_CorrespondingSourceObject: {fileID: 7499942003945667712, guid: 67c9a6862de4b0b46be7a9685f6e1ad0, type: 3}
-  m_PrefabInstance: {fileID: 2147108646}
-  m_PrefabAsset: {fileID: 0}
---- !u!95 &371637025 stripped
-Animator:
-  m_CorrespondingSourceObject: {fileID: 371637025, guid: 67c9a6862de4b0b46be7a9685f6e1ad0, type: 3}
-  m_PrefabInstance: {fileID: 2147108646}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &371865679
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4137,17 +4127,13 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 30011129327066540, guid: 67c9a6862de4b0b46be7a9685f6e1ad0, type: 3}
-      propertyPath: m_keyUiAnimator
-      value: 
-      objectReference: {fileID: 371637025}
-    - target: {fileID: 30011129327066540, guid: 67c9a6862de4b0b46be7a9685f6e1ad0, type: 3}
-      propertyPath: m_keyUiRenderer
-      value: 
-      objectReference: {fileID: 371637023}
-    - target: {fileID: 30011129327066540, guid: 67c9a6862de4b0b46be7a9685f6e1ad0, type: 3}
-      propertyPath: m_waitForAnimationCompleteKeyValue
-      value: 0.2
+    - target: {fileID: 1658337801118708265, guid: 67c9a6862de4b0b46be7a9685f6e1ad0, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1658337802337321675, guid: 67c9a6862de4b0b46be7a9685f6e1ad0, type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7348930268121412840, guid: 67c9a6862de4b0b46be7a9685f6e1ad0, type: 3}
       propertyPath: m_Name
