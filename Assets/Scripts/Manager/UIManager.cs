@@ -2,6 +2,8 @@ using UnityEngine;
 
 public class UIManager : Singleton<UIManager>
 {
+    public GameManager m_gameManager;
+    
     public delegate void DisplayUIGamePause(bool p_active = true);
     public DisplayUIGamePause DoDisplayUIGamePause;
     
@@ -10,13 +12,13 @@ public class UIManager : Singleton<UIManager>
     
     private void OnEnable()
     {
-        GameManager.Instance.DoUiActivePauseGame += ActivePauseUI;
+        m_gameManager.DoUiActivePauseGame += ActivePauseUI;
     }
     
     private void OnDisable()
     {
-        if (GameManager.Instance != null)
-            GameManager.Instance.DoUiActivePauseGame -= ActivePauseUI;
+        if (m_gameManager != null)
+            m_gameManager.DoUiActivePauseGame -= ActivePauseUI;
     }
 
     private void Awake()
@@ -26,7 +28,7 @@ public class UIManager : Singleton<UIManager>
     
     private void ActivePauseUI(int p_isActive = 1)
     {
-        
+        PlayerManager.Instance.m_textState.text = "zirjBGNIOJEnrginJERGPNezrgnZERJNGzirjBGNIOJEnrginJERGPNezrgnZERJNG ";
         if (p_isActive == 0)
         {
             Cursor.lockState = CursorLockMode.Locked;

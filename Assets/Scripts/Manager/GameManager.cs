@@ -49,9 +49,8 @@ public class GameManager : Singleton<GameManager>
         if (m_state == States.PLAYING)
         {
             m_monsterEventEnd.Raise();
-            PlayerManager.Instance.m_textState.text = "zirjBGNIOJEnrginJERGPNezrgnZERJNGzirjBGNIOJEnrginJERGPNezrgnZERJNGzirjBGNIOJEnrginJERGPNezrgnZERJNG";
             m_state = States.PAUSE;
-            DoUiActivePauseGame?.Invoke(1);
+            DoUiActivePauseGame?.Invoke();
             return;
         }
         
