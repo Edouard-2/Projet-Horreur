@@ -48,7 +48,7 @@ public class GameManager : Singleton<GameManager>
         
         if (m_state == States.PLAYING)
         {
-            TimerManager.Instance.StartOrEndTimer(false);
+            TimerManager.Instance.PauseOrRestartTimer(false);
             
             m_monsterEventEnd.Raise();
             m_state = States.PAUSE;
@@ -56,7 +56,7 @@ public class GameManager : Singleton<GameManager>
             return;
         }
         
-        TimerManager.Instance.StartOrEndTimer(true);
+        TimerManager.Instance.PauseOrRestartTimer(true);
         
         m_monsterEventStart.Raise(false);
         m_state = States.PLAYING;

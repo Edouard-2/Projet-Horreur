@@ -12,7 +12,8 @@ public class TimerManager : Singleton<TimerManager>
 
     private WaitForSeconds m_waitOneSeconde = new WaitForSeconds(1);
     
-    [HideInInspector]public bool m_isRunning;
+    private bool m_isRunning;
+    private bool m_isStart;
     
     private int m_timerMinuteValue;
     private int m_timerHourValue;
@@ -22,26 +23,40 @@ public class TimerManager : Singleton<TimerManager>
     
     private void OnEnable()
     {
-        m_timerHourValue = m_minuteStart;
-        
         if (m_event == null) return;
-        m_event.OnTrigger += StartOrEndTimer;
+        m_event.OnTrigger += StartOrStopTimer;
     }
     private void OnDisable()
     {
         if (m_event == null) return;
-        m_event.OnTrigger -= StartOrEndTimer;
+        m_event.OnTrigger -= StartOrStopTimer;
     }
 
+    private void StartOrStopTimer(bool p_isStart)
+    {
+        if (p_isStart)
+        {
+            m_isStart = true;
+            StartCoroutine(IncreaseTime());
+            return;
+        }
+        
+        m_isStart = false;
+        StopAllCoroutines();
+    }
+    
     /// <summary>
-    /// Lancer ou arrêter le timer
+    /// relancer ou mettre en pause le timer
     /// </summary>
     /// <param name="p_isStart"> true: lancer / flase: arrêter</param>
-    public void StartOrEndTimer(bool p_isStart)
+    public void PauseOrRestartTimer(bool p_isStart)
     {
         if (p_isStart)
         {
             m_isRunning = true;
+            
+            m_timerHourValue = m_minuteStart;
+            m_timerMinuteValue = 0;
             StartCoroutine(IncreaseTime());
             return;
         }
@@ -50,9 +65,10 @@ public class TimerManager : Singleton<TimerManager>
         StopAllCoroutines();
     }
     
+    //Minuteur
     private void UpdateTimerValue()
     {
-        if(!m_isRunning) return;
+        if(!m_isRunning || !m_isStart) return;
 
         m_timerMinuteValue--;
 
@@ -74,9 +90,9 @@ public class TimerManager : Singleton<TimerManager>
         StartCoroutine(IncreaseTime());
     }
 
+    //Mettre les Minutes et secondes en strings pour les textes qui l'utiliserons
     private void UpdateStringValue()
     {
-        
         string hours = "";
         string minute = "";
         
