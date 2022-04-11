@@ -18,6 +18,12 @@ public class TimerManager : Singleton<TimerManager>
     private int m_timerMinuteValue;
     private int m_timerHourValue;
     private string m_valueString;
+
+    private Coroutine m_currentCoroutine;
+
+    public delegate void UpdateText(string p_text);
+
+    public event UpdateText UpdateTextHandler;
     
     public string StringValue => m_valueString;
     
@@ -34,15 +40,17 @@ public class TimerManager : Singleton<TimerManager>
 
     private void StartOrStopTimer(bool p_isStart)
     {
-        if (p_isStart)
+        if (p_isStart && !m_isStart)
         {
             m_isStart = true;
-            StartCoroutine(IncreaseTime());
+            PauseOrRestartTimer(p_isStart);
             return;
         }
+
+        if (p_isStart) return;
         
         m_isStart = false;
-        StopAllCoroutines();
+        PauseOrRestartTimer(p_isStart);
     }
     
     /// <summary>
@@ -57,12 +65,17 @@ public class TimerManager : Singleton<TimerManager>
             
             m_timerHourValue = m_minuteStart;
             m_timerMinuteValue = 0;
-            StartCoroutine(IncreaseTime());
+            
+            m_currentCoroutine = StartCoroutine(IncreaseTime());
             return;
         }
         
         m_isRunning = false;
-        StopAllCoroutines();
+        
+        if (m_currentCoroutine != null)
+        {
+            StopCoroutine(m_currentCoroutine);
+        }
     }
     
     //Minuteur
@@ -82,12 +95,12 @@ public class TimerManager : Singleton<TimerManager>
             m_timerHourValue--;
             m_timerMinuteValue = 59;
         }
-
+        
         UpdateStringValue();
         
-        Debug.Log(m_valueString);
+        //Debug.Log(m_valueString);
         
-        StartCoroutine(IncreaseTime());
+        m_currentCoroutine = StartCoroutine(IncreaseTime());
     }
 
     //Mettre les Minutes et secondes en strings pour les textes qui l'utiliserons
@@ -102,7 +115,9 @@ public class TimerManager : Singleton<TimerManager>
         hours += m_timerHourValue.ToString();
         minute += m_timerMinuteValue.ToString();
         
-        m_valueString = $"{hours} : {minute}";
+        m_valueString = $"{hours}:{minute}";
+        
+        UpdateTextHandler?.Invoke(m_valueString);
     }
 
     IEnumerator IncreaseTime()
