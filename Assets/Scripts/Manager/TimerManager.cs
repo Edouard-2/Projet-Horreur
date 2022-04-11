@@ -32,6 +32,7 @@ public class TimerManager : Singleton<TimerManager>
         if (m_event == null) return;
         m_event.OnTrigger += StartOrStopTimer;
     }
+    
     private void OnDisable()
     {
         if (m_event == null) return;
