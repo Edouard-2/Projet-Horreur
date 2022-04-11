@@ -12,7 +12,8 @@ public class UIManager : Singleton<UIManager>
     
     private void OnEnable()
     {
-        m_gameManager.DoUiActivePauseGame += ActivePauseUI;
+        if (m_gameManager != null)
+            m_gameManager.DoUiActivePauseGame += ActivePauseUI;
     }
     
     private void OnDisable()

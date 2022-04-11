@@ -48,14 +48,17 @@ public class GameManager : Singleton<GameManager>
         
         if (m_state == States.PLAYING)
         {
+            TimerManager.Instance.PauseOrRestartTimer(false);
+            
             m_monsterEventEnd.Raise();
             m_state = States.PAUSE;
             DoUiActivePauseGame?.Invoke();
             return;
         }
         
-        m_monsterEventStart.Raise(false);
+        TimerManager.Instance.PauseOrRestartTimer(true);
         
+        m_monsterEventStart.Raise(false);
         m_state = States.PLAYING;
         DoUiActivePauseGame?.Invoke(0);
     }

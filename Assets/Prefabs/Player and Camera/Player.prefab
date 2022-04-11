@@ -181,6 +181,7 @@ MonoBehaviour:
   m_interactionsScript: {fileID: 7320104021563004540}
   m_fadeAnimator: {fileID: 0}
   m_deathUI: {fileID: 0}
+  m_isStartBlur: 0
   m_radiusVision: 2.1
   m_DeathWaitingTime: 5
   m_isHooked: 0
@@ -417,11 +418,13 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 7031
   m_trousseauKey: {fileID: 0}
-  m_KeyUI: {fileID: 0}
   m_pool: {fileID: 0}
   m_cursorSelection: {fileID: 0}
   m_textSelection: {fileID: 0}
+  m_keyUiRenderer: {fileID: 0}
+  m_keyUiAnimator: {fileID: 0}
   m_keyObject: {fileID: 0}
+  m_waitForAnimationCompleteKeyValue: 0
 --- !u!1 &6380790541469819084
 GameObject:
   m_ObjectHideFlags: 0

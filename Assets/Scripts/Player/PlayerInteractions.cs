@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Net.Mime;
 using TMPro;
 using UnityEngine.UI;
@@ -6,40 +7,52 @@ using UnityEngine;
 public class PlayerInteractions : MonoBehaviour
 {
     //LayerMask Visible
+    [Header("Layer Neutral")]
     [SerializeField, Tooltip("Layer pour les door")] private LayerMask m_layerDoor;
     [SerializeField, Tooltip("Layer pour les key")] public LayerMask m_layerKey;
     [SerializeField, Tooltip("Layer pour les transvaseur")] private LayerMask m_layerTransvaseur;
     
     //LayerMaske Invisible To Visible
+    [Header("Layer Invisinble")]
     [SerializeField, Tooltip("Layer pour les doorInvisible")] private LayerMask m_layerDoorInvisible;
     [SerializeField, Tooltip("Layer pour les keyInvisibleToVisible")] public LayerMask m_layerKeyInvisible;
     [SerializeField, Tooltip("Layer pour les transvaseurInvisible")] public LayerMask m_layerTransvaseurInvisible;
     
     //LayerMaske Visible To Invisible
+    [Header("Layer Visinble")]
     [SerializeField, Tooltip("Layer pour les keyVisibleToInvisible")] public LayerMask m_layerKeyVisible;
 
     //Layer raycast de proximité
+    [Header("Layer Raycast")]
     [SerializeField, Tooltip("Les layers qui seront choisis pour la détection du raycast de proximité")] public LayerMask m_targetLayer;
     
     //Objects
+    [Header("Other")]
     [SerializeField, Tooltip("Trousseau de clé")] public KeyType m_trousseauKey;
-    [SerializeField, Tooltip("UI de la clés ingame")] private Image m_KeyUI;
     [SerializeField, Tooltip("La piscine de toutes les clés")] private Transform m_pool;
     [SerializeField, Tooltip("Feedback visuel Cursor")] private GameObject m_cursorSelection;
     [SerializeField, Tooltip("Feedback visuel Text nom obj")] private TextMeshProUGUI m_textSelection;
+    [SerializeField, Tooltip("Mesh render de l'obj key UI")] private MeshRenderer m_keyUiRenderer;
+    [SerializeField, Tooltip("Animator de l'obj key UI")] private Animator m_keyUiAnimator;
+    [SerializeField, Tooltip("Clé in game actuel")] public GameObject m_keyObject;
 
-    public GameObject m_keyObject;
+    private int m_triggerEnter;
+    private int m_triggerExit;
+    
+    [SerializeField, Tooltip("Temps entre l'animation de sortie de la carte et d'entré")] private float m_waitForAnimationCompleteKeyValue;
+    
+    private WaitForSeconds m_waitForAnimationCompleteKey;
     private Material m_currentAimObject;
 
     private bool m_isVariablesReady = true;
 
     private void Awake()
     {
-        if (m_KeyUI == null)
-        {
-            Debug.LogError("Il faut mettre la clé UI", this);
-            m_isVariablesReady = false;
-        }
+        m_waitForAnimationCompleteKey = new WaitForSeconds(m_waitForAnimationCompleteKeyValue);
+
+        m_triggerEnter = Animator.StringToHash("Enter");
+        m_triggerExit = Animator.StringToHash("Exit");
+        
         if (m_pool == null)
         {
             Debug.LogError("Il faut mettre la Pool", this);
@@ -117,16 +130,19 @@ public class PlayerInteractions : MonoBehaviour
                 Key myKey = p_target.GetComponent<Key>();
                 if (myKey && myKey.OpenChest(out KeyType key))
                 {
-                    if (m_trousseauKey == null)
+                    if (m_keyObject == null)
                     {
+                        
                         m_trousseauKey = key;
                         m_keyObject = p_target.gameObject;
                         SetUIKey(myKey);
                     }
                     else
                     {
+                        
                         //Enlever la précedente clé
                         EjectKey();
+                        
                         m_trousseauKey = key;
                         m_keyObject = p_target.gameObject;
                         SetUIKey(myKey);
@@ -148,7 +164,6 @@ public class PlayerInteractions : MonoBehaviour
                         {
                             m_trousseauKey = null;
                             StartCoroutine(m_keyObject.GetComponent<Key>().DestroySelf());
-                            m_KeyUI.color = Color.clear;
                         }
                     }
                 }
@@ -183,17 +198,46 @@ public class PlayerInteractions : MonoBehaviour
     {
         if (m_isVariablesReady)
         {
-            Debug.Log(p_key.m_key.m_keyMat);
+            if (m_trousseauKey != null)
+            {
+                //Lancer le retour
+                m_trousseauKey = null;
+                
+                //Lancer la coroutine de sortie
+                m_keyUiAnimator.ResetTrigger(m_triggerEnter);
+                m_keyUiAnimator.SetTrigger(m_triggerExit);
+                StartCoroutine(WaitUntilSetUiKey(p_key));
+                return;
+            }
+            
+            //Mettre le bon matérial
+            m_keyUiRenderer.material = p_key.m_key.m_keyMat;
+            
+            Material temp = m_keyUiRenderer.gameObject.GetComponent<MeshRenderer>().material;
+            
+            temp.SetFloat("_isAim", 0);
+            
+            //Mettre la carte ingame dans la pool
             p_key.transform.SetParent(m_pool);
             p_key.transform.localPosition = Vector3.zero;
             
-            m_KeyUI.color = new Vector4(p_key.m_key.m_keyMat.GetColor("_BaseColor").r,p_key.m_key.m_keyMat.GetColor("_BaseColor").g,p_key.m_key.m_keyMat.GetColor("_BaseColor").b,1);
+            //Lancer l'anim d'arrivé
+            m_keyUiAnimator.ResetTrigger(m_triggerExit);
+            m_keyUiAnimator.SetTrigger(m_triggerEnter);
+            
+            Debug.Log(p_key.m_key.m_keyMat);
         }
+    }
+
+    IEnumerator WaitUntilSetUiKey(Key p_key)
+    {
+        yield return m_waitForAnimationCompleteKey;
+        SetUIKey(p_key);
     }
     
     public void EjectKey(bool p_position = true)
     {
-        if (m_isVariablesReady && m_trousseauKey!= null)
+        if (m_isVariablesReady && m_keyObject!= null)
         {
             //Ejecter la clé
             Debug.Log("Clear key");
@@ -215,7 +259,10 @@ public class PlayerInteractions : MonoBehaviour
 
             m_trousseauKey = null;
             m_keyObject = null;
-            m_KeyUI.color = Color.clear;
+            
+            //Lancer l'animation de sorite
+            m_keyUiAnimator.ResetTrigger(m_triggerEnter);
+            m_keyUiAnimator.SetTrigger(m_triggerExit);
         }
     }
 }
