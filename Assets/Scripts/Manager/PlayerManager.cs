@@ -160,7 +160,6 @@ public class PlayerManager : Singleton<PlayerManager>
             {
                 m_controllerScript.m_speedMove = m_controllerScript.m_baseSpeed;
             }
-
             GameManager.Instance.SwitchPauseGame();
         }
 
