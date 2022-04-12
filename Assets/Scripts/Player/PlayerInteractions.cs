@@ -19,8 +19,9 @@ public class PlayerInteractions : MonoBehaviour
     [SerializeField, Tooltip("Layer pour les transvaseurInvisible")] public LayerMask m_layerTransvaseurInvisible;
     
     //LayerMaske Visible To Invisible
-    [Header("Layer Visinble")]
+    [Header("Layer Visible")]
     [SerializeField, Tooltip("Layer pour les keyVisibleToInvisible")] public LayerMask m_layerKeyVisible;
+    [SerializeField, Tooltip("Layer pour les doorVisibleToInvisible")] public LayerMask m_layerDoorVisible;
 
     //Layer raycast de proximité
     [Header("Layer Raycast")]
@@ -75,11 +76,11 @@ public class PlayerInteractions : MonoBehaviour
         
         //Récupérer le mat de la porte
         else if ((m_layerDoor.value & (1 << p_target.gameObject.layer)) > 0 || 
-                 (m_layerDoorInvisible.value & (1 << p_target.gameObject.layer)) > 0)
+                 (m_layerDoorInvisible.value & (1 << p_target.gameObject.layer)) > 0 ||
+                 (m_layerDoorVisible.value & (1 << p_target.gameObject.layer)) > 0)
         {
             //Debug.Log("porte");
             targetMaterial = p_target.GetComponent<Door>().m_doorMat;
-
         }
         
         //Récupérer le mat du transvaseur
@@ -152,7 +153,8 @@ public class PlayerInteractions : MonoBehaviour
 
             //Si c'est la porte
             else if ((m_layerDoor.value & (1 << p_target.gameObject.layer)) > 0 ||
-                     (m_layerDoorInvisible.value & (1 << p_target.gameObject.layer)) > 0)
+                     (m_layerDoorInvisible.value & (1 << p_target.gameObject.layer)) > 0 ||
+                     (m_layerDoorVisible.value & (1 << p_target.gameObject.layer)) > 0)
             {
                 Debug.Log("Door ");
                 Door myDoor = p_target.GetComponent<Door>();
@@ -194,22 +196,20 @@ public class PlayerInteractions : MonoBehaviour
         }
     }
 
-    private void SetUIKey(Key p_key)
+    private void SetUIKey(Key p_key, bool p_isSet = false)
     {
         if (m_isVariablesReady)
         {
-            if (m_trousseauKey != null)
+            if (m_trousseauKey != null && !p_isSet)
             {
-                //Lancer le retour
-                m_trousseauKey = null;
-                
                 //Lancer la coroutine de sortie
                 m_keyUiAnimator.ResetTrigger(m_triggerEnter);
                 m_keyUiAnimator.SetTrigger(m_triggerExit);
-                StartCoroutine(WaitUntilSetUiKey(p_key));
+                StartCoroutine(WaitUntilSetUiKey(p_key, true));
                 return;
             }
-            
+
+            m_trousseauKey = p_key.m_key;
             //Mettre le bon matérial
             m_keyUiRenderer.material = p_key.m_key.m_keyMat;
             
@@ -229,10 +229,10 @@ public class PlayerInteractions : MonoBehaviour
         }
     }
 
-    IEnumerator WaitUntilSetUiKey(Key p_key)
+    IEnumerator WaitUntilSetUiKey(Key p_key,bool p_isSet = false)
     {
         yield return m_waitForAnimationCompleteKey;
-        SetUIKey(p_key);
+        SetUIKey(p_key, p_isSet);
     }
     
     public void EjectKey(bool p_position = true)
