@@ -146,7 +146,7 @@ CharacterController:
   m_Enabled: 1
   serializedVersion: 2
   m_Height: 2
-  m_Radius: 0.41
+  m_Radius: 0.5
   m_SlopeLimit: 45
   m_StepOffset: 0.3
   m_SkinWidth: 0.1
@@ -414,6 +414,9 @@ MonoBehaviour:
   m_layerKeyVisible:
     serializedVersion: 2
     m_Bits: 8192
+  m_layerDoorVisible:
+    serializedVersion: 2
+    m_Bits: 0
   m_targetLayer:
     serializedVersion: 2
     m_Bits: 7031
