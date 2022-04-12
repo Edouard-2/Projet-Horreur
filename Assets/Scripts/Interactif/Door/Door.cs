@@ -75,7 +75,7 @@ public class Door : MonoBehaviour
         {
             //On ouvre la porte
             Debug.Log("Je m'ouvre");
-            m_doorAnimator?.SetTrigger(m_openHash);
+            m_doorAnimator.SetTrigger(m_openHash);
             
             m_soundEvent.Raise(PlayerManager.Instance.transform.position);
             
@@ -90,14 +90,14 @@ public class Door : MonoBehaviour
         if (m_isOpen)
         {
             Debug.Log("Close");
-            m_doorAnimator?.SetTrigger(m_closeHash);
+            m_doorAnimator.SetTrigger(m_closeHash);
             m_isOpen = false;
             return;
         }
 
         if ((m_layerMonstre.value & (1 << p_target.gameObject.layer)) > 0)
         {
-            m_doorAnimator?.SetTrigger(m_openHash);
+            m_doorAnimator.SetTrigger(m_openHash);
         }
     }
 }
