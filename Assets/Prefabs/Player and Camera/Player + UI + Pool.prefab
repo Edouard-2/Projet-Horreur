@@ -103,7 +103,7 @@ MonoBehaviour:
   m_AntialiasingQuality: 2
   m_StopNaN: 0
   m_Dithering: 0
-  m_ClearDepth: 1
+  m_ClearDepth: 0
   m_AllowXRRendering: 1
   m_RequiresDepthTexture: 0
   m_RequiresColorTexture: 0
@@ -1170,19 +1170,27 @@ PrefabInstance:
       objectReference: {fileID: -7313418362541956282, guid: 01f613774f4fcb5429ec0f6c55fcf303, type: 3}
     - target: {fileID: 1674616961786738440, guid: d76affee4e139c34f82c85ad49d98109, type: 3}
       propertyPath: m_CullingMask.m_Bits
-      value: 33687
+      value: 919
       objectReference: {fileID: 0}
     - target: {fileID: 1674616961786738442, guid: d76affee4e139c34f82c85ad49d98109, type: 3}
       propertyPath: m_Cameras.Array.size
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1674616961786738442, guid: d76affee4e139c34f82c85ad49d98109, type: 3}
-      propertyPath: m_Cameras.Array.data[1]
+      propertyPath: m_Cameras.Array.data[0]
       value: 
       objectReference: {fileID: 1898721257}
+    - target: {fileID: 1674616961786738442, guid: d76affee4e139c34f82c85ad49d98109, type: 3}
+      propertyPath: m_Cameras.Array.data[1]
+      value: 
+      objectReference: {fileID: 8269112927536598147}
+    - target: {fileID: 1674616962079655763, guid: d76affee4e139c34f82c85ad49d98109, type: 3}
+      propertyPath: m_OcclusionCulling
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1674616962079655763, guid: d76affee4e139c34f82c85ad49d98109, type: 3}
       propertyPath: m_CullingMask.m_Bits
-      value: 64576
+      value: 130112
       objectReference: {fileID: 0}
     - target: {fileID: 1739398479658060359, guid: d76affee4e139c34f82c85ad49d98109, type: 3}
       propertyPath: m_deathUI
@@ -1280,6 +1288,54 @@ PrefabInstance:
       propertyPath: m_uiBv
       value: 
       objectReference: {fileID: 1658337802337321675}
+    - target: {fileID: 7154114867123462734, guid: d76affee4e139c34f82c85ad49d98109, type: 3}
+      propertyPath: m_curveMatVisionStart.m_Curve.Array.data[1].time
+      value: 0.9985101
+      objectReference: {fileID: 0}
+    - target: {fileID: 7154114867123462734, guid: d76affee4e139c34f82c85ad49d98109, type: 3}
+      propertyPath: m_curveMatVisionFinish.m_Curve.Array.data[0].time
+      value: 0.00000042119063
+      objectReference: {fileID: 0}
+    - target: {fileID: 7154114867123462734, guid: d76affee4e139c34f82c85ad49d98109, type: 3}
+      propertyPath: m_curveMatVisionStart.m_Curve.Array.data[1].value
+      value: 1.7981788
+      objectReference: {fileID: 0}
+    - target: {fileID: 7154114867123462734, guid: d76affee4e139c34f82c85ad49d98109, type: 3}
+      propertyPath: m_curveMatVisionFinish.m_Curve.Array.data[0].value
+      value: 1.7769779
+      objectReference: {fileID: 0}
+    - target: {fileID: 7154114867123462734, guid: d76affee4e139c34f82c85ad49d98109, type: 3}
+      propertyPath: m_curveMatVisionStart.m_Curve.Array.data[0].inSlope
+      value: 1.8268405
+      objectReference: {fileID: 0}
+    - target: {fileID: 7154114867123462734, guid: d76affee4e139c34f82c85ad49d98109, type: 3}
+      propertyPath: m_curveMatVisionStart.m_Curve.Array.data[1].inSlope
+      value: 1.8268405
+      objectReference: {fileID: 0}
+    - target: {fileID: 7154114867123462734, guid: d76affee4e139c34f82c85ad49d98109, type: 3}
+      propertyPath: m_curveMatVisionFinish.m_Curve.Array.data[0].inSlope
+      value: -1.8035014
+      objectReference: {fileID: 0}
+    - target: {fileID: 7154114867123462734, guid: d76affee4e139c34f82c85ad49d98109, type: 3}
+      propertyPath: m_curveMatVisionFinish.m_Curve.Array.data[1].inSlope
+      value: -1.8035014
+      objectReference: {fileID: 0}
+    - target: {fileID: 7154114867123462734, guid: d76affee4e139c34f82c85ad49d98109, type: 3}
+      propertyPath: m_curveMatVisionStart.m_Curve.Array.data[0].outSlope
+      value: 1.8268405
+      objectReference: {fileID: 0}
+    - target: {fileID: 7154114867123462734, guid: d76affee4e139c34f82c85ad49d98109, type: 3}
+      propertyPath: m_curveMatVisionStart.m_Curve.Array.data[1].outSlope
+      value: 1.8268405
+      objectReference: {fileID: 0}
+    - target: {fileID: 7154114867123462734, guid: d76affee4e139c34f82c85ad49d98109, type: 3}
+      propertyPath: m_curveMatVisionFinish.m_Curve.Array.data[0].outSlope
+      value: -1.8035014
+      objectReference: {fileID: 0}
+    - target: {fileID: 7154114867123462734, guid: d76affee4e139c34f82c85ad49d98109, type: 3}
+      propertyPath: m_curveMatVisionFinish.m_Curve.Array.data[1].outSlope
+      value: -1.8035014
+      objectReference: {fileID: 0}
     - target: {fileID: 7320104021563004540, guid: d76affee4e139c34f82c85ad49d98109, type: 3}
       propertyPath: m_pool
       value: 
@@ -1304,6 +1360,10 @@ PrefabInstance:
       propertyPath: m_cursorSelection
       value: 
       objectReference: {fileID: 7348930266108326775}
+    - target: {fileID: 7320104021563004540, guid: d76affee4e139c34f82c85ad49d98109, type: 3}
+      propertyPath: m_layerDoorVisible.m_Bits
+      value: 65536
+      objectReference: {fileID: 0}
     - target: {fileID: 7320104021563004540, guid: d76affee4e139c34f82c85ad49d98109, type: 3}
       propertyPath: m_waitForAnimationCompleteKeyValue
       value: 0.3
@@ -1330,6 +1390,11 @@ Transform:
 --- !u!4 &8269112927795461335 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1674616961786738439, guid: d76affee4e139c34f82c85ad49d98109, type: 3}
+  m_PrefabInstance: {fileID: 7348930268061944784}
+  m_PrefabAsset: {fileID: 0}
+--- !u!20 &8269112927536598147 stripped
+Camera:
+  m_CorrespondingSourceObject: {fileID: 1674616962079655763, guid: d76affee4e139c34f82c85ad49d98109, type: 3}
   m_PrefabInstance: {fileID: 7348930268061944784}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &7830966334915196886 stripped
