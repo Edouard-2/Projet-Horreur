@@ -22,7 +22,7 @@ public class Luminosity : MonoBehaviour
 
     private void UpdateMaterial()
     {
-        m_value = (float)m_materialValue.GetIntValue() / 50;
+        m_value = (float)m_materialValue.GetIntValue() / 25;
         
         if (m_value == 0)
         {
