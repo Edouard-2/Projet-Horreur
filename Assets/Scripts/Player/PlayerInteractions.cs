@@ -173,13 +173,14 @@ public class PlayerInteractions : MonoBehaviour
                     {
                         if (myDoor.m_neededKey)
                         {
+                            StartCoroutine(m_keyObject.GetComponent<Key>().DestroySelf());
                             SetUIKey(m_currentKey);
                             m_trousseauKey = null;
-                            StartCoroutine(m_keyObject.GetComponent<Key>().DestroySelf());
                         }
                     }
                 }
             }
+            
             //Si c'est le transvaseur
             else if ((m_layerTransvaseur.value & (1 << p_target.gameObject.layer)) > 0 ||
                      (m_layerTransvaseurInvisible.value & (1 << p_target.gameObject.layer)) > 0)

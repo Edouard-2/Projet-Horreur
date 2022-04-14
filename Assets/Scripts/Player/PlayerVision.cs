@@ -97,8 +97,11 @@ public class PlayerVision : MonoBehaviour
                 DoSwitchMaterial(p_time, m_curveMatVisionStart);
             }
 
-            //Lancement de la consommation de BV
-            DecreaseBV();
+            if (!m_resetTimeVisionComp && !m_resetTimeVisionMat)
+            {
+                //Lancement de la consommation de BV
+                DecreaseBV();
+            }
         }
 
         else if (m_isBlurVision == 1)
@@ -115,8 +118,12 @@ public class PlayerVision : MonoBehaviour
                 //DoSwitchMaterial(retour)
                 DoSwitchMaterial(p_time, m_curveMatVisionFinish);
             }
-
-            IncreaseBV();
+            
+            if (!m_resetTimeVisionComp && !m_resetTimeVisionMat)
+            {
+                //Lancement de la recharge de BV
+                IncreaseBV();
+            }
         }
     }
 
