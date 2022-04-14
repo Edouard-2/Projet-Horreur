@@ -218,7 +218,12 @@ public class PlayerInteractions : MonoBehaviour
                 if (!p_eject)
                 {
                     StartCoroutine(WaitUntilSetUiKey(p_key, true));
+                    return;
                 }
+
+                m_keyObject = null;
+                m_currentKey = null;
+                m_trousseauKey = null;
                 return;
             }
 
