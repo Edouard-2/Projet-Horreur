@@ -8,7 +8,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: M_IV_Door_Key_2
-  m_Shader: {fileID: -6465566751694194690, guid: 5dd50f383502be645b753e8eed16836a, type: 3}
+  m_Shader: {fileID: -6465566751694194690, guid: 17ab7b4697b48ad438997188e1a8557d, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -19,10 +19,6 @@ Material:
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
-    - _SampleTexture2D_b11614ca76ce49c0896b5c359e1d1eaa_Texture_1:
-        m_Texture: {fileID: 2800000, guid: 77ba3d67badea0942bc066a7c486bf3d, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
     - unity_Lightmaps:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -36,9 +32,9 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
-    - Boolean_4c39ea96c2cf4de4b2dc4ef482795fa2: 0
-    - Vector1_63c79ec3f0354370b25d8f050d6a5a56: 2.36
-    - _StepStrenght: -0.025360227
+    - Boolean_e6682e3f40c142909da21f320d085631: 0
+    - _StepStrenght: -0.024142504
+    - _isAim: 0
     m_Colors:
-    - Color_afa59434efcd47fa8f595e8fb5d9720d: {r: 0.40183342, g: 0.6603774, b: 0.5245169, a: 0}
+    - _BaseColor: {r: 0.26319346, g: 0.8301887, b: 0.2232111, a: 0}
   m_BuildTextureStacks: []
