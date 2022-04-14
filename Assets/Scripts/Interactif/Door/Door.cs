@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -31,7 +32,7 @@ public class Door : MonoBehaviour
     
     [SerializeField, Tooltip("Material de la Porte")]
     public Material m_doorMat;
-
+    
     private void Awake()
     {
         if (m_doorAnimator == null)
@@ -87,7 +88,6 @@ public class Door : MonoBehaviour
                 Debug.Log($"La cle {m_neededKey.name} est nécessaire");
                 return false;
             }
-            m_isOpen = true;
         }
 
         if (!m_isOpen)

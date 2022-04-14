@@ -129,6 +129,7 @@ MonoBehaviour:
     m_Bits: 32768
   m_openName: OpenLeft
   m_closeName: Close
+  m_isOpen: 0
   m_listRenderer:
   - {fileID: 4229417917027386455}
   - {fileID: 5348261781236540117}
@@ -199,6 +200,7 @@ MonoBehaviour:
     m_Bits: 32768
   m_openName: OpenRight
   m_closeName: Close
+  m_isOpen: 0
   m_listRenderer:
   - {fileID: 4229417917027386455}
   - {fileID: 5348261781236540117}
@@ -409,7 +411,8 @@ GameObject:
   - component: {fileID: 5105865383677670177}
   - component: {fileID: 7007419370368583659}
   - component: {fileID: 4894561031772323706}
-  m_Layer: 8
+  - component: {fileID: 1701562928607035442}
+  m_Layer: 0
   m_Name: Door_Key_Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -500,3 +503,16 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!65 &1701562928607035442
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8808942715794187838}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.1308668, y: 1.9834933, z: 0.1026089}
+  m_Center: {x: -0.5689081, y: 0.99174666, z: 0.0018397085}

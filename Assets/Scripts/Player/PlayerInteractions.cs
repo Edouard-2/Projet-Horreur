@@ -84,7 +84,11 @@ public class PlayerInteractions : MonoBehaviour
             //Debug.Log("porte");
             Door myDoor = p_target.GetComponent<Door>();
             targetMaterial = myDoor.m_doorMat;
-            if (myDoor.m_isOpen) targetMaterial = null;
+            if (myDoor.m_neededKey != null && myDoor.m_isOpen)
+            {
+                myDoor.transform.parent.gameObject.SetActive(false);
+                targetMaterial = null;
+            }
         }
         
         //Récupérer le mat du transvaseur
