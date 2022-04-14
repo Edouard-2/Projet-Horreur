@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class Door : MonoBehaviour
@@ -23,8 +24,11 @@ public class Door : MonoBehaviour
     private int m_openHash;
     private int m_closeHash;
 
-    private bool m_isOpen;
+    [HideInInspector] public bool m_isOpen;
 
+    [SerializeField, Tooltip("List des mesh renderer qui receveront le material de la Key s'il est est mise")]
+    private List<MeshRenderer> m_listRenderer;
+    
     [SerializeField, Tooltip("Material de la Porte")]
     public Material m_doorMat;
 
@@ -43,7 +47,13 @@ public class Door : MonoBehaviour
         m_closeHash = Animator.StringToHash(m_closeName);
         if (m_neededKey)
         {
-            GetComponent<Renderer>().material = m_neededKey.m_doorMat;
+            if (m_listRenderer.Count == 0)
+            {
+                Debug.LogError("Il faut mettre les mesh renderer", this);
+            }
+
+            UpdateMeshMaterial(m_neededKey.m_doorMat);
+            
             m_neededKey.m_doorMat.SetFloat("_isAim", 0);
             m_neededKey.m_keyMat.SetFloat("_isAim", 0);
             m_doorMat = m_neededKey.m_doorMat;
@@ -59,6 +69,14 @@ public class Door : MonoBehaviour
         m_doorMat.SetFloat("_isAim", 0);
     }
 
+    private void UpdateMeshMaterial(Material p_map)
+    {
+        foreach (MeshRenderer elem in m_listRenderer)
+        {
+            elem.material = p_map;
+        }
+    }
+
     public bool OpenDoor(KeyType p_playerKey)
     {
         if (m_neededKey)
@@ -69,6 +87,7 @@ public class Door : MonoBehaviour
                 Debug.Log($"La cle {m_neededKey.name} est nécessaire");
                 return false;
             }
+            m_isOpen = true;
         }
 
         if (!m_isOpen)

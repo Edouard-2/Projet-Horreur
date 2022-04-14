@@ -47,6 +47,8 @@ public class PlayerInteractions : MonoBehaviour
 
     private bool m_isVariablesReady = true;
 
+    private Key m_currentKey;
+
     private void Awake()
     {
         m_waitForAnimationCompleteKey = new WaitForSeconds(m_waitForAnimationCompleteKeyValue);
@@ -80,7 +82,9 @@ public class PlayerInteractions : MonoBehaviour
                  (m_layerDoorVisible.value & (1 << p_target.gameObject.layer)) > 0)
         {
             //Debug.Log("porte");
-            targetMaterial = p_target.GetComponent<Door>().m_doorMat;
+            Door myDoor = p_target.GetComponent<Door>();
+            targetMaterial = myDoor.m_doorMat;
+            if (myDoor.m_isOpen) targetMaterial = null;
         }
         
         //Récupérer le mat du transvaseur
@@ -131,12 +135,13 @@ public class PlayerInteractions : MonoBehaviour
                 Key myKey = p_target.GetComponent<Key>();
                 if (myKey && myKey.OpenChest(out KeyType key))
                 {
+                    m_currentKey = myKey;
                     if (m_keyObject == null)
                     {
                         
                         m_trousseauKey = key;
                         m_keyObject = p_target.gameObject;
-                        SetUIKey(myKey);
+                        SetUIKey(myKey,false,false);
                     }
                     else
                     {
@@ -146,7 +151,7 @@ public class PlayerInteractions : MonoBehaviour
                         
                         m_trousseauKey = key;
                         m_keyObject = p_target.gameObject;
-                        SetUIKey(myKey);
+                        SetUIKey(myKey,false,false);
                     }
                 }
             }
@@ -164,6 +169,7 @@ public class PlayerInteractions : MonoBehaviour
                     {
                         if (myDoor.m_neededKey)
                         {
+                            SetUIKey(m_currentKey);
                             m_trousseauKey = null;
                             StartCoroutine(m_keyObject.GetComponent<Key>().DestroySelf());
                         }
@@ -196,7 +202,7 @@ public class PlayerInteractions : MonoBehaviour
         }
     }
 
-    private void SetUIKey(Key p_key, bool p_isSet = false)
+    private void SetUIKey(Key p_key, bool p_isSet = false, bool p_eject = true)
     {
         if (m_isVariablesReady)
         {
@@ -205,7 +211,10 @@ public class PlayerInteractions : MonoBehaviour
                 //Lancer la coroutine de sortie
                 m_keyUiAnimator.ResetTrigger(m_triggerEnter);
                 m_keyUiAnimator.SetTrigger(m_triggerExit);
-                StartCoroutine(WaitUntilSetUiKey(p_key, true));
+                if (!p_eject)
+                {
+                    StartCoroutine(WaitUntilSetUiKey(p_key, true));
+                }
                 return;
             }
 
@@ -232,7 +241,7 @@ public class PlayerInteractions : MonoBehaviour
     IEnumerator WaitUntilSetUiKey(Key p_key,bool p_isSet = false)
     {
         yield return m_waitForAnimationCompleteKey;
-        SetUIKey(p_key, p_isSet);
+        SetUIKey(p_key, p_isSet, false);
     }
     
     public void EjectKey(bool p_position = true)
@@ -259,6 +268,7 @@ public class PlayerInteractions : MonoBehaviour
 
             m_trousseauKey = null;
             m_keyObject = null;
+            m_currentKey = null;
             
             //Lancer l'animation de sorite
             m_keyUiAnimator.ResetTrigger(m_triggerEnter);
