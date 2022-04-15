@@ -11,9 +11,12 @@ public class PostProcessApply : MonoBehaviour
     private float m_value;
 
     [Header("Vignette")]
-    [SerializeField, Tooltip("La strength de la vignette")] 
-    [Range(0, 10)]
+    [SerializeField, Tooltip("La strength de la vignette")] [Range(0, 10)]
     public float m_vignetteStrength; 
+    
+    [Header("Depth")]
+    [SerializeField, Tooltip("La strength de la vignette")] [Range(0, 1)]
+    public float m_depthStrenght; 
     
     [Header("Lut Table")]
     [SerializeField, Tooltip("Est ce que la lut est changé par le gradient")]
@@ -24,8 +27,7 @@ public class PostProcessApply : MonoBehaviour
     private Vector2Int m_lutTextSize; 
     [SerializeField, Tooltip("La texture de la lut table")]
     private Texture2D m_lutTexture;
-    [Tooltip("Transition de la lut table")]
-    [Range(0,1)]
+    [Tooltip("Transition de la lut table")] [Range(0,1)]
     public float m_lutTransition;
 
     private void OnEnable()
@@ -51,9 +53,15 @@ public class PostProcessApply : MonoBehaviour
 
         UpdateVignette();
         UpdateLutTable();
+        UpdateDepth();
 
     }
 
+    public void UpdateDepth()
+    {
+        m_material.SetFloat("_DepthLevel", m_depthStrenght);
+    }
+    
     public void UpdateLutTable()
     {
         m_material.SetFloat("_LutColorTransition", m_lutTransition);

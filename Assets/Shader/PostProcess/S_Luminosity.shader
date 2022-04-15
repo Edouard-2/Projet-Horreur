@@ -2,12 +2,19 @@ Shader "Hidden/Luminosity"
 {
     Properties
     {
+        //Main Texture
         _MainTex ("Texture", 2D) = "white" {}
-        [range(0.01,2)]_LuminosityStrength ("Luminosity", float) = 50
-        [range(0,1)]_VignetteStrength ("Vignette Strength", float) = 0
+        //Brightness
+        [range(0.01f,2f)]_LuminosityStrength ("Luminosity", float) = 50
+        //Vignette
+        [range(0f,1f)]_VignetteStrength ("Vignette Strength", float) = 0
+        //Lut Table
         _LutColorGradeTex ("Lut Color Gradient Texture", 2D) = "white" {}
         _LutColorTransition ("Lut Color Transition", float) = 0
+        //Tint
         _Tint ("Color Vignette", Color) = (0,0,0,0)
+        //Depth
+        [range(0f,1f)]_DepthLevel("Depth Level", float) = 1.0
         _DepthRoundness("Depth Roundness", float) = 1.0
         _DepthFactor("Depth Factor", float) = 1.0
         _DepthPow("Depth Pow", float) = 1.0
@@ -52,21 +59,21 @@ Shader "Hidden/Luminosity"
                 return o;
             }
 
+            //Déclaration variables
             sampler2D _MainTex;
             float _LuminosityStrength;
-                        
             float _VignetteStrength;
-            float _DepthRoundness;
             float _LutColorTransition;
+            sampler2D _LutColorGradeTex;
+            float _DepthLevel;
+            float _DepthRoundness;
             float _DepthPow;
             float _DepthFactor;
-            
-            sampler2D _LutColorGradeTex;
-            
             half4 _Tint;
 
             UNITY_DECLARE_DEPTH_TEXTURE(_CameraDepthTexture);
 
+            //Update la lut table
             half4 ColorGrade(sampler2D colorGradeTex, half4 colMain)
             {
                 half4 gradeColor;
@@ -77,6 +84,13 @@ Shader "Hidden/Luminosity"
                 gradeColor = half4(lerp(colMain.rgb, gradeColor.rgb, _LutColorTransition),1);
                 
                 return gradeColor;
+            }
+
+            //Function remap
+            float Unity_Remap_Float(float InMin, float InMax, float OutMin, float OutMax , float Value)
+            {
+                float Out = OutMin + (Value - InMin) * (OutMax - OutMin) / (InMax - InMin);
+                return Out;
             }
 
             fixed4 frag (v2f i) : SV_Target
@@ -101,11 +115,13 @@ Shader "Hidden/Luminosity"
                 half uvDot = dot(uvCoord, uvCoord);
                 half vignette = 1 - uvDot * _VignetteStrength;
                 col.rgb *= vignette;
-                 
-                // compute depth
+
+                //Calculate Depth Strength
+                _DepthPow = Unity_Remap_Float(0, 1, 0, _DepthPow , _DepthLevel);
+                
+                //Compute depth
                 float sceneZ = LinearEyeDepth (SAMPLE_DEPTH_TEXTURE_PROJ(_CameraDepthTexture, UNITY_PROJ_COORD(i.screen_pos)));
                 float depth = sceneZ - i.screen_pos.z;
-
                 fixed depthFading = saturate(abs(pow(depth, _DepthPow)) / _DepthFactor);
 
                 //Faire un arrondit avec le DepthView
