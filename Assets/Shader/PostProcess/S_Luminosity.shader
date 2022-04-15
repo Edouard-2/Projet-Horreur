@@ -116,12 +116,13 @@ Shader "Hidden/Luminosity"
                 fixed depthFading = saturate(abs(pow(depth, _DepthPow)) / _DepthFactor);
 
                 //Faire un arrondit avec le DepthView
-                //half depthFinal = depthFading * (1 - uvDot * _DepthRoundness);
-                //depthFinal = clamp(0,1,depthFinal);
+                half depthFinal = depthFading * (1 - uvDot * _DepthRoundness);
+                depthFinal = clamp(0,1,depthFinal);
                 
-                col = lerp(fixed4 (0,0,0,1), col, depth);
+                col = lerp(col,  depthFinal, depthFinal);
+                //col = lerp(col * depthFinal, col, depth);
                 //col *= depthFinal;
-                return col;
+                return depthFinal;
             }
             ENDCG
         }
