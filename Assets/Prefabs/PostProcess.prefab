@@ -1,50 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &991926608449497920
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 991926608449497934}
-  - component: {fileID: 991926608449497921}
-  m_Layer: 0
-  m_Name: Luminosity
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &991926608449497934
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 991926608449497920}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -558.48114, y: -317.4462, z: 18.043993}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 991926608955106527}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &991926608449497921
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 991926608449497920}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9d6c22a8e199fa244abb0c05d848e9e0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_materialValue: {fileID: 11400000, guid: aebf6a211d06a9b45b8242d0e7184c5c, type: 2}
-  m_material: {fileID: 2100000, guid: 65eb4e4c1ecb4814284b110407d7ac1f, type: 2}
 --- !u!1 &991926608955106526
 GameObject:
   m_ObjectHideFlags: 0
@@ -54,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 991926608955106527}
+  - component: {fileID: 698060145113967874}
   m_Layer: 0
   m_Name: PostProcess
   m_TagString: Untagged
@@ -71,8 +27,55 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 559, y: 314.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 991926608449497934}
+  m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &698060145113967874
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 991926608955106526}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d6c22a8e199fa244abb0c05d848e9e0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_materialValue: {fileID: 11400000, guid: aebf6a211d06a9b45b8242d0e7184c5c, type: 2}
+  m_material: {fileID: 2100000, guid: 65eb4e4c1ecb4814284b110407d7ac1f, type: 2}
+  m_vignetteStrength: 0
+  m_isGradientLut: 1
+  m_gradientLut:
+    serializedVersion: 2
+    key0: {r: 1, g: 0, b: 0, a: 1}
+    key1: {r: 0, g: 0.0005545616, b: 1, a: 1}
+    key2: {r: 0, g: 1, b: 0.18304133, a: 0}
+    key3: {r: 1, g: 1, b: 1, a: 1}
+    key4: {r: 0, g: 0, b: 0, a: 0}
+    key5: {r: 0, g: 0, b: 0, a: 0}
+    key6: {r: 0, g: 0, b: 0, a: 0}
+    key7: {r: 0, g: 0, b: 0, a: 0}
+    ctime0: 0
+    ctime1: 34117
+    ctime2: 65535
+    ctime3: 65535
+    ctime4: 0
+    ctime5: 0
+    ctime6: 0
+    ctime7: 0
+    atime0: 0
+    atime1: 65535
+    atime2: 65535
+    atime3: 65535
+    atime4: 0
+    atime5: 0
+    atime6: 0
+    atime7: 0
+    m_Mode: 0
+    m_NumColorKeys: 3
+    m_NumAlphaKeys: 2
+  m_lutTextSize: {x: 1024, y: 32}
+  m_lutTexture: {fileID: 0}
+  m_lutTransition: 0

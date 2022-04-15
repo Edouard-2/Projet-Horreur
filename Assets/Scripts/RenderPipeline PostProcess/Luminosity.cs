@@ -10,7 +10,8 @@ public class Luminosity : MonoBehaviour
     private float m_value;
 
     [Header("Vignette")]
-    [SerializeField, Tooltip("La strength de la vignette")] [Range(0, 10)]
+    [SerializeField, Tooltip("La strength de la vignette")] 
+    [Range(0, 10)]
     private float m_vignetteStrength; 
     
     [Header("Lut Table")]
@@ -22,7 +23,8 @@ public class Luminosity : MonoBehaviour
     private Vector2Int m_lutTextSize; 
     [SerializeField, Tooltip("La texture de la lut table")]
     private Texture2D m_lutTexture;
-    [SerializeField, Tooltip("Transition de la lut table")][Range(0,1)]
+    [SerializeField, Tooltip("Transition de la lut table")]
+    [Range(0,1)]
     private float m_lutTransition;
 
     private void OnEnable()

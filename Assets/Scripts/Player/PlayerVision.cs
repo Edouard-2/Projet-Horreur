@@ -8,10 +8,18 @@ public class PlayerVision : MonoBehaviour
 {
     //Courbe changement vision
     [Header("Animation Curves")]
-    [SerializeField, Tooltip("Courbe de pourcentage de flou au changement de vision au début de la compétence")] public AnimationCurve m_curveVisionStart;
-    [SerializeField, Tooltip("Courbe de pourcentage de flou au changement de vision é la fin de la compétence")] public AnimationCurve m_curveVisionFinish;
-    [SerializeField, Tooltip("Courbe de pourcentage pour la transparence du matérial allé vers l'état modifié au début de la compétence")] public AnimationCurve m_curveMatVisionStart;
-    [SerializeField, Tooltip("Courbe de pourcentage pour la transparence du matérial allé vers l'état modifié à la fin de la compétence")] public AnimationCurve m_curveMatVisionFinish;
+    [SerializeField, Tooltip("Courbe de pourcentage de flou au changement de vision au début de la compétence")] 
+    public AnimationCurve m_curveVisionStart;
+    [SerializeField, Tooltip("Courbe de pourcentage de flou au changement de vision é la fin de la compétence")] 
+    public AnimationCurve m_curveVisionFinish;
+    [SerializeField, Tooltip("Courbe de pourcentage pour la transparence du matérial allé vers l'état modifié au début de la compétence")] 
+    public AnimationCurve m_curveMatVisionStart;
+    [SerializeField, Tooltip("Courbe de pourcentage pour la transparence du matérial allé vers l'état modifié à la fin de la compétence")] 
+    public AnimationCurve m_curveMatVisionFinish;
+    [SerializeField, Tooltip("Courbe de pourcentage pour le changement de la lut table lorsqu'il passe en vision flou")] 
+    public AnimationCurve m_curveLutStart;
+    [SerializeField, Tooltip("Courbe de pourcentage pour la changement de la lut table lorsqu'il passe en vision net / normal")] 
+    public AnimationCurve m_curveLutFinish;
 
     [Header("Material")]
     [SerializeField, Tooltip("Material de flou pour le postprocess")] public Material m_matVision;
@@ -63,6 +71,13 @@ public class PlayerVision : MonoBehaviour
         }
     }
 
+    private void DoSwitchLut(float p_time, AnimationCurve p_dir)
+    {
+        if (p_time > p_dir.keys[p_dir.length - 1].time)return;
+        
+        
+    }
+
     public void DoSwitchMaterial(float p_time, AnimationCurve p_dir)
     {
         if (p_time > p_dir.keys[p_dir.length - 1].time && m_resetTimeVisionMat)
@@ -95,6 +110,7 @@ public class PlayerVision : MonoBehaviour
             {
                 //DoSwitchMaterial(allé)
                 DoSwitchMaterial(p_time, m_curveMatVisionStart);
+                DoSwitchLut(p_time, m_curveLutStart);
             }
 
             if (!m_resetTimeVisionComp && !m_resetTimeVisionMat)
@@ -117,6 +133,7 @@ public class PlayerVision : MonoBehaviour
             {
                 //DoSwitchMaterial(retour)
                 DoSwitchMaterial(p_time, m_curveMatVisionFinish);
+                DoSwitchLut(p_time, m_curveLutFinish);
             }
             
             if (!m_resetTimeVisionComp && !m_resetTimeVisionMat)
