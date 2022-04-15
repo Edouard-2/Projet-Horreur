@@ -110,19 +110,20 @@ Shader "Hidden/Luminosity"
                 col.rgb *= vignette;
                 
                 // compute depth
-                float sceneZ = LinearEyeDepth (SAMPLE_DEPTH_TEXTURE_PROJ(_CameraDepthTexture, UNITY_PROJ_COORD(i.screenPos)));
-                float depth = sceneZ - i.screenPos.z;
+                //float sceneZ = LinearEyeDepth (SAMPLE_DEPTH_TEXTURE_PROJ(_CameraDepthTexture, UNITY_PROJ_COORD(i.screenPos)));
+                //float depth = sceneZ - i.screenPos.z;
 
-                fixed depthFading = saturate(abs(pow(depth, _DepthPow)) / _DepthFactor);
+                //fixed depthFading = saturate(abs(pow(depth, _DepthPow)) / _DepthFactor);
 
                 //Faire un arrondit avec le DepthView
-                half depthFinal = depthFading * (1 - uvDot * _DepthRoundness);
-                depthFinal = clamp(0,1,depthFinal);
+                //half depthFinal = depthFading * (1 - uvDot * _DepthRoundness);
+                //depthFinal = clamp(0,1,depthFinal);
                 
-                col = lerp(col,  depthFinal, depthFinal);
-                //col = lerp(col * depthFinal, col, depth);
+                //col = lerp(col,fixed4(0,0,0,1), depthFinal);
+                
+                //col = lerp(col * depthFinal, col, col);
                 //col *= depthFinal;
-                return depthFinal;
+                return col;
             }
             ENDCG
         }
