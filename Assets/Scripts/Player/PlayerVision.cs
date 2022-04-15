@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.Serialization;
@@ -7,6 +6,10 @@ using UnityEngine.UI;
 public class PlayerVision : MonoBehaviour
 {
     //Courbe changement vision
+    [Header("Animation Curves")]
+    [SerializeField, Tooltip("Script d'application du post process")] 
+    public PostProcessApply m_postProcessScript;
+    
     [Header("Animation Curves")]
     [SerializeField, Tooltip("Courbe de pourcentage de flou au changement de vision au début de la compétence")] 
     public AnimationCurve m_curveVisionStart;
@@ -54,6 +57,15 @@ public class PlayerVision : MonoBehaviour
             Debug.LogError("Faut mettre l'ui de la BV", this);
             m_isVariableReady = false;
         }
+
+        if (m_postProcessScript == null)
+        {
+            m_postProcessScript = GetComponent<PostProcessApply>();
+            if (m_postProcessScript == null)
+            {
+                Debug.LogError("Mettre le composent PostProcessApply dans le script Player Vision!!!", this);
+            }
+        }
     }
     
     public void DoSwitchView(float p_time, AnimationCurve p_curve)
@@ -73,9 +85,10 @@ public class PlayerVision : MonoBehaviour
 
     private void DoSwitchLut(float p_time, AnimationCurve p_dir)
     {
-        if (p_time > p_dir.keys[p_dir.length - 1].time)return;
+        if (p_time > p_dir.keys[p_dir.length - 1].time) return;
         
-        
+        m_postProcessScript.m_lutTransition =  p_dir.Evaluate(p_time);
+        m_postProcessScript.UpdateLutTable();
     }
 
     public void DoSwitchMaterial(float p_time, AnimationCurve p_dir)
@@ -100,8 +113,6 @@ public class PlayerVision : MonoBehaviour
         {
             if (m_resetTimeVisionComp)
             {
-                //Debug.Log("Start");
-
                 //DoSwitchView(allé)
                 DoSwitchView(p_time, m_curveVisionStart);
             }
@@ -117,6 +128,7 @@ public class PlayerVision : MonoBehaviour
             {
                 //Lancement de la consommation de BV
                 DecreaseBV();
+                m_postProcessScript.UpdateLutTable();
             }
         }
 
@@ -124,7 +136,6 @@ public class PlayerVision : MonoBehaviour
         {
             if (m_resetTimeVisionComp)
             {
-                //Debug.Log("Fin");
                 //DoSwitchView(retour)
                 DoSwitchView(p_time, m_curveVisionFinish);
             }
@@ -140,6 +151,7 @@ public class PlayerVision : MonoBehaviour
             {
                 //Lancement de la recharge de BV
                 IncreaseBV();
+                m_postProcessScript.UpdateLutTable();
             }
         }
     }
@@ -159,6 +171,8 @@ public class PlayerVision : MonoBehaviour
             if (m_uiBv.fillAmount > 0)
             {
                 m_uiBv.fillAmount -= m_speedDecreaseBV * Time.deltaTime;
+                m_postProcessScript.m_vignetteStrength += m_speedDecreaseBV * Time.deltaTime;
+                m_postProcessScript.UpdateVignette();
                 return;
             }
 
@@ -169,9 +183,11 @@ public class PlayerVision : MonoBehaviour
     {
         if (m_isVariableReady)
         {
-            if (m_uiBv.fillAmount <= m_currentBvMax)
+            if (m_uiBv.fillAmount <= m_currentBvMax && m_postProcessScript.m_vignetteStrength > 0.01f)
             {
                 m_uiBv.fillAmount += m_speedDecreaseBV * Time.deltaTime * m_MultiplIncreaseBV;
+                m_postProcessScript.m_vignetteStrength -= m_speedDecreaseBV * Time.deltaTime;
+                m_postProcessScript.UpdateVignette();
             }
         }
     }
@@ -193,6 +209,7 @@ public class PlayerVision : MonoBehaviour
 
             m_currentBvMax -= m_lessBvMax;
             m_uiBv.fillAmount = m_currentBvMax;
+            m_postProcessScript.m_lutTransition = m_currentBvMax;
 
             PlayerManager.Instance.CheckCurrentKey(m_isBlurVision);
 
