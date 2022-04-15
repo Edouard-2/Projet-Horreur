@@ -71,12 +71,6 @@ Shader "Hidden/Luminosity"
                 //Luminosité
                 col.rgb = pow(col, 1 / _LuminosityStrength);
 
-                //Vignette
-                half2 uvCoord = i.uv;
-                uvCoord = (uvCoord - 0.5) * 2;
-                half uvDot = dot(uvCoord, uvCoord);
-                half vignette = 1 - uvDot * _VignetteStrength;
-                col.rgb *= vignette;
 
                 //Apply Tint
                 col.rgb *= _Tint;
@@ -84,6 +78,14 @@ Shader "Hidden/Luminosity"
                 //Lut Color Grading
                 half4 gradeColor = ClolorGrade(_LutColorGradeTex, col);
                 col.rgb *= gradeColor.rgb;
+
+                
+                //Vignette
+                half2 uvCoord = i.uv;
+                uvCoord = (uvCoord - 0.5) * 2;
+                half uvDot = dot(uvCoord, uvCoord);
+                half vignette = 1 - uvDot * _VignetteStrength;
+                col.rgb *= vignette;
                 
                 return col;
             }

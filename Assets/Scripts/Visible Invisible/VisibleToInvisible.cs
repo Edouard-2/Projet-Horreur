@@ -15,8 +15,7 @@ public class VisibleToInvisible : MonoBehaviour
     [SerializeField, Tooltip("False : Mettre le collider de l'objet")]private BoxCollider m_boxCollider;
 
     private bool m_start = true;
-
-
+    
     private void OnEnable()
     {
         PlayerManager.Instance.DoVisibleToInvisibleHandler += DoVisibleToInvisible;
@@ -43,6 +42,8 @@ public class VisibleToInvisible : MonoBehaviour
                 Debug.LogError("Remplit le Renderer Gros Chien !!!", this);
             }
         }
+
+        DoVisibleToInvisible(true);
     }
 
     void DoVisibleToInvisible(bool p_start = false)
