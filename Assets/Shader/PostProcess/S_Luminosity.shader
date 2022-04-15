@@ -114,8 +114,6 @@ Shader "Hidden/Luminosity"
                 
                 fixed4 depthCol = lerp(col,fixed4(0,0,0,1), depthRound);
                 
-                //col = lerp(col * depthFinal, col, col); 
-                //col *= depthFinal;
                 return depthCol;
             }
             ENDCG
