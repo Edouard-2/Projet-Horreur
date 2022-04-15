@@ -1,7 +1,3 @@
-// Upgrade NOTE: replaced 'mul(UNITY_MATRIX_MVP,*)' with 'UnityObjectToClipPos(*)'
-
-// Upgrade NOTE: replaced 'mul(UNITY_MATRIX_MVP,*)' with 'UnityObjectToClipPos(*)'
-
 Shader "Hidden/Luminosity"
 {
     Properties
@@ -33,14 +29,14 @@ Shader "Hidden/Luminosity"
             {
                 float4 vertex : POSITION;
                 float2 uv : TEXCOORD0;
-                float4 screenPos : TEXCOORD1;
+                float4 screen_pos : TEXCOORD1;
             };
 
             struct v2f
             {
                 float2 uv : TEXCOORD0;
                 float4 vertex : SV_POSITION;
-                float4 screenPos : TEXCOORD1;
+                float4 screen_pos : TEXCOORD1;
             };
 
             v2f vert (appdata v)
@@ -50,8 +46,8 @@ Shader "Hidden/Luminosity"
                 o.uv = v.uv;
                 
                 // compute depth
-                o.screenPos = ComputeScreenPos(o.vertex);
-                COMPUTE_EYEDEPTH(o.screenPos.z);
+                o.screen_pos = ComputeScreenPos(o.vertex);
+                COMPUTE_EYEDEPTH(o.screen_pos.z);
                 
                 return o;
             }
@@ -71,9 +67,9 @@ Shader "Hidden/Luminosity"
 
             UNITY_DECLARE_DEPTH_TEXTURE(_CameraDepthTexture);
 
-            half4 ClolorGrade(sampler2D colorGradeTex, half4 colMain)
+            half4 ColorGrade(sampler2D colorGradeTex, half4 colMain)
             {
-                half4 gradeColor = (0,0,0,1);
+                half4 gradeColor;
                 gradeColor.r = tex2D(colorGradeTex, float2(colMain.x,0)).x;
                 gradeColor.g = tex2D(colorGradeTex, float2(colMain.y,0)).y;
                 gradeColor.b = tex2D(colorGradeTex, float2(colMain.z,0)).z;
@@ -86,10 +82,7 @@ Shader "Hidden/Luminosity"
             fixed4 frag (v2f i) : SV_Target
             {
                 fixed4 col = tex2D(_MainTex, i.uv);
-
-                //Tint
-                //col *= _Tint;
-
+                
                 //Luminosité
                 col.rgb = pow(col, 1 / _LuminosityStrength);
 
@@ -98,7 +91,7 @@ Shader "Hidden/Luminosity"
                 col.rgb *= _Tint;
 
                 //Lut Color Grading
-                half4 gradeColor = ClolorGrade(_LutColorGradeTex, col);
+                half4 gradeColor = ColorGrade(_LutColorGradeTex, col);
                 col.rgb *= gradeColor.rgb;
 
                 
@@ -108,22 +101,22 @@ Shader "Hidden/Luminosity"
                 half uvDot = dot(uvCoord, uvCoord);
                 half vignette = 1 - uvDot * _VignetteStrength;
                 col.rgb *= vignette;
-                
+                 
                 // compute depth
-                //float sceneZ = LinearEyeDepth (SAMPLE_DEPTH_TEXTURE_PROJ(_CameraDepthTexture, UNITY_PROJ_COORD(i.screenPos)));
-                //float depth = sceneZ - i.screenPos.z;
+                float sceneZ = LinearEyeDepth (SAMPLE_DEPTH_TEXTURE_PROJ(_CameraDepthTexture, UNITY_PROJ_COORD(i.screen_pos)));
+                float depth = sceneZ - i.screen_pos.z;
 
-                //fixed depthFading = saturate(abs(pow(depth, _DepthPow)) / _DepthFactor);
+                fixed depthFading = saturate(abs(pow(depth, _DepthPow)) / _DepthFactor);
 
                 //Faire un arrondit avec le DepthView
-                //half depthFinal = depthFading * (1 - uvDot * _DepthRoundness);
-                //depthFinal = clamp(0,1,depthFinal);
+                half depthRound = depthFading * (1 - uvDot * _DepthRoundness);
+                depthRound = clamp(0,1,depthRound);
                 
-                //col = lerp(col,fixed4(0,0,0,1), depthFinal);
+                fixed4 depthCol = lerp(col,fixed4(0,0,0,1), depthRound);
                 
-                //col = lerp(col * depthFinal, col, col);
+                //col = lerp(col * depthFinal, col, col); 
                 //col *= depthFinal;
-                return col;
+                return depthCol;
             }
             ENDCG
         }
