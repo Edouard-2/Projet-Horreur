@@ -50,7 +50,7 @@ public class VisibleToInvisible : MonoBehaviour
     {
         if (p_start)
         {
-            Debug.Log("hye start");
+            //Debug.Log("hye start");
             m_start = !m_start;
         }
         

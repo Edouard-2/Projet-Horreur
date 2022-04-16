@@ -19,6 +19,7 @@ public class PostProcessApply : MonoBehaviour
     public float m_vignetteStepMax = 0.88f;
 
     [HideInInspector]public float m_vignetteInitValue;
+    [HideInInspector]public float m_vignetteStartValue;
     
     [Header("Depth")]
     [SerializeField, Tooltip("La strength de la vignette")] [Range(0, 1)]

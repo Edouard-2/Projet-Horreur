@@ -112,24 +112,14 @@ Shader "Hidden/Luminosity"
                 half4 gradeColor = ColorGrade(_LutColorGradeTex, col);
                 col.rgb *= gradeColor.rgb;
 
-                
-                //Vignette
+                //Calculate Depth Strength
+                _DepthPow = Unity_Remap_Float(0, 1, 0, _DepthPow , _DepthLevel);
+
+                //Vignette Setp 1
                 half2 uvCoord = i.uv;
                 uvCoord = uvCoord - 0.5;
                 half uvDot = dot(uvCoord, uvCoord);
-                
-                half vignette = 1- uvDot * _VignetteStrength;
 
-                vignette = smoothstep(_VignetteStrength, _VignetteStrength - _VignetteSoft, vignette);
-                
-                fixed4 vignetteTex = tex2D(_VignetteTex, i.uv);
-                
-                col.rgb = lerp(col, vignetteTex, vignette);
-                //col.rgb *= vignette;
-
-                //Calculate Depth Strength
-                _DepthPow = Unity_Remap_Float(0, 1, 0, _DepthPow , _DepthLevel);
-                
                 //Compute depth
                 float sceneZ = LinearEyeDepth (SAMPLE_DEPTH_TEXTURE_PROJ(_CameraDepthTexture, UNITY_PROJ_COORD(i.screen_pos)));
                 float depth = sceneZ - i.screen_pos.z;
@@ -138,8 +128,13 @@ Shader "Hidden/Luminosity"
                 //Faire un arrondit avec le DepthView
                 half depthRound = depthFading * (1 - uvDot * _DepthRoundness);
                 depthRound = clamp(0,1,depthRound);
-                
                 fixed4 depthCol = lerp(col,fixed4(0,0,0,1), depthRound);
+                
+                //Vignette Setp 2
+                half vignette = 1- uvDot * _VignetteStrength;
+                vignette = smoothstep(_VignetteStrength, _VignetteStrength - _VignetteSoft, vignette);
+                fixed4 vignetteTex = tex2D(_VignetteTex, i.uv);
+                depthCol.rgb = lerp(depthCol, vignetteTex, vignette);
                 
                 return depthCol;
             }

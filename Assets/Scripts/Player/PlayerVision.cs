@@ -144,7 +144,9 @@ public class PlayerVision : MonoBehaviour
             {
                 //DoSwitchMaterial(retour)
                 DoSwitchMaterial(p_time, m_curveMatVisionFinish);
-                DoSwitchLut(p_time, m_curveLutFinish);
+                
+                    DoSwitchLut(p_time, m_curveLutFinish);
+                
             }
             
             if (!m_resetTimeVisionComp && !m_resetTimeVisionMat)
@@ -190,7 +192,7 @@ public class PlayerVision : MonoBehaviour
             {
                 m_uiBv.fillAmount += m_speedDecreaseBV * Time.deltaTime * m_MultiplIncreaseBV;
                 
-                if( m_postProcessScript.m_vignetteStrength > m_postProcessScript.m_vignetteInitValue)
+                if( m_postProcessScript.m_vignetteStrength > m_postProcessScript.m_vignetteStartValue)
                 {
                     m_postProcessScript.m_vignetteStrength -= m_speedDecreaseBV * Time.deltaTime * m_MultiplIncreaseBV * m_postProcessScript.m_vignetteStepMultiplier;
                     m_postProcessScript.UpdateVignette();
@@ -215,19 +217,59 @@ public class PlayerVision : MonoBehaviour
             PlayerManager.Instance.InitVariableChangement();
 
             m_currentBvMax -= m_lessBvMax;
+            
+            float t = Mathf.InverseLerp(0,1,1 - m_currentBvMax);
+            float value = Mathf.Lerp(m_postProcessScript.m_vignetteInitValue,m_postProcessScript.m_vignetteStepMax,t);
+            
+            m_postProcessScript.m_vignetteStartValue = value;
+            
             m_uiBv.fillAmount = m_currentBvMax;
             m_postProcessScript.m_lutTransition = m_currentBvMax;
 
             PlayerManager.Instance.CheckCurrentKey(m_isBlurVision);
 
             StartCoroutine(WaitStopBlind());
+            StartCoroutine(ActiveBlindEffectDepth(1,0.02f));
+            StartCoroutine(ActiveBlindEffectVignette(-1));
         }
     }
 
-    public IEnumerator WaitStopBlind()
+    IEnumerator WaitStopBlind()
     {
         m_readyInitVision = false;
         yield return new WaitForSeconds(m_blindTime);
-        m_readyInitVision = true;
+        StartCoroutine(ActiveBlindEffectDepth(-1,0.0008f));
+        StartCoroutine(ActiveBlindEffectVignette(1));
+        
+    }
+
+    IEnumerator ActiveBlindEffectDepth(float p_dir, float p_step)
+    {
+        yield return new WaitForSeconds(0.01f);
+        
+        if (m_postProcessScript.m_depthStrenght < 0.9f && p_dir > 0 
+            ||m_postProcessScript.m_depthStrenght > 0 && p_dir < 0 )
+        {
+            m_postProcessScript.m_depthStrenght += p_step * p_dir;
+            m_postProcessScript.UpdateDepth();
+            StartCoroutine(ActiveBlindEffectDepth(p_dir, p_step));
+        }
+        else if( m_postProcessScript.m_depthStrenght <= 0 )
+        {
+            Debug.Log("RemmettreTout");
+            m_readyInitVision = true;
+        }
+    }
+
+    IEnumerator ActiveBlindEffectVignette(float p_dir)
+    {
+        yield return new WaitForSeconds(0.01f);
+        
+        if (m_postProcessScript.m_vignetteStrength > m_postProcessScript.m_vignetteStartValue)
+        {
+            m_postProcessScript.m_vignetteStrength += 0.001f * p_dir;
+            m_postProcessScript.UpdateVignette();
+            StartCoroutine(ActiveBlindEffectVignette(p_dir));
+        }
     }
 }
