@@ -250,16 +250,19 @@ public class PlayerVision : MonoBehaviour
         {
             if (Time.time - m_timeLaunchBlind < m_blindTime)
             {
+                Debug.Log("Setp 1");
                 LaunchCoroutineEffects(1, 0.02f);
                 return;
             }
-            LaunchCoroutineEffects(-1, 0.0008f);
+            Debug.Log("Setp 2");
+            Debug.Log(Time.time - m_timeLaunchBlind);
+            StartCoroutine(WaitStopBlind(Time.time - m_timeLaunchBlind));
         }
     }
 
     private void LaunchCoroutineEffects(float p_dir, float p_stepDepth)
     {
-        StartCoroutine(ActiveBlindEffectDepth(p_dir,p_stepDepth));
+        StartCoroutine(ActiveBlindEffectDepth(p_dir, p_stepDepth));
         StartCoroutine(ActiveBlindEffectVignette(-p_dir));
     }
 
