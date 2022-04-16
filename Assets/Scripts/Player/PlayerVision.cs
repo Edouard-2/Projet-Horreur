@@ -171,8 +171,11 @@ public class PlayerVision : MonoBehaviour
             if (m_uiBv.fillAmount > 0)
             {
                 m_uiBv.fillAmount -= m_speedDecreaseBV * Time.deltaTime;
-                m_postProcessScript.m_vignetteStrength += m_speedDecreaseBV * Time.deltaTime;
-                m_postProcessScript.UpdateVignette();
+                if (m_postProcessScript.m_vignetteStrength < m_postProcessScript.m_vignetteStepMax)
+                {
+                    m_postProcessScript.m_vignetteStrength += m_speedDecreaseBV * Time.deltaTime * m_postProcessScript.m_vignetteStepMultiplier;
+                    m_postProcessScript.UpdateVignette();
+                }
                 return;
             }
 
@@ -183,11 +186,15 @@ public class PlayerVision : MonoBehaviour
     {
         if (m_isVariableReady)
         {
-            if (m_uiBv.fillAmount <= m_currentBvMax && m_postProcessScript.m_vignetteStrength > 0.01f)
+            if (m_uiBv.fillAmount <= m_currentBvMax )
             {
                 m_uiBv.fillAmount += m_speedDecreaseBV * Time.deltaTime * m_MultiplIncreaseBV;
-                m_postProcessScript.m_vignetteStrength -= m_speedDecreaseBV * Time.deltaTime;
-                m_postProcessScript.UpdateVignette();
+                
+                if( m_postProcessScript.m_vignetteStrength > m_postProcessScript.m_vignetteInitValue)
+                {
+                    m_postProcessScript.m_vignetteStrength -= m_speedDecreaseBV * Time.deltaTime * m_MultiplIncreaseBV * m_postProcessScript.m_vignetteStepMultiplier;
+                    m_postProcessScript.UpdateVignette();
+                }
             }
         }
     }

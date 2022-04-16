@@ -11,8 +11,14 @@ public class PostProcessApply : MonoBehaviour
     private float m_value;
 
     [Header("Vignette")]
-    [SerializeField, Tooltip("La strength de la vignette")] [Range(0, 10)]
+    [SerializeField, Tooltip("La strength de la vignette")] [Range(0.65f, 1)]
     public float m_vignetteStrength; 
+    [SerializeField, Tooltip("Lorsque la vignette apparait sur l'écran c'est sa vitesse de fade in")] [Range(0, 0.5f)]
+    public float m_vignetteStepMultiplier = 0.25f;
+    [SerializeField, Tooltip("Strength max que la vignette pourra avoir dans le jeu")] [Range(0, 1)]
+    public float m_vignetteStepMax = 0.88f;
+
+    [HideInInspector]public float m_vignetteInitValue;
     
     [Header("Depth")]
     [SerializeField, Tooltip("La strength de la vignette")] [Range(0, 1)]
@@ -42,6 +48,7 @@ public class PostProcessApply : MonoBehaviour
 
     private void Awake()
     {
+        m_vignetteInitValue = m_vignetteStrength;
         m_materialValue.InitValue();
         UpdateMaterial();
     }

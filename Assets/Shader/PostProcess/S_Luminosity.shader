@@ -5,16 +5,18 @@ Shader "Hidden/Luminosity"
         //Main Texture
         _MainTex ("Texture", 2D) = "white" {}
         //Brightness
-        [range(0.01f,2f)]_LuminosityStrength ("Luminosity", float) = 50
+        _LuminosityStrength ("Luminosity", float) = 50
         //Vignette
-        [range(0f,1f)]_VignetteStrength ("Vignette Strength", float) = 0
+        _VignetteTex ("Texture de la vignette", 2D) = "white" {}
+        _VignetteStrength ("Vignette Strength", float) = 0
+        _VignetteSoft ("Vignette Softness", float) = 0
         //Lut Table
         _LutColorGradeTex ("Lut Color Gradient Texture", 2D) = "white" {}
         _LutColorTransition ("Lut Color Transition", float) = 0
         //Tint
         _Tint ("Color Vignette", Color) = (0,0,0,0)
         //Depth
-        [range(0f,1f)]_DepthLevel("Depth Level", float) = 1.0
+        _DepthLevel("Depth Level", float) = 1.0
         _DepthRoundness("Depth Roundness", float) = 1.0
         _DepthFactor("Depth Factor", float) = 1.0
         _DepthPow("Depth Pow", float) = 1.0
@@ -62,7 +64,9 @@ Shader "Hidden/Luminosity"
             //Déclaration variables
             sampler2D _MainTex;
             float _LuminosityStrength;
+            sampler2D _VignetteTex;
             float _VignetteStrength;
+            float _VignetteSoft;
             float _LutColorTransition;
             sampler2D _LutColorGradeTex;
             float _DepthLevel;
@@ -111,10 +115,17 @@ Shader "Hidden/Luminosity"
                 
                 //Vignette
                 half2 uvCoord = i.uv;
-                uvCoord = (uvCoord - 0.5) * 2;
+                uvCoord = uvCoord - 0.5;
                 half uvDot = dot(uvCoord, uvCoord);
-                half vignette = 1 - uvDot * _VignetteStrength;
-                col.rgb *= vignette;
+                
+                half vignette = 1- uvDot * _VignetteStrength;
+
+                vignette = smoothstep(_VignetteStrength, _VignetteStrength - _VignetteSoft, vignette);
+                
+                fixed4 vignetteTex = tex2D(_VignetteTex, i.uv);
+                
+                col.rgb = lerp(col, vignetteTex, vignette);
+                //col.rgb *= vignette;
 
                 //Calculate Depth Strength
                 _DepthPow = Unity_Remap_Float(0, 1, 0, _DepthPow , _DepthLevel);
