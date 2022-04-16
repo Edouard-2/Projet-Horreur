@@ -50,6 +50,8 @@ public class GameManager : Singleton<GameManager>
         {
             TimerManager.Instance.PauseOrRestartTimer(false);
             
+            PlayerManager.Instance.m_visionScript.StopAllCoroutines();
+            
             m_monsterEventEnd.Raise();
             m_state = States.PAUSE;
             DoUiActivePauseGame?.Invoke();
@@ -57,6 +59,8 @@ public class GameManager : Singleton<GameManager>
         }
         
         TimerManager.Instance.PauseOrRestartTimer(true);
+        
+        PlayerManager.Instance.m_visionScript.StopOrStartBlindEffects();
         
         m_monsterEventStart.Raise(false);
         m_state = States.PLAYING;

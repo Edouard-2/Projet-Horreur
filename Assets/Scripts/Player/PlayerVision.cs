@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Serialization;
 using UnityEngine.UI;
@@ -49,6 +50,11 @@ public class PlayerVision : MonoBehaviour
     public ChangeMaterial DoChangeMaterial;
 
     private bool m_isVariableReady = true;
+
+    private float m_timeLaunchBlind;
+
+    private Coroutine m_blindCoroutine;
+    private List<Coroutine> m_listCoroutine;
 
     private void Awake()
     {
@@ -109,6 +115,7 @@ public class PlayerVision : MonoBehaviour
 
     public void IncreaseOrDecreaseMat(float p_time)
     {
+        //Optimiser les m_isBlurVision
         if (m_isBlurVision == 0)
         {
             if (m_resetTimeVisionComp)
@@ -184,6 +191,7 @@ public class PlayerVision : MonoBehaviour
             BlindMoment();
         }
     }
+    
     public void IncreaseBV()
     {
         if (m_isVariableReady)
@@ -204,6 +212,7 @@ public class PlayerVision : MonoBehaviour
     public void ResetCurrentBV()
     {
         m_currentBvMax = m_BvMax;
+        m_postProcessScript.m_vignetteStartValue = m_postProcessScript.m_vignetteInitValue;
     }
 
     public void BlindMoment()
@@ -218,6 +227,7 @@ public class PlayerVision : MonoBehaviour
 
             m_currentBvMax -= m_lessBvMax;
             
+            //Augmenter la vignette de la BV en fonction de la BV max
             float t = Mathf.InverseLerp(0,1,1 - m_currentBvMax);
             float value = Mathf.Lerp(m_postProcessScript.m_vignetteInitValue,m_postProcessScript.m_vignetteStepMax,t);
             
@@ -228,19 +238,37 @@ public class PlayerVision : MonoBehaviour
 
             PlayerManager.Instance.CheckCurrentKey(m_isBlurVision);
 
-            StartCoroutine(WaitStopBlind());
-            StartCoroutine(ActiveBlindEffectDepth(1,0.02f));
-            StartCoroutine(ActiveBlindEffectVignette(-1));
+            m_blindCoroutine = StartCoroutine(WaitStopBlind(m_blindTime));
+
+            LaunchCoroutineEffects(1, 0.02f);
         }
     }
 
-    IEnumerator WaitStopBlind()
+    public void StopOrStartBlindEffects()
+    {
+        if (!m_readyInitVision)
+        {
+            if (Time.time - m_timeLaunchBlind < m_blindTime)
+            {
+                LaunchCoroutineEffects(1, 0.02f);
+                return;
+            }
+            LaunchCoroutineEffects(-1, 0.0008f);
+        }
+    }
+
+    private void LaunchCoroutineEffects(float p_dir, float p_stepDepth)
+    {
+        StartCoroutine(ActiveBlindEffectDepth(p_dir,p_stepDepth));
+        StartCoroutine(ActiveBlindEffectVignette(-p_dir));
+    }
+
+    IEnumerator WaitStopBlind(float p_time)
     {
         m_readyInitVision = false;
-        yield return new WaitForSeconds(m_blindTime);
-        StartCoroutine(ActiveBlindEffectDepth(-1,0.0008f));
-        StartCoroutine(ActiveBlindEffectVignette(1));
-        
+        m_timeLaunchBlind = Time.time;
+        yield return new WaitForSeconds(p_time);
+        LaunchCoroutineEffects(-1,0.0008f);
     }
 
     IEnumerator ActiveBlindEffectDepth(float p_dir, float p_step)
