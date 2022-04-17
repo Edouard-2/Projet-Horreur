@@ -7,7 +7,7 @@ using UnityEngine.UI;
 public class PlayerVision : MonoBehaviour
 {
     //Courbe changement vision
-    [Header("Animation Curves")]
+    [Header("Post Process")]
     [SerializeField, Tooltip("Script d'application du post process")] 
     public PostProcessApply m_postProcessScript;
     
@@ -26,18 +26,24 @@ public class PlayerVision : MonoBehaviour
     public AnimationCurve m_curveLutFinish;
 
     [Header("Material")]
-    [SerializeField, Tooltip("Material de flou pour le postprocess")] public Material m_matVision;
+    [SerializeField, Tooltip("Material de flou pour le postprocess")] 
+    public Material m_matVision;
     [HideInInspector]public bool m_resetTimeVisionComp = false;
     [HideInInspector]public bool m_resetTimeVisionMat = false;
-    [FormerlySerializedAs("m_readyEnd")][HideInInspector] public int m_isBlurVision = 1;
+    [FormerlySerializedAs("m_readyEnd")][HideInInspector] 
+    public int m_isBlurVision = 1;
 
     //BV
     [Header("BV")]
     [SerializeField, Tooltip("BV visuel")] public Image m_uiBv;
-    [SerializeField, Tooltip("La vitesse de consommation de la BV (en vision flou)")] public float m_speedDecreaseBV = 0.1f;
-    [SerializeField, Tooltip("La vitesse de consommation de la BV (en vision flou)")] public float m_MultiplIncreaseBV = 2f;
-    [SerializeField, Tooltip("le temps pendant lequel le joueur est aveugle")] public float m_blindTime = 10f;
-    [SerializeField, Tooltip("Lorsque le joueur perd de la BV max aprés avoir été aveugle")] public float m_lessBvMax = 0.1f;
+    [SerializeField, Tooltip("La vitesse de consommation de la BV (en vision flou)")] 
+    public float m_speedDecreaseBV = 0.1f;
+    [SerializeField, Tooltip("La vitesse de consommation de la BV (en vision flou)")] 
+    public float m_MultiplIncreaseBV = 2f;
+    [SerializeField, Tooltip("le temps pendant lequel le joueur est aveugle")] 
+    public float m_blindTime = 10f;
+    [SerializeField, Tooltip("Lorsque le joueur perd de la BV max aprés avoir été aveugle")] 
+    public float m_lessBvMax = 0.1f;
     [HideInInspector]public float m_BvMax = 1f;
     [HideInInspector]public float m_currentBvMax = 1f;
     [HideInInspector]public bool m_readyInitVision = true;
@@ -54,6 +60,7 @@ public class PlayerVision : MonoBehaviour
     private float m_timeLaunchBlind;
     [HideInInspector] public float m_timeStopBlind;
 
+    private WaitForSeconds m_waitDepthVignette = new WaitForSeconds(0.01f);
     private Coroutine m_blindCoroutine;
     private List<Coroutine> m_listCoroutine;
 
@@ -241,7 +248,8 @@ public class PlayerVision : MonoBehaviour
             PlayerManager.Instance.CheckCurrentKey(m_isBlurVision);
 
             m_blindCoroutine = StartCoroutine(WaitStopBlind(m_blindTime));
-
+            
+            PlayerManager.Instance.DoSwitchLayer(true);
             LaunchCoroutineEffects(1, 0.02f);
         }
     }
@@ -252,13 +260,12 @@ public class PlayerVision : MonoBehaviour
         {
             if (m_timeStopBlind - m_timeLaunchBlind < m_blindTime)
             {
-                Debug.Log("Setp 1");
+                //Debug.Log("Setp 1");
                 LaunchCoroutineEffects(1, 0.02f);
-                Debug.Log(m_timeStopBlind - m_timeLaunchBlind);
                 StartCoroutine(WaitStopBlind(m_timeStopBlind - m_timeLaunchBlind));
                 return;
             }
-            Debug.Log("Setp 2");
+            //Debug.Log("Setp 2");
             LaunchCoroutineEffects(-1, 0.0008f);
         }
     }
@@ -282,7 +289,7 @@ public class PlayerVision : MonoBehaviour
 
     IEnumerator ActiveBlindEffectDepth(float p_dir, float p_step)
     {
-        yield return new WaitForSeconds(0.01f);
+        yield return m_waitDepthVignette;
         
         if (m_postProcessScript.m_depthStrenght < 0.9f && p_dir > 0 
             ||m_postProcessScript.m_depthStrenght > 0 && p_dir < 0 )
@@ -294,6 +301,7 @@ public class PlayerVision : MonoBehaviour
         else if( m_postProcessScript.m_depthStrenght <= 0 )
         {
             Debug.Log("RemmettreTout");
+            PlayerManager.Instance.DoSwitchLayer(false);
             m_timeLaunchBlind = 0;
             m_readyInitVision = true;
         }
@@ -301,7 +309,7 @@ public class PlayerVision : MonoBehaviour
 
     IEnumerator ActiveBlindEffectVignette(float p_dir)
     {
-        yield return new WaitForSeconds(0.01f);
+        yield return m_waitDepthVignette;
         
         if (m_postProcessScript.m_vignetteStrength > m_postProcessScript.m_vignetteStartValue)
         {

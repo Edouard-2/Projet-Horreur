@@ -41,7 +41,7 @@ public class PlayerManager : Singleton<PlayerManager>
     public PlayerVision m_visionScript;
 
     [SerializeField, Tooltip("Script player door")]
-    private PlayerInteractions m_interactionsScript;
+    public PlayerInteractions m_interactionsScript;
     
     //Death Screen
     [Header("Death Screen")]
@@ -85,12 +85,12 @@ public class PlayerManager : Singleton<PlayerManager>
     }
 
     public delegate void RotateKeys();
-
     public RotateKeys DoRotateKeys;
 
     public delegate void DoVisionSwitch(bool p_start = false);
-
     public DoVisionSwitch DoVisibleToInvisibleHandler;
+    public delegate void SwitchLayer(bool p_start);
+    public SwitchLayer DoSwitchLayer;
 
     public delegate void FirstKeyPos();
 
