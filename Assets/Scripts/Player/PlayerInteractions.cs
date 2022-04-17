@@ -8,7 +8,7 @@ public class PlayerInteractions : MonoBehaviour
 {
     //LayerMask Visible
     [Header("Layer Neutral")]
-    [SerializeField, Tooltip("Layer pour les door")] private LayerMask m_layerDoor;
+    [SerializeField, Tooltip("Layer pour les door")] public LayerMask m_layerDoor;
     [SerializeField, Tooltip("Layer pour les key")] public LayerMask m_layerKey;
     [SerializeField, Tooltip("Layer pour les transvaseur")] private LayerMask m_layerTransvaseur;
     
