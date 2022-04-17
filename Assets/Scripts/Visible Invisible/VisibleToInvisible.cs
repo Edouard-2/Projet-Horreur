@@ -32,10 +32,6 @@ public class VisibleToInvisible : MonoBehaviour
 
     private void Awake()
     {
-        
-        m_test.
-        m_test.Play();
-        
         m_layer = gameObject.layer;
         
         if(m_boxCollider == null && m_needCollider)
@@ -57,7 +53,7 @@ public class VisibleToInvisible : MonoBehaviour
                 Debug.LogError("Remplit le Renderer Gros Chien !!!", this);
             }
         }
-
+        
         DoVisibleToInvisible(true);
     }
 
