@@ -52,6 +52,7 @@ public class PlayerVision : MonoBehaviour
     private bool m_isVariableReady = true;
 
     private float m_timeLaunchBlind;
+    [HideInInspector] public float m_timeStopBlind;
 
     private Coroutine m_blindCoroutine;
     private List<Coroutine> m_listCoroutine;
@@ -213,6 +214,7 @@ public class PlayerVision : MonoBehaviour
     {
         m_currentBvMax = m_BvMax;
         m_postProcessScript.m_vignetteStartValue = m_postProcessScript.m_vignetteInitValue;
+        m_postProcessScript.UpdateVignette();
     }
 
     public void BlindMoment()
@@ -248,15 +250,16 @@ public class PlayerVision : MonoBehaviour
     {
         if (!m_readyInitVision)
         {
-            if (Time.time - m_timeLaunchBlind < m_blindTime)
+            if (m_timeStopBlind - m_timeLaunchBlind < m_blindTime)
             {
                 Debug.Log("Setp 1");
                 LaunchCoroutineEffects(1, 0.02f);
+                Debug.Log(m_timeStopBlind - m_timeLaunchBlind);
+                StartCoroutine(WaitStopBlind(m_timeStopBlind - m_timeLaunchBlind));
                 return;
             }
             Debug.Log("Setp 2");
-            Debug.Log(Time.time - m_timeLaunchBlind);
-            StartCoroutine(WaitStopBlind(Time.time - m_timeLaunchBlind));
+            LaunchCoroutineEffects(-1, 0.0008f);
         }
     }
 
@@ -269,7 +272,10 @@ public class PlayerVision : MonoBehaviour
     IEnumerator WaitStopBlind(float p_time)
     {
         m_readyInitVision = false;
-        m_timeLaunchBlind = Time.time;
+        if (m_timeLaunchBlind == 0)
+        {
+            m_timeLaunchBlind = Time.time;
+        }
         yield return new WaitForSeconds(p_time);
         LaunchCoroutineEffects(-1,0.0008f);
     }
@@ -288,6 +294,7 @@ public class PlayerVision : MonoBehaviour
         else if( m_postProcessScript.m_depthStrenght <= 0 )
         {
             Debug.Log("RemmettreTout");
+            m_timeLaunchBlind = 0;
             m_readyInitVision = true;
         }
     }
