@@ -96,8 +96,6 @@ public class TimerManager : Singleton<TimerManager>
         
         UpdateStringValue();
         
-        //Debug.Log(m_valueString);
-        
         m_currentCoroutine = StartCoroutine(IncreaseTime());
     }
 

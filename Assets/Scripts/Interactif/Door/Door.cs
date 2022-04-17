@@ -109,6 +109,7 @@ public class Door : MonoBehaviour
         if (m_isOpen)
         {
             Debug.Log("Close");
+            m_doorAnimator.ResetTrigger(m_openHash);
             m_doorAnimator.SetTrigger(m_closeHash);
             m_isOpen = false;
             return;
@@ -116,6 +117,7 @@ public class Door : MonoBehaviour
 
         if ((m_layerMonstre.value & (1 << p_target.gameObject.layer)) > 0)
         {
+            m_doorAnimator.ResetTrigger(m_openHash);
             m_doorAnimator.SetTrigger(m_openHash);
         }
     }
