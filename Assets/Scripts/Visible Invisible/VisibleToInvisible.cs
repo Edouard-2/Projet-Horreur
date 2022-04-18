@@ -1,5 +1,7 @@
 using UnityEngine;
 using UnityEngine.Rendering;
+using FMOD.Studio;
+using FMODUnity;
 
 [RequireComponent(typeof(VisibleToInvisibleMaterial))]
 public class VisibleToInvisible : MonoBehaviour
@@ -16,6 +18,8 @@ public class VisibleToInvisible : MonoBehaviour
 
     private bool m_start = true;
     private int m_layer;
+
+    private StudioEventEmitter m_test;
     
     private void OnEnable()
     {
@@ -49,7 +53,7 @@ public class VisibleToInvisible : MonoBehaviour
                 Debug.LogError("Remplit le Renderer Gros Chien !!!", this);
             }
         }
-
+        
         DoVisibleToInvisible(true);
     }
 
@@ -57,18 +61,6 @@ public class VisibleToInvisible : MonoBehaviour
     {
         if (p_start)
         {
-            /*if ((m_layer & (1 << LayerMask.NameToLayer("InvisibleToVisibleDoor"))) > 0)
-            {
-                gameObject.layer = LayerMask.NameToLayer("Doors");
-            }
-            else if ((m_layer & (1 << LayerMask.NameToLayer("InvisibleToVisibleKey"))) > 0)
-            {
-                gameObject.layer = LayerMask.NameToLayer("Keys");
-            }
-            else if ((m_layer & (1 << LayerMask.NameToLayer("InvisibleToVisibleTrasvaseur"))) > 0)
-            {
-                gameObject.layer = LayerMask.NameToLayer("Transvaseur");
-            }*/
             if ((m_layer == LayerMask.NameToLayer("Invisibility")) )
             {
                 gameObject.layer = LayerMask.NameToLayer("Default");
