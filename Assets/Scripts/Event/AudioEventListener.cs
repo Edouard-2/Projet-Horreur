@@ -1,6 +1,7 @@
 using UnityEngine;
 using FMODUnity;
 
+[RequireComponent(typeof(StudioEventEmitter))]
 public class AudioEventListener : MonoBehaviour
 {
     [SerializeField,Tooltip("L'event qui déclenchera le son")]private EventsTrigger m_event;
