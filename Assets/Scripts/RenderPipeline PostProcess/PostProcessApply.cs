@@ -7,7 +7,7 @@ public class PostProcessApply : MonoBehaviour
     [SerializeField, Tooltip("Scriptableobjet avec la valeur de la Luminosité")] private UIOptionValue m_materialValue;
     
     [Header("Material")]
-    [SerializeField, Tooltip("Matrial post process de la Luminosité")]private Material m_material;
+    [SerializeField, Tooltip("Matrial post process")]private Material m_material;
     private float m_value;
 
     [Header("Vignette")]
