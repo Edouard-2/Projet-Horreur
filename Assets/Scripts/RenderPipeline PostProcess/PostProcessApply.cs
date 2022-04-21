@@ -54,6 +54,11 @@ public class PostProcessApply : MonoBehaviour
         UpdateMaterial();
     }
 
+    private void Start()
+    {
+        if (m_isGradientLut) GenerateLutTexture();
+    }
+
     private void OnValidate()
     {
         //Debug.Log("Validate");
