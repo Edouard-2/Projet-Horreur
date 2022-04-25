@@ -9,6 +9,16 @@ public class UISettingsEvent : MonoBehaviour
     [SerializeField, Tooltip("Le textMeshPro sur l'obj")]
     private TextMeshProUGUI m_textMeshPro;
 
+    private void OnEnable()
+    {
+        m_optionValue.OnUpdateText += UpdateText;
+    }
+
+    private void OnDisable()
+    {
+        m_optionValue.OnUpdateText -= UpdateText;
+    }
+    
     private void Awake()
     {
         if (m_textMeshPro == null)
@@ -27,15 +37,6 @@ public class UISettingsEvent : MonoBehaviour
         UpdateText();
     }
 
-    private void OnEnable()
-    {
-        m_optionValue.OnUpdateText += UpdateText;
-    }
-
-    private void OnDisable()
-    {
-        m_optionValue.OnUpdateText -= UpdateText;
-    }
 
     private void UpdateText()
     {

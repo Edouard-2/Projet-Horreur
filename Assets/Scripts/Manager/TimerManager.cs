@@ -44,13 +44,13 @@ public class TimerManager : Singleton<TimerManager>
         if (p_isStart && !m_isStart)
         {
             m_isStart = true;
+            m_timerHourValue = m_minuteStart;
+            m_timerMinuteValue = 0;
             PauseOrRestartTimer(p_isStart);
             return;
         }
-
-        if (p_isStart) return;
-        
         m_isStart = false;
+        
         PauseOrRestartTimer(p_isStart);
     }
     
@@ -63,9 +63,6 @@ public class TimerManager : Singleton<TimerManager>
         if (p_isStart)
         {
             m_isRunning = true;
-            
-            m_timerHourValue = m_minuteStart;
-            m_timerMinuteValue = 0;
             
             m_currentCoroutine = StartCoroutine(IncreaseTime());
             return;
@@ -98,8 +95,6 @@ public class TimerManager : Singleton<TimerManager>
         }
         
         UpdateStringValue();
-        
-        //Debug.Log(m_valueString);
         
         m_currentCoroutine = StartCoroutine(IncreaseTime());
     }

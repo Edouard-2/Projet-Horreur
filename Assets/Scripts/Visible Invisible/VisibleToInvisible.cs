@@ -1,5 +1,7 @@
 using UnityEngine;
 using UnityEngine.Rendering;
+using FMOD.Studio;
+using FMODUnity;
 
 [RequireComponent(typeof(VisibleToInvisibleMaterial))]
 public class VisibleToInvisible : MonoBehaviour
@@ -15,15 +17,23 @@ public class VisibleToInvisible : MonoBehaviour
     [SerializeField, Tooltip("False : Mettre le collider de l'objet")]private BoxCollider m_boxCollider;
 
     private bool m_start = true;
+    private int m_layer;
 
-
+    private StudioEventEmitter m_test;
+    
     private void OnEnable()
     {
         PlayerManager.Instance.DoVisibleToInvisibleHandler += DoVisibleToInvisible;
+        if (m_isVisibleToInvisible)
+        {
+            PlayerManager.Instance.DoSwitchLayer += DoSwitchLayerVisible;
+        }
     }
 
     private void Awake()
     {
+        m_layer = gameObject.layer;
+        
         if(m_boxCollider == null && m_needCollider)
         {
             m_boxCollider = GetComponent<BoxCollider>();
@@ -43,13 +53,41 @@ public class VisibleToInvisible : MonoBehaviour
                 Debug.LogError("Remplit le Renderer Gros Chien !!!", this);
             }
         }
+        
+        DoVisibleToInvisible(true);
     }
 
+    private void DoSwitchLayerVisible(bool p_start)
+    {
+        if (p_start)
+        {
+            if ((m_layer == LayerMask.NameToLayer("Invisibility")) )
+            {
+                gameObject.layer = LayerMask.NameToLayer("Default");
+            }
+            else if ((m_layer == LayerMask.NameToLayer("VisibleToInvisibleDoor")) )
+            {
+                gameObject.layer = LayerMask.NameToLayer("Doors");
+            }
+            else if ((m_layer == LayerMask.NameToLayer("VisibleToInvisibleKey")))
+            {
+                gameObject.layer = LayerMask.NameToLayer("Keys");
+            }
+            else if ((m_layer ==  LayerMask.NameToLayer("InvisibleToVisibleTrasvaseur")))
+            {
+                gameObject.layer = LayerMask.NameToLayer("Transvaseur");
+            }
+
+            return;
+        }
+        gameObject.layer = m_layer;
+    }
+    
     void DoVisibleToInvisible(bool p_start = false)
     {
         if (p_start)
         {
-            Debug.Log("hye start");
+            //Debug.Log("hye start");
             m_start = !m_start;
         }
         

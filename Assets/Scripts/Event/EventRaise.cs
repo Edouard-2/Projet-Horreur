@@ -10,6 +10,9 @@ public class EventRaise : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if(m_event != null) m_event.Raise(m_bool);
+        if (m_event == null) return;
+        
+        m_event.Raise(m_bool);
+        gameObject.SetActive(false);
     }
 }
