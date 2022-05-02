@@ -59,11 +59,19 @@ public class Hook : BaseState
         //Le joueur et le monstre se fixent
         Quaternion rotationPlayer = PlayerManager.Instance.transform.rotation;
         PlayerManager.Instance.transform.rotation = new Quaternion(rotationPlayer.x,rotationPlayer.y,m_sm.transform.rotation.z,rotationPlayer.w);
+
+        PlayerLookMonster();
         
-        PlayerManager.Instance.transform.LookAt(m_sm.transform);
         m_sm.transform.LookAt(PlayerManager.Instance.transform);
     }
 
+    private void PlayerLookMonster()
+    {
+        Vector3 newForward = (PlayerManager.Instance.transform.position - m_sm.transform.position).normalized;
+        PlayerManager.Instance.transform.forward = new Vector3(PlayerManager.Instance.transform.forward.x,newForward.y,PlayerManager.Instance.transform.forward.z);
+        PlayerManager.Instance.m_lookScript.m_camera.transform.forward = new Vector3(newForward.y,PlayerManager.Instance.m_lookScript.m_camera.transform.forward.x,PlayerManager.Instance.m_lookScript.m_camera.transform.forward.z);
+    }
+    
     public override void Exit()
     {
         m_sm.m_lastState = this;

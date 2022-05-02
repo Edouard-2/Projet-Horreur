@@ -28,7 +28,7 @@ public class PlayerManager : Singleton<PlayerManager>
     public PlayerController m_controllerScript;
 
     [SerializeField, Tooltip("Script player look")]
-    private PlayerLook m_lookScript;
+    public PlayerLook m_lookScript;
 
     [SerializeField, Tooltip("Script player vision")]
     public PlayerVision m_visionScript;
