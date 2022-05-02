@@ -47,6 +47,23 @@ public class MonsterSM : StateMachine
     private List<EventsTrigger> m_eventEnd;
 
     //--------------Other--------------//
+    [Header("ANIMATIONS")] 
+    [SerializeField, Tooltip("Component animator")]
+    public Animator m_animator;
+    
+    private const string m_moving = "Moving";
+    private const string m_retract = "Retract";
+    private const string m_mesmer = "Mesmer";
+    private const string m_bruit = "Bruit";
+
+    [HideInInspector]public int m_movingHash;
+    [HideInInspector]public int m_retractHash;
+    [HideInInspector]public int m_mesmerHash;
+    [HideInInspector]public int m_bruitHash;
+    
+    private int m_currentHash;
+    
+    //--------------Other--------------//
     [Header("OTHER")] 
     [SerializeField, Tooltip("LayerMask du joueur")]
     public LayerMask m_layerPlayer;
@@ -136,6 +153,8 @@ public class MonsterSM : StateMachine
         
         m_initPos = transform.position;
         
+        m_isPlayerDead = false;
+        
         //Récupérer le navMeshAgent si null
         if (m_navMeshAgent == null)
         {
@@ -155,9 +174,12 @@ public class MonsterSM : StateMachine
                 Debug.LogError("Il faut mettre le collider capsule sur L'IA !!!", this);
             }
         }
-
-        m_isPlayerDead = false;
-
+        //Initialisation des Triggers animations
+        m_mesmerHash = Animator.StringToHash(m_mesmer);
+        m_movingHash = Animator.StringToHash(m_moving);
+        m_bruitHash = Animator.StringToHash(m_bruit);
+        m_retractHash = Animator.StringToHash(m_retract);
+        
         //Initialisations des states
         m_pause = new Pause(this);
         m_idle = new Idle(this);
@@ -202,7 +224,7 @@ public class MonsterSM : StateMachine
         m_collider.enabled = true;
         transform.GetChild(0)?.gameObject.SetActive(true);
         
-        if (m_lastState != null)
+        if (m_lastState != null && m_lastState != m_pause)
         {
             NextState(m_lastState);
             return;
@@ -220,6 +242,13 @@ public class MonsterSM : StateMachine
     {
         m_isStartIA = false;
         NextState(m_pause);
+    }
+
+    public void SetNewAnimation(int p_hash)
+    {
+        m_animator.ResetTrigger(m_currentHash);
+        m_animator.SetTrigger(p_hash);
+        m_currentHash = p_hash;
     }
 
     public void CreateWayPoint()

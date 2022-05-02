@@ -24,11 +24,15 @@ public class Defense : BaseState
         
         m_sm.m_radiusDetection /= 1.5f;
         m_sm.m_navMeshAgent.speed *= 2;
+        
+        m_sm.SetNewAnimation(m_sm.m_retractHash);
+        
         //Arrete de bouger
         m_sm.m_navMeshAgent.SetDestination(m_sm.transform.position);
 
         m_sm.StartCoroutine(StartHook());
         m_sm.StartCoroutine(StartPatrol());
+        
     }
 
     IEnumerator StartHook()

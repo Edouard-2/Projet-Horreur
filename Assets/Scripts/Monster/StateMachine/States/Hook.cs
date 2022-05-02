@@ -17,6 +17,8 @@ public class Hook : BaseState
         
         PlayerManager.Instance.m_isHooked = true;
         
+        m_sm.SetNewAnimation(m_sm.m_mesmerHash);
+        
         m_sm.m_navMeshAgent.SetDestination(m_sm.transform.position);
     }
 
