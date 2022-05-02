@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
-using UnityEngine.SceneManagement;
 
 public class MonsterSM : StateMachine
 {
@@ -83,13 +82,13 @@ public class MonsterSM : StateMachine
     private Transform m_prevWayPoint;
 
     //--------------STATE MACHINE--------------//
-    [HideInInspector] public Pause m_pause;
-    [HideInInspector] public Patrol m_patrol;
-    [HideInInspector] public Hook m_hook;
-    [HideInInspector] public Chase m_chase;
-    [HideInInspector] public Idle m_idle;
-    [HideInInspector] public Defense m_defense;
-    [HideInInspector] public AlertSound m_alertSound;
+    public Pause m_pause;
+    public Patrol m_patrol;
+    public Hook m_hook;
+    public Chase m_chase;
+    public Idle m_idle;
+    public Defense m_defense;
+    public AlertSound m_alertSound;
 
     private void OnEnable()
     {

@@ -411,6 +411,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 364009031330991910, guid: 451659bb7a1238e499e685e63a6ac420, type: 3}
+      propertyPath: m_gameManager
+      value: 
+      objectReference: {fileID: 1126146619}
     - target: {fileID: 1234176270403102690, guid: 451659bb7a1238e499e685e63a6ac420, type: 3}
       propertyPath: m_RootOrder
       value: 2
@@ -564,6 +568,17 @@ Material:
     - _SpecularColor: {r: 1, g: 1, b: 1, a: 1}
     - _UnderlayColor: {r: 0.6155722, g: 0.6155722, b: 0.6155722, a: 0.50980395}
   m_BuildTextureStacks: []
+--- !u!114 &1126146619 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2003710623704509911, guid: b7ced1df3198ae94d80929383d088437, type: 3}
+  m_PrefabInstance: {fileID: 1789960994}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fb6ae82a4269fc64f954a2479da8e899, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!21 &1218235117
 Material:
   serializedVersion: 6

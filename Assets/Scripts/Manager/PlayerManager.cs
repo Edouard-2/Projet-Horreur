@@ -1,13 +1,6 @@
-using System;
 using System.Collections;
-using TMPro;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
-[RequireComponent(typeof(PlayerController))]
-[RequireComponent(typeof(PlayerLook))]
-[RequireComponent(typeof(PlayerVision))]
-[RequireComponent(typeof(PlayerInteractions))]
 public class PlayerManager : Singleton<PlayerManager>
 {
     //Constante
@@ -143,7 +136,7 @@ public class PlayerManager : Singleton<PlayerManager>
             m_visionScript.DoChangeMaterial(1.5f);
         }
         //Commencer sans vision flou
-        else
+        else if (m_visionScript != null)
         {
             m_visionScript.m_matVision.SetFloat("_BlurSize", 0);
         }
