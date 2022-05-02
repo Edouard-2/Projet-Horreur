@@ -6,7 +6,7 @@ public class Defense : BaseState
     private MonsterSM m_sm;
     private bool m_canHook;
     private bool m_canPatrol;
-    private WaitForSeconds m_waitSecondHook = new WaitForSeconds(5f);
+    private WaitForSeconds m_waitSecondHook = new WaitForSeconds(0.5f);
     private WaitForSeconds m_waitSecondPatrol = new WaitForSeconds(5f);
 
     public Defense(MonsterSM p_stateMachine) : base("Defense", p_stateMachine)
@@ -29,10 +29,17 @@ public class Defense : BaseState
         
         //Arrete de bouger
         m_sm.m_navMeshAgent.SetDestination(m_sm.transform.position);
-
-        m_sm.StartCoroutine(StartHook());
+        
         m_sm.StartCoroutine(StartPatrol());
         
+    }
+     
+    IEnumerator StartPatrol()
+    {
+        yield return m_waitSecondPatrol;
+        m_canPatrol = true;
+        m_sm.SetNewAnimation(m_sm.m_movingHash);
+        m_sm.StartCoroutine(StartHook());
     }
 
     IEnumerator StartHook()
@@ -40,12 +47,7 @@ public class Defense : BaseState
         yield return m_waitSecondHook;
         m_canHook = true;
     }
-    IEnumerator StartPatrol()
-    {
-        yield return m_waitSecondPatrol;
-        m_canPatrol = true;
-    }
-
+    
     public override void UpdateLogic()
     {
         if (m_canPatrol && PlayerManager.Instance.m_visionScript.m_isBlurVision == 1)

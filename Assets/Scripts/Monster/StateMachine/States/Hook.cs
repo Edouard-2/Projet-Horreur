@@ -5,6 +5,8 @@ public class Hook : BaseState
     private float m_speedHook;
     private float initTime;
 
+    private Quaternion m_playerInitRot;
+
     public Hook(MonsterSM p_stateMachine, float p_speedHook) : base("Hook", p_stateMachine)
     {
         m_sm = p_stateMachine;
@@ -16,6 +18,8 @@ public class Hook : BaseState
         Debug.Log("HOOK");
         
         PlayerManager.Instance.m_isHooked = true;
+
+        m_playerInitRot = PlayerManager.Instance.transform.rotation;
         
         m_sm.SetNewAnimation(m_sm.m_mesmerHash);
         
@@ -53,30 +57,21 @@ public class Hook : BaseState
         float tTime = Time.time - initTime;
         
         //Attirer le joueur vers sois même et nous même avancer vers lui
-        //m_sm.transform.position = Vector3.MoveTowards(m_sm.transform.position, PlayerManager.Instance.transform.position,tTime/m_speedHook);
-        PlayerManager.Instance.transform.position = Vector3.MoveTowards(PlayerManager.Instance.transform.position, m_sm.transform.position,tTime/m_speedHook);
+        PlayerManager.Instance.transform.position = Vector3.MoveTowards(PlayerManager.Instance.transform.position, m_sm.m_headTransform.position,tTime/m_speedHook);
         
         //Le joueur et le monstre se fixent
-        Quaternion rotationPlayer = PlayerManager.Instance.transform.rotation;
-        PlayerManager.Instance.transform.rotation = new Quaternion(rotationPlayer.x,rotationPlayer.y,m_sm.transform.rotation.z,rotationPlayer.w);
-
-        PlayerLookMonster();
+        PlayerManager.Instance.transform.LookAt(m_sm.m_headTransform.position);
         
         m_sm.transform.LookAt(PlayerManager.Instance.transform);
     }
 
-    private void PlayerLookMonster()
-    {
-        Vector3 newForward = (PlayerManager.Instance.transform.position - m_sm.transform.position).normalized;
-        PlayerManager.Instance.transform.forward = new Vector3(PlayerManager.Instance.transform.forward.x,newForward.y,PlayerManager.Instance.transform.forward.z);
-        PlayerManager.Instance.m_lookScript.m_camera.transform.forward = new Vector3(newForward.y,PlayerManager.Instance.m_lookScript.m_camera.transform.forward.x,PlayerManager.Instance.m_lookScript.m_camera.transform.forward.z);
-    }
-    
     public override void Exit()
     {
         m_sm.m_lastState = this;
         
         PlayerManager.Instance.m_isHooked = false ;
+        
+        PlayerManager.Instance.transform.rotation = m_playerInitRot;
         
         m_sm.m_navMeshAgent.SetDestination(m_sm.transform.position);
         

@@ -28,6 +28,9 @@ public class MonsterSM : StateMachine
     
     [SerializeField, Tooltip("collider capsule de l'IA monstre")]
     public CapsuleCollider m_collider;
+    
+    [SerializeField, Tooltip("Transform de la tête du monstre")]
+    public Transform m_headTransform;
 
     //--------------EVENTS--------------//
     [Header("EVENTS")] 
@@ -246,6 +249,8 @@ public class MonsterSM : StateMachine
 
     public void SetNewAnimation(int p_hash)
     {
+        if (p_hash == m_currentHash) return;
+        
         m_animator.ResetTrigger(m_currentHash);
         m_animator.SetTrigger(p_hash);
         m_currentHash = p_hash;
