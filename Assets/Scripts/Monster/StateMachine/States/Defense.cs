@@ -38,14 +38,6 @@ public class Defense : BaseState
     {
         yield return m_waitSecondPatrol;
         m_canPatrol = true;
-        m_sm.SetNewAnimation(m_sm.m_movingHash);
-        m_sm.StartCoroutine(StartHook());
-    }
-
-    IEnumerator StartHook()
-    {
-        yield return m_waitSecondHook;
-        m_canHook = true;
     }
     
     public override void UpdateLogic()
@@ -53,14 +45,6 @@ public class Defense : BaseState
         if (m_canPatrol && PlayerManager.Instance.m_visionScript.m_isBlurVision == 1)
         {
             m_sm.NextState(m_sm.m_patrol);
-        }
-    }
-
-    public override void UpdateFunction()
-    {
-        if (m_canHook && PlayerManager.Instance.m_visionScript.m_isBlurVision == 1)
-        {
-            m_sm.m_patrol.UpdateLogic();
         }
     }
 

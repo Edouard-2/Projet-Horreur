@@ -76,7 +76,9 @@ public class Hook : BaseState
         
         PlayerManager.Instance.m_isHooked = false ;
         
-        PlayerManager.Instance.transform.rotation = m_playerInitRot;
+        //PlayerManager.Instance.transform.rotation = m_playerInitRot;
+        
+        PlayerManager.Instance.transform.rotation = new Quaternion(m_playerInitRot.x,PlayerManager.Instance.transform.rotation.y ,m_playerInitRot.z,PlayerManager.Instance.transform.rotation.w);
         
         m_sm.m_navMeshAgent.SetDestination(m_sm.transform.position);
         
