@@ -17,7 +17,7 @@ public class PostProcessApply : MonoBehaviour
     public float m_vignetteStepMultiplier = 0.25f;
     [SerializeField, Tooltip("Strength max que la vignette pourra avoir dans le jeu")] [Range(0, 1)]
     public float m_vignetteStepMax = 0.88f;
-
+    
     [HideInInspector]public float m_vignetteInitValue;
     [HideInInspector]public float m_vignetteStartValue;
     
