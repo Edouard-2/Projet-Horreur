@@ -97,9 +97,13 @@ public class SubtitleManager : MonoBehaviour
 
     private void LaunchSubtitle(bool p_isstart = false)
     {
+        if (p_isstart)
+        {
+            FirstTransition(m_firstCurrent);
+            return;
+        }
         SwitchCurrentText();
         FirstTransition(m_firstCurrent);
-        if (p_isstart) return;
         SecondTransition(m_secondCurrent.anim);
         StartCoroutine(EndTransition(m_secondCurrent.anim));
     }
