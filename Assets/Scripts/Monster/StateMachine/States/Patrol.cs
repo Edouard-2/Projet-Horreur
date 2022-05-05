@@ -45,7 +45,10 @@ public class Patrol : BaseState
             m_currentWayPoint = GetRandomWayPoint();
         }
         
+        m_sm.SetNewAnimation(m_sm.m_movingHash);
+        
         m_sm.m_navMeshAgent.SetDestination(m_currentWayPoint.position);
+        
     }
 
     public override void UpdateLogic()

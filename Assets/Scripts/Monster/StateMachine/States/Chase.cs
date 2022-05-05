@@ -17,6 +17,8 @@ public class Chase : BaseState
      public override void Enter()
     {
         Debug.Log("CHASE");
+        m_sm.SetNewAnimation(m_sm.m_mesmerHash);
+        
         m_sm.m_navMeshAgent.SetDestination(PlayerManager.Instance.transform.position);
         m_sm.m_navMeshAgent.speed *= 1.2f;
     }

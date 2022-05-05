@@ -16,12 +16,16 @@ public class AlertSound : BaseState
     {
         Debug.Log("Alert");
         m_sm.m_navMeshAgent.speed *= 1.5f;
+        
+        m_sm.SetNewAnimation(m_sm.m_bruitHash);
+        m_sm.SetNewAnimation(m_sm.m_movingHash);
+        
         m_sm.m_navMeshAgent.SetDestination(m_FirstPos);
     }
 
     public override void UpdateFunction()
     {
-        if (Vector3.Distance(m_FirstPos, m_sm.transform.position) < 1)
+        if (Vector3.Distance(m_FirstPos, m_sm.transform.position) < 1.5f)
         {
             m_sm.StartCoroutine(LaunchPatrol());
         }

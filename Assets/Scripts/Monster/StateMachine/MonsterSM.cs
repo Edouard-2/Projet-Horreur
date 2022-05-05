@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
-using UnityEngine.SceneManagement;
 
 public class MonsterSM : StateMachine
 {
@@ -29,6 +28,9 @@ public class MonsterSM : StateMachine
     
     [SerializeField, Tooltip("collider capsule de l'IA monstre")]
     public CapsuleCollider m_collider;
+    
+    [SerializeField, Tooltip("Transform de la tête du monstre")]
+    public Transform m_headTransform;
 
     //--------------EVENTS--------------//
     [Header("EVENTS")] 
@@ -47,6 +49,23 @@ public class MonsterSM : StateMachine
     [SerializeField, Tooltip("Scriptable de l'event pour arreter l'IA monstre")]
     private List<EventsTrigger> m_eventEnd;
 
+    //--------------Other--------------//
+    [Header("ANIMATIONS")] 
+    [SerializeField, Tooltip("Component animator")]
+    public Animator m_animator;
+    
+    private const string m_moving = "Moving";
+    private const string m_retract = "Retract";
+    private const string m_mesmer = "Mesmer";
+    private const string m_bruit = "Bruit";
+
+    [HideInInspector]public int m_movingHash;
+    [HideInInspector]public int m_retractHash;
+    [HideInInspector]public int m_mesmerHash;
+    [HideInInspector]public int m_bruitHash;
+    
+    private int m_currentHash;
+    
     //--------------Other--------------//
     [Header("OTHER")] 
     [SerializeField, Tooltip("LayerMask du joueur")]
@@ -83,13 +102,13 @@ public class MonsterSM : StateMachine
     private Transform m_prevWayPoint;
 
     //--------------STATE MACHINE--------------//
-    [HideInInspector] public Pause m_pause;
-    [HideInInspector] public Patrol m_patrol;
-    [HideInInspector] public Hook m_hook;
-    [HideInInspector] public Chase m_chase;
-    [HideInInspector] public Idle m_idle;
-    [HideInInspector] public Defense m_defense;
-    [HideInInspector] public AlertSound m_alertSound;
+    public Pause m_pause;
+    public Patrol m_patrol;
+    public Hook m_hook;
+    public Chase m_chase;
+    public Idle m_idle;
+    public Defense m_defense;
+    public AlertSound m_alertSound;
 
     private void OnEnable()
     {
@@ -137,6 +156,8 @@ public class MonsterSM : StateMachine
         
         m_initPos = transform.position;
         
+        m_isPlayerDead = false;
+        
         //Récupérer le navMeshAgent si null
         if (m_navMeshAgent == null)
         {
@@ -156,9 +177,12 @@ public class MonsterSM : StateMachine
                 Debug.LogError("Il faut mettre le collider capsule sur L'IA !!!", this);
             }
         }
-
-        m_isPlayerDead = false;
-
+        //Initialisation des Triggers animations
+        m_mesmerHash = Animator.StringToHash(m_mesmer);
+        m_movingHash = Animator.StringToHash(m_moving);
+        m_bruitHash = Animator.StringToHash(m_bruit);
+        m_retractHash = Animator.StringToHash(m_retract);
+        
         //Initialisations des states
         m_pause = new Pause(this);
         m_idle = new Idle(this);
@@ -203,7 +227,7 @@ public class MonsterSM : StateMachine
         m_collider.enabled = true;
         transform.GetChild(0)?.gameObject.SetActive(true);
         
-        if (m_lastState != null)
+        if (m_lastState != null && m_lastState != m_pause)
         {
             NextState(m_lastState);
             return;
@@ -221,6 +245,15 @@ public class MonsterSM : StateMachine
     {
         m_isStartIA = false;
         NextState(m_pause);
+    }
+
+    public void SetNewAnimation(int p_hash)
+    {
+        if (p_hash == m_currentHash) return;
+        
+        m_animator.ResetTrigger(m_currentHash);
+        m_animator.SetTrigger(p_hash);
+        m_currentHash = p_hash;
     }
 
     public void CreateWayPoint()
