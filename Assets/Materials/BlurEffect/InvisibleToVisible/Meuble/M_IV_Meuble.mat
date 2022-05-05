@@ -19,6 +19,30 @@ Material:
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
+    - _AO:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Albedo:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Emissive:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Metalic:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Normal:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Rougthness:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _SampleTexture2D_b11614ca76ce49c0896b5c359e1d1eaa_Texture_1:
         m_Texture: {fileID: 2800000, guid: 77ba3d67badea0942bc066a7c486bf3d, type: 3}
         m_Scale: {x: 1, y: 1}
@@ -38,7 +62,8 @@ Material:
     m_Floats:
     - Boolean_4c39ea96c2cf4de4b2dc4ef482795fa2: 0
     - Vector1_63c79ec3f0354370b25d8f050d6a5a56: 2.36
-    - _StepStrenght: -0.018365145
+    - _Invisible: 0
+    - _StepStrenght: -0.01874876
     m_Colors:
     - Color_afa59434efcd47fa8f595e8fb5d9720d: {r: 0.40183342, g: 0.6603774, b: 0.5245169, a: 0}
   m_BuildTextureStacks: []

@@ -133,7 +133,7 @@ public class PlayerManager : Singleton<PlayerManager>
             m_visionScript.m_matVision.SetFloat("_BlurSize", 0.35f);
             m_visionScript.m_isBlurVision = Mathf.Abs(m_visionScript.m_isBlurVision - 1);
             DoVisibleToInvisibleHandler?.Invoke();
-            m_visionScript.DoChangeMaterial(1.5f);
+            m_visionScript.DoChangeMaterial(1.8f);
         }
         //Commencer sans vision flou
         else if (m_visionScript != null)
