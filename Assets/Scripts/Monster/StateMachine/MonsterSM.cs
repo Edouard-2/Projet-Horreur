@@ -270,7 +270,7 @@ public class MonsterSM : StateMachine
             && m_isStartIA)
         {
             m_isPlayerDead = true;
-            
+            m_hook.AddIndexSpeed(0);
             NextState(m_pause);
             PlayerManager.Instance.Death();
         }
