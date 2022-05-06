@@ -4,7 +4,7 @@ using UnityEngine.AI;
 
 public class Patrol : BaseState
 {
-    private List<Transform> m_wayPointsList = new List<Transform>();
+    public List<Transform> m_wayPointsList = new List<Transform>();
     
     private Transform m_prevWayPoint;
     private Transform m_currentWayPoint;

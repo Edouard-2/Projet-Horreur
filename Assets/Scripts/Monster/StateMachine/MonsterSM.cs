@@ -7,8 +7,15 @@ public class MonsterSM : StateMachine
     //--------------WAYPOINTS--------------//
     [Header("WAYPOINTS")] 
     [SerializeField, Tooltip("Tableau des waypoints du monstre")]
-    public List<Transform> m_waypointsArray;
+    public List<Transform> m_waypointsLvl1;
+    [SerializeField, Tooltip("Tableau des waypoints du monstre")]
+    public List<Transform> m_waypointsLvl2;
+    [SerializeField, Tooltip("Tableau des waypoints du monstre")]
+    public List<Transform> m_waypointsLvl3;
+    [SerializeField, Tooltip("Tableau des waypoints du monstre")]
+    public List<Transform> m_waypointsLvl4;
 
+    public List<List<int>> p_aeinr;
     [SerializeField, Tooltip("Prefab pour creer un waypoint")]
     private GameObject m_waypointPrefab;
 
@@ -20,6 +27,8 @@ public class MonsterSM : StateMachine
 
     [SerializeField, Tooltip("Lorsque l'IA s'arrete elle va sur ce Way Point")]
     private Transform m_wayPointEnd;
+    public List<List<Transform>> m_waypointsArray;
+    private int m_indexLevelWaypoint;
 
     //--------------IA--------------//
     [Header("IA")] 
@@ -186,7 +195,7 @@ public class MonsterSM : StateMachine
         //Initialisations des states
         m_pause = new Pause(this);
         m_idle = new Idle(this);
-        m_patrol = new Patrol(this, m_waypointsArray, m_layerPlayer, m_angleHorizontal, m_angleVertical);
+        m_patrol = new Patrol(this, m_waypointsArray[m_indexLevelWaypoint], m_layerPlayer, m_angleHorizontal, m_angleVertical);
         m_hook = new Hook(this, m_speedHook);
         m_chase = new Chase(this);
         m_defense = new Defense(this);
@@ -245,6 +254,9 @@ public class MonsterSM : StateMachine
     {
         m_isStartIA = false;
         NextState(m_pause);
+        m_indexLevelWaypoint++;
+        if (m_indexLevelWaypoint > 3) return;
+        m_patrol.m_wayPointsList = m_waypointsArray[m_indexLevelWaypoint];
     }
 
     public void SetNewAnimation(int p_hash)
@@ -260,7 +272,7 @@ public class MonsterSM : StateMachine
     {
         GameObject go = Instantiate(m_waypointPrefab, Vector3.zero, Quaternion.identity);
         go.transform.SetParent(m_parentWaypoint.transform);
-        m_waypointsArray.Add(go.transform);
+        m_waypointsArray[m_indexLevelWaypoint].Add(go.transform);
     }
 
     protected override void VerifyDeathPlayer()
