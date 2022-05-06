@@ -7,7 +7,7 @@ public class Patrol : BaseState
     public List<Transform> m_wayPointsList = new List<Transform>();
     
     private Transform m_prevWayPoint;
-    private Transform m_currentWayPoint;
+    public Transform m_currentWayPoint;
     
     private float m_angleVertical;
     private float m_angleHorizontal;

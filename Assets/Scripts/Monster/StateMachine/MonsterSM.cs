@@ -271,8 +271,9 @@ public class MonsterSM : StateMachine
         m_isStartIA = false;
         NextState(m_pause);
         m_indexLevelWaypoint++;
-        if (m_indexLevelWaypoint > m_indexLevelWaypointMax) return;
+        if (m_indexLevelWaypoint < m_indexLevelWaypointMax) return;
         m_patrol.m_wayPointsList = m_waypointsArray[m_indexLevelWaypoint];
+        m_patrol.m_currentWayPoint = null;
     }
 
     public void SetNewAnimation(int p_hash)
