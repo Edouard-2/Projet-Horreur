@@ -4,6 +4,13 @@ using UnityEngine.AI;
 
 public class MonsterSM : StateMachine
 {
+    private static MonsterSM m_instance;
+    
+    public static MonsterSM Instance
+    {
+        get => m_instance;
+    }
+    
     //--------------WAYPOINTS--------------//
     [Header("WAYPOINTS")] [SerializeField, Tooltip("Tableau des waypoints du monstre")]
     public List<Transform> m_waypointsLvl1;
@@ -134,7 +141,6 @@ public class MonsterSM : StateMachine
     public Idle m_idle;
     public Defense m_defense;
     public AlertSound m_alertSound;
-    
 
     private void OnEnable()
     {
@@ -181,6 +187,8 @@ public class MonsterSM : StateMachine
     }
     private void Awake()
     {
+        m_instance = this;
+        
         m_waypointsArray.Add(m_waypointsLvl1);
         m_waypointsArray.Add(m_waypointsLvl2);
         m_waypointsArray.Add(m_waypointsLvl2Bis);
@@ -262,7 +270,7 @@ public class MonsterSM : StateMachine
         m_navMeshAgent.SetDestination(p_pos);
     }
 
-    private void StartIA(bool p_idStart = true)
+    public void StartIA(bool p_idStart = true)
     {
         m_isStartIA = true;
         m_collider.enabled = true;
@@ -295,6 +303,17 @@ public class MonsterSM : StateMachine
         
         Debug.Log(m_indexLevelWaypoint);
         Debug.Log(m_patrol.m_wayPointsList.Count);
+    }
+
+    public void Stop(bool p_idStart = true)
+    {
+        NextState(m_pause);
+    }
+    
+    public void Relaunch()
+    {
+        if (m_lastState == null) return;
+        NextState(m_lastState);
     }
 
     public void SetNewAnimation(int p_hash)
@@ -331,4 +350,6 @@ public class MonsterSM : StateMachine
     {
         return m_pause;
     }
+
+    
 }

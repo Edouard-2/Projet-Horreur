@@ -46,7 +46,7 @@ public class Patrol : BaseState
         }
         
         m_sm.SetNewAnimation(m_sm.m_movingHash);
-        
+        Debug.Log(m_currentWayPoint.position);
         m_sm.m_navMeshAgent.SetDestination(m_currentWayPoint.position);
         
     }
