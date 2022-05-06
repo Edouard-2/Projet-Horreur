@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 3280613818366468810}
   - component: {fileID: 2165096836050881152}
   - component: {fileID: 7952351798106018149}
+  - component: {fileID: -6692547747950787614}
   m_Layer: 6
   m_Name: IV_Meuble
   m_TagString: Untagged
@@ -128,3 +129,20 @@ MonoBehaviour:
   m_meshRenderer: {fileID: 3544439974158784038}
   m_needCollider: 1
   m_boxCollider: {fileID: 3280613818366468810}
+--- !u!114 &-6692547747950787614
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6203296597074459670}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 426f39938dfc2b244b79bface8f37917, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_isVisibleToInvisible: 0
+  m_needRenderer: 0
+  m_meshRenderer: {fileID: 0}
+  m_needCollider: 0
+  m_boxCollider: {fileID: 0}
