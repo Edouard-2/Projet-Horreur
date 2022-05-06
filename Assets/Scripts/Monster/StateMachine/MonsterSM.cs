@@ -227,7 +227,7 @@ public class MonsterSM : StateMachine
 
     private void SoundAlertIA(Vector3 p_pos)
     {
-        if (m_currentState == m_pause) return;
+        if (m_currentState == m_pause || m_currentState == m_defense) return;
         m_alertSound.m_FirstPos = p_pos;
         NextState(m_alertSound);
     }
@@ -243,8 +243,8 @@ public class MonsterSM : StateMachine
     private void SetPosIA(Vector3 p_pos)
     {
         Debug.Log("position");
-        m_currentState = m_idle;
         m_navMeshAgent.nextPosition = p_pos;
+        m_navMeshAgent.SetDestination(p_pos);
     }
 
     private void StartIA(bool p_idStart = true)
@@ -302,7 +302,8 @@ public class MonsterSM : StateMachine
     {
         if (Vector3.Distance(transform.position, PlayerManager.Instance.transform.position) < m_radiusDetection
             && !m_isPlayerDead
-            && m_isStartIA)
+            && m_isStartIA
+            && m_currentState != m_defense)
         {
             m_isPlayerDead = true;
             m_hook.AddIndexSpeed(0);
