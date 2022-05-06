@@ -5,18 +5,21 @@ using UnityEngine.AI;
 public class MonsterSM : StateMachine
 {
     //--------------WAYPOINTS--------------//
-    [Header("WAYPOINTS")] 
-    [SerializeField, Tooltip("Tableau des waypoints du monstre")]
+    [Header("WAYPOINTS")] [SerializeField, Tooltip("Tableau des waypoints du monstre")]
     public List<Transform> m_waypointsLvl1;
+
     [SerializeField, Tooltip("Tableau des waypoints du monstre")]
     public List<Transform> m_waypointsLvl2;
+
     [SerializeField, Tooltip("Tableau des waypoints du monstre")]
     public List<Transform> m_waypointsLvl2Bis;
+
     [SerializeField, Tooltip("Tableau des waypoints du monstre")]
     public List<Transform> m_waypointsLvl3;
+
     [SerializeField, Tooltip("Tableau des waypoints du monstre")]
     public List<Transform> m_waypointsLvl4;
-    
+
     [SerializeField, Tooltip("Prefab pour creer un waypoint")]
     private GameObject m_waypointPrefab;
 
@@ -28,12 +31,13 @@ public class MonsterSM : StateMachine
 
     [SerializeField, Tooltip("Lorsque l'IA s'arrete elle va sur ce Way Point")]
     private Transform m_wayPointEnd;
-    
+
     public List<List<Transform>> m_waypointsArray = new List<List<Transform>>();
-    
+
     [SerializeField, Tooltip("Index de changement de waypoint max")]
     private int m_indexLevelWaypointMax = 3;
-    
+
+    [SerializeField]
     private int m_indexLevelWaypoint;
 
     //--------------IA--------------//
@@ -167,8 +171,6 @@ public class MonsterSM : StateMachine
 
     private void Awake()
     {
-        
-        
         m_waypointsArray.Add(m_waypointsLvl1);
         m_waypointsArray.Add(m_waypointsLvl2);
         m_waypointsArray.Add(m_waypointsLvl2Bis);
@@ -241,9 +243,8 @@ public class MonsterSM : StateMachine
     private void SetPosIA(Vector3 p_pos)
     {
         Debug.Log("position");
-        
+        m_currentState = m_idle;
         m_navMeshAgent.nextPosition = p_pos;
-        m_navMeshAgent.SetDestination(p_pos);
     }
 
     private void StartIA(bool p_idStart = true)
@@ -271,9 +272,14 @@ public class MonsterSM : StateMachine
         m_isStartIA = false;
         NextState(m_pause);
         m_indexLevelWaypoint++;
-        if (m_indexLevelWaypoint < m_indexLevelWaypointMax) return;
+        Debug.Log("End");
+        if (m_indexLevelWaypoint > m_indexLevelWaypointMax) return;
+        m_lastState = null;
         m_patrol.m_wayPointsList = m_waypointsArray[m_indexLevelWaypoint];
         m_patrol.m_currentWayPoint = null;
+        
+        Debug.Log(m_indexLevelWaypoint);
+        Debug.Log(m_patrol.m_wayPointsList.Count);
     }
 
     public void SetNewAnimation(int p_hash)

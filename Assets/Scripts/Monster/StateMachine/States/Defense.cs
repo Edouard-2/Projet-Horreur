@@ -23,7 +23,6 @@ public class Defense : BaseState
         m_canHook = false;
         
         m_sm.m_radiusDetection /= 1.5f;
-        m_sm.m_navMeshAgent.speed *= 2;
         
         m_sm.SetNewAnimation(m_sm.m_retractHash);
         
@@ -51,7 +50,6 @@ public class Defense : BaseState
     public override void Exit()
     {
         m_sm.m_lastState = this;
-        m_sm.m_navMeshAgent.speed /= 2;
         m_sm.m_radiusDetection *= 1.5f;
     }
 }
