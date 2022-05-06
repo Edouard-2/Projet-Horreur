@@ -12,6 +12,7 @@ public class Pause : BaseState
     public override void Enter()
     {
         Debug.Log("PAUSE");
+        m_sm.m_navMeshAgent.SetDestination(m_sm.transform.position);
         m_sm.m_isPlayerDead = false;
     }
 }
