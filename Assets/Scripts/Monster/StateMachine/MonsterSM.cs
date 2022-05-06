@@ -59,6 +59,9 @@ public class MonsterSM : StateMachine
     [SerializeField, Tooltip("Scriptable de l'event Alerter avec le son l'IA monstre")]
     private EventsTriggerPos m_eventAlertSound;
     
+    [SerializeField, Tooltip("Scriptable pour activer / Desactiver les soudAlert")]
+    private EventsTrigger m_eventAlertSoundActivation;
+    
     [SerializeField, Tooltip("Scriptable de l'event pour placer l'IA monstre")]
     private List<EventsTriggerPos> m_eventPosList;
 
@@ -89,6 +92,9 @@ public class MonsterSM : StateMachine
     [Header("OTHER")] 
     [SerializeField, Tooltip("LayerMask du joueur")]
     public LayerMask m_layerPlayer;
+    
+    [SerializeField,Tooltip("Est ce que le monstre commence sans réagire au alert de son")]
+    private bool m_readyAlertSound;
 
     [SerializeField, Tooltip("Speed de déplacement du joueur et du monstre lorsque le monstre hook le joueur")]
     public float m_speedHook;
@@ -128,10 +134,13 @@ public class MonsterSM : StateMachine
     public Idle m_idle;
     public Defense m_defense;
     public AlertSound m_alertSound;
+    
 
     private void OnEnable()
     {
         m_eventAlertSound.OnTrigger += SoundAlertIA;
+        
+        m_eventAlertSoundActivation.OnTrigger += ActiveAlertSound;
 
         PlayerManager.Instance.UpdateFirstPos += SetInitPos;
         
@@ -153,6 +162,8 @@ public class MonsterSM : StateMachine
     {
         m_eventAlertSound.OnTrigger -= SoundAlertIA;
         
+        m_eventAlertSoundActivation.OnTrigger -= ActiveAlertSound;
+        
         PlayerManager.Instance.UpdateFirstPos -= SetInitPos;
         
         foreach (EventsTriggerPos elem in m_eventPosList)
@@ -168,7 +179,6 @@ public class MonsterSM : StateMachine
             elem.OnTrigger -= EndIA;
         }
     }
-
     private void Awake()
     {
         m_waypointsArray.Add(m_waypointsLvl1);
@@ -218,6 +228,11 @@ public class MonsterSM : StateMachine
         TurnOffAI();
     }
 
+    private void ActiveAlertSound(bool p_start = true)
+    {
+        m_readyAlertSound = p_start;
+    }
+
     private void SetInitPos()
     {
         NextState(m_pause);
@@ -227,7 +242,7 @@ public class MonsterSM : StateMachine
 
     private void SoundAlertIA(Vector3 p_pos)
     {
-        if (m_currentState == m_pause || m_currentState == m_defense) return;
+        if (m_currentState == m_pause || m_currentState == m_defense || !m_readyAlertSound) return;
         m_alertSound.m_FirstPos = p_pos;
         NextState(m_alertSound);
     }
