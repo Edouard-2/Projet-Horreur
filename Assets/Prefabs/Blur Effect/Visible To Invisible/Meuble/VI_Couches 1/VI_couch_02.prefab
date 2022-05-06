@@ -12,7 +12,9 @@ GameObject:
   - component: {fileID: 1281073561674740524}
   - component: {fileID: 3901171520056362982}
   - component: {fileID: 4409299958257010369}
-  m_Layer: 0
+  - component: {fileID: 5268529191443453029}
+  - component: {fileID: 5404401641204459042}
+  m_Layer: 6
   m_Name: VI_couch_02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -60,7 +62,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: b862cc3fe288c9740bc0646bfcd85b06, type: 2}
+  - {fileID: 2100000, guid: e4f0dfeb3025c914bb9f9cdef7bbf3b9, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -95,3 +97,34 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1.9375536, y: 0.9376539, z: 1.229275}
   m_Center: {x: 0.0021997094, y: 0.09521214, z: 0.55832016}
+--- !u!114 &5268529191443453029
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3252516628880631347}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e7623531750f80747807b30c0dcbd9b5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_needMaterial: 1
+  m_material: {fileID: 2100000, guid: e4f0dfeb3025c914bb9f9cdef7bbf3b9, type: 2}
+--- !u!114 &5404401641204459042
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3252516628880631347}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 426f39938dfc2b244b79bface8f37917, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_isVisibleToInvisible: 0
+  m_needRenderer: 1
+  m_meshRenderer: {fileID: 4750487286404975013, guid: 39b2fb5c8ffc615429c16afb608909d8, type: 3}
+  m_needCollider: 1
+  m_boxCollider: {fileID: 2058809330263313690, guid: 39b2fb5c8ffc615429c16afb608909d8, type: 3}

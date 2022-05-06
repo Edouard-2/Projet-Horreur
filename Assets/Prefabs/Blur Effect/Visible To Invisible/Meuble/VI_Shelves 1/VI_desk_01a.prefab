@@ -12,7 +12,9 @@ GameObject:
   - component: {fileID: 1684240123267357768}
   - component: {fileID: 3511514950463875202}
   - component: {fileID: -1860655121560287957}
-  m_Layer: 0
+  - component: {fileID: 7983190526462793705}
+  - component: {fileID: 7367843951307779405}
+  m_Layer: 6
   m_Name: VI_desk_01a
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -60,7 +62,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: d869feb946f0f664294f9fc5d8fea469, type: 2}
+  - {fileID: 2100000, guid: 079830fa9af759a4babd076967d05ddd, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -95,3 +97,34 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1.4927194, y: 0.61209977, z: 2.1423028}
   m_Center: {x: 0.0000002682209, y: -0.000000014901165, z: 1.0711032}
+--- !u!114 &7983190526462793705
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3151275427732965719}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e7623531750f80747807b30c0dcbd9b5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_needMaterial: 1
+  m_material: {fileID: 2100000, guid: 079830fa9af759a4babd076967d05ddd, type: 2}
+--- !u!114 &7367843951307779405
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3151275427732965719}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 426f39938dfc2b244b79bface8f37917, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_isVisibleToInvisible: 0
+  m_needRenderer: 1
+  m_meshRenderer: {fileID: 3511514950463875202, guid: 87bc2261c45af414ea5bc658264e2ba9, type: 3}
+  m_needCollider: 1
+  m_boxCollider: {fileID: 2376201471926996553, guid: 87bc2261c45af414ea5bc658264e2ba9, type: 3}

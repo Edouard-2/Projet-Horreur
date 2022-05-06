@@ -12,7 +12,9 @@ GameObject:
   - component: {fileID: 4389803073877620416}
   - component: {fileID: 1949849640685027850}
   - component: {fileID: 6136618945993253776}
-  m_Layer: 0
+  - component: {fileID: 8870741604584264737}
+  - component: {fileID: -5031845344456621558}
+  m_Layer: 6
   m_Name: IV_chair_03
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -95,3 +97,34 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.8654114, y: 0.8192517, z: 1.043972}
   m_Center: {x: -0.00000004470349, y: 0.000000012514352, z: 0.54004407}
+--- !u!114 &8870741604584264737
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4430597679997919}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e7623531750f80747807b30c0dcbd9b5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_needMaterial: 1
+  m_material: {fileID: 2100000, guid: 46895f7e56d260e4487b43cb28f1a22c, type: 2}
+--- !u!114 &-5031845344456621558
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4430597679997919}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 426f39938dfc2b244b79bface8f37917, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_isVisibleToInvisible: 0
+  m_needRenderer: 1
+  m_meshRenderer: {fileID: 2626294596216703376, guid: 991a863288a46ef45b5f11805332f318, type: 3}
+  m_needCollider: 1
+  m_boxCollider: {fileID: -1238348842765903450, guid: 991a863288a46ef45b5f11805332f318, type: 3}

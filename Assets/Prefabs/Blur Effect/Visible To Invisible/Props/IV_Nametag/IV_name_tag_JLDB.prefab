@@ -11,7 +11,9 @@ GameObject:
   - component: {fileID: 7562611378128244843}
   - component: {fileID: 6871386302477393870}
   - component: {fileID: 8698955733090609924}
-  m_Layer: 0
+  - component: {fileID: -4172363591646464593}
+  - component: {fileID: -620943645983723029}
+  m_Layer: 6
   m_Name: IV_name_tag_JLDB
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -59,7 +61,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: d09ea1d2cde8ae248858269e63b83c0e, type: 2}
+  - {fileID: 2100000, guid: 812a23264f2f5f64085b32d1253bfd0f, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -81,3 +83,34 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &-4172363591646464593
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7185522163298405073}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e7623531750f80747807b30c0dcbd9b5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_needMaterial: 1
+  m_material: {fileID: 2100000, guid: 812a23264f2f5f64085b32d1253bfd0f, type: 2}
+--- !u!114 &-620943645983723029
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7185522163298405073}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 426f39938dfc2b244b79bface8f37917, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_isVisibleToInvisible: 0
+  m_needRenderer: 0
+  m_meshRenderer: {fileID: 0}
+  m_needCollider: 0
+  m_boxCollider: {fileID: 0}

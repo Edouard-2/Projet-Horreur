@@ -12,7 +12,9 @@ GameObject:
   - component: {fileID: 2680562748198812135}
   - component: {fileID: 204828948559301933}
   - component: {fileID: -4501491153367795091}
-  m_Layer: 0
+  - component: {fileID: -3287827802959549747}
+  - component: {fileID: -5598352857283431418}
+  m_Layer: 6
   m_Name: IV_water_dispenser 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -95,3 +97,34 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.62637275, y: 0.63177955, z: 1.791415}
   m_Center: {x: -0.044946134, y: -0.03188912, z: 0.8957075}
+--- !u!114 &-3287827802959549747
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1862043453735021816}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e7623531750f80747807b30c0dcbd9b5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_needMaterial: 1
+  m_material: {fileID: 2100000, guid: e998761c0d51bc24fa400988d33b31a6, type: 2}
+--- !u!114 &-5598352857283431418
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1862043453735021816}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 426f39938dfc2b244b79bface8f37917, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_isVisibleToInvisible: 0
+  m_needRenderer: 1
+  m_meshRenderer: {fileID: 204828948559301933}
+  m_needCollider: 1
+  m_boxCollider: {fileID: -4501491153367795091}
