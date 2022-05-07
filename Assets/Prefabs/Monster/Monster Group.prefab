@@ -485,7 +485,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1720407683123857057, guid: 091504c64fcb6354a86fda11f72cb615, type: 3}
       propertyPath: m_Radius
-      value: 0.29
+      value: 0.17
       objectReference: {fileID: 0}
     - target: {fileID: 1728629560438733769, guid: 091504c64fcb6354a86fda11f72cb615, type: 3}
       propertyPath: m_Layer
@@ -517,7 +517,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4289074870773366192, guid: 091504c64fcb6354a86fda11f72cb615, type: 3}
       propertyPath: m_speedHook
-      value: 400
+      value: 200
       objectReference: {fileID: 0}
     - target: {fileID: 4289074870773366192, guid: 091504c64fcb6354a86fda11f72cb615, type: 3}
       propertyPath: m_wayPointEnd
@@ -537,11 +537,11 @@ PrefabInstance:
       objectReference: {fileID: 425070453}
     - target: {fileID: 4289074870773366192, guid: 091504c64fcb6354a86fda11f72cb615, type: 3}
       propertyPath: m_radiusDetection
-      value: 1.07
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 4289074870773366192, guid: 091504c64fcb6354a86fda11f72cb615, type: 3}
       propertyPath: m_waypointsLvl1.Array.size
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4289074870773366192, guid: 091504c64fcb6354a86fda11f72cb615, type: 3}
       propertyPath: m_waypointsLvl2.Array.size
@@ -558,11 +558,11 @@ PrefabInstance:
     - target: {fileID: 4289074870773366192, guid: 091504c64fcb6354a86fda11f72cb615, type: 3}
       propertyPath: m_waypointsLvl1.Array.data[0]
       value: 
-      objectReference: {fileID: 676795163}
+      objectReference: {fileID: 596597432}
     - target: {fileID: 4289074870773366192, guid: 091504c64fcb6354a86fda11f72cb615, type: 3}
       propertyPath: m_waypointsLvl1.Array.data[1]
       value: 
-      objectReference: {fileID: 596597432}
+      objectReference: {fileID: 676795163}
     - target: {fileID: 4289074870773366192, guid: 091504c64fcb6354a86fda11f72cb615, type: 3}
       propertyPath: m_waypointsLvl2.Array.data[0]
       value: 
@@ -614,6 +614,18 @@ PrefabInstance:
     - target: {fileID: 5458092931114588476, guid: 091504c64fcb6354a86fda11f72cb615, type: 3}
       propertyPath: m_RootOrder
       value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 5458092931114588476, guid: 091504c64fcb6354a86fda11f72cb615, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5458092931114588476, guid: 091504c64fcb6354a86fda11f72cb615, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5458092931114588476, guid: 091504c64fcb6354a86fda11f72cb615, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 5458092931114588476, guid: 091504c64fcb6354a86fda11f72cb615, type: 3}
       propertyPath: m_LocalPosition.x
