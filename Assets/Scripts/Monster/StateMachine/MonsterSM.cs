@@ -340,8 +340,6 @@ public class MonsterSM : StateMachine
 
     protected override void VerifyDeathPlayer()
     {
-        Debug.Log(Vector3.Distance(transform.position, PlayerManager.Instance.transform.position));
-        Debug.Log(m_radiusDetection);
         if (Vector3.Distance(transform.position, PlayerManager.Instance.transform.position) < m_radiusDetection
             && !m_isPlayerDead
             && m_isStartIA
