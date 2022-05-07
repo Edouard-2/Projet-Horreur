@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
@@ -236,6 +237,11 @@ public class MonsterSM : StateMachine
         TurnOffAI();
     }
 
+    private void OnCollisionEnter(Collision collision)
+    {
+        ActiveDeath();
+    }
+
     private void ActiveAlertSound(bool p_start = true)
     {
         m_readyAlertSound = p_start;
@@ -334,18 +340,26 @@ public class MonsterSM : StateMachine
 
     protected override void VerifyDeathPlayer()
     {
+        Debug.Log(Vector3.Distance(transform.position, PlayerManager.Instance.transform.position));
+        Debug.Log(m_radiusDetection);
         if (Vector3.Distance(transform.position, PlayerManager.Instance.transform.position) < m_radiusDetection
             && !m_isPlayerDead
             && m_isStartIA
             && m_currentState != m_defense)
         {
-            m_isPlayerDead = true;
-            m_hook.AddIndexSpeed(0);
-            NextState(m_pause);
-            PlayerManager.Instance.Death();
+            ActiveDeath();
         }
     }
 
+    private void ActiveDeath()
+    {
+        Debug.Log("Je te tue");
+        m_isPlayerDead = true;
+        m_hook.AddIndexSpeed(0);
+        NextState(m_pause);
+        PlayerManager.Instance.Death();
+    }
+    
     protected override BaseState GetInitialState()
     {
         return m_pause;
