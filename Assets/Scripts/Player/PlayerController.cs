@@ -3,7 +3,7 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     //Mouvement
-    [SerializeField, Tooltip("Le characontroller du player")]private CharacterController m_charaController;
+    [SerializeField, Tooltip("Le characontroller du player")]public CharacterController m_charaController;
     [SerializeField, Tooltip("La speed de déplacement du player")]public float m_speedMove = 10f;
     
     private Vector3 m_dir;
