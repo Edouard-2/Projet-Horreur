@@ -39,6 +39,7 @@ public class Patrol : BaseState
     public override void Enter()
     {
         Debug.Log("PATROL");
+        m_sm.m_navMeshAgent.isStopped = false;
         
         if (m_currentWayPoint == null)
         {

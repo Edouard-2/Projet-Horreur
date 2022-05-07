@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
@@ -272,10 +273,12 @@ public class MonsterSM : StateMachine
     private void SetPosIA(Vector3 p_pos)
     {
         Debug.Log("position");
+        //m_navMeshAgent.isStopped  = true;
+        m_navMeshAgent.nextPosition = p_pos;
         m_navMeshAgent.nextPosition = p_pos;
         m_navMeshAgent.SetDestination(p_pos);
     }
-
+    
     public void StartIA(bool p_idStart = true)
     {
         m_isStartIA = true;
