@@ -21,6 +21,7 @@ public class UISwitchScene : MonoBehaviour, IPointerClickHandler
     {
         if (m_levelIndex == 0)
         {
+            PlayerManager.Instance.RemoveAllPostProcess();
             Destroy(m_monster);
             Destroy(PlayerManager.Instance.gameObject);
             Destroy(UIManager.Instance.gameObject);

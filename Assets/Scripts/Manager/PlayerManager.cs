@@ -200,6 +200,16 @@ public class PlayerManager : Singleton<PlayerManager>
         transform.transform.position = newPosition;
     }
 
+    public void RemoveAllPostProcess()
+    {
+        m_visionScript.m_postProcessScript.m_lutTransition = 0;
+        m_visionScript.m_postProcessScript.m_vignetteStrength = m_visionScript.m_postProcessScript.m_vignetteInitValue;
+        m_visionScript.m_postProcessScript.m_depthStrenght = 0;
+        m_visionScript.m_postProcessScript.UpdateVignette();
+        m_visionScript.m_postProcessScript.UpdateDepth();
+        m_visionScript.m_postProcessScript.UpdateLutTable();
+    }
+    
     private void UpdateCheckFeedbackOrInteract(bool p_feedBack = true)
     {
         RaycastHit hitInteract;
