@@ -140,6 +140,7 @@ public class PlayerManager : Singleton<PlayerManager>
         {
             m_visionScript.m_matVision.SetFloat("_BlurSize", 0);
         }
+        
         LoadSavePlayer();
     }
 
