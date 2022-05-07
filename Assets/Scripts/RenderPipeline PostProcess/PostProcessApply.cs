@@ -50,6 +50,7 @@ public class PostProcessApply : MonoBehaviour
     private void Awake()
     {
         m_vignetteInitValue = m_vignetteStrength;
+        m_vignetteStartValue = m_vignetteStrength;
         m_materialValue.InitValue();
         UpdateMaterial();
     }
