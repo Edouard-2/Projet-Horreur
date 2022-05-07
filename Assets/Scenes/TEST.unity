@@ -227,7 +227,7 @@ Texture2D:
     offset: 0
     size: 0
     path: 
---- !u!28 &302864939
+--- !u!28 &312096759
 Texture2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -287,7 +287,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 935684213376799766, guid: 16fe8f7e581ba684dae85dbe12235a14, type: 3}
       propertyPath: m_RootOrder
-      value: 10
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 935684213376799766, guid: 16fe8f7e581ba684dae85dbe12235a14, type: 3}
       propertyPath: m_LocalPosition.x
@@ -956,7 +956,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8563391468971078798, guid: accbf34917e47d14daaf44a15316211e, type: 3}
       propertyPath: m_RootOrder
-      value: 8
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 8563391468971078798, guid: accbf34917e47d14daaf44a15316211e, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1145,7 +1145,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6346341185720494053, guid: 7d8c588cf7fba9b40a0c1f7bed3b97d8, type: 3}
       propertyPath: m_RootOrder
-      value: 9
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 6346341185720494053, guid: 7d8c588cf7fba9b40a0c1f7bed3b97d8, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1418,7 +1418,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 5328443145853060280, guid: 3dcf672c7ae78a448a43d5ea2cc62915, type: 3}
       propertyPath: m_RootOrder
-      value: 7
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 5328443145853060280, guid: 3dcf672c7ae78a448a43d5ea2cc62915, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1568,7 +1568,7 @@ PrefabInstance:
       objectReference: {fileID: 1768225970}
     - target: {fileID: 1234176270403102690, guid: 451659bb7a1238e499e685e63a6ac420, type: 3}
       propertyPath: m_RootOrder
-      value: 6
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 1234176270403102690, guid: 451659bb7a1238e499e685e63a6ac420, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1625,7 +1625,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1455764699939324644, guid: b7ced1df3198ae94d80929383d088437, type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 1455764699939324644, guid: b7ced1df3198ae94d80929383d088437, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1699,9 +1699,13 @@ PrefabInstance:
       propertyPath: m_Name
       value: Monster Group
       objectReference: {fileID: 0}
+    - target: {fileID: 6155589858365358415, guid: 0072aae6ed274a8428e5766fe3a50a49, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6155589858365358419, guid: 0072aae6ed274a8428e5766fe3a50a49, type: 3}
       propertyPath: m_RootOrder
-      value: 11
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 6155589858365358419, guid: 0072aae6ed274a8428e5766fe3a50a49, type: 3}
       propertyPath: m_LocalPosition.x

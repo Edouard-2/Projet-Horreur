@@ -140,6 +140,7 @@ public class PlayerManager : Singleton<PlayerManager>
         {
             m_visionScript.m_matVision.SetFloat("_BlurSize", 0);
         }
+        LoadSavePlayer();
     }
 
     private void Update()
@@ -184,6 +185,18 @@ public class PlayerManager : Singleton<PlayerManager>
         {
             m_prevStateReady = true;
         }
+    }
+
+    private void LoadSavePlayer()
+    {
+        PlayerDataSave playerData = SaveSystem.LoadPlayer();
+        if (playerData == null) return;
+        Vector3 newPosition;
+        newPosition.x = playerData.position[0];
+        newPosition.y = playerData.position[1];
+        newPosition.z = playerData.position[2];
+
+        transform.transform.position = newPosition;
     }
 
     private void UpdateCheckFeedbackOrInteract(bool p_feedBack = true)

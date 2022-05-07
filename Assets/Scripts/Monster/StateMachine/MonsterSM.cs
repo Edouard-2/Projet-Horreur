@@ -324,7 +324,7 @@ public class MonsterSM : StateMachine
 
     public void SetNewAnimation(int p_hash)
     {
-        if (p_hash == m_currentHash) return;
+        if ( p_hash == m_currentHash ) return;
         
         m_animator.ResetTrigger(m_currentHash);
         m_animator.SetTrigger(p_hash);
