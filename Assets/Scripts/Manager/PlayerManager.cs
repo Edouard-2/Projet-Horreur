@@ -46,9 +46,6 @@ public class PlayerManager : Singleton<PlayerManager>
     
     [SerializeField, Tooltip("ScriptableObj pour activer l'utilisation de la sauvegarde")]
     private IsFirstCheckpointActive m_isFirstCheckpointActive;
-    
-    [SerializeField, Tooltip("Est ce que le Start Blur à été utilisé")]
-    private IsFirstCheckpointActive m_isStartBlurIsDone;
 
     private int m_fadeIn;
     private int m_fadeOut;
@@ -129,18 +126,17 @@ public class PlayerManager : Singleton<PlayerManager>
 
         if (m_interactionsScript == null)
             m_interactionsScript = GetComponent<PlayerInteractions>();
-
-    }
-
-    private void Start()
-    {
+        
         if (m_isFirstCheckpointActive.m_isActive)
         {
             LoadSavePlayer();
         }
-        
+    }
+
+    private void Start()
+    {
         //Commencer avec vision flou
-        if (m_isStartBlur && !m_isStartBlurIsDone.m_isActive)
+        if (m_isStartBlur && !m_isFirstCheckpointActive.m_isActive)
         {
             m_visionScript.m_matVision.SetFloat("_BlurSize", 0.35f);
             m_visionScript.m_isBlurVision = Mathf.Abs(m_visionScript.m_isBlurVision - 1);
