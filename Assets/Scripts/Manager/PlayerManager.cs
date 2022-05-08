@@ -155,7 +155,7 @@ public class PlayerManager : Singleton<PlayerManager>
         
         if (SaveSystem.ReadActiveSave())
         {
-            LoadSavePlayer();
+            //LoadSavePlayer();
         }
     }
 
