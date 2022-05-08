@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 
@@ -43,9 +44,6 @@ public class PlayerManager : Singleton<PlayerManager>
     
     [SerializeField, Tooltip("Ui du death screen")]
     private GameObject m_deathUI;
-    
-    [SerializeField, Tooltip("ScriptableObj pour activer l'utilisation de la sauvegarde")]
-    private IsFirstCheckpointActive m_isFirstCheckpointActive;
 
     private int m_fadeIn;
     private int m_fadeOut;
@@ -60,6 +58,9 @@ public class PlayerManager : Singleton<PlayerManager>
     
     [Range(0,20), SerializeField, Tooltip("Temps avant de relancer le jeu apres la mort")]
     public float m_DeathWaitingTime;
+    
+    [SerializeField, Tooltip("Activer la sauvegarde ou pas")]
+    private bool ActiveSaveGame;
     
     private WaitForSeconds m_waitFade = new WaitForSeconds(0.5f);
     
@@ -91,6 +92,12 @@ public class PlayerManager : Singleton<PlayerManager>
     public delegate void FirstKeyPos();
 
     public event FirstKeyPos UpdateFirstPos;
+    
+    private void OnValidate()
+    {
+        //SaveSystem.ActiveSaveGame(ActiveSaveGame);
+        Debug.Log(SaveSystem.ReadActiveSave());
+    }
 
     private void Awake()
     {
@@ -127,16 +134,13 @@ public class PlayerManager : Singleton<PlayerManager>
         if (m_interactionsScript == null)
             m_interactionsScript = GetComponent<PlayerInteractions>();
         
-        if (m_isFirstCheckpointActive.m_isActive)
-        {
-            LoadSavePlayer();
-        }
+        
     }
 
     private void Start()
     {
         //Commencer avec vision flou
-        if (m_isStartBlur && !m_isFirstCheckpointActive.m_isActive)
+        if (m_isStartBlur && SaveSystem.ReadActiveSave() == false)
         {
             m_visionScript.m_matVision.SetFloat("_BlurSize", 0.35f);
             m_visionScript.m_isBlurVision = Mathf.Abs(m_visionScript.m_isBlurVision - 1);
@@ -149,11 +153,15 @@ public class PlayerManager : Singleton<PlayerManager>
             m_visionScript.m_matVision.SetFloat("_BlurSize", 0);
         }
         
-        //LoadSavePlayer();
+        if (SaveSystem.ReadActiveSave())
+        {
+            LoadSavePlayer();
+        }
     }
 
     private void Update()
     {
+        
         //Mettre le jeu en pause
         if (Input.GetKeyDown(KeyCode.Escape) 
             && ( GameManager.Instance.State == GameManager.States.PLAYING 
@@ -206,8 +214,11 @@ public class PlayerManager : Singleton<PlayerManager>
         newPosition.x = playerData.position[0];
         newPosition.y = playerData.position[1];
         newPosition.z = playerData.position[2];
+
+        //transform.transform.position = newPosition;
         Debug.Log(newPosition);
-        transform.transform.position = newPosition;
+        m_controllerScript.m_charaController.Move(newPosition - transform.transform.position);
+        
     }
 
     public void RemoveAllPostProcess()

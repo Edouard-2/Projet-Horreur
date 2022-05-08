@@ -10,3 +10,14 @@ public class PlayerDataSave
         position[2] = player.transform.position.z;
     }
 }
+
+[System.Serializable]
+public class ActiveSave
+{
+    public bool m_active;
+
+    public ActiveSave(bool p_bool)
+    {
+        m_active = p_bool;
+    }
+}

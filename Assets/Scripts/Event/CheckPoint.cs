@@ -3,13 +3,13 @@ using UnityEngine;
 
 public class CheckPoint : MonoBehaviour
 {
-    [SerializeField, Tooltip("ScriptableObj pour activer l'utilisation de la sauvegarde")]
-    private IsFirstCheckpointActive m_checkpointActive;
+    [SerializeField, Tooltip("Activer l'utilisation de la sauvegarde")]
+    private bool m_checkpointActive;
     private void OnTriggerEnter(Collider other)
     {
-        if(m_checkpointActive != null)
+        if (m_checkpointActive)
         {
-            m_checkpointActive.m_isActive = true;
+            SaveSystem.ActiveSaveGame(m_checkpointActive);
         }
         
         SaveSystem.SavePlayer(PlayerManager.Instance);
