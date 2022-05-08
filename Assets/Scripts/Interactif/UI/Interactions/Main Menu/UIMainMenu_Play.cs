@@ -35,7 +35,7 @@ public class UIMainMenu_Play : MonoBehaviour
         
         while (!operation.isDone)
         {
-            
+            //Faire un truc pendant le chargement du LVL
             yield return null;
         }
     }
