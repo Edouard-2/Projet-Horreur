@@ -3,12 +3,16 @@ public class Hook : BaseState
 {
     private MonsterSM m_sm;
     private float m_speedHook;
+    private float m_initSpeedHook;
+    private int m_indexSpeedHook = 1;
     private float initTime;
+
+    private Quaternion m_playerInitRot;
 
     public Hook(MonsterSM p_stateMachine, float p_speedHook) : base("Hook", p_stateMachine)
     {
         m_sm = p_stateMachine;
-        m_speedHook = p_speedHook;
+        m_initSpeedHook = p_speedHook;
     }
     
      public override void Enter()
@@ -16,6 +20,12 @@ public class Hook : BaseState
         Debug.Log("HOOK");
         
         PlayerManager.Instance.m_isHooked = true;
+
+        m_playerInitRot = PlayerManager.Instance.transform.rotation;
+        
+        m_sm.SetNewAnimation(m_sm.m_mesmerHash);
+
+        m_speedHook = m_initSpeedHook * m_indexSpeedHook;
         
         m_sm.m_navMeshAgent.SetDestination(m_sm.transform.position);
     }
@@ -35,6 +45,7 @@ public class Hook : BaseState
         {
             if((m_sm.m_layerPlayer.value & (1 << hit.collider.gameObject.layer)) <= 0)
             {
+                AddIndexSpeed(1);
                 m_sm.NextState(m_sm.m_chase);
                 Debug.DrawRay(m_sm.transform.position,vectorPlayerMonster * Vector3.Distance(hit.point,m_sm.transform.position),Color.red,3);
             }
@@ -51,15 +62,12 @@ public class Hook : BaseState
         float tTime = Time.time - initTime;
         
         //Attirer le joueur vers sois même et nous même avancer vers lui
-        //m_sm.transform.position = Vector3.MoveTowards(m_sm.transform.position, PlayerManager.Instance.transform.position,tTime/m_speedHook);
-        PlayerManager.Instance.transform.position = Vector3.MoveTowards(PlayerManager.Instance.transform.position, m_sm.transform.position,tTime/m_speedHook);
+        PlayerManager.Instance.transform.position = Vector3.MoveTowards(PlayerManager.Instance.transform.position, m_sm.m_headTransform.position,tTime/m_speedHook);
         
         //Le joueur et le monstre se fixent
-        Quaternion rotationPlayer = PlayerManager.Instance.transform.rotation;
-        PlayerManager.Instance.transform.rotation = new Quaternion(rotationPlayer.x,rotationPlayer.y,m_sm.transform.rotation.z,rotationPlayer.w);
+        PlayerManager.Instance.transform.LookAt(m_sm.m_headTransform.position);
         
-        PlayerManager.Instance.transform.LookAt(m_sm.transform);
-        m_sm.transform.LookAt(PlayerManager.Instance.transform);
+        m_sm.transform.LookAt(new Vector3(PlayerManager.Instance.transform.position.x,m_sm.transform.position.y,PlayerManager.Instance.transform.position.z));
     }
 
     public override void Exit()
@@ -68,8 +76,28 @@ public class Hook : BaseState
         
         PlayerManager.Instance.m_isHooked = false ;
         
+        //PlayerManager.Instance.transform.rotation = m_playerInitRot;
+        
+        PlayerManager.Instance.transform.rotation = new Quaternion(m_playerInitRot.x,PlayerManager.Instance.transform.rotation.y ,m_playerInitRot.z,PlayerManager.Instance.transform.rotation.w);
+        
         m_sm.m_navMeshAgent.SetDestination(m_sm.transform.position);
         
         initTime = 0;
+    }
+
+    public void AddIndexSpeed(int p_nbr)
+    {
+        if (p_nbr == 0)
+        {
+            m_indexSpeedHook = 1;
+            return;
+        }
+        
+        m_indexSpeedHook += p_nbr;
+        
+        if (m_indexSpeedHook >3)
+        {
+            m_indexSpeedHook = 3;
+        }
     }
 }

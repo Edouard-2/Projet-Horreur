@@ -62,7 +62,7 @@ Shader "Hidden/ShaderFlou"{
 				fixed4 frag(v2f i) : SV_TARGET{
 
 				//failsafe so we can use turn off the blur by setting the deviation to 0
-				if (_StandardDeviation <= 0.02)
+				if (_StandardDeviation <= 0.02f || _BlurSize <= 0.02f)
 				return tex2D(_MainTex, i.uv);
 				//init color variable
 				float4 col = 0;

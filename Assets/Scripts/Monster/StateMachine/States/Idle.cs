@@ -11,6 +11,7 @@ public class Idle : BaseState
     public override void Enter()
     {
         Debug.Log("Idle");
+        m_sm.SetNewAnimation(m_sm.m_retractHash);
     }
 
     public override void UpdateFunction()

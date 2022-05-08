@@ -1,13 +1,6 @@
-using System;
 using System.Collections;
-using TMPro;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
-[RequireComponent(typeof(PlayerController))]
-[RequireComponent(typeof(PlayerLook))]
-[RequireComponent(typeof(PlayerVision))]
-[RequireComponent(typeof(PlayerInteractions))]
 public class PlayerManager : Singleton<PlayerManager>
 {
     //Constante
@@ -35,13 +28,13 @@ public class PlayerManager : Singleton<PlayerManager>
     public PlayerController m_controllerScript;
 
     [SerializeField, Tooltip("Script player look")]
-    private PlayerLook m_lookScript;
+    public PlayerLook m_lookScript;
 
     [SerializeField, Tooltip("Script player vision")]
     public PlayerVision m_visionScript;
 
     [SerializeField, Tooltip("Script player door")]
-    private PlayerInteractions m_interactionsScript;
+    public PlayerInteractions m_interactionsScript;
     
     //Death Screen
     [Header("Death Screen")]
@@ -85,12 +78,12 @@ public class PlayerManager : Singleton<PlayerManager>
     }
 
     public delegate void RotateKeys();
-
     public RotateKeys DoRotateKeys;
 
     public delegate void DoVisionSwitch(bool p_start = false);
-
     public DoVisionSwitch DoVisibleToInvisibleHandler;
+    public delegate void SwitchLayer(bool p_start);
+    public SwitchLayer DoSwitchLayer;
 
     public delegate void FirstKeyPos();
 
@@ -140,10 +133,10 @@ public class PlayerManager : Singleton<PlayerManager>
             m_visionScript.m_matVision.SetFloat("_BlurSize", 0.35f);
             m_visionScript.m_isBlurVision = Mathf.Abs(m_visionScript.m_isBlurVision - 1);
             DoVisibleToInvisibleHandler?.Invoke();
-            m_visionScript.DoChangeMaterial(1.5f);
+            m_visionScript.DoChangeMaterial(1.8f);
         }
         //Commencer sans vision flou
-        else
+        else if (m_visionScript != null)
         {
             m_visionScript.m_matVision.SetFloat("_BlurSize", 0);
         }
