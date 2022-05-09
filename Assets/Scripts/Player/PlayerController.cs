@@ -3,7 +3,7 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     //Mouvement
-    [SerializeField, Tooltip("Le characontroller du player")]private CharacterController m_charaController;
+    [SerializeField, Tooltip("Le characontroller du player")]public CharacterController m_charaController;
     [SerializeField, Tooltip("La speed de déplacement du player")]public float m_speedMove = 10f;
     
     private Vector3 m_dir;
@@ -20,6 +20,7 @@ public class PlayerController : MonoBehaviour
 
     public void Mouvement()
     {
+        Debug.Log(transform.transform.position);
         if (Input.GetAxis("Horizontal") != 0 || Input.GetAxis("Vertical") != 0)
         {
             //Mouvement sur le sol
@@ -40,5 +41,6 @@ public class PlayerController : MonoBehaviour
         //Simulation de gravité
         m_velocity.y += PlayerManager.Instance.Gravity * Time.deltaTime;
         m_charaController.Move(m_velocity * Time.deltaTime);
+        Debug.Log(transform.transform.position);
     }
 }

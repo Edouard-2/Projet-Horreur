@@ -178,6 +178,8 @@ public class PlayerVision : MonoBehaviour
         if (m_isVariableReady)
         {
             m_uiBv.fillAmount -= 0.1f;
+            m_postProcessScript.m_vignetteStrength += 0.02f;
+            m_postProcessScript.UpdateVignette();
         }
     }
 
