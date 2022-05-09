@@ -148,7 +148,6 @@ public class PlayerManager : Singleton<PlayerManager>
 
     private void Update()
     {
-        
         //Mettre le jeu en pause
         if (Input.GetKeyDown(KeyCode.Escape) 
             && ( GameManager.Instance.State == GameManager.States.PLAYING 
@@ -215,7 +214,8 @@ public class PlayerManager : Singleton<PlayerManager>
                 //Si oui est ce que l'obj est visible (net) en mode flou
                 if ((m_keyLayerInvisible.value & (1 << hitInteract.transform.gameObject.layer)) > 0
                     || (m_doorLayerInvisible.value & (1 << hitInteract.transform.gameObject.layer)) > 0
-                    || (m_transvaseurLayerInvisible.value & (1 << hitInteract.transform.gameObject.layer)) > 0)
+                    || (m_transvaseurLayerInvisible.value & (1 << hitInteract.transform.gameObject.layer)) > 0
+                    || (m_interactionsScript.m_layerDoor.value & (1 << hitInteract.transform.gameObject.layer)) > 0)
                 {
                     if (p_feedBack)
                     {
