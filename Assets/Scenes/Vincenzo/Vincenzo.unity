@@ -399,7 +399,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 093602cfc69e6e241952898d4cabbed7, type: 3}
---- !u!28 &185831515
+--- !u!28 &211690809
 Texture2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1967,7 +1967,7 @@ PrefabInstance:
     - target: {fileID: 5131206964596692536, guid: 79e95de107011014993692aa09c1590d, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 7c41bc98f944b434a85c1a630d95b6be, type: 2}
+      objectReference: {fileID: 2100000, guid: bc82c0b83775654468c1953899528913, type: 2}
     - target: {fileID: 6304645101097594199, guid: 79e95de107011014993692aa09c1590d, type: 3}
       propertyPath: m_RootOrder
       value: 32
@@ -2827,6 +2827,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 5131206964596692536, guid: 79e95de107011014993692aa09c1590d, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: bc82c0b83775654468c1953899528913, type: 2}
     - target: {fileID: 6304645101097594199, guid: 79e95de107011014993692aa09c1590d, type: 3}
       propertyPath: m_RootOrder
       value: 10
