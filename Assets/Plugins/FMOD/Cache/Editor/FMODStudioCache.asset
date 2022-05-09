@@ -1,60 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-7042940750020844652
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/Soihgfn
-  m_EditorClassIdentifier: 
-  Path: event:/Soihgfn
-  Guid:
-    Data1: 582090
-    Data2: 1196405359
-    Data3: 408946869
-    Data4: -81904195
-  Banks:
-  - {fileID: -3033339046511730141}
-  IsStream: 1
-  Is3D: 0
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 298762
---- !u!114 &-3309498573344207112
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/menuMusic
-  m_EditorClassIdentifier: 
-  Path: event:/menuMusic
-  Guid:
-    Data1: -1808394834
-    Data2: 1163110342
-    Data3: 609617543
-    Data4: 531631923
-  Banks:
-  - {fileID: -3033339046511730141}
-  IsStream: 1
-  Is3D: 0
-  IsOneShot: 0
-  Parameters: []
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 298762
---- !u!114 &-3033339046511730141
+--- !u!114 &-6941617835002372800
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -64,17 +10,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
-  m_Name: bank:/Master.bank
+  m_Name: bank:/Master.strings.bank
   m_EditorClassIdentifier: 
-  Path: ProjetHorreurFmod/Build/Desktop/Master.bank
-  Name: Master
-  StudioPath: bank:/Master
-  lastModified: 637877044304033618
+  Path: ProjetHorreurFmod/Build/Desktop/Master.strings.bank
+  Name: Master.strings
+  StudioPath: bank:/Master.strings
+  lastModified: 637877102629597569
   FileSizes:
   - Name: Desktop
-    Value: 7100480
+    Value: 1006
   Exists: 1
---- !u!114 &-2884906726922930401
+--- !u!114 &-2279548831135799916
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -93,7 +39,7 @@ MonoBehaviour:
     Data3: -1235720787
     Data4: 953585937
   Banks:
-  - {fileID: -3033339046511730141}
+  - {fileID: 892367924502922656}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
@@ -101,26 +47,6 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 1906
---- !u!114 &-2833663103314173837
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
-  m_Name: bank:/Master.strings.bank
-  m_EditorClassIdentifier: 
-  Path: ProjetHorreurFmod/Build/Desktop/Master.strings.bank
-  Name: Master.strings
-  StudioPath: bank:/Master.strings
-  lastModified: 637877044304133432
-  FileSizes:
-  - Name: Desktop
-    Value: 1006
-  Exists: 1
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -134,16 +60,90 @@ MonoBehaviour:
   m_Name: FMODStudioCache
   m_EditorClassIdentifier: 
   EditorBanks:
-  - {fileID: -2833663103314173837}
-  - {fileID: -3033339046511730141}
+  - {fileID: -6941617835002372800}
+  - {fileID: 892367924502922656}
   EditorEvents:
-  - {fileID: -3309498573344207112}
-  - {fileID: -2884906726922930401}
-  - {fileID: -7042940750020844652}
+  - {fileID: -2279548831135799916}
+  - {fileID: 3280602184543145973}
+  - {fileID: 1897488537604104588}
   EditorParameters: []
   MasterBanks:
-  - {fileID: -3033339046511730141}
+  - {fileID: 892367924502922656}
   StringsBanks:
-  - {fileID: -2833663103314173837}
-  cacheTime: 637877044304133432
+  - {fileID: -6941617835002372800}
+  cacheTime: 637877102629597569
   cacheVersion: 10
+--- !u!114 &892367924502922656
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Master.bank
+  m_EditorClassIdentifier: 
+  Path: ProjetHorreurFmod/Build/Desktop/Master.bank
+  Name: Master
+  StudioPath: bank:/Master
+  lastModified: 637877102629587597
+  FileSizes:
+  - Name: Desktop
+    Value: 7100480
+  Exists: 1
+--- !u!114 &1897488537604104588
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Soihgfn
+  m_EditorClassIdentifier: 
+  Path: event:/Soihgfn
+  Guid:
+    Data1: 582090
+    Data2: 1196405359
+    Data3: 408946869
+    Data4: -81904195
+  Banks:
+  - {fileID: 892367924502922656}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 298762
+--- !u!114 &3280602184543145973
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/menuMusic
+  m_EditorClassIdentifier: 
+  Path: event:/menuMusic
+  Guid:
+    Data1: -1808394834
+    Data2: 1163110342
+    Data3: 609617543
+    Data4: 531631923
+  Banks:
+  - {fileID: 892367924502922656}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 298762
