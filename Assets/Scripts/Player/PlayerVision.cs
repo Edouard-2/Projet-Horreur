@@ -294,13 +294,13 @@ public class PlayerVision : MonoBehaviour
         yield return m_waitDepthVignette;
         
         if (m_postProcessScript.m_depthStrenght < 0.9f && p_dir > 0 
-            ||m_postProcessScript.m_depthStrenght > 0 && p_dir < 0 )
+            ||m_postProcessScript.m_depthStrenght > 0.25f && p_dir < 0 )
         {
             m_postProcessScript.m_depthStrenght += p_step * p_dir;
             m_postProcessScript.UpdateDepth();
             StartCoroutine(ActiveBlindEffectDepth(p_dir, p_step));
         }
-        else if( m_postProcessScript.m_depthStrenght <= 0 )
+        else if( m_postProcessScript.m_depthStrenght <= 0.25f )
         {
             Debug.Log("RemmettreTout");
             PlayerManager.Instance.DoSwitchLayer(false);

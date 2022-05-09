@@ -93,13 +93,7 @@ public class PlayerManager : Singleton<PlayerManager>
 
     public event FirstKeyPos UpdateFirstPos;
     
-    private void OnValidate()
-    {
-        //SaveSystem.ActiveSaveGame(ActiveSaveGame);
-        Debug.Log(SaveSystem.ReadActiveSave());
-    }
-
-    private void Awake()
+   private void Awake()
     {
         m_checkPointPos = transform.position;
         
@@ -133,14 +127,12 @@ public class PlayerManager : Singleton<PlayerManager>
 
         if (m_interactionsScript == null)
             m_interactionsScript = GetComponent<PlayerInteractions>();
-        
-        
     }
 
     private void Start()
     {
         //Commencer avec vision flou
-        if (m_isStartBlur && SaveSystem.ReadActiveSave() == false)
+        if (m_isStartBlur)
         {
             m_visionScript.m_matVision.SetFloat("_BlurSize", 0.35f);
             m_visionScript.m_isBlurVision = Mathf.Abs(m_visionScript.m_isBlurVision - 1);
@@ -151,11 +143,6 @@ public class PlayerManager : Singleton<PlayerManager>
         else if (m_visionScript != null)
         {
             m_visionScript.m_matVision.SetFloat("_BlurSize", 0);
-        }
-        
-        if (SaveSystem.ReadActiveSave())
-        {
-            //LoadSavePlayer();
         }
     }
 
@@ -202,23 +189,6 @@ public class PlayerManager : Singleton<PlayerManager>
         {
             m_prevStateReady = true;
         }
-    }
-
-    private void LoadSavePlayer()
-    {
-        PlayerDataSave playerData = SaveSystem.LoadPlayer();
-        if (playerData == null) return;
-        Debug.Log("Player Loading");
-        
-        Vector3 newPosition;
-        newPosition.x = playerData.position[0];
-        newPosition.y = playerData.position[1];
-        newPosition.z = playerData.position[2];
-
-        //transform.transform.position = newPosition;
-        Debug.Log(newPosition);
-        m_controllerScript.m_charaController.Move(newPosition - transform.transform.position);
-        
     }
 
     public void RemoveAllPostProcess()
