@@ -34,14 +34,12 @@ public class UIManager : Singleton<UIManager>
             Cursor.lockState = CursorLockMode.Locked;
             DoDisplayUIGamePause?.Invoke(false);
             //Enlever l'UI du menu pause
-            Debug.Log("Remise en place du jeu");
         }
         else if (p_isActive == 1)
         {
             DoDisplayUIGamePause?.Invoke();
             Cursor.lockState = CursorLockMode.Confined;
             //Activer l'ui du menu pause
-            Debug.Log("Activation de l'UI");
         }
     }
 

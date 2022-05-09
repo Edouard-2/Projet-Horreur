@@ -1,13 +1,33 @@
+using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
 public class MonsterSM : StateMachine
 {
+    private static MonsterSM m_instance;
+    
+    public static MonsterSM Instance
+    {
+        get => m_instance;
+    }
+    
     //--------------WAYPOINTS--------------//
-    [Header("WAYPOINTS")] 
+    [Header("WAYPOINTS")] [SerializeField, Tooltip("Tableau des waypoints du monstre")]
+    public List<Transform> m_waypointsLvl1;
+
     [SerializeField, Tooltip("Tableau des waypoints du monstre")]
-    public List<Transform> m_waypointsArray;
+    public List<Transform> m_waypointsLvl2;
+
+    [SerializeField, Tooltip("Tableau des waypoints du monstre")]
+    public List<Transform> m_waypointsLvl2Bis;
+
+    [SerializeField, Tooltip("Tableau des waypoints du monstre")]
+    public List<Transform> m_waypointsLvl3;
+
+    [SerializeField, Tooltip("Tableau des waypoints du monstre")]
+    public List<Transform> m_waypointsLvl4;
 
     [SerializeField, Tooltip("Prefab pour creer un waypoint")]
     private GameObject m_waypointPrefab;
@@ -20,6 +40,14 @@ public class MonsterSM : StateMachine
 
     [SerializeField, Tooltip("Lorsque l'IA s'arrete elle va sur ce Way Point")]
     private Transform m_wayPointEnd;
+
+    public List<List<Transform>> m_waypointsArray = new List<List<Transform>>();
+
+    [SerializeField, Tooltip("Index de changement de waypoint max")]
+    private int m_indexLevelWaypointMax = 3;
+
+    [SerializeField]
+    private int m_indexLevelWaypoint;
 
     //--------------IA--------------//
     [Header("IA")] 
@@ -39,6 +67,9 @@ public class MonsterSM : StateMachine
 
     [SerializeField, Tooltip("Scriptable de l'event Alerter avec le son l'IA monstre")]
     private EventsTriggerPos m_eventAlertSound;
+    
+    [SerializeField, Tooltip("Scriptable pour activer / Desactiver les soudAlert")]
+    private EventsTrigger m_eventAlertSoundActivation;
     
     [SerializeField, Tooltip("Scriptable de l'event pour placer l'IA monstre")]
     private List<EventsTriggerPos> m_eventPosList;
@@ -70,6 +101,9 @@ public class MonsterSM : StateMachine
     [Header("OTHER")] 
     [SerializeField, Tooltip("LayerMask du joueur")]
     public LayerMask m_layerPlayer;
+    
+    [SerializeField,Tooltip("Est ce que le monstre commence sans réagire au alert de son")]
+    private bool m_readyAlertSound;
 
     [SerializeField, Tooltip("Speed de déplacement du joueur et du monstre lorsque le monstre hook le joueur")]
     public float m_speedHook;
@@ -113,6 +147,8 @@ public class MonsterSM : StateMachine
     private void OnEnable()
     {
         m_eventAlertSound.OnTrigger += SoundAlertIA;
+        
+        m_eventAlertSoundActivation.OnTrigger += ActiveAlertSound;
 
         PlayerManager.Instance.UpdateFirstPos += SetInitPos;
         
@@ -134,6 +170,8 @@ public class MonsterSM : StateMachine
     {
         m_eventAlertSound.OnTrigger -= SoundAlertIA;
         
+        m_eventAlertSoundActivation.OnTrigger -= ActiveAlertSound;
+        
         PlayerManager.Instance.UpdateFirstPos -= SetInitPos;
         
         foreach (EventsTriggerPos elem in m_eventPosList)
@@ -149,10 +187,15 @@ public class MonsterSM : StateMachine
             elem.OnTrigger -= EndIA;
         }
     }
-
     private void Awake()
     {
-        TurnOffAI();
+        m_instance = this;
+        
+        m_waypointsArray.Add(m_waypointsLvl1);
+        m_waypointsArray.Add(m_waypointsLvl2);
+        m_waypointsArray.Add(m_waypointsLvl2Bis);
+        m_waypointsArray.Add(m_waypointsLvl3);
+        m_waypointsArray.Add(m_waypointsLvl4);
         
         m_initPos = transform.position;
         
@@ -186,11 +229,23 @@ public class MonsterSM : StateMachine
         //Initialisations des states
         m_pause = new Pause(this);
         m_idle = new Idle(this);
-        m_patrol = new Patrol(this, m_waypointsArray, m_layerPlayer, m_angleHorizontal, m_angleVertical);
+        m_patrol = new Patrol(this, m_waypointsArray[m_indexLevelWaypoint], m_layerPlayer, m_angleHorizontal, m_angleVertical);
         m_hook = new Hook(this, m_speedHook);
         m_chase = new Chase(this);
         m_defense = new Defense(this);
         m_alertSound = new AlertSound(this);
+        
+        TurnOffAI();
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        ActiveDeath();
+    }
+
+    private void ActiveAlertSound(bool p_start = true)
+    {
+        m_readyAlertSound = p_start;
     }
 
     private void SetInitPos()
@@ -202,6 +257,7 @@ public class MonsterSM : StateMachine
 
     private void SoundAlertIA(Vector3 p_pos)
     {
+        if (m_currentState == m_pause || m_currentState == m_defense || !m_readyAlertSound) return;
         m_alertSound.m_FirstPos = p_pos;
         NextState(m_alertSound);
     }
@@ -217,11 +273,13 @@ public class MonsterSM : StateMachine
     private void SetPosIA(Vector3 p_pos)
     {
         Debug.Log("position");
-        
+        //m_navMeshAgent.isStopped  = true;
         m_navMeshAgent.nextPosition = p_pos;
+        m_navMeshAgent.nextPosition = p_pos;
+        m_navMeshAgent.SetDestination(p_pos);
     }
-
-    private void StartIA(bool p_idStart = true)
+    
+    public void StartIA(bool p_idStart = true)
     {
         m_isStartIA = true;
         m_collider.enabled = true;
@@ -245,11 +303,31 @@ public class MonsterSM : StateMachine
     {
         m_isStartIA = false;
         NextState(m_pause);
+        m_indexLevelWaypoint++;
+        Debug.Log("End");
+        if (m_indexLevelWaypoint > m_indexLevelWaypointMax) return;
+        m_lastState = null;
+        m_patrol.m_wayPointsList = m_waypointsArray[m_indexLevelWaypoint];
+        m_patrol.m_currentWayPoint = null;
+        
+        Debug.Log(m_indexLevelWaypoint);
+        Debug.Log(m_patrol.m_wayPointsList.Count);
+    }
+
+    public void Stop(bool p_idStart = true)
+    {
+        NextState(m_pause);
+    }
+    
+    public void Relaunch()
+    {
+        if (m_lastState == null) return;
+        NextState(m_lastState);
     }
 
     public void SetNewAnimation(int p_hash)
     {
-        if (p_hash == m_currentHash) return;
+        if ( p_hash == m_currentHash ) return;
         
         m_animator.ResetTrigger(m_currentHash);
         m_animator.SetTrigger(p_hash);
@@ -260,24 +338,33 @@ public class MonsterSM : StateMachine
     {
         GameObject go = Instantiate(m_waypointPrefab, Vector3.zero, Quaternion.identity);
         go.transform.SetParent(m_parentWaypoint.transform);
-        m_waypointsArray.Add(go.transform);
+        m_waypointsArray[m_indexLevelWaypoint].Add(go.transform);
     }
 
     protected override void VerifyDeathPlayer()
     {
         if (Vector3.Distance(transform.position, PlayerManager.Instance.transform.position) < m_radiusDetection
             && !m_isPlayerDead
-            && m_isStartIA)
+            && m_isStartIA
+            && m_currentState != m_defense)
         {
-            m_isPlayerDead = true;
-            m_hook.AddIndexSpeed(0);
-            NextState(m_pause);
-            PlayerManager.Instance.Death();
+            ActiveDeath();
         }
     }
 
+    private void ActiveDeath()
+    {
+        Debug.Log("Je te tue");
+        m_isPlayerDead = true;
+        m_hook.AddIndexSpeed(0);
+        NextState(m_pause);
+        PlayerManager.Instance.Death();
+    }
+    
     protected override BaseState GetInitialState()
     {
         return m_pause;
     }
+
+    
 }
