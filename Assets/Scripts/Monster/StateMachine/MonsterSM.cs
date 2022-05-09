@@ -345,8 +345,7 @@ public class MonsterSM : StateMachine
     {
         if (Vector3.Distance(transform.position, PlayerManager.Instance.transform.position) < m_radiusDetection
             && !m_isPlayerDead
-            && m_isStartIA
-            && m_currentState != m_defense)
+            && m_isStartIA)
         {
             ActiveDeath();
         }

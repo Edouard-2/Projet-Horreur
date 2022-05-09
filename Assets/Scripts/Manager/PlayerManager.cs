@@ -239,6 +239,7 @@ public class PlayerManager : Singleton<PlayerManager>
                 }
             }
         }
+        
         //Sinon on remet le materiaux de base
         else if (p_feedBack)
         {
