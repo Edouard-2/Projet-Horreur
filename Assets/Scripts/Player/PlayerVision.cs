@@ -36,13 +36,11 @@ public class PlayerVision : MonoBehaviour
     //BV
     [Header("BV")]
     [SerializeField, Tooltip("BV visuel")] public Image m_uiBv;
-    [SerializeField, Tooltip("La vitesse de consommation de la BV (en vision flou)")] 
+    [Range(0,1),SerializeField, Tooltip("La vitesse de consommation de la BV (en vision flou)")] 
     public float m_speedDecreaseBV = 0.1f;
-    [SerializeField, Tooltip("La vitesse de consommation de la BV (en vision flou)")] 
-    public float m_MultiplIncreaseBV = 2f;
-    [SerializeField, Tooltip("le temps pendant lequel le joueur est aveugle")] 
+    [Range(0.3f,10),SerializeField, Tooltip("le temps pendant lequel le joueur est aveugle")] 
     public float m_blindTime = 10f;
-    [SerializeField, Tooltip("Lorsque le joueur perd de la BV max aprés avoir été aveugle")] 
+    [Range(0,0.5f),SerializeField, Tooltip("Lorsque le joueur perd de la BV max aprés avoir été aveugle (C'est aussi la valeur qui est utiliser pour faire le cran d'utilisation à chaque utilisation)")] 
     public float m_lessBvMax = 0.1f;
     [HideInInspector]public float m_BvMax = 1f;
     [HideInInspector]public float m_currentBvMax = 1f;
@@ -177,8 +175,8 @@ public class PlayerVision : MonoBehaviour
     {
         if (m_isVariableReady)
         {
-            m_uiBv.fillAmount -= 0.1f;
-            m_postProcessScript.m_vignetteStrength += 0.02f;
+            m_uiBv.fillAmount -= m_lessBvMax;
+            m_postProcessScript.m_vignetteStrength += m_lessBvMax * 0.18f;
             m_postProcessScript.UpdateVignette();
         }
     }
@@ -208,11 +206,11 @@ public class PlayerVision : MonoBehaviour
         {
             if (m_uiBv.fillAmount <= m_currentBvMax )
             {
-                m_uiBv.fillAmount += m_speedDecreaseBV * Time.deltaTime * m_MultiplIncreaseBV;
+                m_uiBv.fillAmount += m_speedDecreaseBV * Time.deltaTime;
                 
                 if( m_postProcessScript.m_vignetteStrength > m_postProcessScript.m_vignetteStartValue)
                 {
-                    m_postProcessScript.m_vignetteStrength -= m_speedDecreaseBV * Time.deltaTime * m_MultiplIncreaseBV * m_postProcessScript.m_vignetteStepMultiplier;
+                    m_postProcessScript.m_vignetteStrength -= m_speedDecreaseBV * Time.deltaTime * m_postProcessScript.m_vignetteStepMultiplier;
                     m_postProcessScript.UpdateVignette();
                 }
             }
@@ -315,7 +313,7 @@ public class PlayerVision : MonoBehaviour
         
         if (m_postProcessScript.m_vignetteStrength > m_postProcessScript.m_vignetteStartValue)
         {
-            m_postProcessScript.m_vignetteStrength += 0.001f * p_dir;
+            m_postProcessScript.m_vignetteStrength += m_speedDecreaseBV * 0.02f * p_dir;
             m_postProcessScript.UpdateVignette();
             StartCoroutine(ActiveBlindEffectVignette(p_dir));
         }
