@@ -4,10 +4,10 @@ using UnityEngine.AI;
 
 public class Patrol : BaseState
 {
-    private List<Transform> m_wayPointsList = new List<Transform>();
+    public List<Transform> m_wayPointsList = new List<Transform>();
     
     private Transform m_prevWayPoint;
-    private Transform m_currentWayPoint;
+    public Transform m_currentWayPoint;
     
     private float m_angleVertical;
     private float m_angleHorizontal;
@@ -38,7 +38,8 @@ public class Patrol : BaseState
 
     public override void Enter()
     {
-        Debug.Log("¨PATROL");
+        Debug.Log("PATROL");
+        m_sm.m_navMeshAgent.isStopped = false;
         
         if (m_currentWayPoint == null)
         {
@@ -46,7 +47,7 @@ public class Patrol : BaseState
         }
         
         m_sm.SetNewAnimation(m_sm.m_movingHash);
-        
+        Debug.Log(m_currentWayPoint.position);
         m_sm.m_navMeshAgent.SetDestination(m_currentWayPoint.position);
         
     }
@@ -104,6 +105,7 @@ public class Patrol : BaseState
                 m_currentWayPoint = GetRandomWayPoint();
                 
                 m_sm.m_navMeshAgent.SetDestination(m_currentWayPoint.position);
+                Debug.Log(m_wayPointsList.Count);
                 Debug.Log(m_sm.m_navMeshAgent.CalculatePath(m_currentWayPoint.position,m_sm.m_navMeshAgent.path));
             }
         }

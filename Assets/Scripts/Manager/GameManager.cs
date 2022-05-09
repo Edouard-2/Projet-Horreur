@@ -2,11 +2,6 @@ using UnityEngine;
 
 public class GameManager : Singleton<GameManager>
 {
-
-    [Header("EVENTS MONSTER")]
-    [SerializeField, Tooltip("Event arret du monstre")]private EventsTrigger m_monsterEventEnd;
-    [SerializeField, Tooltip("Event relancement du monstre")]private EventsTrigger m_monsterEventStart;
-    
     private States m_state;
     private States m_prevState;
 
@@ -50,8 +45,8 @@ public class GameManager : Singleton<GameManager>
             
             PlayerManager.Instance.m_visionScript.StopAllCoroutines();
             PlayerManager.Instance.m_visionScript.m_timeStopBlind = Time.time;
-            
-            m_monsterEventEnd.Raise();
+
+            MonsterSM.Instance.Stop();
             m_state = States.PAUSE;
             DoUiActivePauseGame?.Invoke();
             return;
@@ -61,7 +56,7 @@ public class GameManager : Singleton<GameManager>
         
         PlayerManager.Instance.m_visionScript.StopOrStartBlindEffects();
         
-        m_monsterEventStart.Raise(false);
+        MonsterSM.Instance.Relaunch();
         m_state = States.PLAYING;
         DoUiActivePauseGame?.Invoke(0);
     }

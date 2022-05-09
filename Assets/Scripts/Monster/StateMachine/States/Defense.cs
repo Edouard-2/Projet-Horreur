@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 
@@ -6,8 +7,8 @@ public class Defense : BaseState
     private MonsterSM m_sm;
     private bool m_canHook;
     private bool m_canPatrol;
-    private WaitForSeconds m_waitSecondHook = new WaitForSeconds(0.5f);
-    private WaitForSeconds m_waitSecondPatrol = new WaitForSeconds(5f);
+    
+    private WaitForSeconds m_waitSecondPatrol = new WaitForSeconds(10f);
 
     public Defense(MonsterSM p_stateMachine) : base("Defense", p_stateMachine)
     {
@@ -23,7 +24,7 @@ public class Defense : BaseState
         m_canHook = false;
         
         m_sm.m_radiusDetection /= 1.5f;
-        m_sm.m_navMeshAgent.speed *= 2;
+        m_sm.m_collider.radius /= 2;
         
         m_sm.SetNewAnimation(m_sm.m_retractHash);
         
@@ -51,7 +52,7 @@ public class Defense : BaseState
     public override void Exit()
     {
         m_sm.m_lastState = this;
-        m_sm.m_navMeshAgent.speed /= 2;
         m_sm.m_radiusDetection *= 1.5f;
+        m_sm.m_collider.radius *= 2;
     }
 }

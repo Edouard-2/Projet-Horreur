@@ -93,7 +93,6 @@ public class Door : MonoBehaviour
         if (!m_isOpen)
         {
             //On ouvre la porte
-            Debug.Log("Je m'ouvre");
             m_doorAnimator.SetTrigger(m_openHash);
             
             m_soundEvent.Raise(PlayerManager.Instance.transform.position);
@@ -108,7 +107,6 @@ public class Door : MonoBehaviour
     {
         if (m_isOpen)
         {
-            Debug.Log("Close");
             m_doorAnimator.ResetTrigger(m_openHash);
             m_doorAnimator.SetTrigger(m_closeHash);
             m_isOpen = false;
