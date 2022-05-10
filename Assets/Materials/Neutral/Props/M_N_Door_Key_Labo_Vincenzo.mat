@@ -20,7 +20,11 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - Texture2D_14720d6aa9454c62bd764afed9d9e57c:
-        m_Texture: {fileID: 2800000, guid: 9f56db5e0a3ba554d8f10d4bedc4419b, type: 3}
+        m_Texture: {fileID: 2800000, guid: 04f5b2fb768e03e47928c47716f682b2, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - Texture2D_e9d38055ac484ad9b8ddcb518a01fed7:
+        m_Texture: {fileID: 2800000, guid: a10a4f84d9871da4e9042550d794bc09, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _AO:
@@ -28,23 +32,23 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Albedo:
-        m_Texture: {fileID: 2800000, guid: 0262dc1137c45b44b859bb1be013006c, type: 3}
+        m_Texture: {fileID: 2800000, guid: fdd05c536789586489bf37590f3ef881, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Emissive:
-        m_Texture: {fileID: 2800000, guid: ab36091fc31e89d4bb2d2f14c4ce2056, type: 3}
+        m_Texture: {fileID: 2800000, guid: b7fd8cba412fe85448aab7650e9f718b, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Metalic:
-        m_Texture: {fileID: 2800000, guid: 96bcd188b67e50045bd58dbe7e87c253, type: 3}
+        m_Texture: {fileID: 2800000, guid: 2177accb77c2a944894ed2eec63b6014, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Normal:
-        m_Texture: {fileID: 2800000, guid: 3621569c1d53b724a813076441f8294d, type: 3}
+        m_Texture: {fileID: 2800000, guid: e8a5e4844c311ad41b66d39eccb3cc3d, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Rougthness:
-        m_Texture: {fileID: 2800000, guid: f3294626c267ef541ab1db4d48acbe3c, type: 3}
+        m_Texture: {fileID: 2800000, guid: 0861afe5feee5384c970cf98cb56caf0, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - unity_Lightmaps:
@@ -60,7 +64,10 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
+    - Boolean_8ff23b1222d140b9bfa63637fcd76828: 1
+    - Boolean_bd9f48cb25c14b1891f7ab99f814db08: 0
     - _isAim: 0
     m_Colors:
+    - Color_d81c43a2cd0840daa0ae011d4233e4bd: {r: 0.9528302, g: 0.38652542, b: 0.3460751, a: 0}
     - _BaseColor: {r: 0.735849, g: 0.735849, b: 0.735849, a: 0}
   m_BuildTextureStacks: []
