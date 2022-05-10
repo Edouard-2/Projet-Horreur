@@ -15,10 +15,10 @@ MonoBehaviour:
   Path: ProjetHorreurFmod/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 637878018311523444
+  lastModified: 637878018586564496
   FileSizes:
   - Name: Desktop
-    Value: 942
+    Value: 1116
   Exists: 1
 --- !u!114 &-8216887860752734075
 MonoBehaviour:
@@ -47,6 +47,33 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 3600696
+--- !u!114 &-6686071534926612598
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Bip_Bip
+  m_EditorClassIdentifier: 
+  Path: event:/Bip_Bip
+  Guid:
+    Data1: 229888390
+    Data2: 1089554421
+    Data3: -469746002
+    Data4: 2014129
+  Banks:
+  - {fileID: 916322104816340486}
+  IsStream: 1
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 129168
 --- !u!114 &-5220718419596700578
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -120,12 +147,16 @@ MonoBehaviour:
   - {fileID: -8216887860752734075}
   - {fileID: -5220718419596700578}
   - {fileID: -3429819149763713176}
+  - {fileID: 6542825058960496822}
+  - {fileID: 5159406747729164162}
+  - {fileID: -6686071534926612598}
+  - {fileID: 6462319841818010308}
   EditorParameters: []
   MasterBanks:
   - {fileID: 916322104816340486}
   StringsBanks:
   - {fileID: -8647617015449775809}
-  cacheTime: 637878018311523444
+  cacheTime: 637878018586564496
   cacheVersion: 10
 --- !u!114 &916322104816340486
 MonoBehaviour:
@@ -142,8 +173,89 @@ MonoBehaviour:
   Path: ProjetHorreurFmod/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 637878018311443655
+  lastModified: 637878018586531638
   FileSizes:
   - Name: Desktop
-    Value: 45100640
+    Value: 86849088
   Exists: 1
+--- !u!114 &5159406747729164162
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/ErrorKey_Sound
+  m_EditorClassIdentifier: 
+  Path: event:/ErrorKey_Sound
+  Guid:
+    Data1: -417662658
+    Data2: 1139388216
+    Data3: 1881957248
+    Data4: -213097596
+  Banks:
+  - {fileID: 916322104816340486}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 8400
+--- !u!114 &6462319841818010308
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Drama
+  m_EditorClassIdentifier: 
+  Path: event:/Drama
+  Guid:
+    Data1: 1736822267
+    Data2: 1189604466
+    Data3: -343913066
+    Data4: -1578644226
+  Banks:
+  - {fileID: 916322104816340486}
+  IsStream: 1
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 15888
+--- !u!114 &6542825058960496822
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Bruit_Blanc_TV
+  m_EditorClassIdentifier: 
+  Path: event:/Bruit_Blanc_TV
+  Guid:
+    Data1: -15768281
+    Data2: 1119759030
+    Data3: 352802746
+    Data4: 229881757
+  Banks:
+  - {fileID: 916322104816340486}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 3600072
