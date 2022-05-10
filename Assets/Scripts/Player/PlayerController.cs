@@ -20,7 +20,6 @@ public class PlayerController : MonoBehaviour
 
     public void Mouvement()
     {
-        Debug.Log(transform.transform.position);
         if (Input.GetAxis("Horizontal") != 0 || Input.GetAxis("Vertical") != 0)
         {
             //Mouvement sur le sol
@@ -41,6 +40,5 @@ public class PlayerController : MonoBehaviour
         //Simulation de gravité
         m_velocity.y += PlayerManager.Instance.Gravity * Time.deltaTime;
         m_charaController.Move(m_velocity * Time.deltaTime);
-        Debug.Log(transform.transform.position);
     }
 }
