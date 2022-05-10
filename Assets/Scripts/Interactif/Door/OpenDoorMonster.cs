@@ -5,7 +5,6 @@ public class OpenDoorMonster : MonoBehaviour
 {
     [SerializeField] private Door m_door; 
     [SerializeField] private GameObject m_otherDoor; 
-    [SerializeField] private int m_dir; 
     
     private WaitForSeconds m_waitCloseDoorMonster = new WaitForSeconds(1.2f);
     private WaitForSeconds m_waitMonsterAnim = new WaitForSeconds(0.5f);
