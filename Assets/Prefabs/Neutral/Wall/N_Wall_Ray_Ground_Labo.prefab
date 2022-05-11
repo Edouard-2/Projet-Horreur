@@ -59,7 +59,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a28d7d4aa81253a46a3f3ba0824bca0e, type: 2}
+  - {fileID: 2100000, guid: 4a2c5f3fa4df3ec449bb23ae70ff0de9, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -140,7 +140,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a28d7d4aa81253a46a3f3ba0824bca0e, type: 2}
+  - {fileID: 2100000, guid: 4a2c5f3fa4df3ec449bb23ae70ff0de9, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -261,6 +261,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 9063555814965259374}
     m_Modifications:
+    - target: {fileID: 5506103837565698809, guid: 35337cd58d84d444bb1ae191d1ec82b2, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 73ae48bfeecb762458b7d295cd51d8db, type: 2}
     - target: {fileID: 6298671333264548652, guid: 35337cd58d84d444bb1ae191d1ec82b2, type: 3}
       propertyPath: m_Name
       value: N_Ground_Labo
