@@ -126,9 +126,12 @@ public class PlayerVision : MonoBehaviour
             DoChangeMaterial?.Invoke(matVisibilityValue);
             float value = matVisibilityValue;
             if (m_isBlurVision == 1 && value > 0) value = matVisibilityValue - 0.798179f;
-            m_chaleurVFX.SetFloat("SizeParticle",p_dir.keys[p_dir.length - 1].value - value);
-            m_matMonsterHead.SetFloat("_DistortionStrength",value);
-            m_matMonsterSpeaks.SetFloat("_DistortionStrength",value);
+            m_matMonsterHead.SetFloat("_DistortionStrength", value);
+            m_matMonsterSpeaks.SetFloat("_DistortionStrength", value);
+
+            value = Mathf.Abs(p_dir.keys[p_dir.length - 1].value - matVisibilityValue);
+            if(p_dir.keys[p_dir.length - 1].value < 0) value = Mathf.Abs(p_dir.keys[p_dir.length - 1].value - value);
+            m_chaleurVFX.SetFloat("Invisibility", value);
         }
     }
 
