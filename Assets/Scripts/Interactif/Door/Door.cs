@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -14,7 +15,7 @@ public class Door : MonoBehaviour
     private Animator m_doorAnimator;
 
     [SerializeField, Tooltip("Layermask du monstre")]
-    private LayerMask m_layerMonstre;
+    public LayerMask m_layerMonstre;
 
     [SerializeField, Tooltip("Nom du trigger pour déclancher l'animation Open")]
     private string m_openName = "Open";
@@ -25,6 +26,7 @@ public class Door : MonoBehaviour
     private int m_openHash;
     private int m_closeHash;
 
+    
     [HideInInspector] public bool m_isOpen;
 
     [SerializeField, Tooltip("List des mesh renderer qui receveront le material de la Key s'il est est mise")]
@@ -69,6 +71,8 @@ public class Door : MonoBehaviour
         
         m_doorMat.SetFloat("_isAim", 0);
     }
+    
+    
 
     private void UpdateMeshMaterial(Material p_map)
     {
@@ -80,6 +84,7 @@ public class Door : MonoBehaviour
 
     public bool OpenDoor(KeyType p_playerKey)
     {
+        Debug.Log(m_openName);
         if (m_neededKey)
         {
             //Si le joueur n'a pas la clé necessaire
@@ -113,10 +118,5 @@ public class Door : MonoBehaviour
             return;
         }
 
-        if ((m_layerMonstre.value & (1 << p_target.gameObject.layer)) > 0)
-        {
-            m_doorAnimator.ResetTrigger(m_openHash);
-            m_doorAnimator.SetTrigger(m_openHash);
-        }
     }
 }
