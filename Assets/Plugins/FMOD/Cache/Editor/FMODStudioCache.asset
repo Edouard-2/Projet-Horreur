@@ -42,10 +42,10 @@ MonoBehaviour:
   Path: ProjetHorreurFmod/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 637878020305678454
+  lastModified: 637877044304133432
   FileSizes:
   - Name: Desktop
-    Value: 1550
+    Value: 1830
   Exists: 1
 --- !u!114 &-8609155119300988448
 MonoBehaviour:
@@ -128,6 +128,60 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 1872
+--- !u!114 &-7205815500057117150
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Souffle_Course
+  m_EditorClassIdentifier: 
+  Path: event:/Souffle_Course
+  Guid:
+    Data1: 1716136877
+    Data2: 1339921720
+    Data3: -2050398846
+    Data4: -730265401
+  Banks:
+  - {fileID: 916322104816340486}
+  IsStream: 1
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 35616
+--- !u!114 &-6739221787194947980
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Suspens_Sound
+  m_EditorClassIdentifier: 
+  Path: event:/Suspens_Sound
+  Guid:
+    Data1: 14157649
+    Data2: 1090567248
+    Data3: 1194956700
+    Data4: -193687604
+  Banks:
+  - {fileID: 916322104816340486}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 4080
 --- !u!114 &-6686071534926612598
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -182,6 +236,33 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 63936
+--- !u!114 &-5162349289105617829
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Son_Rouages
+  m_EditorClassIdentifier: 
+  Path: event:/Son_Rouages
+  Guid:
+    Data1: -1211577822
+    Data2: 1129685092
+    Data3: -153532239
+    Data4: 1408559901
+  Banks:
+  - {fileID: 916322104816340486}
+  IsStream: 1
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 23472
 --- !u!114 &-4405845253073568855
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -295,12 +376,18 @@ MonoBehaviour:
   - {fileID: 6607544526604250631}
   - {fileID: -1503630473681262418}
   - {fileID: -7494203855822657277}
+  - {fileID: 8996320028510214708}
+  - {fileID: -5162349289105617829}
+  - {fileID: -6739221787194947980}
+  - {fileID: 6833903955133373753}
+  - {fileID: 6793428815863249804}
+  - {fileID: -7205815500057117150}
   EditorParameters: []
   MasterBanks:
   - {fileID: 916322104816340486}
   StringsBanks:
   - {fileID: -8647617015449775809}
-  cacheTime: 637878020305678454
+  cacheTime: 637877044304133432
   cacheVersion: 10
 --- !u!114 &399645409812421130
 MonoBehaviour:
@@ -344,10 +431,10 @@ MonoBehaviour:
   Path: ProjetHorreurFmod/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 637878020305638572
+  lastModified: 637877044304033618
   FileSizes:
   - Name: Desktop
-    Value: 103904544
+    Value: 104847456
   Exists: 1
 --- !u!114 &5159406747729164162
 MonoBehaviour:
@@ -484,6 +571,60 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 297264
+--- !u!114 &6793428815863249804
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Souffle
+  m_EditorClassIdentifier: 
+  Path: event:/Souffle
+  Guid:
+    Data1: -650768727
+    Data2: 1244224242
+    Data3: 397912478
+    Data4: 70031420
+  Banks:
+  - {fileID: 916322104816340486}
+  IsStream: 1
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 12216
+--- !u!114 &6833903955133373753
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Trasvaser_Aspiration
+  m_EditorClassIdentifier: 
+  Path: event:/Trasvaser_Aspiration
+  Guid:
+    Data1: 199043164
+    Data2: 1213804181
+    Data3: 328725153
+    Data4: -395391958
+  Banks:
+  - {fileID: 916322104816340486}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 1368
 --- !u!114 &7297154873670886574
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -511,3 +652,30 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 10320
+--- !u!114 &8996320028510214708
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Pas
+  m_EditorClassIdentifier: 
+  Path: event:/Pas
+  Guid:
+    Data1: -1607336421
+    Data2: 1157489844
+    Data3: 1338879381
+    Data4: -1348049868
+  Banks:
+  - {fileID: 916322104816340486}
+  IsStream: 1
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 10104
