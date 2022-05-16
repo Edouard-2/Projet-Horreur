@@ -266,6 +266,15 @@ public class PlayerManager : Singleton<PlayerManager>
             if (p_next)
             {
                 m_visionScript.m_isBlurVision = Mathf.Abs(m_visionScript.m_isBlurVision - 1);
+                if (m_visionScript.m_isBlurVision > 0)
+                {
+                    m_visionScript.m_chaleurVFX.gameObject.SetActive(true);
+                }
+                else
+                {
+                    m_visionScript.m_chaleurVFX.gameObject.SetActive(false);
+                }
+                
                 DoVisibleToInvisibleHandler?.Invoke();
             }
             else
