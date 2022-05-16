@@ -23,7 +23,6 @@ public class Defense : BaseState
         m_canPatrol = false;
         m_canHook = false;
         
-        m_sm.m_radiusDetection /= 1.5f;
         m_sm.m_collider.radius /= 2;
         
         m_sm.SetNewAnimation(m_sm.m_retractHash);
@@ -52,7 +51,6 @@ public class Defense : BaseState
     public override void Exit()
     {
         m_sm.m_lastState = this;
-        m_sm.m_radiusDetection *= 1.5f;
         m_sm.m_collider.radius *= 2;
     }
 }
