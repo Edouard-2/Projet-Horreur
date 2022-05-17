@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class StateMachine : MonoBehaviour
 {
-    protected BaseState m_currentState;
+    public BaseState m_currentState;
     
     public BaseState m_lastState;
 

@@ -105,8 +105,8 @@ public class Patrol : BaseState
                 m_currentWayPoint = GetRandomWayPoint();
                 
                 m_sm.m_navMeshAgent.SetDestination(m_currentWayPoint.position);
-                Debug.Log(m_wayPointsList.Count);
-                Debug.Log(m_sm.m_navMeshAgent.CalculatePath(m_currentWayPoint.position,m_sm.m_navMeshAgent.path));
+//                Debug.Log(m_wayPointsList.Count);
+//                Debug.Log(m_sm.m_navMeshAgent.CalculatePath(m_currentWayPoint.position,m_sm.m_navMeshAgent.path));
             }
         }
         //LookAt joueur
