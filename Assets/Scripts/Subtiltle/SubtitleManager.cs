@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.InteropServices.WindowsRuntime;
 using TMPro;
 using UnityEngine;
 
@@ -51,6 +52,8 @@ public class SubtitleManager : MonoBehaviour
     private int m_displayHash;
     private int m_transHash;
     private int m_hideHash;
+    
+    private string m_currentDialogueArray;
 
     private WaitForSeconds m_waitUntilTransition;
     private WaitForSeconds m_waitUntilEndTransition;
@@ -99,6 +102,7 @@ public class SubtitleManager : MonoBehaviour
     {
         if (p_isstart)
         {
+            m_currentDialogueArray = m_dialogues.m_listDialogues[m_indexDialogue];
             FirstTransition(m_firstCurrent);
             return;
         }
@@ -131,21 +135,46 @@ public class SubtitleManager : MonoBehaviour
         m_secondCurrent = m_firstObj;
     }
 
+    private string GetCurrentTextDialogue()
+    {
+        string dialogueArray = SetNewDialogueArray(m_currentSentenceLenght);
+        
+        m_currentSentenceLenght += m_sentenceLength;
+
+        return dialogueArray;
+    }
+
+    private string SetNewDialogueArray(int p_nbr)
+    {
+        if(m_currentSentenceLenght == 0) return m_dialogues.m_listDialogues[m_indexDialogue];
+        
+        m_currentDialogueArray = "";
+        
+        for (int i = 0; i < m_dialogues.m_listDialogues[m_indexDialogue].Length; i++)
+        {
+            if (m_currentSentenceLenght <= i)
+            {
+                m_currentDialogueArray += m_dialogues.m_listDialogues[m_indexDialogue][i];
+            }
+        }
+
+        return m_currentDialogueArray;
+    }
+
     //Faire apparaitre le texte
     private void FirstTransition(CurrentObj p_text)
     {
-        m_currentSentenceLenght += m_sentenceLength;
-        string text = m_dialogues.m_listDialogues[m_indexDialogue];
+        string text = GetCurrentTextDialogue();
         char space = ' ';
-
+        p_text.text.text = "";
         for (int i = 0; i < text.Length; i++)
         {
-            if (i >= m_sentenceLength && text[i].GetHashCode() == space.GetHashCode()) break;
+            if (i > m_sentenceLength - 1 && text[i].GetHashCode() == space.GetHashCode()) break;
             p_text.text.text += text[i];
         }
 
+        p_text.anim.ResetTrigger(m_hideHash);
         p_text.anim.SetTrigger(m_displayHash);
-        p_text.anim.ResetTrigger(m_displayHash);
         
         StartCoroutine(WaitForNewTransition(2, p_text.text));
     }
@@ -153,16 +182,16 @@ public class SubtitleManager : MonoBehaviour
     //Faire l'animation de monté du text
     private void SecondTransition(Animator p_anim)
     {
+        p_anim.ResetTrigger(m_displayHash);
         p_anim.SetTrigger(m_transHash);
-        p_anim.ResetTrigger(m_transHash);
     }
 
     //Faire l'animation de disparition du text
     IEnumerator EndTransition(Animator p_anim)
     {
         yield return m_waitUntilEndTransition;
+        p_anim.ResetTrigger(m_transHash);
         p_anim.SetTrigger(m_hideHash);
-        p_anim.ResetTrigger(m_hideHash);
     }
 
     IEnumerator WaitForNewTransition(int p_trans, TextMeshProUGUI p_text)
