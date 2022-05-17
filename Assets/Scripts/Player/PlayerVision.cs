@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Serialization;
 using UnityEngine.UI;
+using UnityEngine.VFX;
 
 public class PlayerVision : MonoBehaviour
 {
@@ -25,9 +26,17 @@ public class PlayerVision : MonoBehaviour
     [SerializeField, Tooltip("Courbe de pourcentage pour la changement de la lut table lorsqu'il passe en vision net / normal")] 
     public AnimationCurve m_curveLutFinish;
 
+    [Header("VFX")]
+    [SerializeField, Tooltip("VFX de chaleur du monstre")] 
+    public VisualEffect m_chaleurVFX;        
+    
     [Header("Material")]
     [SerializeField, Tooltip("Material de flou pour le postprocess")] 
     public Material m_matVision;
+    [SerializeField, Tooltip("Material de la tête du monstre")] 
+    public Material m_matMonsterHead;
+    [SerializeField, Tooltip("Material des pattes du monstre")] 
+    public Material m_matMonsterSpeaks;
     [HideInInspector]public bool m_resetTimeVisionComp = false;
     [HideInInspector]public bool m_resetTimeVisionMat = false;
     [FormerlySerializedAs("m_readyEnd")][HideInInspector] 
@@ -114,8 +123,14 @@ public class PlayerVision : MonoBehaviour
         if (m_resetTimeVisionMat)
         {
             float matVisibilityValue = p_dir.Evaluate(p_time);
-            
             DoChangeMaterial?.Invoke(matVisibilityValue);
+            
+            float value = matVisibilityValue;
+            
+            if (m_isBlurVision == 1 && value > 0) value = matVisibilityValue - 0.798179f;
+            
+            m_matMonsterHead.SetFloat("_DistortionStrength", value);
+            m_matMonsterSpeaks.SetFloat("_DistortionStrength", value);
         }
     }
 
