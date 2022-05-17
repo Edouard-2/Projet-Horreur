@@ -101,24 +101,21 @@ public class SubtitleManager : MonoBehaviour
 
     private void LaunchSubtitle(bool p_isstart = false)
     {
-        Debug.Log($"Le current Sentence: {m_currentSentenceLenght}, current dialogue length : {m_dialogues.m_listDialogues[m_indexDialogue].Length}");
-
         if (m_currentSentenceLenght >= m_dialogues.m_listDialogues[m_indexDialogue].Length)
         {
             m_currentSentenceLenght = 0;
             m_indexDialogue++;
         }
-        
-        if (m_dialogues.m_listDialogues.Count < m_indexDialogue) return;
+
+        if (m_dialogues.m_listDialogues.Count == m_indexDialogue)
+        {
+            
+            return;
+        }
         
         bool b = VerifPauseForDialogue();
         
-        if (b)
-        {
-            Debug.Log("J'arrete");
-            //StartCoroutine(EndTransition(m_secondCurrent.anim));
-            return;
-        }
+        if (b) return;
 
         if (p_isstart)
         {
@@ -143,8 +140,6 @@ public class SubtitleManager : MonoBehaviour
         {
             empty += text[i];
         }
-
-        Debug.Log(empty);
         
         if (empty == "$$Wait")
         {
@@ -157,9 +152,7 @@ public class SubtitleManager : MonoBehaviour
             
             string nbr = nbrString + "0";
             
-            Debug.Log(nbr);
             float s = Convert.ToSingle(nbr);
-            Debug.Log(s);
             StartCoroutine(WaitUntilResume(s/10));
             
             return true;
@@ -234,13 +227,14 @@ public class SubtitleManager : MonoBehaviour
     //Faire l'animation de monté du text
     private void SecondTransition(Animator p_anim)
     {
+        Debug.Log("Transition");
+        p_anim.ResetTrigger(m_hideHash);
         p_anim.ResetTrigger(m_displayHash);
         p_anim.SetTrigger(m_transHash);
     }
 
     IEnumerator WaitUntilResume(float p_nbr)
     {
-        Debug.Log(p_nbr);
         yield return new WaitForSeconds(p_nbr);
         
         m_currentSentenceLenght = 0;
@@ -253,17 +247,19 @@ public class SubtitleManager : MonoBehaviour
     IEnumerator EndTransition(Animator p_anim)
     {
         yield return m_waitUntilEndTransition;
+        Debug.Log("Hide");
+        p_anim.ResetTrigger(m_displayHash);
         p_anim.ResetTrigger(m_transHash);
         p_anim.SetTrigger(m_hideHash);
-        
-        p_anim.gameObject.SetActive(false);
     }
 
     IEnumerator WaitForNewTransition(CurrentObj p_text)
     {
-        yield return new WaitForSeconds(0.5f);
-        p_text.text.gameObject.SetActive(true);
+        //yield return new WaitForSeconds(0.5f);
+        
+        Debug.Log($"Display");
         p_text.anim.ResetTrigger(m_hideHash);
+        p_text.anim.ResetTrigger(m_transHash);
         p_text.anim.SetTrigger(m_displayHash);
         yield return m_waitUntilTransition;
         LaunchSubtitle();
