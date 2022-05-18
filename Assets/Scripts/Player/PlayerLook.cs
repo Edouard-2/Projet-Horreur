@@ -13,7 +13,7 @@ public class PlayerLook : MonoBehaviour
     [Header("Other")]
     [SerializeField, Tooltip("La speed de déplacement du player")]private float m_speedCursor = 5f;
     [SerializeField, Tooltip("La camera du joueur")]public Camera m_camera;
-    [SerializeField, Tooltip("L'animator du joueur")]public Animator m_animator;
+    [SerializeField, Tooltip("L'animator de la rotation de camera du joueur")]public Animator m_animator;
     private float m_mouseRotationX;
     private float m_mouseRotationY;
     private float m_xRotate;

@@ -14,7 +14,7 @@ public class SoundManager : Singleton<SoundManager>
     
     [SerializeField, Tooltip("Scriptableobject qui contient les informations sur les SFX")]
     private UIOptionValue m_soundVFX;
-
+    
     private float m_globalVolume;
     private float m_musiqueVolume;
     private float m_VFXVolume;
