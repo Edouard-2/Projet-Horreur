@@ -26,6 +26,8 @@ public class SoundManager : Singleton<SoundManager>
     private Bus m_master;
     private Bus m_musique;
     private Bus m_vfx;
+    
+    private static WaitForSeconds m_waitForTurnOff = new WaitForSeconds(0.01f);
 
     private void OnEnable()
     {
@@ -71,7 +73,19 @@ public class SoundManager : Singleton<SoundManager>
         Debug.Log(m_VFXVolume);
         m_vfx.setVolume(m_VFXVolume);
     }
-
+    /// <summary>
+    /// Faire monter ou baisser le son progressivement
+    /// </summary>
+    /// <param name="m_event"> Event emitter sur lequel on baisse le son </param>
+    /// <param name="p_in"> True : FadeIn / False : FadeOut </param>
+    public static void FadeOut(StudioEventEmitter m_event, bool p_in)
+    {
+        Debug.Log($"Je vais baisser le son de : {m_event}");
+        int dir = 1;
+        if (p_in) dir = 0;
+        m_event.SetParameter("Fade", dir);
+    }
+    
     protected override string GetSingletonName()
     {
         return "SoundManager";

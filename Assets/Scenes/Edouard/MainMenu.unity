@@ -1279,6 +1279,10 @@ PrefabInstance:
       value: 0.0013
       objectReference: {fileID: 0}
     - target: {fileID: 1435708443760036741, guid: f414dc7c3bb687943bb0e99ac394a05b, type: 3}
+      propertyPath: m_emitter
+      value: 
+      objectReference: {fileID: 1435708445309712047}
+    - target: {fileID: 1435708443760036741, guid: f414dc7c3bb687943bb0e99ac394a05b, type: 3}
       propertyPath: m_fadeAnimator
       value: 
       objectReference: {fileID: 1733780809}
@@ -1425,7 +1429,7 @@ MonoBehaviour:
       Data2: 1109551287
       Data3: -102625610
       Data4: -1681433764
-    Path: event:/OverRandom
+    Path: event:/Click/OverRandom
   Event: 
   PlayEvent: 0
   StopEvent: 0
@@ -1434,8 +1438,8 @@ MonoBehaviour:
   Preload: 0
   Params: []
   OverrideAttenuation: 1
-  OverrideMinDistance: 0.0224706
-  OverrideMaxDistance: 0.43602425
+  OverrideMinDistance: 0.12004495
+  OverrideMaxDistance: 0.5
 --- !u!114 &1435708445309712040
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1455,7 +1459,7 @@ MonoBehaviour:
       Data2: 1224234452
       Data3: 1484507297
       Data4: 1471966755
-    Path: event:/ClickRandom
+    Path: event:/Click/ClickRandom
   Event: 
   PlayEvent: 0
   StopEvent: 0
@@ -1464,8 +1468,8 @@ MonoBehaviour:
   Preload: 0
   Params: []
   OverrideAttenuation: 1
-  OverrideMinDistance: 0.021728978
-  OverrideMaxDistance: 0.43264607
+  OverrideMinDistance: 0.12056576
+  OverrideMaxDistance: 0.5
 --- !u!1 &1435708445309712041 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1435708445537121627, guid: f414dc7c3bb687943bb0e99ac394a05b, type: 3}
@@ -1542,14 +1546,16 @@ MonoBehaviour:
       Data2: 1119759030
       Data3: 352802746
       Data4: 229881757
-    Path: event:/Bruit_Blanc_TV
+    Path: event:/Ambiance/Bruit_Blanc_TV
   Event: 
   PlayEvent: 1
   StopEvent: 0
   AllowFadeout: 1
   TriggerOnce: 0
   Preload: 0
-  Params: []
+  Params:
+  - Name: Fade
+    Value: 0
   OverrideAttenuation: 0
   OverrideMinDistance: 1
   OverrideMaxDistance: 20
