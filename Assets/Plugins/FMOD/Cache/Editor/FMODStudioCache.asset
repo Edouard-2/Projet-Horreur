@@ -69,10 +69,10 @@ MonoBehaviour:
   Path: ProjetHorreurFmod/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 637884682735281090
+  lastModified: 637884780655627689
   FileSizes:
   - Name: Desktop
-    Value: 2088
+    Value: 1912
   Exists: 1
 --- !u!114 &-5312101895080936749
 MonoBehaviour:
@@ -269,21 +269,17 @@ MonoBehaviour:
   - {fileID: 8066814682419892988}
   - {fileID: 6732971465607007533}
   - {fileID: -5312101895080936749}
-  - {fileID: 1380312805528634521}
   - {fileID: -6012246761435647542}
-  - {fileID: 519151920857249264}
   - {fileID: -5136637092373001534}
   - {fileID: 2094648528535625299}
   - {fileID: 1552966778274164782}
   - {fileID: -2142962629694523135}
-  - {fileID: 4051140272795572724}
-  - {fileID: 1344892562080990043}
   EditorParameters: []
   MasterBanks:
   - {fileID: 5801067211475645165}
   StringsBanks:
   - {fileID: -5641762550955934708}
-  cacheTime: 637884682735281090
+  cacheTime: 637884780655627689
   cacheVersion: 10
 --- !u!114 &323980295796305496
 MonoBehaviour:
@@ -339,33 +335,6 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 4080
---- !u!114 &519151920857249264
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/Click/ClickRandom
-  m_EditorClassIdentifier: 
-  Path: event:/Click/ClickRandom
-  Guid:
-    Data1: -1276758381
-    Data2: 1224234452
-    Data3: 1484507297
-    Data4: 1471966755
-  Banks:
-  - {fileID: 5801067211475645165}
-  IsStream: 0
-  Is3D: 1
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 320
 --- !u!114 &524613542196709770
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -393,60 +362,6 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 15888
---- !u!114 &1344892562080990043
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/Click/Click2
-  m_EditorClassIdentifier: 
-  Path: event:/Click/Click2
-  Guid:
-    Data1: 416059353
-    Data2: 1176295136
-    Data3: -1907853121
-    Data4: -1253705727
-  Banks:
-  - {fileID: 5801067211475645165}
-  IsStream: 0
-  Is3D: 1
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 240
---- !u!114 &1380312805528634521
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/Click/Click3
-  m_EditorClassIdentifier: 
-  Path: event:/Click/Click3
-  Guid:
-    Data1: 1117803653
-    Data2: 1188099435
-    Data3: -804960890
-    Data4: -376273658
-  Banks:
-  - {fileID: 5801067211475645165}
-  IsStream: 0
-  Is3D: 1
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 96
 --- !u!114 &1453793065674825676
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -636,33 +551,6 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 1872
---- !u!114 &4051140272795572724
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/Click/OverRandom
-  m_EditorClassIdentifier: 
-  Path: event:/Click/OverRandom
-  Guid:
-    Data1: 1466255313
-    Data2: 1109551287
-    Data3: -102625610
-    Data4: -1681433764
-  Banks:
-  - {fileID: 5801067211475645165}
-  IsStream: 0
-  Is3D: 1
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 320
 --- !u!114 &5664331669526374784
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -705,10 +593,10 @@ MonoBehaviour:
   Path: ProjetHorreurFmod/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 637884682735211260
+  lastModified: 637884780655627689
   FileSizes:
   - Name: Desktop
-    Value: 104860768
+    Value: 104847840
   Exists: 1
 --- !u!114 &6705127605747098035
 MonoBehaviour:
