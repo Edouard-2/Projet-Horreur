@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using FMOD.Studio;
 using UnityEngine;
 using FMODUnity;
@@ -14,6 +15,9 @@ public class SoundManager : Singleton<SoundManager>
     
     [SerializeField, Tooltip("Scriptableobject qui contient les informations sur les SFX")]
     private UIOptionValue m_soundVFX;
+    
+    [SerializeField, Tooltip("Emitter de l'ambiance labo in game")]
+    private StudioEventEmitter m_ambiance;
     
     private float m_globalVolume;
     private float m_musiqueVolume;
