@@ -27,8 +27,6 @@ public class SoundManager : Singleton<SoundManager>
     private Bus m_musique;
     private Bus m_vfx;
     
-    private static WaitForSeconds m_waitForTurnOff = new WaitForSeconds(0.01f);
-
     private void OnEnable()
     {
         m_soundGlobal.OnUpdateText += UpdateSoundVolumeGlobal;
@@ -73,6 +71,7 @@ public class SoundManager : Singleton<SoundManager>
         Debug.Log(m_VFXVolume);
         m_vfx.setVolume(m_VFXVolume);
     }
+    
     /// <summary>
     /// Faire monter ou baisser le son progressivement
     /// </summary>
