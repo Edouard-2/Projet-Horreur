@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 
 public class PlayerLook : MonoBehaviour
@@ -12,9 +13,14 @@ public class PlayerLook : MonoBehaviour
     [Header("Other")]
     [SerializeField, Tooltip("La speed de déplacement du player")]private float m_speedCursor = 5f;
     [SerializeField, Tooltip("La camera du joueur")]public Camera m_camera;
+    [SerializeField, Tooltip("L'animator de la rotation de camera du joueur")]public Animator m_animator;
     private float m_mouseRotationX;
     private float m_mouseRotationY;
     private float m_xRotate;
+
+    private int m_idleHash = Animator.StringToHash("Idle");
+    private int m_leftHash = Animator.StringToHash("Left");
+    private int m_rightHash = Animator.StringToHash("Right");
 
     private void OnEnable()
     {
@@ -38,6 +44,24 @@ public class PlayerLook : MonoBehaviour
         m_mouseRotationY =  Input.GetAxis("Mouse Y") * m_speedCursor;
 
         if (PlayerManager.Instance.m_isHooked)return;
+
+        m_animator.ResetTrigger(m_idleHash);
+        m_animator.ResetTrigger(m_leftHash);
+        m_animator.SetTrigger(m_leftHash);
+        
+        if (m_mouseRotationX < 0)
+        {
+            m_animator.ResetTrigger(m_leftHash);
+            m_animator.ResetTrigger(m_idleHash);
+            m_animator.SetTrigger(m_rightHash);
+        }
+        
+        if (m_mouseRotationX == 0)
+        {
+            m_animator.ResetTrigger(m_rightHash);
+            m_animator.ResetTrigger(m_leftHash);
+            m_animator.SetTrigger(m_idleHash);
+        }
         
         m_xRotate -= m_mouseRotationY;
         m_xRotate = Mathf.Clamp(m_xRotate, -90f, 90f);
