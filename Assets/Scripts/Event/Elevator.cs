@@ -1,17 +1,29 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using FMODUnity;
 using UnityEngine;
 
 public class Elevator : MonoBehaviour
 {
-
+    [Header("Transform")]
+    [SerializeField, Tooltip("Position de l'assensceur actuel")]
+    private GameObject m_colliderBlock;
+    
     [SerializeField, Tooltip("Position de l'assensceur actuel")]
     private Transform m_currentPosElevator;
     
     [SerializeField, Tooltip("Autre Assensceur qui va recevoir le joueur")]
     private Transform m_newPosElevator;
     
+    [Header("Sound Emitter")]
+    [SerializeField, Tooltip("Emitter d'ouverture de porte")]
+    private StudioEventEmitter m_openEmitter;
+    
+    [SerializeField, Tooltip("Emitter de fermeture de porte")]
+    private StudioEventEmitter m_closeEmitter;
+    
+    [Header("Animator")]
     [SerializeField, Tooltip("Liste des animator des portes")]
     private List<Animator> m_listAnimator;
 
@@ -41,11 +53,13 @@ public class Elevator : MonoBehaviour
         {
             ResetTrigger(m_closeHash);
             SetTrigger(m_openHash);
+            m_openEmitter.Play();
             gameObject.SetActive(false);
             return;
         }
 
         if(m_coroutineClose == null) StartCoroutine(WaitBeforeTP());
+        m_closeEmitter.Play();
         ResetTrigger(m_openHash);
         SetTrigger(m_closeHash);
     }
@@ -75,6 +89,9 @@ public class Elevator : MonoBehaviour
         
         yield return new WaitForEndOfFrame();
         PlayerManager.Instance.m_controllerScript.m_charaController.enabled = true;
+        
+        if (m_colliderBlock != null) m_colliderBlock.SetActive(true);
+        
         gameObject.SetActive(false);
     }
 }

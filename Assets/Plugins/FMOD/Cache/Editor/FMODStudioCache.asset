@@ -42,10 +42,10 @@ MonoBehaviour:
   Path: ProjetHorreurFmod/Build/Desktop/SFX.bank
   Name: SFX
   StudioPath: bank:/SFX
-  lastModified: 637885465812070525
+  lastModified: 637885609674524667
   FileSizes:
   - Name: Desktop
-    Value: 87712
+    Value: 167808
   Exists: 1
 --- !u!114 &-6012246761435647542
 MonoBehaviour:
@@ -74,6 +74,33 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 129168
+--- !u!114 &-5728011490797780319
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/TingOuverture
+  m_EditorClassIdentifier: 
+  Path: event:/TingOuverture
+  Guid:
+    Data1: 730637450
+    Data2: 1181392975
+    Data3: -940750706
+    Data4: -853133921
+  Banks:
+  - {fileID: -6456487149576492547}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
 --- !u!114 &-5641762550955934708
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -89,10 +116,10 @@ MonoBehaviour:
   Path: ProjetHorreurFmod/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 637885511125424918
+  lastModified: 637885609673830383
   FileSizes:
   - Name: Desktop
-    Value: 2480
+    Value: 2638
   Exists: 1
 --- !u!114 &-5312101895080936749
 MonoBehaviour:
@@ -407,12 +434,15 @@ MonoBehaviour:
   - {fileID: -3226905856223286682}
   - {fileID: 5811257285130925516}
   - {fileID: -3781954026265261475}
+  - {fileID: 7960008607361886276}
+  - {fileID: -5728011490797780319}
+  - {fileID: 6010860564165518640}
   EditorParameters: []
   MasterBanks:
   - {fileID: 5801067211475645165}
   StringsBanks:
   - {fileID: -5641762550955934708}
-  cacheTime: 637885511125424918
+  cacheTime: 637885609674524667
   cacheVersion: 10
 --- !u!114 &323980295796305496
 MonoBehaviour:
@@ -804,10 +834,10 @@ MonoBehaviour:
   Path: ProjetHorreurFmod/Build/Desktop/Ambiance.bank
   Name: Ambiance
   StudioPath: bank:/Ambiance
-  lastModified: 637885465810604318
+  lastModified: 637885609672640005
   FileSizes:
   - Name: Desktop
-    Value: 98744896
+    Value: 99354944
   Exists: 1
 --- !u!114 &5664331669526374784
 MonoBehaviour:
@@ -875,7 +905,7 @@ MonoBehaviour:
   Path: ProjetHorreurFmod/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 637885504552650505
+  lastModified: 637885609673710251
   FileSizes:
   - Name: Desktop
     Value: 6108192
@@ -906,7 +936,7 @@ MonoBehaviour:
   Parameters: []
   MinDistance: 1
   MaxDistance: 20
-  Length: 3500
+  Length: 4850
 --- !u!114 &5966219570104925401
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -931,6 +961,33 @@ MonoBehaviour:
   IsGlobal: 0
   Labels: []
   Exists: 1
+--- !u!114 &6010860564165518640
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/OuvertureAssensceurDing
+  m_EditorClassIdentifier: 
+  Path: event:/OuvertureAssensceurDing
+  Guid:
+    Data1: 323630846
+    Data2: 1148903052
+    Data3: -557128771
+    Data4: 1666271534
+  Banks:
+  - {fileID: -6456487149576492547}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 4272
 --- !u!114 &6634190534411354793
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1014,6 +1071,33 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 854520
+--- !u!114 &7960008607361886276
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Ambiance_BE
+  m_EditorClassIdentifier: 
+  Path: event:/Ambiance_BE
+  Guid:
+    Data1: -928638464
+    Data2: 1221085485
+    Data3: -549180254
+    Data4: 1989010040
+  Banks:
+  - {fileID: 5361345218166823366}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 75000
 --- !u!114 &8066814682419892988
 MonoBehaviour:
   m_ObjectHideFlags: 0
