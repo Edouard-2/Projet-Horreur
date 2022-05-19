@@ -26,6 +26,9 @@ public class Elevator : MonoBehaviour
     [Header("Animator")]
     [SerializeField, Tooltip("Liste des animator des portes")]
     private List<Animator> m_listAnimator;
+    
+    [SerializeField, Tooltip("Est ce que l'elevator tp le joueur")]
+    private bool m_isTeleport;
 
     private int m_openHash;
     private int m_closeHash;
@@ -62,14 +65,14 @@ public class Elevator : MonoBehaviour
         ResetTrigger(m_openHash);
         SetTrigger(m_closeHash);
 
-        if (m_colliderBlock != null)
+        if (!m_isTeleport)
         {
             m_colliderBlock.SetActive(true);
             gameObject.SetActive(false);
             return;
         }
 
-        if(m_coroutineClose == null ) StartCoroutine(WaitBeforeTP());
+        StartCoroutine(WaitBeforeTP());
     }
 
     private void ResetTrigger(int Hash)

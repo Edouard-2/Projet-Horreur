@@ -1,5 +1,49 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &727047932
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 727047933}
+  - component: {fileID: 727047934}
+  m_Layer: 0
+  m_Name: ColliderBlock
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &727047933
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 727047932}
+  m_LocalRotation: {x: -0, y: -0.0002838373, z: -0, w: -1}
+  m_LocalPosition: {x: -0.15, y: 0.066000104, z: 0.722}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 6655621586382721447}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &727047934
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 727047932}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.1392553, y: 2.0409527, z: 0.08843588}
+  m_Center: {x: 0.028856635, y: -0.16027868, z: -0.04487137}
 --- !u!1 &1144510479
 GameObject:
   m_ObjectHideFlags: 0
@@ -57,7 +101,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 422670f09ad1e6f44bb9d5f2e55b17c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_colliderBlock: {fileID: 0}
+  m_colliderBlock: {fileID: 727047932}
   m_currentPosElevator: {fileID: 6655621586382721447}
   m_newPosElevator: {fileID: 0}
   m_openEmitter: {fileID: 1380057760}
@@ -65,6 +109,7 @@ MonoBehaviour:
   m_listAnimator:
   - {fileID: 2856990565453598591}
   - {fileID: 5808778479813964689}
+  m_isTeleport: 1
   m_isOpen: 0
 --- !u!1 &1256402930
 GameObject:
@@ -852,6 +897,7 @@ MonoBehaviour:
   m_listAnimator:
   - {fileID: 2856990565453598591}
   - {fileID: 5808778479813964689}
+  m_isTeleport: 0
   m_isOpen: 1
 --- !u!1 &6655621585602460551
 GameObject:
@@ -918,6 +964,7 @@ Transform:
   - {fileID: 9049194803442056664}
   - {fileID: 1144510480}
   - {fileID: 2087740024}
+  - {fileID: 727047933}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
