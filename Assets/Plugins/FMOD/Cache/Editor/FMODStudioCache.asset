@@ -42,10 +42,10 @@ MonoBehaviour:
   Path: ProjetHorreurFmod/Build/Desktop/SFX.bank
   Name: SFX
   StudioPath: bank:/SFX
-  lastModified: 637884918224836710
+  lastModified: 637885465812070525
   FileSizes:
   - Name: Desktop
-    Value: 31168
+    Value: 87712
   Exists: 1
 --- !u!114 &-6012246761435647542
 MonoBehaviour:
@@ -89,10 +89,10 @@ MonoBehaviour:
   Path: ProjetHorreurFmod/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 637884918218638191
+  lastModified: 637885511125424918
   FileSizes:
   - Name: Desktop
-    Value: 2320
+    Value: 2480
   Exists: 1
 --- !u!114 &-5312101895080936749
 MonoBehaviour:
@@ -202,6 +202,33 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 155544
+--- !u!114 &-3781954026265261475
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/OuverturAssensceur
+  m_EditorClassIdentifier: 
+  Path: event:/OuverturAssensceur
+  Guid:
+    Data1: 2013812678
+    Data2: 1201102474
+    Data3: 237681801
+    Data4: 113034579
+  Banks:
+  - {fileID: -6456487149576492547}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 4272
 --- !u!114 &-3226905856223286682
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -254,6 +281,7 @@ MonoBehaviour:
   IsOneShot: 0
   Parameters:
   - {fileID: -247379142457916406}
+  - {fileID: 3222665709906856819}
   MinDistance: 1
   MaxDistance: 20
   Length: 862000
@@ -377,12 +405,14 @@ MonoBehaviour:
   - {fileID: 3983022051934444230}
   - {fileID: 5355740473859795350}
   - {fileID: -3226905856223286682}
+  - {fileID: 5811257285130925516}
+  - {fileID: -3781954026265261475}
   EditorParameters: []
   MasterBanks:
   - {fileID: 5801067211475645165}
   StringsBanks:
   - {fileID: -5641762550955934708}
-  cacheTime: 637884918224836710
+  cacheTime: 637885511125424918
   cacheVersion: 10
 --- !u!114 &323980295796305496
 MonoBehaviour:
@@ -654,6 +684,30 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 12216
+--- !u!114 &3222665709906856819
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Labo_WhiteNoise/BE_Fade
+  m_EditorClassIdentifier: 
+  Name: BE_Fade
+  StudioPath: 
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 1967728906
+    data2: 2574792105
+  Type: 0
+  IsGlobal: 0
+  Labels: []
+  Exists: 1
 --- !u!114 &3618999680088817332
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -750,10 +804,10 @@ MonoBehaviour:
   Path: ProjetHorreurFmod/Build/Desktop/Ambiance.bank
   Name: Ambiance
   StudioPath: bank:/Ambiance
-  lastModified: 637884918224287741
+  lastModified: 637885465810604318
   FileSizes:
   - Name: Desktop
-    Value: 98744224
+    Value: 98744896
   Exists: 1
 --- !u!114 &5664331669526374784
 MonoBehaviour:
@@ -782,6 +836,30 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 10320
+--- !u!114 &5690606498967716466
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Labo_Ambiance/BE_Fade
+  m_EditorClassIdentifier: 
+  Name: BE_Fade
+  StudioPath: 
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 1967728906
+    data2: 2574792105
+  Type: 0
+  IsGlobal: 0
+  Labels: []
+  Exists: 1
 --- !u!114 &5801067211475645165
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -797,11 +875,38 @@ MonoBehaviour:
   Path: ProjetHorreurFmod/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 637884918218577946
+  lastModified: 637885504552650505
   FileSizes:
   - Name: Desktop
     Value: 6108192
   Exists: 1
+--- !u!114 &5811257285130925516
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/FermetureAssensceur
+  m_EditorClassIdentifier: 
+  Path: event:/FermetureAssensceur
+  Guid:
+    Data1: 1244312095
+    Data2: 1288368168
+    Data3: 887419268
+    Data4: 916608663
+  Banks:
+  - {fileID: -6456487149576492547}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 3500
 --- !u!114 &5966219570104925401
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -905,6 +1010,7 @@ MonoBehaviour:
   IsOneShot: 0
   Parameters:
   - {fileID: -139883404662293818}
+  - {fileID: 5690606498967716466}
   MinDistance: 1
   MaxDistance: 20
   Length: 854520
