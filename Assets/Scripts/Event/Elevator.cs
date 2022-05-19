@@ -58,10 +58,18 @@ public class Elevator : MonoBehaviour
             return;
         }
 
-        if(m_coroutineClose == null) StartCoroutine(WaitBeforeTP());
         m_closeEmitter.Play();
         ResetTrigger(m_openHash);
         SetTrigger(m_closeHash);
+
+        if (m_colliderBlock != null)
+        {
+            m_colliderBlock.SetActive(true);
+            gameObject.SetActive(false);
+            return;
+        }
+
+        if(m_coroutineClose == null ) StartCoroutine(WaitBeforeTP());
     }
 
     private void ResetTrigger(int Hash)
@@ -89,8 +97,6 @@ public class Elevator : MonoBehaviour
         
         yield return new WaitForEndOfFrame();
         PlayerManager.Instance.m_controllerScript.m_charaController.enabled = true;
-        
-        if (m_colliderBlock != null) m_colliderBlock.SetActive(true);
         
         gameObject.SetActive(false);
     }
