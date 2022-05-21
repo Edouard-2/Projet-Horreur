@@ -21,24 +21,39 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: M_N_Door_Key_Office_Vincenzo
-  m_Shader: {fileID: 4800000, guid: 933532a4fcc9baf4fa0491de14d08ed7, type: 3}
+  m_Shader: {fileID: -6465566751694194690, guid: ac36b1b422368fd4ca4554f710d381e7, type: 3}
   m_ShaderKeywords: _EMISSION _METALLICSPECGLOSSMAP _NORMALMAP _PARALLAXMAP
   m_LightmapFlags: 2
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: 2000
-  stringTagMap:
-    RenderType: Opaque
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
   disabledShaderPasses: []
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
+    - Texture2D_14720d6aa9454c62bd764afed9d9e57c:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - Texture2D_e9d38055ac484ad9b8ddcb518a01fed7:
+        m_Texture: {fileID: 2800000, guid: bc1772c0259631a40a04275fb0ac508d, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _AO:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Albedo:
+        m_Texture: {fileID: 2800000, guid: ae3e24032f921b949a25cd29ec2cfb3a, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _BaseMap:
-        m_Texture: {fileID: 2800000, guid: 43afca69dd8f02f47a13d625d745d9ef, type: 3}
+        m_Texture: {fileID: 2800000, guid: ae3e24032f921b949a25cd29ec2cfb3a, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BumpMap:
-        m_Texture: {fileID: 2800000, guid: a5d8bb5bc4c269a42924b6fec2473011, type: 3}
+        m_Texture: {fileID: 2800000, guid: 5fefb8c8f3a005c4abbf98d0b7112649, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _DetailAlbedoMap:
@@ -54,15 +69,27 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _EmissionMap:
-        m_Texture: {fileID: 2800000, guid: e96c44e9a9a3280458cb9db8f9462080, type: 3}
+        m_Texture: {fileID: 2800000, guid: 380c9149869903e45acc8b9cf99d6484, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Emissive:
+        m_Texture: {fileID: 2800000, guid: 380c9149869903e45acc8b9cf99d6484, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: 43afca69dd8f02f47a13d625d745d9ef, type: 3}
+        m_Texture: {fileID: 2800000, guid: ae3e24032f921b949a25cd29ec2cfb3a, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Metalic:
+        m_Texture: {fileID: 2800000, guid: 611be59bfb3058749ab1e864ee176252, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
-        m_Texture: {fileID: 2800000, guid: 2de002fa931af5d448b15fea541c7617, type: 3}
+        m_Texture: {fileID: 2800000, guid: 611be59bfb3058749ab1e864ee176252, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Normal:
+        m_Texture: {fileID: 2800000, guid: 5fefb8c8f3a005c4abbf98d0b7112649, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _OcclusionMap:
@@ -70,7 +97,11 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _ParallaxMap:
-        m_Texture: {fileID: 2800000, guid: 493956bb67732404b8452bb9ddfbe415, type: 3}
+        m_Texture: {fileID: 2800000, guid: 08d8ddda50fa00e4e9c7186a61ffdb9f, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Rougthness:
+        m_Texture: {fileID: 2800000, guid: 8f36369759a03244083aef14a0440492, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _SpecGlossMap:
@@ -90,6 +121,8 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
+    - Boolean_8ff23b1222d140b9bfa63637fcd76828: 1
+    - Boolean_bd9f48cb25c14b1891f7ab99f814db08: 1
     - _AlphaClip: 0
     - _Blend: 0
     - _BumpScale: 1
@@ -116,7 +149,9 @@ Material:
     - _Surface: 0
     - _WorkflowMode: 1
     - _ZWrite: 1
+    - _isAim: 0
     m_Colors:
+    - Color_d81c43a2cd0840daa0ae011d4233e4bd: {r: 0.2783019, g: 0.4599536, b: 1, a: 1}
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 1, g: 1, b: 1, a: 1}
