@@ -98,7 +98,7 @@ public class MonsterSM : StateMachine
     [HideInInspector]public int m_mesmerHash;
     [HideInInspector]public int m_bruitHash;
     
-    private int m_currentHash = Animator.StringToHash(m_retract);
+    private int m_currentHash;
     
     //--------------Other--------------//
     [Header("OTHER")] 

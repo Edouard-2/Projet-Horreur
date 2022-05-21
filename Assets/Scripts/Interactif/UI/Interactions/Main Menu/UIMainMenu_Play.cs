@@ -1,5 +1,4 @@
 using System.Collections;
-using FMODUnity;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -11,9 +10,6 @@ public class UIMainMenu_Play : MonoBehaviour
     
     [SerializeField, Tooltip("Index de la scene pour commencer le jeu")] 
     private Animator m_fadeAnimator;
-    
-    [SerializeField, Tooltip("Emitter du son d'ambiance")] 
-    private StudioEventEmitter m_emitter;
 
     private WaitForSeconds m_waitUntilLoadScene = new WaitForSeconds(0.5f);
     
@@ -22,7 +18,7 @@ public class UIMainMenu_Play : MonoBehaviour
         Debug.Log("Over Text");
         //Lanacer l'animation du fond noir
         m_fadeAnimator.SetTrigger(Animator.StringToHash("FadeIn"));
-        SoundManager.FadeOut(m_emitter, false);
+
         StartCoroutine(WaitUntilLaunchLoadingScene());
     }
 
@@ -39,6 +35,7 @@ public class UIMainMenu_Play : MonoBehaviour
         
         while (!operation.isDone)
         {
+            //Faire un truc pendant le chargement du LVL
             yield return null;
         }
     }
