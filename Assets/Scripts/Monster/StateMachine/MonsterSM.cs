@@ -62,9 +62,12 @@ public class MonsterSM : StateMachine
 
     //--------------EVENTS--------------//
     [Header("EVENTS")] 
+    [SerializeField, Tooltip("Scriptable de l'event de fin du jeu (cinématique)")]
+    private EventsTrigger m_eventEndCinematique;
+    
     [SerializeField, Tooltip("True: Le monstre commence par Idle")]
     private bool m_isIdleStart;
-
+    
     [SerializeField, Tooltip("Scriptable de l'event Alerter avec le son l'IA monstre")]
     private EventsTriggerPos m_eventAlertSound;
     
@@ -95,7 +98,7 @@ public class MonsterSM : StateMachine
     [HideInInspector]public int m_mesmerHash;
     [HideInInspector]public int m_bruitHash;
     
-    private int m_currentHash;
+    private int m_currentHash = Animator.StringToHash(m_retract);
     
     //--------------Other--------------//
     [Header("OTHER")] 
@@ -146,6 +149,8 @@ public class MonsterSM : StateMachine
 
     private void OnEnable()
     {
+        m_eventEndCinematique.OnTrigger += TurnOffAI;
+        
         m_eventAlertSound.OnTrigger += SoundAlertIA;
         
         m_eventAlertSoundActivation.OnTrigger += ActiveAlertSound;
@@ -168,6 +173,8 @@ public class MonsterSM : StateMachine
 
     private void OnDisable()
     {
+        m_eventEndCinematique.OnTrigger -= TurnOffAI;
+        
         m_eventAlertSound.OnTrigger -= SoundAlertIA;
         
         m_eventAlertSoundActivation.OnTrigger -= ActiveAlertSound;
@@ -262,7 +269,7 @@ public class MonsterSM : StateMachine
         NextState(m_alertSound);
     }
 
-    private void TurnOffAI()
+    private void TurnOffAI(bool p_isStart = true)
     {
         m_navMeshAgent.SetDestination(transform.position);
         m_currentState = m_pause;

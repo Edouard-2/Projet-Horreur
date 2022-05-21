@@ -1,6 +1,6 @@
-using System;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Playables;
 
 public class PlayerManager : Singleton<PlayerManager>
 {
@@ -11,6 +11,13 @@ public class PlayerManager : Singleton<PlayerManager>
     [Header("Camera")]
     [SerializeField, Tooltip("Camera Principale")]
     public Camera m_camera;
+    
+    //Event
+    [Header("End Cinematique")]
+    [SerializeField, Tooltip("Event qui va déclencher la cinématique")]
+    public EventsTrigger m_endCinematique;
+    [SerializeField, Tooltip("Event qui va déclencher la cinématique")]
+    public PlayableDirector m_endTimeline;
 
     //LayerMask
     [Header("LayerMask")]
@@ -71,6 +78,8 @@ public class PlayerManager : Singleton<PlayerManager>
     private float m_timeVision;
     private float tTime;
     
+    private bool m_end;
+    
     private Vector3 m_checkPointPos;
 
     //Sécurité pour lire une seul fois une fonction
@@ -86,14 +95,24 @@ public class PlayerManager : Singleton<PlayerManager>
 
     public delegate void DoVisionSwitch(bool p_start = false);
     public DoVisionSwitch DoVisibleToInvisibleHandler;
+    
     public delegate void SwitchLayer(bool p_start);
     public SwitchLayer DoSwitchLayer;
 
     public delegate void FirstKeyPos();
-
     public event FirstKeyPos UpdateFirstPos;
+
+    private void OnEnable()
+    {
+        m_endCinematique.OnTrigger += ActiveEndCinematique;
+    }
     
-   private void Awake()
+    private void OnDisable()
+    {
+        m_endCinematique.OnTrigger -= ActiveEndCinematique;
+    }
+    
+    private void Awake()
     {
         m_checkPointPos = transform.position;
         
@@ -135,7 +154,7 @@ public class PlayerManager : Singleton<PlayerManager>
         if (m_isStartBlur)
         {
             m_visionScript.m_matVision.SetFloat("_BlurSize", 0.35f);
-            m_visionScript.m_chaleurVFX.SetFloat("Invisibility", 0);
+            m_visionScript.m_chaleurVFX.gameObject.SetActive(true);
             m_visionScript.m_matMonsterHead.SetFloat("_DistortionStrength",1);
             m_visionScript.m_matMonsterSpeaks.SetFloat("_DistortionStrength",1);
             m_visionScript.m_isBlurVision = Mathf.Abs(m_visionScript.m_isBlurVision - 1);
@@ -146,7 +165,7 @@ public class PlayerManager : Singleton<PlayerManager>
         else if (m_visionScript != null)
         {
             m_visionScript.m_matVision.SetFloat("_BlurSize", 0);
-            m_visionScript.m_chaleurVFX.SetFloat("Invisibility", 1);
+            m_visionScript.m_chaleurVFX.gameObject.SetActive(false);
             m_visionScript.m_matMonsterHead.SetFloat("_DistortionStrength",0);
             m_visionScript.m_matMonsterSpeaks.SetFloat("_DistortionStrength",0);
         }
@@ -154,6 +173,9 @@ public class PlayerManager : Singleton<PlayerManager>
 
     private void Update()
     {
+        //Si c'est la cinématique de fin
+        if (m_end) return;
+        
         //Mettre le jeu en pause
         if (Input.GetKeyDown(KeyCode.Escape) 
             && ( GameManager.Instance.State == GameManager.States.PLAYING 
@@ -350,6 +372,14 @@ public class PlayerManager : Singleton<PlayerManager>
         }
     }
 
+    public void SetCheckPoint(Vector3 p_pos)
+    {
+        if (m_checkPointPos != p_pos)
+        {
+            m_checkPointPos = p_pos;
+        }
+    }
+
     public void Death()
     {
         m_visionScript.ResetCurrentBV();
@@ -364,6 +394,14 @@ public class PlayerManager : Singleton<PlayerManager>
         GameManager.Instance.SetState(GameManager.States.DEATH);
 
         StartCoroutine(ResetLevel());
+    }
+
+    private void ActiveEndCinematique(bool p_start = true)
+    {
+        m_end = true;
+        m_controllerScript.m_animator.ResetTrigger(m_controllerScript.m_moveHash);
+        m_controllerScript.m_animator.SetTrigger(m_controllerScript.m_idleHash);
+        m_endTimeline.Play();
     }
     
     IEnumerator ResetLevel()
@@ -405,14 +443,6 @@ public class PlayerManager : Singleton<PlayerManager>
         GameManager.Instance.SetState(GameManager.States.PLAYING);
     }
     
-    public void SetCheckPoint(Vector3 p_pos)
-    {
-        if (m_checkPointPos != p_pos)
-        {
-            m_checkPointPos = p_pos;
-        }
-    }
-
     protected override string GetSingletonName()
     {
         return "PlayerManager";
