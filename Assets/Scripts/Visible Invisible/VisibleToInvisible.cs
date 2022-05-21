@@ -1,5 +1,7 @@
 using UnityEngine;
 using UnityEngine.Rendering;
+using FMOD.Studio;
+using FMODUnity;
 
 [RequireComponent(typeof(VisibleToInvisibleMaterial))]
 public class VisibleToInvisible : MonoBehaviour
@@ -8,21 +10,31 @@ public class VisibleToInvisible : MonoBehaviour
     [SerializeField, Tooltip("True : l'objet est Visible puis Invisible / False : l'objet est Invisible puis Visible")]
     private bool m_isVisibleToInvisible;
     
-    [SerializeField, Tooltip("Mettre le MeshRenderer de l'objet")]private MeshRenderer m_meshRenderer;
+    [ Tooltip("Est ce que l'objet a besoin du renderer")]public bool m_needRenderer;
+    [SerializeField, Tooltip("False : Mettre le MeshRenderer de l'objet")]private MeshRenderer m_meshRenderer;
 
-    [SerializeField, Tooltip("Mettre le collider de l'objet")]private BoxCollider m_boxCollider;
+    [ Tooltip("Est ce que l'objet a besoin du collider ?")]public bool m_needCollider;
+    [SerializeField, Tooltip("False : Mettre le collider de l'objet")]private BoxCollider m_boxCollider;
 
     private bool m_start = true;
+    private int m_layer;
 
-
+    private StudioEventEmitter m_test;
+    
     private void OnEnable()
     {
         PlayerManager.Instance.DoVisibleToInvisibleHandler += DoVisibleToInvisible;
+        if (m_isVisibleToInvisible)
+        {
+            PlayerManager.Instance.DoSwitchLayer += DoSwitchLayerVisible;
+        }
     }
 
     private void Awake()
     {
-        if(m_boxCollider == null)
+        m_layer = gameObject.layer;
+        
+        if(m_boxCollider == null && m_needCollider)
         {
             m_boxCollider = GetComponent<BoxCollider>();
             
@@ -32,20 +44,53 @@ public class VisibleToInvisible : MonoBehaviour
             }
         }
         
-        if(m_meshRenderer == null)
+        if(m_meshRenderer == null && m_needRenderer)
         {
             m_meshRenderer = GetComponent<MeshRenderer>();
             
             if(m_meshRenderer == null)
             {
-                Debug.LogError("Remplit le collider Gros Chien !!!", this);
+                Debug.LogError("Remplit le Renderer Gros Chien !!!", this);
             }
         }
+        
+        DoVisibleToInvisible(true);
     }
 
-    void DoVisibleToInvisible()
+    private void DoSwitchLayerVisible(bool p_start)
     {
-        //Debug.Log("Function");
+        if (p_start)
+        {
+            if ((m_layer == LayerMask.NameToLayer("Invisibility")) )
+            {
+                gameObject.layer = LayerMask.NameToLayer("Default");
+            }
+            else if ((m_layer == LayerMask.NameToLayer("VisibleToInvisibleDoor")) )
+            {
+                gameObject.layer = LayerMask.NameToLayer("Doors");
+            }
+            else if ((m_layer == LayerMask.NameToLayer("VisibleToInvisibleKey")))
+            {
+                gameObject.layer = LayerMask.NameToLayer("Keys");
+            }
+            else if ((m_layer ==  LayerMask.NameToLayer("InvisibleToVisibleTrasvaseur")))
+            {
+                gameObject.layer = LayerMask.NameToLayer("Transvaseur");
+            }
+
+            return;
+        }
+        gameObject.layer = m_layer;
+    }
+    
+    void DoVisibleToInvisible(bool p_start = false)
+    {
+        if (p_start)
+        {
+            //Debug.Log("hye start");
+            m_start = !m_start;
+        }
+        
         //Allé
         if (m_start)
         {
@@ -61,7 +106,6 @@ public class VisibleToInvisible : MonoBehaviour
             return;
         }
         
-        //.Log("None");
         //Retour
         if (m_isVisibleToInvisible)
         {
@@ -76,19 +120,30 @@ public class VisibleToInvisible : MonoBehaviour
 
     void Display()
     {
-        //Debug.Log("Display");
         //  Mettre ombre
-        m_meshRenderer.shadowCastingMode = ShadowCastingMode.On;
+        if (m_needRenderer)
+        {
+            m_meshRenderer.shadowCastingMode = ShadowCastingMode.On;
+        }
         //  Mettre Collider
-        m_boxCollider.enabled = true;
+        if (m_needCollider)
+        {
+            m_boxCollider.enabled = true;
+        }
     }
 
     void Hide()
     {
-        //Debug.Log("Hide");
         //  Enlever ombre
-        m_meshRenderer.shadowCastingMode = ShadowCastingMode.Off;
+        if (m_needRenderer)
+        {
+            m_meshRenderer.shadowCastingMode = ShadowCastingMode.Off;
+        }
+
         //  Enlever Collider
-        m_boxCollider.enabled = false;
+        if (m_needCollider)
+        {
+            m_boxCollider.enabled = false;
+        }
     }
 }
