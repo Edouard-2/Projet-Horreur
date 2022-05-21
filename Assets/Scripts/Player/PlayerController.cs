@@ -8,9 +8,12 @@ public class PlayerController : MonoBehaviour
     
     private Vector3 m_dir;
     private Vector3 m_velocity;
-    
-    [HideInInspector]
-    public float m_baseSpeed;
+
+    [HideInInspector] public int m_moveHash = Animator.StringToHash("Move");
+    [HideInInspector] public int m_idleHash = Animator.StringToHash("Idle");
+    private bool m_runAnim = true;
+
+    [HideInInspector] public float m_baseSpeed;
 
     private void Awake()
     {
