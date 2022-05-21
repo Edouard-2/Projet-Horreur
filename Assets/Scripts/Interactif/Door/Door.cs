@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using FMODUnity;
 using UnityEngine;
 
 public class Door : MonoBehaviour
@@ -34,6 +35,12 @@ public class Door : MonoBehaviour
     
     [SerializeField, Tooltip("Material de la Porte")]
     public Material m_doorMat;
+    
+    [SerializeField, Tooltip("Material de la Porte")]
+    public StudioEventEmitter m_emitterOpen;
+    
+    [SerializeField, Tooltip("Material de la Porte")]
+    public StudioEventEmitter m_emitterClose;
     
     private void Awake()
     {
@@ -94,17 +101,19 @@ public class Door : MonoBehaviour
                 return false;
             }
         }
-
+        
         if (!m_isOpen)
         {
             //On ouvre la porte
             m_doorAnimator.SetTrigger(m_openHash);
             
             m_soundEvent.Raise(PlayerManager.Instance.transform.position);
+
+            m_emitterOpen.Play();
             
             m_isOpen = true;
         }
-
+        
         return true;
     }
 
@@ -115,6 +124,7 @@ public class Door : MonoBehaviour
             m_doorAnimator.ResetTrigger(m_openHash);
             m_doorAnimator.SetTrigger(m_closeHash);
             m_isOpen = false;
+            m_emitterClose.Play();
             return;
         }
 
