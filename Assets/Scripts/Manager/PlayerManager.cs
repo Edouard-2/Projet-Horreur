@@ -135,7 +135,7 @@ public class PlayerManager : Singleton<PlayerManager>
         if (m_isStartBlur)
         {
             m_visionScript.m_matVision.SetFloat("_BlurSize", 0.35f);
-            m_visionScript.m_chaleurVFX.gameObject.SetActive(true);
+            m_visionScript.m_chaleurVFX.SetFloat("Invisibility", 0);
             m_visionScript.m_matMonsterHead.SetFloat("_DistortionStrength",1);
             m_visionScript.m_matMonsterSpeaks.SetFloat("_DistortionStrength",1);
             m_visionScript.m_isBlurVision = Mathf.Abs(m_visionScript.m_isBlurVision - 1);
@@ -146,7 +146,7 @@ public class PlayerManager : Singleton<PlayerManager>
         else if (m_visionScript != null)
         {
             m_visionScript.m_matVision.SetFloat("_BlurSize", 0);
-            m_visionScript.m_chaleurVFX.gameObject.SetActive(false);
+            m_visionScript.m_chaleurVFX.SetFloat("Invisibility", 1);
             m_visionScript.m_matMonsterHead.SetFloat("_DistortionStrength",0);
             m_visionScript.m_matMonsterSpeaks.SetFloat("_DistortionStrength",0);
         }
