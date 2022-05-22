@@ -13,14 +13,14 @@ public class UIMainMenu_PlayClick : MonoBehaviour
     private bool p_activeOver;
     private void OnMouseUpAsButton()
     {
-        if (p_activeClick) return;
+        if (p_activeClick || m_emitterClick == null) return;
         p_activeClick = true;
         m_emitterClick.Play();
     }
 
     private void OnMouseOver()
     {
-        if (p_activeOver) return;
+        if (p_activeOver|| m_emitterOver == null) return;
         p_activeOver = true;
         m_emitterOver.Play();
     }
