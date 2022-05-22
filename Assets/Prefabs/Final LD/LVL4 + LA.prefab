@@ -153,6 +153,10 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 4f6cd2704c036bc4ab7ebec98f05d52d, type: 2}
+    - target: {fileID: 9133447135886036709, guid: d439d699c9b17b044b0d8999fc0f512b, type: 3}
+      propertyPath: m_key
+      value: 
+      objectReference: {fileID: 11400000, guid: eb2ae083e785d8946ba3eaf448ea720b, type: 2}
     m_RemovedComponents:
     - {fileID: 919455466, guid: d439d699c9b17b044b0d8999fc0f512b, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: d439d699c9b17b044b0d8999fc0f512b, type: 3}
@@ -228,6 +232,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 576975985427590021, guid: 16fe8f7e581ba684dae85dbe12235a14, type: 3}
+      propertyPath: m_neededKey
+      value: 
+      objectReference: {fileID: 11400000, guid: eb2ae083e785d8946ba3eaf448ea720b, type: 2}
     - target: {fileID: 935684213376799765, guid: 16fe8f7e581ba684dae85dbe12235a14, type: 3}
       propertyPath: m_Name
       value: Level_4
@@ -276,10 +284,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4193131731832615138, guid: 16fe8f7e581ba684dae85dbe12235a14, type: 3}
+      propertyPath: m_neededKey
+      value: 
+      objectReference: {fileID: 11400000, guid: eb2ae083e785d8946ba3eaf448ea720b, type: 2}
     - target: {fileID: 4957901909894369603, guid: 16fe8f7e581ba684dae85dbe12235a14, type: 3}
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7909285353764651222, guid: 16fe8f7e581ba684dae85dbe12235a14, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 76990ff82cdee8b4991b752eee64f43f, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 16fe8f7e581ba684dae85dbe12235a14, type: 3}
 --- !u!4 &8443336480746062512 stripped

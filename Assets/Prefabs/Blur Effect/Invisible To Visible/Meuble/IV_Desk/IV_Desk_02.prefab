@@ -93,7 +93,7 @@ BoxCollider:
   m_GameObject: {fileID: 5836169839960354207}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Size: {x: 2.0822072, y: 0.63003874, z: 0.85847926}
   m_Center: {x: 0, y: 0.00000002980233, z: 0.4298882}
@@ -125,6 +125,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_isVisibleToInvisible: 0
   m_needRenderer: 1
-  m_meshRenderer: {fileID: 4041832027480719604, guid: d174b880fbc639a4b80a52fc86200b68, type: 3}
+  m_meshRenderer: {fileID: 5476027487035116618}
   m_needCollider: 1
-  m_boxCollider: {fileID: 6260477310396453651, guid: d174b880fbc639a4b80a52fc86200b68, type: 3}
+  m_boxCollider: {fileID: 816034667937264472}

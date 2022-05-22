@@ -234,6 +234,8 @@ MonoBehaviour:
   m_isOpen: 0
   m_listRenderer: []
   m_doorMat: {fileID: 2100000, guid: 5269ba25bd4f5664bb18ddb5553e1afb, type: 2}
+  m_emitterOpen: {fileID: 0}
+  m_emitterClose: {fileID: 0}
 --- !u!114 &6976752912120511332
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -335,6 +337,8 @@ MonoBehaviour:
   m_isOpen: 0
   m_listRenderer: []
   m_doorMat: {fileID: 2100000, guid: 5269ba25bd4f5664bb18ddb5553e1afb, type: 2}
+  m_emitterOpen: {fileID: 0}
+  m_emitterClose: {fileID: 0}
 --- !u!114 &547699384755739772
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -461,8 +465,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e7623531750f80747807b30c0dcbd9b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_needMaterial: 0
-  m_material: {fileID: 0}
+  m_needMaterial: 1
+  m_material: {fileID: 2100000, guid: 52193e21c6490874c94a049c37656b8d, type: 2}
 --- !u!114 &8589778342273731072
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -707,8 +711,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e7623531750f80747807b30c0dcbd9b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_needMaterial: 0
-  m_material: {fileID: 0}
+  m_needMaterial: 1
+  m_material: {fileID: 2100000, guid: 52193e21c6490874c94a049c37656b8d, type: 2}
 --- !u!114 &2104852362793836925
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -821,8 +825,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e7623531750f80747807b30c0dcbd9b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_needMaterial: 0
-  m_material: {fileID: 0}
+  m_needMaterial: 1
+  m_material: {fileID: 2100000, guid: 52193e21c6490874c94a049c37656b8d, type: 2}
 --- !u!114 &1404384242059486610
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -935,8 +939,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e7623531750f80747807b30c0dcbd9b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_needMaterial: 0
-  m_material: {fileID: 0}
+  m_needMaterial: 1
+  m_material: {fileID: 2100000, guid: 52193e21c6490874c94a049c37656b8d, type: 2}
 --- !u!114 &3136511865208802949
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1106,7 +1110,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_needMaterial: 1
-  m_material: {fileID: 2100000, guid: 5269ba25bd4f5664bb18ddb5553e1afb, type: 2}
+  m_material: {fileID: 2100000, guid: 52193e21c6490874c94a049c37656b8d, type: 2}
 --- !u!114 &1832774380008027674
 MonoBehaviour:
   m_ObjectHideFlags: 0
