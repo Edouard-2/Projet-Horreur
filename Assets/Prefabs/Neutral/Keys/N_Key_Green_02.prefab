@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 3728061652707604405}
   - component: {fileID: 919455466}
   - component: {fileID: 2717343768496447427}
+  - component: {fileID: 8904632874480397592}
   m_Layer: 7
   m_Name: N_Key_Green_02
   m_TagString: Untagged
@@ -40,12 +41,12 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5202280242279303657}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a35774128b3620440af6877766d05e19, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_key: {fileID: 11400000, guid: 458d9b61da1251b4e9b367a0093856aa, type: 2}
+  m_key: {fileID: 11400000, guid: bf4b84cb79cc39746845864a6b5878e2, type: 2}
   m_doorAnimator: {fileID: 0}
   m_openName: 
 --- !u!65 &2717343768496447427
@@ -61,6 +62,19 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &8904632874480397592
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5202280242279303657}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 866329a28991af74ca8140c7ae06159d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_key: {fileID: 11400000, guid: bf4b84cb79cc39746845864a6b5878e2, type: 2}
 --- !u!1 &5543328973748918546
 GameObject:
   m_ObjectHideFlags: 0

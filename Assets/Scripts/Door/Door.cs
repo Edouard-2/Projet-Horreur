@@ -109,7 +109,7 @@ public class Door : MonoBehaviour
             
             m_soundEvent.Raise(PlayerManager.Instance.transform.position);
 
-            m_emitterOpen.Play();
+            if(m_emitterOpen != null) m_emitterOpen.Play();
             
             m_isOpen = true;
         }
@@ -124,7 +124,7 @@ public class Door : MonoBehaviour
             m_doorAnimator.ResetTrigger(m_openHash);
             m_doorAnimator.SetTrigger(m_closeHash);
             m_isOpen = false;
-            m_emitterClose.Play();
+            if(m_emitterClose != null) m_emitterClose.Play();
             return;
         }
 

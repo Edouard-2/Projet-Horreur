@@ -94,6 +94,7 @@ public class PlayerVision : MonoBehaviour
         if (p_time > p_curve.keys[p_curve.length - 1].time && m_resetTimeVisionComp)
         {
             m_resetTimeVisionComp = false;
+            m_matVision.SetFloat("_BlurSize", p_curve.keys[p_curve.length - 1].value);
             return;
         }
 

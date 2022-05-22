@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 919455466}
   - component: {fileID: 2239183782901219281}
   - component: {fileID: 2717343768496447427}
+  - component: {fileID: 6263621739940865171}
   m_Layer: 7
   m_Name: N_Key_Orange_03
   m_TagString: Untagged
@@ -50,7 +51,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5202280242279303657}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a35774128b3620440af6877766d05e19, type: 3}
   m_Name: 
@@ -66,7 +67,7 @@ Animator:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5202280242279303657}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: d28119b3ec8b1d04692829aadceef8c3, type: 2}
   m_CullingMode: 0
@@ -90,6 +91,19 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &6263621739940865171
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5202280242279303657}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 866329a28991af74ca8140c7ae06159d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_key: {fileID: 11400000, guid: 22466c1b367242c49ac190328c7f5592, type: 2}
 --- !u!1 &6531859504239154826
 GameObject:
   m_ObjectHideFlags: 0
