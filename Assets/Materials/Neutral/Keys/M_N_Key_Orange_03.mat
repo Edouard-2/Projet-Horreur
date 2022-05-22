@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: M_N_Door_Key_2
+  m_Name: M_N_Key_Orange_03
   m_Shader: {fileID: -6465566751694194690, guid: ac36b1b422368fd4ca4554f710d381e7, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
@@ -20,11 +20,11 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - Texture2D_14720d6aa9454c62bd764afed9d9e57c:
-        m_Texture: {fileID: 2800000, guid: 08d8ddda50fa00e4e9c7186a61ffdb9f, type: 3}
+        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - Texture2D_e9d38055ac484ad9b8ddcb518a01fed7:
-        m_Texture: {fileID: 2800000, guid: 8dee50bc9cab85a48918c6b6e2ac5e8f, type: 3}
+        m_Texture: {fileID: 2800000, guid: 969099feee1a1c3489442d106dfb32c1, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _AO:
@@ -32,11 +32,11 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Albedo:
-        m_Texture: {fileID: 2800000, guid: ae3e24032f921b949a25cd29ec2cfb3a, type: 3}
+        m_Texture: {fileID: 2800000, guid: aa5d49cbd3ef65d46a9347876fe404d7, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Emissive:
-        m_Texture: {fileID: 2800000, guid: 380c9149869903e45acc8b9cf99d6484, type: 3}
+        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Metalic:
@@ -44,11 +44,11 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Normal:
-        m_Texture: {fileID: 2800000, guid: 5fefb8c8f3a005c4abbf98d0b7112649, type: 3}
+        m_Texture: {fileID: 2800000, guid: e231e4c02c48ee14aafa55f7b1a843c1, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Rougthness:
-        m_Texture: {fileID: 2800000, guid: 8f36369759a03244083aef14a0440492, type: 3}
+        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - unity_Lightmaps:
@@ -64,10 +64,10 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
-    - Boolean_8ff23b1222d140b9bfa63637fcd76828: 1
+    - Boolean_8ff23b1222d140b9bfa63637fcd76828: 0
     - Boolean_bd9f48cb25c14b1891f7ab99f814db08: 1
     - _isAim: 0
     m_Colors:
-    - Color_d81c43a2cd0840daa0ae011d4233e4bd: {r: 0.084590435, g: 1, b: 0, a: 0}
-    - _BaseColor: {r: 0.735849, g: 0.735849, b: 0.735849, a: 0}
+    - Color_d81c43a2cd0840daa0ae011d4233e4bd: {r: 1, g: 0.46021718, b: 0, a: 0}
+    - _BaseColor: {r: 0.8490566, g: 0.8490566, b: 0.8490566, a: 0}
   m_BuildTextureStacks: []
