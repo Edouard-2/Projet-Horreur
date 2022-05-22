@@ -105,6 +105,9 @@ public class MonsterSM : StateMachine
     [SerializeField, Tooltip("LayerMask du joueur")]
     public LayerMask m_layerPlayer;
     
+    [SerializeField,Tooltip("Obj qui est le mesh du monstre")]
+    private GameObject m_mesh;
+    
     [SerializeField,Tooltip("Est ce que le monstre commence sans réagire au alert de son")]
     private bool m_readyAlertSound;
 
@@ -281,6 +284,7 @@ public class MonsterSM : StateMachine
     {
         Debug.Log("position");
         //m_navMeshAgent.isStopped  = true;
+        m_initPos = p_pos;
         m_navMeshAgent.nextPosition = p_pos;
         m_navMeshAgent.nextPosition = p_pos;
         m_navMeshAgent.SetDestination(p_pos);
@@ -288,6 +292,7 @@ public class MonsterSM : StateMachine
     
     public void StartIA(bool p_idStart = true)
     {
+        m_mesh.SetActive(true);
         m_isStartIA = true;
         m_collider.enabled = true;
         transform.GetChild(0)?.gameObject.SetActive(true);
@@ -308,15 +313,20 @@ public class MonsterSM : StateMachine
 
     private void EndIA(bool p_idStart = true)
     {
+        
         m_isStartIA = false;
         NextState(m_pause);
         m_indexLevelWaypoint++;
         Debug.Log("End");
-        if (m_indexLevelWaypoint > m_indexLevelWaypointMax) return;
+        if (m_indexLevelWaypoint > m_indexLevelWaypointMax)
+        {
+            m_mesh.SetActive(false);
+            return;
+        }
         m_lastState = null;
         m_patrol.m_wayPointsList = m_waypointsArray[m_indexLevelWaypoint];
         m_patrol.m_currentWayPoint = null;
-        
+        m_mesh.SetActive(false);
         Debug.Log(m_indexLevelWaypoint);
         Debug.Log(m_patrol.m_wayPointsList.Count);
     }
