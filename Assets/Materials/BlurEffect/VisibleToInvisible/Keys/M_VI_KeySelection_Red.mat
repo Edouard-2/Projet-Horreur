@@ -8,7 +8,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: M_VI_KeySelection_Red
-  m_Shader: {fileID: -6465566751694194690, guid: a7be069c8566a8f4f875e46b99d240c9, type: 3}
+  m_Shader: {fileID: -6465566751694194690, guid: 17ab7b4697b48ad438997188e1a8557d, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -19,12 +19,20 @@ Material:
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
+    - Texture2D_07a68cdf5f6f4334b55fa43257f49212:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - Texture2D_e9d38055ac484ad9b8ddcb518a01fed7:
+        m_Texture: {fileID: 2800000, guid: 969099feee1a1c3489442d106dfb32c1, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _AO:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Albedo:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: aa5d49cbd3ef65d46a9347876fe404d7, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Emissive:
@@ -32,11 +40,11 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Metalic:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: 2efa7b1f446623f47b201191cc65c324, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Normal:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: 7de1875a1c15dbd438df4e0117b0b6f5, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Rougthness:
@@ -56,9 +64,11 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
+    - Boolean_bd9f48cb25c14b1891f7ab99f814db08: 1
     - Boolean_e6682e3f40c142909da21f320d085631: 1
-    - _StepStrenght: 0.77381897
+    - _StepStrenght: -0.03
     - _isAim: 0
     m_Colors:
+    - Color_d81c43a2cd0840daa0ae011d4233e4bd: {r: 1, g: 0.36862746, b: 0, a: 0}
     - _BaseColor: {r: 0.8301887, g: 0.29369885, b: 0.29369885, a: 0}
   m_BuildTextureStacks: []

@@ -56,12 +56,13 @@ public class Elevator : MonoBehaviour
         {
             ResetTrigger(m_closeHash);
             SetTrigger(m_openHash);
-            m_openEmitter.Play();
+            if(m_openEmitter != null) m_openEmitter.Play();
             gameObject.SetActive(false);
             return;
         }
 
-        m_closeEmitter.Play();
+        if(m_closeEmitter != null) m_closeEmitter.Play();
+        
         ResetTrigger(m_openHash);
         SetTrigger(m_closeHash);
 
