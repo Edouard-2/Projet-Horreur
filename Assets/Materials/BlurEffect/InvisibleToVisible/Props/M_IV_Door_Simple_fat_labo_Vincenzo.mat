@@ -8,7 +8,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: M_IV_Door_Simple_fat_labo_Vincenzo
-  m_Shader: {fileID: -6465566751694194690, guid: 5dd50f383502be645b753e8eed16836a, type: 3}
+  m_Shader: {fileID: -6465566751694194690, guid: 17ab7b4697b48ad438997188e1a8557d, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -19,8 +19,16 @@ Material:
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
+    - Texture2D_07a68cdf5f6f4334b55fa43257f49212:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - Texture2D_4d258d10b8a84c5585826170a3c06400:
         m_Texture: {fileID: 2800000, guid: 6cf41c79a84bddb4dbb3bd94ab71b1c4, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - Texture2D_e9d38055ac484ad9b8ddcb518a01fed7:
+        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _AO:
@@ -65,9 +73,13 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Floats:
     - Boolean_4c39ea96c2cf4de4b2dc4ef482795fa2: 1
+    - Boolean_bd9f48cb25c14b1891f7ab99f814db08: 0
+    - Boolean_e6682e3f40c142909da21f320d085631: 0
     - Vector1_63c79ec3f0354370b25d8f050d6a5a56: 2.36
     - _Invisible: 0
-    - _StepStrenght: -0.027179837
+    - _StepStrenght: 0.0005284548
+    - _isAim: 0
     m_Colors:
     - Color_afa59434efcd47fa8f595e8fb5d9720d: {r: 0.5, g: 0.5, b: 0.5, a: 0}
+    - Color_d81c43a2cd0840daa0ae011d4233e4bd: {r: 0, g: 0, b: 0, a: 0}
   m_BuildTextureStacks: []

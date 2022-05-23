@@ -268,6 +268,8 @@ MonoBehaviour:
   m_isOpen: 0
   m_listRenderer: []
   m_doorMat: {fileID: 2100000, guid: a976b3498bc5d9d4fa2b7334d96377dc, type: 2}
+  m_emitterOpen: {fileID: 0}
+  m_emitterClose: {fileID: 0}
 --- !u!114 &6976752912120511332
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -369,6 +371,8 @@ MonoBehaviour:
   m_isOpen: 0
   m_listRenderer: []
   m_doorMat: {fileID: 2100000, guid: a976b3498bc5d9d4fa2b7334d96377dc, type: 2}
+  m_emitterOpen: {fileID: 0}
+  m_emitterClose: {fileID: 0}
 --- !u!114 &547699384755739772
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1106,7 +1110,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_needMaterial: 1
-  m_material: {fileID: 2100000, guid: a976b3498bc5d9d4fa2b7334d96377dc, type: 2}
+  m_material: {fileID: 2100000, guid: 52193e21c6490874c94a049c37656b8d, type: 2}
 --- !u!114 &1832774380008027674
 MonoBehaviour:
   m_ObjectHideFlags: 0
