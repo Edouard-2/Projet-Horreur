@@ -1,4 +1,6 @@
 using System.Collections;
+using FMOD.Studio;
+using FMODUnity;
 using UnityEngine;
 using UnityEngine.Playables;
 
@@ -66,11 +68,17 @@ public class PlayerManager : Singleton<PlayerManager>
     [Range(0,20), SerializeField, Tooltip("Temps avant de relancer le jeu apres la mort")]
     public float m_DeathWaitingTime;
     
-    [SerializeField, Tooltip("Activer la sauvegarde ou pas")]
-    private bool ActiveSaveGame;
+    [SerializeField, Tooltip("Emitter d'ambiance Blur Effect")]
+    private StudioEventEmitter m_blurAmbiance;
+    
+    [SerializeField, Tooltip("Emitter d'activation du Blur Effect")]
+    private StudioEventEmitter m_blurActiveEmitter;
+    
+    [SerializeField, Tooltip("Emitter de désactivation du Blur Effect")]
+    private StudioEventEmitter m_blurDesactiveEmitter;
+    
     
     private WaitForSeconds m_waitFade = new WaitForSeconds(0.5f);
-    
     private WaitForSeconds m_waitDeath;
     
     [HideInInspector] public bool m_isHooked;
@@ -82,10 +90,12 @@ public class PlayerManager : Singleton<PlayerManager>
     
     private Vector3 m_checkPointPos;
 
+    private VCA m_vcaController;
+
     //Sécurité pour lire une seul fois une fonction
     private bool m_prevStateReady = true;
 
-    public float Gravity
+    public float Gravity 
     {
         get => m_gravity;
     }
@@ -114,6 +124,8 @@ public class PlayerManager : Singleton<PlayerManager>
     
     private void Awake()
     {
+        m_vcaController = RuntimeManager.GetVCA("vca:/BlurDownVolume");
+        
         m_checkPointPos = transform.position;
         
         m_waitDeath = new WaitForSeconds(m_DeathWaitingTime);
@@ -153,6 +165,10 @@ public class PlayerManager : Singleton<PlayerManager>
         //Commencer avec vision flou
         if (m_isStartBlur)
         {
+            m_blurAmbiance.Play();
+            
+            m_vcaController.setVolume(0.125f);
+            
             m_visionScript.m_matVision.SetFloat("_BlurSize", 0.35f);
             m_visionScript.m_chaleurVFX.gameObject.SetActive(true);
             m_visionScript.m_matMonsterHead.SetFloat("_DistortionStrength",1);
@@ -164,6 +180,11 @@ public class PlayerManager : Singleton<PlayerManager>
         //Commencer sans vision flou
         else if (m_visionScript != null)
         {
+            m_blurAmbiance.Stop();
+            
+            SoundManager.Instance.m_ambiance1.Play();
+            SoundManager.Instance.m_ambiance2.Play();
+            
             m_visionScript.m_matVision.SetFloat("_BlurSize", 0);
             m_visionScript.m_chaleurVFX.gameObject.SetActive(false);
             m_visionScript.m_matMonsterHead.SetFloat("_DistortionStrength",0);
@@ -290,10 +311,24 @@ public class PlayerManager : Singleton<PlayerManager>
                 m_visionScript.m_isBlurVision = Mathf.Abs(m_visionScript.m_isBlurVision - 1);
                 if (m_visionScript.m_isBlurVision > 0)
                 {
+                    //Enlever le son d'ambiance BV
+                    m_blurAmbiance.Stop();
+                    SoundManager.Instance.m_ambiance1.Play();
+                    SoundManager.Instance.m_ambiance2.Play();
+                    m_blurDesactiveEmitter.Play();
+                    m_vcaController.setVolume(1f);
+                    
                     m_visionScript.m_chaleurVFX.gameObject.SetActive(true);
                 }
                 else
                 {
+                    //Mettre le son d'ambiance BV
+                    m_blurAmbiance.Play();
+                    SoundManager.Instance.m_ambiance1.Stop();
+                    SoundManager.Instance.m_ambiance2.Stop();
+                    m_blurActiveEmitter.Play();
+                    m_vcaController.setVolume(0.125f);
+                    
                     m_visionScript.m_chaleurVFX.gameObject.SetActive(false);
                 }
                 

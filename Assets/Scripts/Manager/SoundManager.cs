@@ -17,7 +17,9 @@ public class SoundManager : Singleton<SoundManager>
     private UIOptionValue m_soundVFX;
     
     [SerializeField, Tooltip("Emitter de l'ambiance labo in game")]
-    private StudioEventEmitter m_ambiance;
+    public StudioEventEmitter m_ambiance1;
+    [SerializeField, Tooltip("Emitter de l'ambiance labo in game")]
+    public StudioEventEmitter m_ambiance2;
     
     private float m_globalVolume;
     private float m_musiqueVolume;
