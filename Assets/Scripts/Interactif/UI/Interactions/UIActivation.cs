@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine.UI;
 using UnityEngine;
 
@@ -8,7 +9,7 @@ public class UIActivation : MonoBehaviour
     private Image m_imageComponent;
 
     private Transform[] m_childsList;
-
+    
     private void OnEnable()
     {
         UIManager.Instance.DoDisplayUIGamePause += SetVisible;
