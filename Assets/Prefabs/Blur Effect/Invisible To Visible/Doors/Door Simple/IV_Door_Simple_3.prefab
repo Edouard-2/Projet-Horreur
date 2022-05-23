@@ -100,6 +100,38 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_door: {fileID: 3948751758592341983}
+--- !u!1 &534846589893302158
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8637772938629021666}
+  m_Layer: 0
+  m_Name: Sound
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8637772938629021666
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 534846589893302158}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 57.865852, y: 0.99174666, z: -21.287014}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 8747778515385000727}
+  - {fileID: 6880560170439832884}
+  m_Father: {fileID: 6803571485856256818}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1216699831616863520
 GameObject:
   m_ObjectHideFlags: 0
@@ -348,8 +380,8 @@ MonoBehaviour:
   m_isOpen: 0
   m_listRenderer: []
   m_doorMat: {fileID: 2100000, guid: 26a8732031f4e2a42b482e0db6a4111f, type: 2}
-  m_emitterOpen: {fileID: 0}
-  m_emitterClose: {fileID: 0}
+  m_emitterOpen: {fileID: 5184367996381896384}
+  m_emitterClose: {fileID: 8524795528287212827}
 --- !u!114 &6976752912120511332
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -381,6 +413,67 @@ MonoBehaviour:
   m_meshRenderer: {fileID: 0}
   m_needCollider: 1
   m_boxCollider: {fileID: 16005199370811958}
+--- !u!1 &4774750445661096191
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6880560170439832884}
+  - component: {fileID: 8524795528287212827}
+  m_Layer: 0
+  m_Name: Close
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6880560170439832884
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4774750445661096191}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 8637772938629021666}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8524795528287212827
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4774750445661096191}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionTag: 
+  EventReference:
+    Guid:
+      Data1: 1923447788
+      Data2: 1092729238
+      Data3: -1870695296
+      Data4: 192466919
+    Path: event:/CloseDoor
+  Event: 
+  PlayEvent: 0
+  StopEvent: 0
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  Params: []
+  OverrideAttenuation: 1
+  OverrideMinDistance: 0.2794313
+  OverrideMaxDistance: 5.6802287
 --- !u!1 &5100465726679526332
 GameObject:
   m_ObjectHideFlags: 0
@@ -451,8 +544,8 @@ MonoBehaviour:
   m_isOpen: 0
   m_listRenderer: []
   m_doorMat: {fileID: 2100000, guid: 26a8732031f4e2a42b482e0db6a4111f, type: 2}
-  m_emitterOpen: {fileID: 0}
-  m_emitterClose: {fileID: 0}
+  m_emitterOpen: {fileID: 5184367996381896384}
+  m_emitterClose: {fileID: 8524795528287212827}
 --- !u!114 &547699384755739772
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -761,6 +854,7 @@ Transform:
   m_Children:
   - {fileID: 8991458642486480541}
   - {fileID: 8175289064591539332}
+  - {fileID: 8637772938629021666}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -878,6 +972,67 @@ MonoBehaviour:
   m_meshRenderer: {fileID: 1650087442850701964}
   m_needCollider: 0
   m_boxCollider: {fileID: 0}
+--- !u!1 &8051842257645964929
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8747778515385000727}
+  - component: {fileID: 5184367996381896384}
+  m_Layer: 0
+  m_Name: Open
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8747778515385000727
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8051842257645964929}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 8637772938629021666}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5184367996381896384
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8051842257645964929}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionTag: 
+  EventReference:
+    Guid:
+      Data1: 791482445
+      Data2: 1325708876
+      Data3: 1246373504
+      Data4: -1169904164
+    Path: event:/Open_Porte
+  Event: 
+  PlayEvent: 0
+  StopEvent: 0
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  Params: []
+  OverrideAttenuation: 1
+  OverrideMinDistance: 0.272999
+  OverrideMaxDistance: 5.6098404
 --- !u!1 &8808942715794187838
 GameObject:
   m_ObjectHideFlags: 0

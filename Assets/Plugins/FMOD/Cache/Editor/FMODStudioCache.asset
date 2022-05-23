@@ -198,10 +198,10 @@ MonoBehaviour:
   Path: ProjetHorreurFmod/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 637889109955995845
+  lastModified: 637889172087283914
   FileSizes:
   - Name: Desktop
-    Value: 2638
+    Value: 2686
   Exists: 1
 --- !u!114 &-4269173989650992211
 MonoBehaviour:
@@ -331,7 +331,7 @@ MonoBehaviour:
   Parameters: []
   MinDistance: 1
   MaxDistance: 20
-  Length: 580
+  Length: 430
 --- !u!114 &-2007254008871866117
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -408,12 +408,12 @@ MonoBehaviour:
   - {fileID: 6739773059693112666}
   IsStream: 1
   Is3D: 0
-  IsOneShot: 1
+  IsOneShot: 0
   Parameters:
   - {fileID: -5008409046698502915}
   MinDistance: 1
   MaxDistance: 20
-  Length: 1200000
+  Length: 480000
 --- !u!114 &-1133624406802398602
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -483,10 +483,10 @@ MonoBehaviour:
   Path: ProjetHorreurFmod/Build/Desktop/SFX.bank
   Name: SFX
   StudioPath: bank:/SFX
-  lastModified: 637889109956005842
+  lastModified: 637889172087699245
   FileSizes:
   - Name: Desktop
-    Value: 168032
+    Value: 168512
   Exists: 1
 --- !u!114 &-415940217475756973
 MonoBehaviour:
@@ -592,12 +592,13 @@ MonoBehaviour:
   - {fileID: -4999403215663709785}
   - {fileID: 1834999472405007014}
   - {fileID: -4269173989650992211}
+  - {fileID: 6960334920206270141}
   EditorParameters: []
   MasterBanks:
   - {fileID: 4726995918373350990}
   StringsBanks:
   - {fileID: -4550200417294855588}
-  cacheTime: 637889109956005842
+  cacheTime: 637889172087699245
   cacheVersion: 10
 --- !u!114 &250855454199517988
 MonoBehaviour:
@@ -993,10 +994,10 @@ MonoBehaviour:
   Path: ProjetHorreurFmod/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 637889109955985838
+  lastModified: 637889172087263915
   FileSizes:
   - Name: Desktop
-    Value: 6108192
+    Value: 6108160
   Exists: 1
 --- !u!114 &6405383537181620543
 MonoBehaviour:
@@ -1040,11 +1041,38 @@ MonoBehaviour:
   Path: ProjetHorreurFmod/Build/Desktop/Ambiance.bank
   Name: Ambiance
   StudioPath: bank:/Ambiance
-  lastModified: 637889109955548565
+  lastModified: 637889172086493570
   FileSizes:
   - Name: Desktop
-    Value: 99354944
+    Value: 30696000
   Exists: 1
+--- !u!114 &6960334920206270141
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Ambiance/New_BruitBlanc_TV
+  m_EditorClassIdentifier: 
+  Path: event:/Ambiance/New_BruitBlanc_TV
+  Guid:
+    Data1: 237794580
+    Data2: 1103652752
+    Data3: 1557692300
+    Data4: 1648700345
+  Banks:
+  - {fileID: 6739773059693112666}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 308592
 --- !u!114 &7359943121074202104
 MonoBehaviour:
   m_ObjectHideFlags: 0

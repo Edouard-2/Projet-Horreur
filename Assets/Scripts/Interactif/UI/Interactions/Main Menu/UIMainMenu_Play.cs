@@ -21,8 +21,8 @@ public class UIMainMenu_Play : MonoBehaviour
     {
         Debug.Log("Over Text");
         //Lanacer l'animation du fond noir
+        m_emitter.Stop();
         m_fadeAnimator.SetTrigger(Animator.StringToHash("FadeIn"));
-        SoundManager.FadeOut(m_emitter, false);
         StartCoroutine(WaitUntilLaunchLoadingScene());
     }
 

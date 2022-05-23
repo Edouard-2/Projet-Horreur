@@ -303,25 +303,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d4d18062dd5538e4eac2b22ebcc8b584, type: 3}
---- !u!1 &206620539 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6547298079765633310, guid: f414dc7c3bb687943bb0e99ac394a05b, type: 3}
-  m_PrefabInstance: {fileID: 1435708445309712037}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &206620546
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 206620539}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1919fa708ac9e1842a7caa103e79bbf5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_emitterClick: {fileID: 0}
-  m_emitterOver: {fileID: 0}
 --- !u!1 &270374205
 GameObject:
   m_ObjectHideFlags: 0
@@ -591,25 +572,6 @@ Material:
     - _SpecularColor: {r: 1, g: 1, b: 1, a: 1}
     - _UnderlayColor: {r: 0.6155722, g: 0.6155722, b: 0.6155722, a: 0.50980395}
   m_BuildTextureStacks: []
---- !u!1 &614774727 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6547298079554799824, guid: f414dc7c3bb687943bb0e99ac394a05b, type: 3}
-  m_PrefabInstance: {fileID: 1435708445309712037}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &614774734
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 614774727}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1919fa708ac9e1842a7caa103e79bbf5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_emitterClick: {fileID: 0}
-  m_emitterOver: {fileID: 0}
 --- !u!1001 &755077998
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -888,6 +850,71 @@ Material:
     - _SpecularColor: {r: 1, g: 1, b: 1, a: 1}
     - _UnderlayColor: {r: 0.6155722, g: 0.6155722, b: 0.6155722, a: 0.50980395}
   m_BuildTextureStacks: []
+--- !u!1 &1697783464
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1697783465}
+  - component: {fileID: 1697783466}
+  m_Layer: 0
+  m_Name: Sound
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1697783465
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1697783464}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.09345001, y: 1.564, z: -0.059}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 2031607300}
+  - {fileID: 1761039376}
+  m_Father: {fileID: 0}
+  m_RootOrder: 12
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1697783466
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1697783464}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionTag: 
+  EventReference:
+    Guid:
+      Data1: -15768281
+      Data2: 1119759030
+      Data3: 352802746
+      Data4: 229881757
+    Path: event:/Ambiance/Bruit_Blanc_TV
+  Event: 
+  PlayEvent: 1
+  StopEvent: 2
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  Params:
+  - Name: Fade
+    Value: 0
+  OverrideAttenuation: 0
+  OverrideMinDistance: 1
+  OverrideMaxDistance: 20
 --- !u!1 &1733780805
 GameObject:
   m_ObjectHideFlags: 0
@@ -983,6 +1010,67 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!1 &1761039375
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1761039376}
+  - component: {fileID: 1761039377}
+  m_Layer: 0
+  m_Name: SoundOver
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1761039376
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1761039375}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1697783465}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1761039377
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1761039375}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionTag: 
+  EventReference:
+    Guid:
+      Data1: 1466255313
+      Data2: 1109551287
+      Data3: -102625610
+      Data4: -1681433764
+    Path: event:/Click/OverRandom
+  Event: 
+  PlayEvent: 0
+  StopEvent: 2
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  Params: []
+  OverrideAttenuation: 1
+  OverrideMinDistance: 0.12004495
+  OverrideMaxDistance: 0.5
 --- !u!1001 &1789960994
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1040,25 +1128,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b7ced1df3198ae94d80929383d088437, type: 3}
---- !u!1 &1959269974 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 956050537760017392, guid: f414dc7c3bb687943bb0e99ac394a05b, type: 3}
-  m_PrefabInstance: {fileID: 1435708445309712037}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1959269981
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1959269974}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1919fa708ac9e1842a7caa103e79bbf5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_emitterClick: {fileID: 0}
-  m_emitterOver: {fileID: 0}
 --- !u!1001 &1967462931
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1116,6 +1185,67 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 22af548284024104d9d7c307306ca2e4, type: 3}
+--- !u!1 &2031607299
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2031607300}
+  - component: {fileID: 2031607301}
+  m_Layer: 0
+  m_Name: SoundClick
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2031607300
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2031607299}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1697783465}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2031607301
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2031607299}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionTag: 
+  EventReference:
+    Guid:
+      Data1: -1276758381
+      Data2: 1224234452
+      Data3: 1484507297
+      Data4: 1471966755
+    Path: event:/Click/ClickRandom
+  Event: 
+  PlayEvent: 0
+  StopEvent: 2
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 1
+  OverrideMaxDistance: 20
 --- !u!21 &2054730332
 Material:
   serializedVersion: 6
@@ -1283,14 +1413,62 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 206620546, guid: f414dc7c3bb687943bb0e99ac394a05b, type: 3}
+      propertyPath: m_emitterOver
+      value: 
+      objectReference: {fileID: 1761039377}
+    - target: {fileID: 206620546, guid: f414dc7c3bb687943bb0e99ac394a05b, type: 3}
+      propertyPath: m_emitterClick
+      value: 
+      objectReference: {fileID: 2031607301}
+    - target: {fileID: 614774734, guid: f414dc7c3bb687943bb0e99ac394a05b, type: 3}
+      propertyPath: m_emitterOver
+      value: 
+      objectReference: {fileID: 1761039377}
+    - target: {fileID: 614774734, guid: f414dc7c3bb687943bb0e99ac394a05b, type: 3}
+      propertyPath: m_emitterClick
+      value: 
+      objectReference: {fileID: 2031607301}
+    - target: {fileID: 1959269981, guid: f414dc7c3bb687943bb0e99ac394a05b, type: 3}
+      propertyPath: m_emitterOver
+      value: 
+      objectReference: {fileID: 1761039377}
+    - target: {fileID: 1959269981, guid: f414dc7c3bb687943bb0e99ac394a05b, type: 3}
+      propertyPath: m_emitterClick
+      value: 
+      objectReference: {fileID: 2031607301}
+    - target: {fileID: 956050537472029654, guid: f414dc7c3bb687943bb0e99ac394a05b, type: 3}
+      propertyPath: m_fontColor.b
+      value: 0.06666667
+      objectReference: {fileID: 0}
+    - target: {fileID: 956050537472029654, guid: f414dc7c3bb687943bb0e99ac394a05b, type: 3}
+      propertyPath: m_fontColor.g
+      value: 0.047058824
+      objectReference: {fileID: 0}
     - target: {fileID: 956050537472029654, guid: f414dc7c3bb687943bb0e99ac394a05b, type: 3}
       propertyPath: m_fontMaterial
       value: 
       objectReference: {fileID: 916575562}
     - target: {fileID: 956050537760017393, guid: f414dc7c3bb687943bb0e99ac394a05b, type: 3}
+      propertyPath: m_fontColor.b
+      value: 0.06666667
+      objectReference: {fileID: 0}
+    - target: {fileID: 956050537760017393, guid: f414dc7c3bb687943bb0e99ac394a05b, type: 3}
+      propertyPath: m_fontColor.g
+      value: 0.047058824
+      objectReference: {fileID: 0}
+    - target: {fileID: 956050537760017393, guid: f414dc7c3bb687943bb0e99ac394a05b, type: 3}
       propertyPath: m_fontMaterial
       value: 
       objectReference: {fileID: 592043069}
+    - target: {fileID: 956050539137594645, guid: f414dc7c3bb687943bb0e99ac394a05b, type: 3}
+      propertyPath: m_fontColor.b
+      value: 0.06666667
+      objectReference: {fileID: 0}
+    - target: {fileID: 956050539137594645, guid: f414dc7c3bb687943bb0e99ac394a05b, type: 3}
+      propertyPath: m_fontColor.g
+      value: 0.047058824
+      objectReference: {fileID: 0}
     - target: {fileID: 956050539137594645, guid: f414dc7c3bb687943bb0e99ac394a05b, type: 3}
       propertyPath: m_fontMaterial
       value: 
@@ -1299,6 +1477,10 @@ PrefabInstance:
       propertyPath: m_fontMaterial
       value: 
       objectReference: {fileID: 1218235117}
+    - target: {fileID: 1435708443760036741, guid: f414dc7c3bb687943bb0e99ac394a05b, type: 3}
+      propertyPath: m_emitter
+      value: 
+      objectReference: {fileID: 1697783466}
     - target: {fileID: 1435708443760036741, guid: f414dc7c3bb687943bb0e99ac394a05b, type: 3}
       propertyPath: m_fadeAnimator
       value: 
@@ -1311,46 +1493,38 @@ PrefabInstance:
       propertyPath: m_fontMaterial
       value: 
       objectReference: {fileID: 916575562}
-    - target: {fileID: 1435708445309712039, guid: f414dc7c3bb687943bb0e99ac394a05b, type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1435708445309712040, guid: f414dc7c3bb687943bb0e99ac394a05b, type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 1435708445309712044, guid: f414dc7c3bb687943bb0e99ac394a05b, type: 3}
       propertyPath: m_emitterOver
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1761039377}
     - target: {fileID: 1435708445309712044, guid: f414dc7c3bb687943bb0e99ac394a05b, type: 3}
       propertyPath: m_emitterClick
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 2031607301}
     - target: {fileID: 1435708445309712045, guid: f414dc7c3bb687943bb0e99ac394a05b, type: 3}
       propertyPath: m_emitterOver
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1761039377}
     - target: {fileID: 1435708445309712045, guid: f414dc7c3bb687943bb0e99ac394a05b, type: 3}
       propertyPath: m_emitterClick
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 2031607301}
     - target: {fileID: 1435708445309712046, guid: f414dc7c3bb687943bb0e99ac394a05b, type: 3}
       propertyPath: m_emitterOver
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1761039377}
     - target: {fileID: 1435708445309712046, guid: f414dc7c3bb687943bb0e99ac394a05b, type: 3}
       propertyPath: m_emitterClick
       value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 1435708445309712047, guid: f414dc7c3bb687943bb0e99ac394a05b, type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 2031607301}
     - target: {fileID: 1435708445537121626, guid: f414dc7c3bb687943bb0e99ac394a05b, type: 3}
       propertyPath: m_fontMaterial
       value: 
       objectReference: {fileID: 592043069}
+    - target: {fileID: 2550526992886850272, guid: f414dc7c3bb687943bb0e99ac394a05b, type: 3}
+      propertyPath: m_isButton
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4029133047853879900, guid: f414dc7c3bb687943bb0e99ac394a05b, type: 3}
       propertyPath: m_RootOrder
       value: 9
@@ -1395,18 +1569,42 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4627428404154113819, guid: f414dc7c3bb687943bb0e99ac394a05b, type: 3}
+      propertyPath: m_isButton
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6079664394804159140, guid: f414dc7c3bb687943bb0e99ac394a05b, type: 3}
       propertyPath: m_Name
       value: MainMenu
+      objectReference: {fileID: 0}
+    - target: {fileID: 6547298079554799831, guid: f414dc7c3bb687943bb0e99ac394a05b, type: 3}
+      propertyPath: m_fontColor.b
+      value: 0.06666667
+      objectReference: {fileID: 0}
+    - target: {fileID: 6547298079554799831, guid: f414dc7c3bb687943bb0e99ac394a05b, type: 3}
+      propertyPath: m_fontColor.g
+      value: 0.047058824
       objectReference: {fileID: 0}
     - target: {fileID: 6547298079554799831, guid: f414dc7c3bb687943bb0e99ac394a05b, type: 3}
       propertyPath: m_fontMaterial
       value: 
       objectReference: {fileID: 592043069}
     - target: {fileID: 6547298079765633285, guid: f414dc7c3bb687943bb0e99ac394a05b, type: 3}
+      propertyPath: m_fontColor.b
+      value: 0.06666667
+      objectReference: {fileID: 0}
+    - target: {fileID: 6547298079765633285, guid: f414dc7c3bb687943bb0e99ac394a05b, type: 3}
+      propertyPath: m_fontColor.g
+      value: 0.047058824
+      objectReference: {fileID: 0}
+    - target: {fileID: 6547298079765633285, guid: f414dc7c3bb687943bb0e99ac394a05b, type: 3}
       propertyPath: m_fontMaterial
       value: 
       objectReference: {fileID: 592043069}
+    - target: {fileID: 8383039882765988660, guid: f414dc7c3bb687943bb0e99ac394a05b, type: 3}
+      propertyPath: m_isButton
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f414dc7c3bb687943bb0e99ac394a05b, type: 3}
 --- !u!1001 &1477646780720736655
