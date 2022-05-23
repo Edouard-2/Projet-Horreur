@@ -37,6 +37,9 @@ public class Door : MonoBehaviour
     public Material m_doorMat;
     
     [SerializeField, Tooltip("Material de la Porte")]
+    public StudioEventEmitter m_wrongDoor;
+    
+    [SerializeField, Tooltip("Material de la Porte")]
     public StudioEventEmitter m_emitterOpen;
     
     [SerializeField, Tooltip("Material de la Porte")]
@@ -97,6 +100,7 @@ public class Door : MonoBehaviour
             //Si le joueur n'a pas la clé necessaire
             if (p_playerKey == null || p_playerKey != m_neededKey)
             {
+                if(m_wrongDoor != null) m_wrongDoor.Play();
                 Debug.Log($"La cle {m_neededKey.name} est nécessaire");
                 return false;
             }

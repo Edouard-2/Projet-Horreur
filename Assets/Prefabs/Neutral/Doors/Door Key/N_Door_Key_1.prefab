@@ -1,5 +1,66 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &293094365330386089
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6395087812764198721}
+  - component: {fileID: 2710096656456521842}
+  m_Layer: 0
+  m_Name: Wrong
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6395087812764198721
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 293094365330386089}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 6351269605347594628}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2710096656456521842
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 293094365330386089}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionTag: 
+  EventReference:
+    Guid:
+      Data1: 1058875924
+      Data2: 1152425802
+      Data3: 1111057586
+      Data4: -1674385339
+    Path: event:/WrongDoor
+  Event: 
+  PlayEvent: 0
+  StopEvent: 0
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  Params: []
+  OverrideAttenuation: 1
+  OverrideMinDistance: 0.2984991
+  OverrideMaxDistance: 10.977418
 --- !u!1 &1119217862050209599
 GameObject:
   m_ObjectHideFlags: 0
@@ -91,8 +152,8 @@ MonoBehaviour:
   Preload: 0
   Params: []
   OverrideAttenuation: 1
-  OverrideMinDistance: 0.272999
-  OverrideMaxDistance: 5.6098404
+  OverrideMinDistance: 0.27602863
+  OverrideMaxDistance: 10.970577
 --- !u!1 &4302281021643329960
 GameObject:
   m_ObjectHideFlags: 0
@@ -149,11 +210,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4334288341168396440}
   m_LocalRotation: {x: -0, y: -0.7071068, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 13.639001, y: 0.99174666, z: 14.799904}
+  m_LocalPosition: {x: -0.6, y: 0.77, z: -0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 2323858182148543369}
   - {fileID: 599022547901804021}
+  - {fileID: 6395087812764198721}
   m_Father: {fileID: 6803571485856256818}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -228,6 +290,7 @@ MonoBehaviour:
   - {fileID: 5348261781236540117}
   - {fileID: 7007419370368583659}
   m_doorMat: {fileID: 2100000, guid: 31f7b320f782a1f4c9c91d10c2f7da55, type: 2}
+  m_wrongDoor: {fileID: 2710096656456521842}
   m_emitterOpen: {fileID: 8080312512764263791}
   m_emitterClose: {fileID: 529049660186194553}
 --- !u!1 &5100465726679526332
@@ -301,6 +364,7 @@ MonoBehaviour:
   - {fileID: 5348261781236540117}
   - {fileID: 7007419370368583659}
   m_doorMat: {fileID: 2100000, guid: 31f7b320f782a1f4c9c91d10c2f7da55, type: 2}
+  m_wrongDoor: {fileID: 2710096656456521842}
   m_emitterOpen: {fileID: 8080312512764263791}
   m_emitterClose: {fileID: 529049660186194553}
 --- !u!1 &5428489549360926026
@@ -556,8 +620,8 @@ MonoBehaviour:
   Preload: 0
   Params: []
   OverrideAttenuation: 1
-  OverrideMinDistance: 0.2794313
-  OverrideMaxDistance: 5.6802287
+  OverrideMinDistance: 0.26122093
+  OverrideMaxDistance: 10.901571
 --- !u!1 &8808942715794187838
 GameObject:
   m_ObjectHideFlags: 0

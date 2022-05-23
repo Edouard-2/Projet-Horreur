@@ -198,10 +198,10 @@ MonoBehaviour:
   Path: ProjetHorreurFmod/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 637889172087283914
+  lastModified: 637889219247009279
   FileSizes:
   - Name: Desktop
-    Value: 2686
+    Value: 2818
   Exists: 1
 --- !u!114 &-4269173989650992211
 MonoBehaviour:
@@ -325,6 +325,7 @@ MonoBehaviour:
     Data4: -1169904164
   Banks:
   - {fileID: 4726995918373350990}
+  - {fileID: -567523314520762633}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
@@ -483,10 +484,10 @@ MonoBehaviour:
   Path: ProjetHorreurFmod/Build/Desktop/SFX.bank
   Name: SFX
   StudioPath: bank:/SFX
-  lastModified: 637889172087699245
+  lastModified: 637889219247503438
   FileSizes:
   - Name: Desktop
-    Value: 168512
+    Value: 210848
   Exists: 1
 --- !u!114 &-415940217475756973
 MonoBehaviour:
@@ -593,12 +594,15 @@ MonoBehaviour:
   - {fileID: 1834999472405007014}
   - {fileID: -4269173989650992211}
   - {fileID: 6960334920206270141}
+  - {fileID: 6504504171463971109}
+  - {fileID: 6875208500698688509}
+  - {fileID: 1765857190608133765}
   EditorParameters: []
   MasterBanks:
   - {fileID: 4726995918373350990}
   StringsBanks:
   - {fileID: -4550200417294855588}
-  cacheTime: 637889172087699245
+  cacheTime: 637889219247503438
   cacheVersion: 10
 --- !u!114 &250855454199517988
 MonoBehaviour:
@@ -734,6 +738,33 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 12216
+--- !u!114 &1765857190608133765
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/CorrectDoor
+  m_EditorClassIdentifier: 
+  Path: event:/CorrectDoor
+  Guid:
+    Data1: -139165971
+    Data2: 1193565352
+    Data3: -1966008938
+    Data4: 810016774
+  Banks:
+  - {fileID: -567523314520762633}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 560
 --- !u!114 &1834999472405007014
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -994,7 +1025,7 @@ MonoBehaviour:
   Path: ProjetHorreurFmod/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 637889172087263915
+  lastModified: 637889219246979275
   FileSizes:
   - Name: Desktop
     Value: 6108160
@@ -1026,6 +1057,33 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 4272
+--- !u!114 &6504504171463971109
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/WrongDoor
+  m_EditorClassIdentifier: 
+  Path: event:/WrongDoor
+  Guid:
+    Data1: 1058875924
+    Data2: 1152425802
+    Data3: 1111057586
+    Data4: -1674385339
+  Banks:
+  - {fileID: -567523314520762633}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 340
 --- !u!114 &6739773059693112666
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1041,11 +1099,38 @@ MonoBehaviour:
   Path: ProjetHorreurFmod/Build/Desktop/Ambiance.bank
   Name: Ambiance
   StudioPath: bank:/Ambiance
-  lastModified: 637889172086493570
+  lastModified: 637889219246105708
   FileSizes:
   - Name: Desktop
     Value: 30696000
   Exists: 1
+--- !u!114 &6875208500698688509
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/LockDoor
+  m_EditorClassIdentifier: 
+  Path: event:/LockDoor
+  Guid:
+    Data1: 1892399666
+    Data2: 1133189911
+    Data3: -1049821565
+    Data4: 994539682
+  Banks:
+  - {fileID: -567523314520762633}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 350
 --- !u!114 &6960334920206270141
 MonoBehaviour:
   m_ObjectHideFlags: 0
