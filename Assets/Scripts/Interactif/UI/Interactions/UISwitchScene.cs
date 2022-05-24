@@ -1,4 +1,5 @@
 using System;
+using FMODUnity;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
@@ -9,6 +10,7 @@ public class UISwitchScene : MonoBehaviour, IPointerClickHandler
     [SerializeField,Tooltip("Index du niveau à charger")]private int m_levelIndex;
     [SerializeField,Tooltip("Monstre du niveau")]private GameObject m_monster1;
     [SerializeField,Tooltip("Monstre du niveau")]private GameObject m_monster2;
+    [SerializeField, Tooltip("Emitter du son Click")] private StudioEventEmitter m_clickEmitter;
 
     private void Awake()
     {
@@ -20,6 +22,7 @@ public class UISwitchScene : MonoBehaviour, IPointerClickHandler
 
     public void OnPointerClick(PointerEventData eventData)
     {
+        m_clickEmitter.Play();
         if (m_levelIndex == 0)
         {
             PlayerManager.Instance.RemoveAllPostProcess();

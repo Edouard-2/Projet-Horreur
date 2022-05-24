@@ -1,4 +1,4 @@
-using System;
+using FMODUnity;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -7,8 +7,9 @@ public class UIOver : MonoBehaviour, IPointerExitHandler,IPointerEnterHandler
 {
     private TextMeshProUGUI m_textMeshPro;
     private Color m_initColor;
-    [SerializeField] private Color m_overColor;
+    [SerializeField, Tooltip("Couleur du texte lorsqu'Over")] private Color m_overColor;
     
+    [SerializeField, Tooltip("Emitter du son Over")] private StudioEventEmitter m_overEmitter;
     private void OnDisable()
     {
         if (m_textMeshPro == null) return;
@@ -34,6 +35,8 @@ public class UIOver : MonoBehaviour, IPointerExitHandler,IPointerEnterHandler
     public void OnPointerEnter(PointerEventData eventData)
     {
         if (m_textMeshPro == null) return;
+        m_overEmitter.Play();
         m_textMeshPro.color = m_overColor;
     }
+
 }
