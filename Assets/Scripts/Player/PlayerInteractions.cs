@@ -72,6 +72,7 @@ public class PlayerInteractions : MonoBehaviour
             (m_layerKeyVisible.value & (1 << p_target.gameObject.layer)) > 0)
         {
             //Debug.Log("key");
+            m_textSelection.text = "Key";
             targetMaterial = p_target.GetComponent<Key>().m_key.m_keyMat;
 
         }
@@ -82,6 +83,7 @@ public class PlayerInteractions : MonoBehaviour
                  (m_layerDoorVisible.value & (1 << p_target.gameObject.layer)) > 0)
         {
             //Debug.Log("porte");
+            m_textSelection.text = "Door";
             Door myDoor = p_target.GetComponent<Door>();
             targetMaterial = myDoor.m_doorMat;
             if (myDoor.m_neededKey != null && myDoor.m_isOpen)
@@ -95,7 +97,7 @@ public class PlayerInteractions : MonoBehaviour
         else if ((m_layerTransvaseur.value & (1 << p_target.gameObject.layer)) > 0 || 
                  (m_layerTransvaseurInvisible.value & (1 << p_target.gameObject.layer)) > 0)
         {
-            
+            m_textSelection.text = "Transfer";
             targetMaterial = p_target.GetComponent<Recepteur>().m_material;
             //Debug.Log(targetMaterial.GetFloat("_isAim"));
         }
@@ -113,7 +115,7 @@ public class PlayerInteractions : MonoBehaviour
             targetMaterial.SetFloat("_isAim", 1);
             
             //Cursor
-            m_textSelection.text = p_target.name;
+            
             m_cursorSelection.SetActive(true);
         }
     }
