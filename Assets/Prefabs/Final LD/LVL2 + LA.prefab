@@ -385,7 +385,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1880842894}
-  m_Mesh: {fileID: -4613566224929446028, guid: 7284a3e8e6dd7fe419327c069db52729, type: 3}
+  m_Mesh: {fileID: -4613566224929446028, guid: 8bd95c77070b2ae478936109d81dc8ca, type: 3}
 --- !u!23 &1880842898
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -405,7 +405,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: b37bd00a9fefb8d45819496d8422a349, type: 2}
+  - {fileID: 2100000, guid: 7ae6d1d526fdc5440bba88edd0ce25ba, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1235,6 +1235,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3852995711258762472}
     m_Modifications:
+    - target: {fileID: 652918990271115794, guid: bdb5bf23aec7e164592edb2c2d5c3add, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 7ae6d1d526fdc5440bba88edd0ce25ba, type: 2}
+    - target: {fileID: 2978684839354976115, guid: bdb5bf23aec7e164592edb2c2d5c3add, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: -4613566224929446028, guid: 8bd95c77070b2ae478936109d81dc8ca, type: 3}
     - target: {fileID: 3728061652707604405, guid: bdb5bf23aec7e164592edb2c2d5c3add, type: 3}
       propertyPath: m_RootOrder
       value: 25
@@ -1370,6 +1378,10 @@ PrefabInstance:
       propertyPath: m_Center.z
       value: 0.07376024
       objectReference: {fileID: 0}
+    - target: {fileID: 2752049000150950268, guid: 5cf5441728126f44c90e7c81803910bc, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: -4613566224929446028, guid: 8bd95c77070b2ae478936109d81dc8ca, type: 3}
     - target: {fileID: 3728061652707604405, guid: 5cf5441728126f44c90e7c81803910bc, type: 3}
       propertyPath: m_RootOrder
       value: 23
@@ -1418,6 +1430,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: N_Key_Green_02
       objectReference: {fileID: 0}
+    - target: {fileID: 8065597408906671677, guid: 5cf5441728126f44c90e7c81803910bc, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 7ae6d1d526fdc5440bba88edd0ce25ba, type: 2}
     m_RemovedComponents:
     - {fileID: 3779158369237097646, guid: 5cf5441728126f44c90e7c81803910bc, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 5cf5441728126f44c90e7c81803910bc, type: 3}
@@ -1603,6 +1619,10 @@ PrefabInstance:
     - target: {fileID: 1069066829835960063, guid: accbf34917e47d14daaf44a15316211e, type: 3}
       propertyPath: EventReference.Guid.Data4
       value: 810016774
+      objectReference: {fileID: 0}
+    - target: {fileID: 1810059458204582206, guid: accbf34917e47d14daaf44a15316211e, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 26.178
       objectReference: {fileID: 0}
     - target: {fileID: 1810059458204582206, guid: accbf34917e47d14daaf44a15316211e, type: 3}
       propertyPath: m_LocalRotation.w
