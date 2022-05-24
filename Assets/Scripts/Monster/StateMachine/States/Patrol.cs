@@ -39,6 +39,9 @@ public class Patrol : BaseState
     public override void Enter()
     {
         Debug.Log("PATROL");
+
+        m_sm.m_isPlayerDead = false;
+        
         m_sm.m_patrolEmitter.Play();
         
         m_sm.m_navMeshAgent.isStopped = false;

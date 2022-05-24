@@ -67,6 +67,7 @@ public class Hook : BaseState
         
         //Le joueur et le monstre se fixent
         PlayerManager.Instance.transform.LookAt(m_sm.m_headTransform.position);
+        PlayerManager.Instance.m_camera.transform.LookAt(m_sm.m_headTransform.position);
         
         m_sm.transform.LookAt(new Vector3(PlayerManager.Instance.transform.position.x, m_sm.transform.position.y, PlayerManager.Instance.transform.position.z));
     }
@@ -74,7 +75,6 @@ public class Hook : BaseState
     public override void Exit()
     {
         m_sm.m_hookEmitter.Stop();
-        m_sm.m_deathEmitter.Play();
         
         m_sm.m_lastState = this;
         

@@ -271,6 +271,7 @@ public class MonsterSM : StateMachine
 
     private void OnCollisionEnter(Collision collision)
     {
+        if (m_isPlayerDead) return;
         ActiveDeath();
     }
 
@@ -381,18 +382,17 @@ public class MonsterSM : StateMachine
 
     protected override void VerifyDeathPlayer()
     {
-        if (Vector3.Distance(transform.position, PlayerManager.Instance.transform.position) < m_radiusDetection
-            && !m_isPlayerDead
-            && m_isStartIA)
+        if (Vector3.Distance(transform.position, PlayerManager.Instance.transform.position) < m_radiusDetection && !m_isPlayerDead && m_isStartIA)
         {
+            m_isPlayerDead = true;
             ActiveDeath();
         }
     }
 
     private void ActiveDeath()
     {
+        m_deathEmitter.Play();
         Debug.Log("Je te tue");
-        m_isPlayerDead = true;
         m_hook.AddIndexSpeed(0);
         NextState(m_pause);
         PlayerManager.Instance.Death();

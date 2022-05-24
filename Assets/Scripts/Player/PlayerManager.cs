@@ -428,6 +428,13 @@ public class PlayerManager : Singleton<PlayerManager>
         //Bloquer les mouvement du joueur => curseur + movements
         GameManager.Instance.SetState(GameManager.States.DEATH);
 
+        m_controllerScript.m_animator.ResetTrigger(m_controllerScript.m_moveHash);
+        m_controllerScript.m_animator.SetTrigger(m_controllerScript.m_idleHash);
+        
+        m_lookScript.m_animator.ResetTrigger(m_lookScript.m_leftHash);
+        m_lookScript.m_animator.ResetTrigger(m_lookScript.m_rightHash);
+        m_lookScript.m_animator.SetTrigger(m_lookScript.m_idleHash);
+        
         StartCoroutine(ResetLevel());
     }
 
