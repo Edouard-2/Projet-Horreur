@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Net.Mime;
+using FMODUnity;
 using TMPro;
 using UnityEngine.UI;
 using UnityEngine;
@@ -28,7 +29,10 @@ public class PlayerInteractions : MonoBehaviour
     [SerializeField, Tooltip("Les layers qui seront choisis pour la détection du raycast de proximité")] public LayerMask m_targetLayer;
     
     //Objects
-    [Header("Other")]
+    [Header("Other")] 
+    [SerializeField, Tooltip("Emitter lorsqu'on jette la clés")] public StudioEventEmitter m_dropKeyEmitter;
+    [SerializeField, Tooltip("Emitter lorsqu'on prend la clés")] public StudioEventEmitter m_pickKeyEmitter;
+    
     [SerializeField, Tooltip("Trousseau de clé")] public KeyType m_trousseauKey;
     [SerializeField, Tooltip("La piscine de toutes les clés")] private Transform m_pool;
     [SerializeField, Tooltip("Feedback visuel Cursor")] private GameObject m_cursorSelection;
@@ -141,6 +145,7 @@ public class PlayerInteractions : MonoBehaviour
                 Key myKey = p_target.GetComponent<Key>();
                 if (myKey && myKey.OpenChest(out KeyType key))
                 {
+                    m_pickKeyEmitter.Play();
                     m_currentKey = myKey;
                     if (m_keyObject == null)
                     {
@@ -260,13 +265,19 @@ public class PlayerInteractions : MonoBehaviour
     {
         if (m_isVariablesReady && m_keyObject!= null)
         {
+            m_dropKeyEmitter.Play();
+            
+            //Lancer l'animation de sorite
+            m_keyUiAnimator.ResetTrigger(m_triggerEnter);
+            m_keyUiAnimator.SetTrigger(m_triggerExit);
+            
             //Ejecter la clé
             Debug.Log("Clear key");
             m_keyObject.transform.parent = null;
             if (p_position)
             {
                 Debug.Log("je reset ma poisition");
-                m_keyObject.transform.position = gameObject.transform.position;
+                m_keyObject.transform.position = gameObject.transform.position - new Vector3(0,1,0);
 
                 RaycastHit hitInteract;
                 Ray rayInteract = PlayerManager.Instance.m_camera.ScreenPointToRay(Input.mousePosition);
@@ -281,10 +292,6 @@ public class PlayerInteractions : MonoBehaviour
             m_trousseauKey = null;
             m_keyObject = null;
             m_currentKey = null;
-            
-            //Lancer l'animation de sorite
-            m_keyUiAnimator.ResetTrigger(m_triggerEnter);
-            m_keyUiAnimator.SetTrigger(m_triggerExit);
         }
     }
 }
