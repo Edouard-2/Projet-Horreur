@@ -54,6 +54,33 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 8400
+--- !u!114 &-8438342065592776786
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Monster/HookMoment
+  m_EditorClassIdentifier: 
+  Path: event:/Monster/HookMoment
+  Guid:
+    Data1: 1253379321
+    Data2: 1284136615
+    Data3: -1291789167
+    Data4: 615845871
+  Banks:
+  - {fileID: -567523314520762633}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 10500
 --- !u!114 &-7142701423372978856
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -81,6 +108,60 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 10320
+--- !u!114 &-6853829725500696288
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/BlindMoment
+  m_EditorClassIdentifier: 
+  Path: event:/BlindMoment
+  Guid:
+    Data1: -373796290
+    Data2: 1270285188
+    Data3: -1624884058
+    Data4: -254426708
+  Banks:
+  - {fileID: -567523314520762633}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 4328
+--- !u!114 &-6069222618992390725
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/DeathSound
+  m_EditorClassIdentifier: 
+  Path: event:/DeathSound
+  Guid:
+    Data1: 1478407536
+    Data2: 1154142727
+    Data3: -548441
+    Data4: 288373296
+  Banks:
+  - {fileID: -567523314520762633}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 4582
 --- !u!114 &-5512559808694738473
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -171,10 +252,10 @@ MonoBehaviour:
   Path: ProjetHorreurFmod/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 637890233047431791
+  lastModified: 637890292777818610
   FileSizes:
   - Name: Desktop
-    Value: 2862
+    Value: 3134
   Exists: 1
 --- !u!114 &-4269173989650992211
 MonoBehaviour:
@@ -335,6 +416,33 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 698
+--- !u!114 &-2043336660711031828
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Monster/MonsterSound_old
+  m_EditorClassIdentifier: 
+  Path: event:/Monster/MonsterSound_old
+  Guid:
+    Data1: 1349297538
+    Data2: 1250700579
+    Data3: -803867722
+    Data4: 642843609
+  Banks:
+  - {fileID: -567523314520762633}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 10200
 --- !u!114 &-2007254008871866117
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -388,7 +496,7 @@ MonoBehaviour:
   Parameters: []
   MinDistance: 1
   MaxDistance: 20
-  Length: 23472
+  Length: 10000
 --- !u!114 &-1532056551452100889
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -417,6 +525,33 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 480000
+--- !u!114 &-1463080963837764532
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Monster/MonsterAmbiance
+  m_EditorClassIdentifier: 
+  Path: event:/Monster/MonsterAmbiance
+  Guid:
+    Data1: 1598558779
+    Data2: 1326980777
+    Data3: -1402959195
+    Data4: 458949049
+  Banks:
+  - {fileID: -567523314520762633}
+  IsStream: 1
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 64000
 --- !u!114 &-1133624406802398602
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -486,10 +621,10 @@ MonoBehaviour:
   Path: ProjetHorreurFmod/Build/Desktop/SFX.bank
   Name: SFX
   StudioPath: bank:/SFX
-  lastModified: 637890233047989543
+  lastModified: 637890292778559330
   FileSizes:
   - Name: Desktop
-    Value: 306496
+    Value: 1651840
   Exists: 1
 --- !u!114 &11400000
 MonoBehaviour:
@@ -545,12 +680,18 @@ MonoBehaviour:
   - {fileID: -3653664615119387629}
   - {fileID: 8705023992255827332}
   - {fileID: -2079992231434128845}
+  - {fileID: -6853829725500696288}
+  - {fileID: -6069222618992390725}
+  - {fileID: -1463080963837764532}
+  - {fileID: -2043336660711031828}
+  - {fileID: 442876221847286329}
+  - {fileID: -8438342065592776786}
   EditorParameters: []
   MasterBanks:
   - {fileID: 4726995918373350990}
   StringsBanks:
   - {fileID: -4550200417294855588}
-  cacheTime: 637890233047989543
+  cacheTime: 637890292778559330
   cacheVersion: 10
 --- !u!114 &250855454199517988
 MonoBehaviour:
@@ -603,6 +744,33 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 85
+--- !u!114 &442876221847286329
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Monster/MonsterChase
+  m_EditorClassIdentifier: 
+  Path: event:/Monster/MonsterChase
+  Guid:
+    Data1: 1497204180
+    Data2: 1180809767
+    Data3: 2142469049
+    Data4: -597305309
+  Banks:
+  - {fileID: -567523314520762633}
+  IsStream: 1
+  Is3D: 1
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 27480
 --- !u!114 &501019459578707709
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -712,7 +880,7 @@ MonoBehaviour:
   Parameters: []
   MinDistance: 1
   MaxDistance: 20
-  Length: 560
+  Length: 480
 --- !u!114 &1835247250193257652
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -735,7 +903,7 @@ MonoBehaviour:
   - {fileID: 4726995918373350990}
   IsStream: 1
   Is3D: 1
-  IsOneShot: 1
+  IsOneShot: 0
   Parameters: []
   MinDistance: 1
   MaxDistance: 20
@@ -919,10 +1087,10 @@ MonoBehaviour:
   Path: ProjetHorreurFmod/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 637890233047401785
+  lastModified: 637890292777778602
   FileSizes:
   - Name: Desktop
-    Value: 5662688
+    Value: 5662816
   Exists: 1
 --- !u!114 &5241573002766221510
 MonoBehaviour:
@@ -1047,7 +1215,7 @@ MonoBehaviour:
   Path: ProjetHorreurFmod/Build/Desktop/Ambiance.bank
   Name: Ambiance
   StudioPath: bank:/Ambiance
-  lastModified: 637890233046627799
+  lastModified: 637890292777001144
   FileSizes:
   - Name: Desktop
     Value: 32909184

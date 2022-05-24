@@ -17,6 +17,7 @@ public class Hook : BaseState
     
      public override void Enter()
     {
+        m_sm.m_hookEmitter.Play();
         Debug.Log("HOOK");
         
         PlayerManager.Instance.m_isHooked = true;
@@ -72,6 +73,9 @@ public class Hook : BaseState
 
     public override void Exit()
     {
+        m_sm.m_hookEmitter.Stop();
+        m_sm.m_deathEmitter.Play();
+        
         m_sm.m_lastState = this;
         
         PlayerManager.Instance.m_isHooked = false ;

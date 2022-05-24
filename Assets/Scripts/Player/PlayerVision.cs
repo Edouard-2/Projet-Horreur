@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using FMODUnity;
 using UnityEngine;
 using UnityEngine.Serialization;
 using UnityEngine.UI;
@@ -58,6 +59,10 @@ public class PlayerVision : MonoBehaviour
     [Header("Event")]
     [SerializeField, Tooltip("Event du sound")]
     public EventsTriggerPos m_soundEvent;
+    
+    [Header("Sound")]
+    [SerializeField, Tooltip("Emitter du blind moment")]
+    public StudioEventEmitter m_blindEmitter;
 
     public delegate void ChangeMaterial(float p_time);
     public ChangeMaterial DoChangeMaterial;
@@ -244,6 +249,8 @@ public class PlayerVision : MonoBehaviour
     {
         if (m_isVariableReady)
         {
+            m_blindEmitter.Play();
+            
             Debug.Log("BlindMoment");
             
             m_soundEvent.Raise(PlayerManager.Instance.transform.position);
