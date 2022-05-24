@@ -1,8 +1,7 @@
-using System;
 using System.Collections.Generic;
+using FMODUnity;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using UnityEngine.UI;
 
 [RequireComponent(typeof(UIActivation))]
 public class UISetActiveOptions : MonoBehaviour, IPointerClickHandler
@@ -12,6 +11,9 @@ public class UISetActiveOptions : MonoBehaviour, IPointerClickHandler
 
     [SerializeField, Tooltip("L'UI Présent en même temps que le bouton OPTIONS (lui même y compris)")]
     private List<GameObject> m_listUIFront;
+    
+    [SerializeField, Tooltip("Emitter du son Click")] private StudioEventEmitter m_clickEmitter;
+
 
     private void OnEnable()
     {
@@ -25,6 +27,7 @@ public class UISetActiveOptions : MonoBehaviour, IPointerClickHandler
     public void OnPointerClick(PointerEventData eventData)
     {
         Debug.Log("Open  Game");
+        m_clickEmitter.Play();
         ActiveOrDesactive(2);
     }
 
