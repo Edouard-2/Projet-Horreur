@@ -19,11 +19,12 @@ public class VisibleInvisibleTimer : MonoBehaviour
 
     private void OnEnable()
     {
-        PlayerManager.Instance.DoSwitchLayer += SwitchMaterials;
+        //PlayerManager.Instance.DoVisibleToInvisibleHandler += SwitchMaterials;
     }
 
-    private void SwitchMaterials(bool p_visible)
+    private void SwitchMaterials(bool p_visible = false)
     {
+        Debug.Log(p_visible);
         if (m_isVisibleInvisible)
         {
             if (m_isTimer) m_test.enabled = p_visible;
