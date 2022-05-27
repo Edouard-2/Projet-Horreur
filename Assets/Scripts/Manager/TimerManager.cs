@@ -39,7 +39,7 @@ public class TimerManager : Singleton<TimerManager>
         m_event.OnTrigger -= StartOrStopTimer;
     }
 
-    private void StartOrStopTimer(bool p_isStart)
+    public void StartOrStopTimer(bool p_isStart)
     {
         if (p_isStart && !m_isStart)
         {

@@ -6,6 +6,13 @@ using UnityEngine;
 
 public class Elevator : MonoBehaviour
 {
+    [Header("Level")]
+    [SerializeField, Tooltip("Autre lvl à charger")]
+    private GameObject m_nextLevel;
+    
+    [SerializeField, Tooltip("level à decharger")]
+    private GameObject m_currentLevel;
+    
     [Header("Transform")]
     [SerializeField, Tooltip("Position de l'assensceur actuel")]
     private GameObject m_colliderBlock;
@@ -42,6 +49,8 @@ public class Elevator : MonoBehaviour
     {
         m_openHash = Animator.StringToHash("Open");
         m_closeHash = Animator.StringToHash("Close");
+        
+        if(m_nextLevel)m_nextLevel.SetActive(false);
     }
 
     private void OnTriggerEnter(Collider other)
@@ -95,12 +104,17 @@ public class Elevator : MonoBehaviour
     IEnumerator WaitBeforeTP()
     {
         yield return new WaitForSeconds(6);
+        
+        m_nextLevel.SetActive(true);
+        m_currentLevel.SetActive(false);
+        
         PlayerManager.Instance.m_controllerScript.m_charaController.enabled = false;
         PlayerManager.Instance.transform.position =  m_newPosElevator.position + (PlayerManager.Instance.transform.position - m_currentPosElevator.position);
         
         
         yield return new WaitForEndOfFrame();
         PlayerManager.Instance.m_controllerScript.m_charaController.enabled = true;
+        
         
         gameObject.SetActive(false);
     }

@@ -459,6 +459,8 @@ public class PlayerManager : Singleton<PlayerManager>
         //Mettre le joueur à la position du dernier checkpoint
         transform.position = m_checkPointPos;
         
+        TimerManager.Instance.StartOrStopTimer(true);
+        
         StartCoroutine(WaitUntilReset());
     }
     
