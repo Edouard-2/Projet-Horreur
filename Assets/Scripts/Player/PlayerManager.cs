@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Timers;
 using FMOD.Studio;
 using FMODUnity;
 using UnityEngine;
@@ -427,7 +428,9 @@ public class PlayerManager : Singleton<PlayerManager>
 
         //Bloquer les mouvement du joueur => curseur + movements
         GameManager.Instance.SetState(GameManager.States.DEATH);
-
+        
+        TimerManager.Instance.PauseOrRestartTimer(false);
+        
         m_controllerScript.m_animator.ResetTrigger(m_controllerScript.m_moveHash);
         m_controllerScript.m_animator.SetTrigger(m_controllerScript.m_idleHash);
         
@@ -450,6 +453,10 @@ public class PlayerManager : Singleton<PlayerManager>
     {
         yield return m_waitFade;
         
+        //Relancer les timers
+        TimerManager.Instance.ResetTimer();
+        TimerManager.Instance.PauseOrRestartTimer(true);
+        
         //Death Screen
         m_deathUI.SetActive(true);
         
@@ -458,8 +465,6 @@ public class PlayerManager : Singleton<PlayerManager>
         
         //Mettre le joueur à la position du dernier checkpoint
         transform.position = m_checkPointPos;
-        
-        TimerManager.Instance.StartOrStopTimer(true);
         
         StartCoroutine(WaitUntilReset());
     }
@@ -472,7 +477,7 @@ public class PlayerManager : Singleton<PlayerManager>
         
         m_fadeAnimator.ResetTrigger(m_fadeIn);
         m_fadeAnimator.SetTrigger(m_fadeOut);
-        
+
         //Mettre les clés et le monstre à leurs emplacements de base
         UpdateFirstPos?.Invoke();
         

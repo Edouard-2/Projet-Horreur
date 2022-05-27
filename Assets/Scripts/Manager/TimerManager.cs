@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using UnityEngine;
 
@@ -43,15 +42,20 @@ public class TimerManager : Singleton<TimerManager>
     {
         if (p_isStart && !m_isStart)
         {
-            m_isStart = true;
-            m_timerHourValue = m_minuteStart;
-            m_timerMinuteValue = 0;
+            ResetTimer();
             PauseOrRestartTimer(p_isStart);
             return;
         }
         m_isStart = false;
         
         PauseOrRestartTimer(p_isStart);
+    }
+
+    public void ResetTimer()
+    {
+        m_isStart = true;
+        m_timerHourValue = m_minuteStart;
+        m_timerMinuteValue = 0;
     }
     
     /// <summary>
