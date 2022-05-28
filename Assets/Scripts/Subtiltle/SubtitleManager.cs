@@ -33,7 +33,6 @@ public class SubtitleManager : MonoBehaviour
     [SerializeField, Tooltip("Longueur des phrases qui seront affichées")]
     private int m_sentenceLength;
 
-    private int m_indexTextmeshpro = -1;
     private int m_indexDialogue = 0;
 
     private int m_currentSentenceLenght;
