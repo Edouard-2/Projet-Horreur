@@ -481,6 +481,8 @@ public class PlayerManager : Singleton<PlayerManager>
         //Mettre les clés et le monstre à leurs emplacements de base
         UpdateFirstPos?.Invoke();
         
+        SoundManager.Instance.UpdateSoundVolumeMusique();
+        
         StartCoroutine(AllowMovementPlayer());
     }
     

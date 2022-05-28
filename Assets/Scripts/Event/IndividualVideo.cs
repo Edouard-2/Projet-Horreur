@@ -9,7 +9,6 @@ public class IndividualVideo : MonoBehaviour
     [SerializeField, Tooltip("Le component emitter fmod")]
     private StudioEventEmitter m_emitter;
 
-
     private void OnEnable()
     {
         m_event.OnTrigger += DestroySelf;

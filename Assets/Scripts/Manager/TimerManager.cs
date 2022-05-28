@@ -1,10 +1,23 @@
 using System.Collections;
+using FMODUnity;
 using UnityEngine;
 
 public class TimerManager : Singleton<TimerManager>
 {
+    [SerializeField, Tooltip("Emitter du son de fin de timer")]
+    private StudioEventEmitter m_flashEmitter;
+    
+    [SerializeField, Tooltip("Emitter du son d'alarm de fin")]
+    private StudioEventEmitter m_alarmEmitter;
+    
+    [SerializeField, Tooltip("Animator du fade blanc")]
+    private Animator m_animatorFade;
+    
     [SerializeField, Tooltip("Event du timer")]
     private EventsTrigger m_event;
+    
+    [SerializeField, Tooltip("Event de la dernière video")]
+    private EventsTrigger m_eventLastVideo;
     
     [SerializeField, Tooltip("Le timer est de X minutes")]
     private int m_minuteStart;
@@ -14,8 +27,12 @@ public class TimerManager : Singleton<TimerManager>
     private bool m_isRunning;
     private bool m_isStart;
     
+    private readonly int m_fadeHash = Animator.StringToHash("FadeIn");
+    private readonly int m_idleHash = Animator.StringToHash("FadeOut");
+    
     private int m_timerMinuteValue;
     private int m_timerHourValue;
+    private bool m_isAlarmRun;
     private string m_valueString;
 
     private Coroutine m_currentCoroutine;
@@ -67,7 +84,7 @@ public class TimerManager : Singleton<TimerManager>
         if (p_isStart)
         {
             m_isRunning = true;
-            
+            m_alarmEmitter.Stop();
             m_currentCoroutine = StartCoroutine(IncreaseTime());
             return;
         }
@@ -87,11 +104,28 @@ public class TimerManager : Singleton<TimerManager>
 
         m_timerMinuteValue--;
 
+        if (m_timerHourValue == 0 && m_timerMinuteValue <= 10)
+        {
+            //Lancer le son de l'alarm
+            if (!m_isAlarmRun)
+            {
+                m_isAlarmRun = true;
+                m_alarmEmitter.Play();
+            }
+        }
+        
         if (m_timerMinuteValue <= 0)
         {
+
+            if (m_timerHourValue == 40)
+            {
+                //Lancer la 4eme video
+                m_eventLastVideo?.Raise();
+            }
+            
             if (m_timerHourValue == 0)
             {
-                PlayerManager.Instance.Death();
+                StartCoroutine(Death());
                 return;
             }
             m_timerHourValue--;
@@ -118,6 +152,31 @@ public class TimerManager : Singleton<TimerManager>
         m_valueString = $"{hours}:{minute}";
         
         UpdateTextHandler?.Invoke(m_valueString);
+    }
+
+    IEnumerator Death()
+    {
+        m_isAlarmRun = false;
+        
+        //Arrêter le son
+        SoundManager.Instance.m_musique.setVolume(0);
+        yield return new WaitForSeconds(2f);
+        
+        m_flashEmitter.Play();
+        m_alarmEmitter.Stop();
+        
+        //fade in blanc
+        m_animatorFade.ResetTrigger(m_idleHash);
+        m_animatorFade.SetTrigger(m_fadeHash);
+        
+        yield return new WaitForSeconds(1f);
+        //Mort
+        PlayerManager.Instance.Death();
+        
+        yield return new WaitForSeconds(2f);
+        //Reset le fade in
+        m_animatorFade.ResetTrigger(m_fadeHash);
+        m_animatorFade.SetTrigger(m_idleHash);
     }
 
     IEnumerator IncreaseTime()

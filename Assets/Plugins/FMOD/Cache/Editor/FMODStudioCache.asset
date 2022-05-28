@@ -252,10 +252,10 @@ MonoBehaviour:
   Path: ProjetHorreurFmod/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 637892783178019935
+  lastModified: 637893355990692166
   FileSizes:
   - Name: Desktop
-    Value: 3278
+    Value: 3328
   Exists: 1
 --- !u!114 &-4269173989650992211
 MonoBehaviour:
@@ -574,11 +574,11 @@ MonoBehaviour:
   - {fileID: 6739773059693112666}
   IsStream: 1
   Is3D: 0
-  IsOneShot: 1
+  IsOneShot: 0
   Parameters: []
   MinDistance: 1
   MaxDistance: 20
-  Length: 550000
+  Length: 11100
 --- !u!114 &-800822629261049094
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -606,6 +606,33 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 155544
+--- !u!114 &-590674779671457999
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/FlashBang
+  m_EditorClassIdentifier: 
+  Path: event:/FlashBang
+  Guid:
+    Data1: -1154989818
+    Data2: 1151942263
+    Data3: 1649165744
+    Data4: -1270535968
+  Banks:
+  - {fileID: 4726995918373350990}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 2100
 --- !u!114 &-567523314520762633
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -621,10 +648,10 @@ MonoBehaviour:
   Path: ProjetHorreurFmod/Build/Desktop/SFX.bank
   Name: SFX
   StudioPath: bank:/SFX
-  lastModified: 637892783178069949
+  lastModified: 637893355991311973
   FileSizes:
   - Name: Desktop
-    Value: 1651744
+    Value: 1651840
   Exists: 1
 --- !u!114 &11400000
 MonoBehaviour:
@@ -690,12 +717,13 @@ MonoBehaviour:
   - {fileID: 7717064763255260614}
   - {fileID: 7895219549753842599}
   - {fileID: 8903011438645811207}
+  - {fileID: -590674779671457999}
   EditorParameters: []
   MasterBanks:
   - {fileID: 4726995918373350990}
   StringsBanks:
   - {fileID: -4550200417294855588}
-  cacheTime: 637892783178069949
+  cacheTime: 637893355991311973
   cacheVersion: 10
 --- !u!114 &250855454199517988
 MonoBehaviour:
@@ -1118,10 +1146,10 @@ MonoBehaviour:
   Path: ProjetHorreurFmod/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 637892783176620041
+  lastModified: 637893355990652156
   FileSizes:
   - Name: Desktop
-    Value: 9336352
+    Value: 9397056
   Exists: 1
 --- !u!114 &5241573002766221510
 MonoBehaviour:
@@ -1246,10 +1274,10 @@ MonoBehaviour:
   Path: ProjetHorreurFmod/Build/Desktop/Ambiance.bank
   Name: Ambiance
   StudioPath: bank:/Ambiance
-  lastModified: 637892783175290279
+  lastModified: 637893355989711533
   FileSizes:
   - Name: Desktop
-    Value: 32909344
+    Value: 32909760
   Exists: 1
 --- !u!114 &6960334920206270141
 MonoBehaviour:
