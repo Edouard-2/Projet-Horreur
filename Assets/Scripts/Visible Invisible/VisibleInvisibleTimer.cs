@@ -15,7 +15,7 @@ public class VisibleInvisibleTimer : MonoBehaviour
         if(m_isTimer) m_test = GetComponent<TextMeshPro>();
         else m_render = GetComponent<MeshRenderer>();
 
-        DoVisibleToInvisible(m_isVisibleInvisible);
+        DoVisibleToInvisible(false);
     }
 
     private void OnEnable()
@@ -50,7 +50,7 @@ public class VisibleInvisibleTimer : MonoBehaviour
             m_start = false;
             return;
         }
-        
+        Debug.Log("VI");
         //Retour
         if (m_isVisibleInvisible)
         {

@@ -60,7 +60,6 @@ public class IndividualVideo : MonoBehaviour
             {
                 m_emitter.Play();
             }
-            
         }
         
         if (m_start == 2)
