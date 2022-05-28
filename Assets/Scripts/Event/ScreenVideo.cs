@@ -44,15 +44,22 @@ public class ScreenVideo : MonoBehaviour
 
     private void SwitchVideo(bool p_start = true)
     {
-        if (p_start && m_start)
+        if (p_start && !m_start)
         {
-            m_start = false;
-            
             if (m_newVideoClip != null)
             {
                 m_videoPlayer.clip = m_newVideoClip;
+                m_newVideoClip = null;
+                m_waitUntilReplaceVideo = new WaitForSeconds((float)m_videoPlayer.clip.length);
+                m_videoPlayer.frame = 0;
+                m_videoPlayer.Play();
+                StartCoroutine(ReplaceVideo());
             }
-            
+        }
+        
+        if (p_start && m_start)
+        {
+            m_start = false;
             m_videoPlayer.frame = 0;
             m_videoPlayer.Play();
             StartCoroutine(ReplaceVideo());
@@ -64,13 +71,6 @@ public class ScreenVideo : MonoBehaviour
         yield return m_waitUntilReplaceVideo;
         m_videoPlayer.frame = 0;
         
-        if (m_newVideoClip != null)
-        {
-            m_videoPlayer.clip = m_newVideoClip;
-            m_newVideoClip = null;
-            
-            yield return null;
-        }
         m_event.Raise(false);
     }
 }

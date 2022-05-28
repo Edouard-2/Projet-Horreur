@@ -7,7 +7,7 @@ public class VisibleInvisibleTimer : MonoBehaviour
     [SerializeField, Tooltip("Checked: Visible to Invisible")] bool m_isVisibleInvisible;
     
     private TextMeshPro m_test;
-    private MeshRenderer m_render;
+    [HideInInspector]public MeshRenderer m_render;
     private bool m_start;
 
     private void Awake()
