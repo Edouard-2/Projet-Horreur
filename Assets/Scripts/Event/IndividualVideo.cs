@@ -10,6 +10,9 @@ public class IndividualVideo : MonoBehaviour
     [SerializeField, Tooltip("Le component emitter fmod")]
     private StudioEventEmitter m_emitter;
     
+    [SerializeField, Tooltip("Le component emitter fmod pour la deuxième video")]
+    private StudioEventEmitter m_emitter2;
+    
     [SerializeField, Tooltip("True : il n'est pas neutral")]
     private bool m_isInvisibleVisible;
 
@@ -20,7 +23,6 @@ public class IndividualVideo : MonoBehaviour
     private void OnEnable()
     {
         m_event.OnTrigger += DestroySelf;
-        
     }
 
     private void Awake()
@@ -40,7 +42,6 @@ public class IndividualVideo : MonoBehaviour
             m_InvisibleVisible.m_render.enabled = p_active;
         }
     }
-
     private void DestroySelf(bool p_active)
     {
         if (m_start > 2) return;
@@ -65,6 +66,7 @@ public class IndividualVideo : MonoBehaviour
         if (m_start == 2)
         {
             Debug.Log("Step 2", this);
+            if(m_emitter2 != null) m_emitter2.Play();
             SemiDestroy(true);
         }
         

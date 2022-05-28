@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 8074145555578032550}
   - component: {fileID: 4916814696851342632}
   - component: {fileID: 3488524234413224317}
+  - component: {fileID: 6206713645639713099}
   m_Layer: 6
   m_Name: IV_Screen_Video
   m_TagString: Untagged
@@ -128,6 +129,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_isTimer: 0
   m_isVisibleInvisible: 0
+  m_render: {fileID: 0}
 --- !u!114 &3488524234413224317
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -142,3 +144,35 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_event: {fileID: 11400000, guid: ab4a6e0613ae9cf48ba20feb0479ba61, type: 2}
   m_emitter: {fileID: 8074145555578032550}
+  m_emitter2: {fileID: 6206713645639713099}
+  m_isInvisibleVisible: 0
+--- !u!114 &6206713645639713099
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2828387705057593084}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionTag: 
+  EventReference:
+    Guid:
+      Data1: 1390912611
+      Data2: 1322733487
+      Data3: 603507600
+      Data4: -1074776366
+    Path: event:/vid4
+  Event: 
+  PlayEvent: 0
+  StopEvent: 0
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  Params: []
+  OverrideAttenuation: 1
+  OverrideMinDistance: 0
+  OverrideMaxDistance: 0
