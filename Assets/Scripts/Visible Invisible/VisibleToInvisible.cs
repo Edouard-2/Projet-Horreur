@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.Rendering;
 using FMOD.Studio;
@@ -27,6 +28,16 @@ public class VisibleToInvisible : MonoBehaviour
         if (m_isVisibleToInvisible)
         {
             PlayerManager.Instance.DoSwitchLayer += DoSwitchLayerVisible;
+        }
+    }
+
+    private void OnDisable()
+    {
+        PlayerManager.Instance.DoVisibleToInvisibleHandler -= DoVisibleToInvisible;
+        
+        if (m_isVisibleToInvisible)
+        {
+            PlayerManager.Instance.DoSwitchLayer -= DoSwitchLayerVisible;
         }
     }
 

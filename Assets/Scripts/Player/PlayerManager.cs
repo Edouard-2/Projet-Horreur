@@ -1,8 +1,10 @@
 using System.Collections;
 using FMOD.Studio;
 using FMODUnity;
+using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.Playables;
+using UnityEngine.SceneManagement;
 
 public class PlayerManager : Singleton<PlayerManager>
 {
@@ -59,6 +61,13 @@ public class PlayerManager : Singleton<PlayerManager>
     
     //Other
     [Header("Other")]
+    [SerializeField, Tooltip("UISwitxhScene Comlponent (menu)")]
+    private UISwitchScene m_switchScene;
+    [SerializeField, Tooltip("Monstre pour la cinématique de fin")]
+    private GameObject m_monsterEnd;
+    [SerializeField, Tooltip("Animator de la spe camera")]
+    private Animator m_animatorSpeCamera;
+    
     [SerializeField, Tooltip("True: Le joueur commence en flou")]
     public bool m_isStartBlur;
     
@@ -112,6 +121,8 @@ public class PlayerManager : Singleton<PlayerManager>
     public delegate void FirstKeyPos();
     public event FirstKeyPos UpdateFirstPos;
 
+    private float duration;
+    
     private void OnEnable()
     {
         m_endCinematique.OnTrigger += ActiveEndCinematique;
@@ -124,6 +135,8 @@ public class PlayerManager : Singleton<PlayerManager>
     
     private void Awake()
     {
+        m_monsterEnd.SetActive(false);
+        
         m_vcaController = RuntimeManager.GetVCA("vca:/BlurDownVolume");
         
         m_checkPointPos = transform.position;
@@ -428,6 +441,13 @@ public class PlayerManager : Singleton<PlayerManager>
         //Bloquer les mouvement du joueur => curseur + movements
         GameManager.Instance.SetState(GameManager.States.DEATH);
 
+        m_controllerScript.m_animator.ResetTrigger(m_controllerScript.m_moveHash);
+        m_controllerScript.m_animator.SetTrigger(m_controllerScript.m_idleHash);
+        
+        m_lookScript.m_animator.ResetTrigger(m_lookScript.m_leftHash);
+        m_lookScript.m_animator.ResetTrigger(m_lookScript.m_rightHash);
+        m_lookScript.m_animator.SetTrigger(m_lookScript.m_idleHash);
+        
         StartCoroutine(ResetLevel());
     }
 
@@ -436,7 +456,34 @@ public class PlayerManager : Singleton<PlayerManager>
         m_end = true;
         m_controllerScript.m_animator.ResetTrigger(m_controllerScript.m_moveHash);
         m_controllerScript.m_animator.SetTrigger(m_controllerScript.m_idleHash);
+        
+        StartCoroutine(LookTheDoubleDoor(m_lookScript.m_camera.transform.rotation, transform.position));
+    }
+
+    IEnumerator LookTheDoubleDoor(Quaternion rotation, Vector3 pos)
+    {
+        while (duration <= 1)
+        {
+            duration += 0.015f;
+            Debug.Log(rotation);
+            Debug.Log(pos);
+            
+            m_lookScript.m_camera.transform.rotation = Quaternion.Lerp(rotation, new quaternion(0,10,0,1), duration);
+            transform.position = Vector3.Lerp(pos, m_endTimeline.transform.position, duration);
+            
+            yield return null;
+        }
+        Debug.Log("Finis");
+        
+        m_monsterEnd.SetActive(true);
+        m_animatorSpeCamera.enabled = true;
+        duration = 0;
         m_endTimeline.Play();
+        
+        yield return new WaitForSeconds((float)m_endTimeline.duration);
+        
+        m_switchScene.m_levelIndex = 2;
+        m_switchScene.NextLevel();
     }
     
     IEnumerator ResetLevel()

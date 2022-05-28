@@ -5,7 +5,6 @@ using UnityEngine;
 public class Defense : BaseState
 {
     private MonsterSM m_sm;
-    private bool m_canHook;
     private bool m_canPatrol;
     
     private WaitForSeconds m_waitSecondPatrol = new WaitForSeconds(10f);
@@ -21,7 +20,6 @@ public class Defense : BaseState
         
         //Init variables
         m_canPatrol = false;
-        m_canHook = false;
         
         m_sm.m_collider.radius /= 2;
         

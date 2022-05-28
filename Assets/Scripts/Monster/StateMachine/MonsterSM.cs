@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using FMODUnity;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -83,7 +84,7 @@ public class MonsterSM : StateMachine
     [SerializeField, Tooltip("Scriptable de l'event pour arreter l'IA monstre")]
     private List<EventsTrigger> m_eventEnd;
 
-    //--------------Other--------------//
+    //--------------Animation--------------//
     [Header("ANIMATIONS")] 
     [SerializeField, Tooltip("Component animator")]
     public Animator m_animator;
@@ -101,7 +102,25 @@ public class MonsterSM : StateMachine
     private int m_currentHash = Animator.StringToHash(m_retract);
     
     //--------------Other--------------//
+    [Header("Sound")]
+    [SerializeField, Tooltip("Son générale du monstre")]
+    public StudioEventEmitter m_idleSound;
+    
+    [SerializeField, Tooltip("Son rouage / patrol")]
+    public StudioEventEmitter m_patrolEmitter;
+    
+    [SerializeField, Tooltip("Son strident chase")]
+    public StudioEventEmitter m_chaseEmitter;
+    
+    [SerializeField, Tooltip("Son Hook")]
+    public StudioEventEmitter m_hookEmitter;
+    
+    [SerializeField, Tooltip("Detonation du son death")]
+    public StudioEventEmitter m_deathEmitter;
+    
+    //--------------Other--------------//
     [Header("OTHER")] 
+    
     [SerializeField, Tooltip("LayerMask du joueur")]
     public LayerMask m_layerPlayer;
     
@@ -211,6 +230,8 @@ public class MonsterSM : StateMachine
         
         m_isPlayerDead = false;
         
+        m_idleSound.Play();
+        
         //Récupérer le navMeshAgent si null
         if (m_navMeshAgent == null)
         {
@@ -250,6 +271,7 @@ public class MonsterSM : StateMachine
 
     private void OnCollisionEnter(Collision collision)
     {
+        if (m_isPlayerDead) return;
         ActiveDeath();
     }
 
@@ -360,18 +382,17 @@ public class MonsterSM : StateMachine
 
     protected override void VerifyDeathPlayer()
     {
-        if (Vector3.Distance(transform.position, PlayerManager.Instance.transform.position) < m_radiusDetection
-            && !m_isPlayerDead
-            && m_isStartIA)
+        if (Vector3.Distance(transform.position, PlayerManager.Instance.transform.position) < m_radiusDetection && !m_isPlayerDead && m_isStartIA)
         {
+            m_isPlayerDead = true;
             ActiveDeath();
         }
     }
 
     private void ActiveDeath()
     {
+        m_deathEmitter.Play();
         Debug.Log("Je te tue");
-        m_isPlayerDead = true;
         m_hook.AddIndexSpeed(0);
         NextState(m_pause);
         PlayerManager.Instance.Death();

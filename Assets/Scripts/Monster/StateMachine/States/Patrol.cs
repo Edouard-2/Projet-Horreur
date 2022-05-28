@@ -39,6 +39,11 @@ public class Patrol : BaseState
     public override void Enter()
     {
         Debug.Log("PATROL");
+
+        m_sm.m_isPlayerDead = false;
+        
+        m_sm.m_patrolEmitter.Play();
+        
         m_sm.m_navMeshAgent.isStopped = false;
         
         if (m_currentWayPoint == null)
@@ -110,11 +115,12 @@ public class Patrol : BaseState
             }
         }
         //LookAt joueur
-        m_sm.transform.LookAt(PlayerManager.Instance.transform);
+        //m_sm.transform.LookAt(PlayerManager.Instance.transform);
     }
 
     public override void Exit()
     {
+        m_sm.m_patrolEmitter.Stop();
         m_sm.m_navMeshAgent.SetDestination(m_sm.transform.position);
     }
     

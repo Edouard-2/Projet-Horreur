@@ -18,9 +18,9 @@ public class PlayerLook : MonoBehaviour
     private float m_mouseRotationY;
     private float m_xRotate;
 
-    private int m_idleHash = Animator.StringToHash("Idle");
-    private int m_leftHash = Animator.StringToHash("Left");
-    private int m_rightHash = Animator.StringToHash("Right");
+    [HideInInspector]public int m_idleHash = Animator.StringToHash("Idle");
+    [HideInInspector]public int m_leftHash = Animator.StringToHash("Left");
+    [HideInInspector]public int m_rightHash = Animator.StringToHash("Right");
 
     private void OnEnable()
     {

@@ -26,7 +26,7 @@ public class SoundManager : Singleton<SoundManager>
     private float m_VFXVolume;
     
     private Bus m_master;
-    private Bus m_musique;
+    public Bus m_musique;
     private Bus m_vfx;
     
     private void OnEnable()
@@ -58,7 +58,7 @@ public class SoundManager : Singleton<SoundManager>
         m_master.setVolume(m_globalVolume);
     }
 
-    private void UpdateSoundVolumeMusique()
+    public void UpdateSoundVolumeMusique()
     {
         m_musiqueVolume = (float)m_soundMusique.GetIntValue() / 100;
         

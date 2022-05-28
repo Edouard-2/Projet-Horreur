@@ -7,7 +7,7 @@ using UnityEngine.SceneManagement;
 [RequireComponent(typeof(UIActivation))]
 public class UISwitchScene : MonoBehaviour, IPointerClickHandler
 {
-    [SerializeField,Tooltip("Index du niveau à charger")]private int m_levelIndex;
+    [SerializeField,Tooltip("Index du niveau à charger")]public int m_levelIndex;
     [SerializeField,Tooltip("Monstre du niveau")]private GameObject m_monster1;
     [SerializeField,Tooltip("Monstre du niveau")]private GameObject m_monster2;
     [SerializeField, Tooltip("Emitter du son Click")] private StudioEventEmitter m_clickEmitter;
@@ -23,15 +23,22 @@ public class UISwitchScene : MonoBehaviour, IPointerClickHandler
     public void OnPointerClick(PointerEventData eventData)
     {
         m_clickEmitter.Play();
-        if (m_levelIndex == 0)
+        NextLevel();
+    }
+
+    public void NextLevel()
+    {
+        if (m_levelIndex == 0 || m_levelIndex == 2 )
         {
             PlayerManager.Instance.RemoveAllPostProcess();
-            Destroy(m_monster1);
-            Destroy(m_monster2);
-            Destroy(PlayerManager.Instance.gameObject);
-            Destroy(UIManager.Instance.gameObject);
-            Destroy(GameManager.Instance.gameObject);
+            DestroyImmediate(m_monster1);
+            DestroyImmediate(m_monster2);
+            DestroyImmediate(PlayerManager.Instance.gameObject);
+            DestroyImmediate(UIManager.Instance.gameObject);
+            DestroyImmediate(GameManager.Instance.gameObject);
+            Cursor.lockState = CursorLockMode.Confined;
         }
+
         SceneManager.LoadSceneAsync(m_levelIndex);
     }
 }

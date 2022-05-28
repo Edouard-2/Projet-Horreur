@@ -45,15 +45,16 @@ public class Recepteur : MonoBehaviour
         m_soundAlert.Raise(PlayerManager.Instance.transform.position);
         m_transvaseurEmitter.Play();
         m_travelEmitter.Play();
-        p_target.position = m_otherRecepeteur.m_spawnObjects.position;
-        StartCoroutine(EmitterRecepteur());
+        p_target.position = m_otherRecepeteur.m_spawnObjects.position + new Vector3(0,0,100);
+        StartCoroutine(EmitterRecepteur(p_target));
     }
 
-    IEnumerator EmitterRecepteur()
+    IEnumerator EmitterRecepteur(Transform trans)
     {
         yield return m_waitRecepteurTravel;
         m_otherRecepeteur.m_travelEmitter.Play();
         yield return m_waitRecepteurTravel;
         m_otherRecepeteur.m_transvaseurEmitter.Play();
+        trans.position = m_otherRecepeteur.m_spawnObjects.position;
     }
 }
