@@ -9,10 +9,12 @@ public class UIMainMenu_PlayClick : MonoBehaviour
     [SerializeField, Tooltip("L'emitter qui va joueur le son quand on passe au dessus du texte")]
     private StudioEventEmitter m_emitterOver;
 
+    private bool p_activeClick;
     private bool p_activeOver;
     private void OnMouseUpAsButton()
     {
         if (m_emitterClick == null) return;
+        p_activeClick = true;
         m_emitterClick.Play();
     }
 
