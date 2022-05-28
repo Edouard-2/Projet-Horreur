@@ -10,6 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 7798416436871237983}
   - component: {fileID: 7798416436871237980}
+  - component: {fileID: 1917300085}
+  - component: {fileID: 1917300086}
   m_Layer: 0
   m_Name: TimerManager
   m_TagString: Untagged
@@ -44,4 +46,69 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_dontdestroyOnLoad: 0
+  m_flashEmitter: {fileID: 1917300086}
+  m_alarmEmitter: {fileID: 1917300085}
+  m_animatorFade: {fileID: 0}
   m_event: {fileID: 11400000, guid: c7fa9a33c4545a44896715337f39057f, type: 2}
+  m_eventLastVideo: {fileID: 0}
+  m_minuteStart: 5
+--- !u!114 &1917300085
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7798416436871237982}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionTag: 
+  EventReference:
+    Guid:
+      Data1: -1809918289
+      Data2: 1097366336
+      Data3: -316200303
+      Data4: -969069325
+    Path: event:/Ambiance/Alarme
+  Event: 
+  PlayEvent: 0
+  StopEvent: 0
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 1
+  OverrideMaxDistance: 20
+--- !u!114 &1917300086
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7798416436871237982}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionTag: 
+  EventReference:
+    Guid:
+      Data1: -1154989818
+      Data2: 1151942263
+      Data3: 1649165744
+      Data4: -1270535968
+    Path: event:/FlashBang
+  Event: 
+  PlayEvent: 0
+  StopEvent: 0
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 1
+  OverrideMaxDistance: 20
