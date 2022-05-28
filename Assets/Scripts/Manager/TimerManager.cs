@@ -113,7 +113,7 @@ public class TimerManager : Singleton<TimerManager>
                 m_alarmEmitter.Play();
             }
         }
-        if (m_timerHourValue == 0 && m_timerMinuteValue == 50)
+        if (m_timerHourValue == 0 && m_timerMinuteValue == 42)
         {
             //Lancer la 4eme video
             m_eventLastVideo?.Raise();
