@@ -1,3 +1,4 @@
+using System.Collections;
 using TMPro;
 using UnityEngine;
 
@@ -6,13 +7,14 @@ public class VisibleInvisibleTimer : MonoBehaviour
     [SerializeField, Tooltip("Script sur le timer ? checked: true")] bool m_isTimer;
     [SerializeField, Tooltip("Checked: Visible to Invisible")] bool m_isVisibleInvisible;
     
-    private TextMeshPro m_test;
+    private TextMeshPro m_text;
     [HideInInspector]public MeshRenderer m_render;
     private bool m_start;
+    private WaitForSeconds m_waitDisplay = new WaitForSeconds(0.7f);
 
     private void Awake()
     {
-        if(m_isTimer) m_test = GetComponent<TextMeshPro>();
+        if(m_isTimer) m_text = GetComponent<TextMeshPro>();
         else m_render = GetComponent<MeshRenderer>();
 
         DoVisibleToInvisible(false);
@@ -66,23 +68,38 @@ public class VisibleInvisibleTimer : MonoBehaviour
     void Display()
     {
         //  Mettre ombre
-        if (m_test)
+        if (m_text)
         {
-            m_test.enabled = true;
+            //m_text.enabled = true;
+            StartCoroutine(DisplayText());
         }
         //  Mettre Collider
         if (m_render)
         {
-            m_render.enabled = true;
+            //m_render.enabled = true;
+            StartCoroutine(DisplayRender());
         }
+    }
+
+    IEnumerator DisplayRender()
+    {
+        yield return m_waitDisplay;
+        m_render.enabled = true;
+    }
+
+
+    IEnumerator DisplayText()
+    {
+        yield return m_waitDisplay;
+        m_text.enabled = true;
     }
 
     void Hide()
     {
         //  Enlever ombre
-        if (m_test)
+        if (m_text)
         {
-            m_test.enabled = false;
+            m_text.enabled = false;
         }
 
         //  Enlever Collider
