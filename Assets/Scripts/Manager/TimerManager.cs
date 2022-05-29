@@ -22,7 +22,7 @@ public class TimerManager : Singleton<TimerManager>
     [SerializeField, Tooltip("Le timer est de X minutes")]
     private int m_minuteStart;
 
-    private WaitForSeconds m_waitOneSeconde = new WaitForSeconds(.5f);
+    private WaitForSeconds m_waitOneSeconde = new WaitForSeconds(1f);
     
     private bool m_isRunning;
     private bool m_isStart;
@@ -113,6 +113,7 @@ public class TimerManager : Singleton<TimerManager>
                 m_alarmEmitter.Play();
             }
         }
+        
         if (m_timerHourValue == 0 && m_timerMinuteValue == 42)
         {
             //Lancer la 4eme video
