@@ -1448,71 +1448,6 @@ MonoBehaviour:
   OverrideAttenuation: 1
   OverrideMinDistance: 10.604916
   OverrideMaxDistance: 16.38
---- !u!1001 &1676357108
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 1751847367}
-    m_Modifications:
-    - target: {fileID: 643262596242736623, guid: 7be518f8ede72cc4e92b146f1ec7f4c1, type: 3}
-      propertyPath: m_Name
-      value: EventTrigger (14)
-      objectReference: {fileID: 0}
-    - target: {fileID: 1663026304761052678, guid: 7be518f8ede72cc4e92b146f1ec7f4c1, type: 3}
-      propertyPath: m_RootOrder
-      value: 14
-      objectReference: {fileID: 0}
-    - target: {fileID: 1663026304761052678, guid: 7be518f8ede72cc4e92b146f1ec7f4c1, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 3.96
-      objectReference: {fileID: 0}
-    - target: {fileID: 1663026304761052678, guid: 7be518f8ede72cc4e92b146f1ec7f4c1, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1663026304761052678, guid: 7be518f8ede72cc4e92b146f1ec7f4c1, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0.000017166138
-      objectReference: {fileID: 0}
-    - target: {fileID: 1663026304761052678, guid: 7be518f8ede72cc4e92b146f1ec7f4c1, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0.70710784
-      objectReference: {fileID: 0}
-    - target: {fileID: 1663026304761052678, guid: 7be518f8ede72cc4e92b146f1ec7f4c1, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1663026304761052678, guid: 7be518f8ede72cc4e92b146f1ec7f4c1, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0.70710576
-      objectReference: {fileID: 0}
-    - target: {fileID: 1663026304761052678, guid: 7be518f8ede72cc4e92b146f1ec7f4c1, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1663026304761052678, guid: 7be518f8ede72cc4e92b146f1ec7f4c1, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1663026304761052678, guid: 7be518f8ede72cc4e92b146f1ec7f4c1, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 90
-      objectReference: {fileID: 0}
-    - target: {fileID: 1663026304761052678, guid: 7be518f8ede72cc4e92b146f1ec7f4c1, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5772240845468184167, guid: 7be518f8ede72cc4e92b146f1ec7f4c1, type: 3}
-      propertyPath: m_bool
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5772240845468184167, guid: 7be518f8ede72cc4e92b146f1ec7f4c1, type: 3}
-      propertyPath: m_event
-      value: 
-      objectReference: {fileID: 11400000, guid: c7fa9a33c4545a44896715337f39057f, type: 2}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 7be518f8ede72cc4e92b146f1ec7f4c1, type: 3}
 --- !u!1001 &1695162344
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2332,11 +2267,6 @@ MonoBehaviour:
   OverrideAttenuation: 0
   OverrideMinDistance: 1
   OverrideMaxDistance: 20
---- !u!4 &1751847367 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 8785995339942598132, guid: f3f6335001b44ed4c8c3595a4ef65307, type: 3}
-  m_PrefabInstance: {fileID: 2165211283692947545}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1768225969
 PrefabInstance:
   m_ObjectHideFlags: 0
