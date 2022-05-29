@@ -120,7 +120,7 @@ public class Patrol : BaseState
 
     public override void Exit()
     {
-        m_sm.m_patrolEmitter.Stop();
+        //m_sm.m_patrolEmitter.Stop();
         m_sm.m_navMeshAgent.SetDestination(m_sm.transform.position);
     }
     

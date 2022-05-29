@@ -45,6 +45,8 @@ public class Elevator : MonoBehaviour
 
     private Coroutine m_coroutineClose;
 
+    private bool m_action;
+    
     private void Awake()
     {
         m_openHash = Animator.StringToHash("Open");
@@ -61,6 +63,8 @@ public class Elevator : MonoBehaviour
 
     private void OpenDoorElevator()
     {
+        if (m_action) return;
+        m_action = true;
         if (m_isOpen)
         {
             ResetTrigger(m_closeHash);
