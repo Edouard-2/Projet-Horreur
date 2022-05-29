@@ -252,10 +252,10 @@ MonoBehaviour:
   Path: ProjetHorreurFmod/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 637893560963476874
+  lastModified: 637894376582328377
   FileSizes:
   - Name: Desktop
-    Value: 3328
+    Value: 3374
   Exists: 1
 --- !u!114 &-4269173989650992211
 MonoBehaviour:
@@ -648,10 +648,10 @@ MonoBehaviour:
   Path: ProjetHorreurFmod/Build/Desktop/SFX.bank
   Name: SFX
   StudioPath: bank:/SFX
-  lastModified: 637893560963601954
+  lastModified: 637894376582937321
   FileSizes:
   - Name: Desktop
-    Value: 1651840
+    Value: 1659616
   Exists: 1
 --- !u!114 &11400000
 MonoBehaviour:
@@ -718,12 +718,13 @@ MonoBehaviour:
   - {fileID: 7895219549753842599}
   - {fileID: 8903011438645811207}
   - {fileID: -590674779671457999}
+  - {fileID: 2696961196475310991}
   EditorParameters: []
   MasterBanks:
   - {fileID: 4726995918373350990}
   StringsBanks:
   - {fileID: -4550200417294855588}
-  cacheTime: 637893560963601954
+  cacheTime: 637894376582937321
   cacheVersion: 10
 --- !u!114 &250855454199517988
 MonoBehaviour:
@@ -1050,6 +1051,33 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 142000
+--- !u!114 &2696961196475310991
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/HeadHitGroundx2
+  m_EditorClassIdentifier: 
+  Path: event:/HeadHitGroundx2
+  Guid:
+    Data1: 437071710
+    Data2: 1196805559
+    Data3: 816502942
+    Data4: -78438236
+  Banks:
+  - {fileID: -567523314520762633}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 500
 --- !u!114 &2874631705297266851
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1146,7 +1174,7 @@ MonoBehaviour:
   Path: ProjetHorreurFmod/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 637893560963456879
+  lastModified: 637894376582302012
   FileSizes:
   - Name: Desktop
     Value: 9397056
@@ -1274,7 +1302,7 @@ MonoBehaviour:
   Path: ProjetHorreurFmod/Build/Desktop/Ambiance.bank
   Name: Ambiance
   StudioPath: bank:/Ambiance
-  lastModified: 637893560962776723
+  lastModified: 637894376581308649
   FileSizes:
   - Name: Desktop
     Value: 32909760
