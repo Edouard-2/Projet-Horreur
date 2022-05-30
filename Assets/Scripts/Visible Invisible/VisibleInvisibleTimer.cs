@@ -12,13 +12,6 @@ public class VisibleInvisibleTimer : MonoBehaviour
     private bool m_start;
     private WaitForSeconds m_waitDisplay = new WaitForSeconds(0.7f);
 
-    private void Awake()
-    {
-        if(m_isTimer) m_text = GetComponent<TextMeshPro>();
-        else m_render = GetComponent<MeshRenderer>();
-
-        DoVisibleToInvisible(false);
-    }
 
     private void OnEnable()
     {
@@ -30,6 +23,14 @@ public class VisibleInvisibleTimer : MonoBehaviour
         PlayerManager.Instance.DoVisibleToInvisibleHandler -= DoVisibleToInvisible;
     }
 
+    private void Awake()
+    {
+        if(m_isTimer) m_text = GetComponent<TextMeshPro>();
+        else m_render = GetComponent<MeshRenderer>();
+
+        DoVisibleToInvisible();
+    }
+    
     void DoVisibleToInvisible(bool p_start = false)
     {
         if (p_start)

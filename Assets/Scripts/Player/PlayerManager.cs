@@ -511,6 +511,11 @@ public class PlayerManager : Singleton<PlayerManager>
         m_fadeAnimator.ResetTrigger(m_fadeIn);
         m_fadeAnimator.SetTrigger(m_fadeOut);
         
+        SoundManager.Instance.UpdateSoundVolumeMusique();
+        
+        TimerManager.Instance.ResetTimer();
+        TimerManager.Instance.PauseOrRestartTimer(true);
+        
         //Mettre les clés et le monstre à leurs emplacements de base
         UpdateFirstPos?.Invoke();
         

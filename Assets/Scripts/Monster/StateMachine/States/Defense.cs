@@ -20,7 +20,7 @@ public class Defense : BaseState
         
         //Init variables
         m_canPatrol = false;
-        
+        m_sm.m_patrolEmitter.Stop();
         m_sm.m_collider.radius /= 2;
         
         m_sm.SetNewAnimation(m_sm.m_retractHash);

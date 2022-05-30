@@ -5,6 +5,8 @@ public class UpdateTextTimer : MonoBehaviour
 {
     [SerializeField, Tooltip("TextMeshPro component")]
     private TextMeshPro m_textMeshPro;
+
+    private bool start;
     
     private void OnEnable()
     {
@@ -12,7 +14,7 @@ public class UpdateTextTimer : MonoBehaviour
     }
     private void OnDisable()
     {
-        TimerManager.Instance.UpdateTextHandler += UpdateText;
+        TimerManager.Instance.UpdateTextHandler -= UpdateText;
     }
 
     private void Awake()

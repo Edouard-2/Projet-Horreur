@@ -42,13 +42,14 @@ public class IndividualVideo : MonoBehaviour
             m_InvisibleVisible.m_render.enabled = p_active;
         }
     }
+    
     private void DestroySelf(bool p_active)
     {
         if (m_start > 2) return;
         
         if (m_start == 1 && m_isInvisibleVisible)
         {
-            Debug.Log("Step 1", this);
+            //Debug.Log("Step 1", this);
             SemiDestroy(false);
             m_start++;
             return;
@@ -64,7 +65,7 @@ public class IndividualVideo : MonoBehaviour
         
         if (m_start == 2)
         {
-            Debug.Log("Step 2", this);
+            //Debug.Log("Step 2", this);
             if(m_emitter2 != null) m_emitter2.Play();
             SemiDestroy(true);
         }
