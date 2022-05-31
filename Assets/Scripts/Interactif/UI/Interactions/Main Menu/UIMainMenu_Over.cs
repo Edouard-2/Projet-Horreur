@@ -48,6 +48,10 @@ public class UIMainMenu_Over : MonoBehaviour
 
     private void OnMouseOver()
     {
+        if (GameManager.Instance.State == GameManager.States.LOADING) return;
+        
+        Debug.Log(name);
+        
         if (m_isButton)
         {
             gameObject.transform.localScale = m_scale * 1.1f;

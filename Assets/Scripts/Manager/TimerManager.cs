@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class TimerManager : Singleton<TimerManager>
 {
+    [SerializeField, Tooltip("lvl 4")]
+    private GameObject m_lvl4;
+    
     [SerializeField, Tooltip("Emitter du son de fin de timer")]
     private StudioEventEmitter m_flashEmitter;
     
@@ -84,7 +87,7 @@ public class TimerManager : Singleton<TimerManager>
         if (p_isStart)
         {
             m_isRunning = true;
-            m_alarmEmitter.Stop();
+            
             m_currentCoroutine = StartCoroutine(IncreaseTime());
             return;
         }
@@ -93,6 +96,7 @@ public class TimerManager : Singleton<TimerManager>
         
         if (m_currentCoroutine != null)
         {
+            m_alarmEmitter.Stop();
             StopCoroutine(m_currentCoroutine);
         }
     }
@@ -114,16 +118,10 @@ public class TimerManager : Singleton<TimerManager>
             }
         }
         
-        if (m_timerHourValue == 0 && m_timerMinuteValue == 42)
-        {
-            //Lancer la 4eme video
-            m_eventLastVideo?.Raise();
-        }
-        
         if (m_timerMinuteValue <= 0)
         {
 
-            if (m_timerHourValue == 40)
+            if (m_timerHourValue == 40 && m_lvl4.activeSelf)
             {
                 //Lancer la 4eme video
                 m_eventLastVideo?.Raise();
@@ -136,7 +134,7 @@ public class TimerManager : Singleton<TimerManager>
             }
             m_timerHourValue--;
             m_timerMinuteValue = 59;
-        }
+        } 
         
         UpdateStringValue();
         

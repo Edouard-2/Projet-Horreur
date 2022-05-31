@@ -7,6 +7,9 @@ using UnityEngine.SceneManagement;
 public class UIMainMenu_Play : MonoBehaviour
 {
     [SerializeField, Tooltip("Index de la scene pour commencer le jeu")] 
+    private GameObject m_noCol;
+    
+    [SerializeField, Tooltip("Index de la scene pour commencer le jeu")] 
     private int m_sceneIndex;
     
     [SerializeField, Tooltip("Index de la scene pour commencer le jeu")] 
@@ -19,9 +22,12 @@ public class UIMainMenu_Play : MonoBehaviour
     
     private void OnMouseDown()
     {
-        Debug.Log("Over Text");
+        GameManager.Instance.SetState(GameManager.States.LOADING);
+        
         //Lanacer l'animation du fond noir
         m_emitter.Stop();
+        m_noCol.SetActive(true);
+        m_fadeAnimator.gameObject.SetActive(true);
         m_fadeAnimator.SetTrigger(Animator.StringToHash("FadeIn"));
         StartCoroutine(WaitUntilLaunchLoadingScene());
     }
@@ -29,6 +35,7 @@ public class UIMainMenu_Play : MonoBehaviour
     IEnumerator WaitUntilLaunchLoadingScene()
     {
         yield return m_waitUntilLoadScene;
+        
         //Lancement de la scene principale
         StartCoroutine(LoadAsynScene(m_sceneIndex));
     }
