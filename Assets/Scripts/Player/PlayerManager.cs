@@ -4,6 +4,8 @@ using FMODUnity;
 using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.Playables;
+using UnityEngine.Rendering;
+using UnityEngine.Rendering.Universal;
 using UnityEngine.SceneManagement;
 
 public class PlayerManager : Singleton<PlayerManager>
@@ -61,6 +63,11 @@ public class PlayerManager : Singleton<PlayerManager>
     
     //Other
     [Header("Other")]
+    [SerializeField, Tooltip("UISwitxhScene Comlponent (menu)")]
+    private Volume m_postProcess;
+
+    private ChromaticAberration m_chromaticAberration;
+    
     [SerializeField, Tooltip("UISwitxhScene Comlponent (menu)")]
     private UISwitchScene m_switchScene;
     [SerializeField, Tooltip("Monstre pour la cinématique de fin")]
@@ -175,6 +182,8 @@ public class PlayerManager : Singleton<PlayerManager>
 
     private void Start()
     {
+        m_postProcess.profile.TryGet<ChromaticAberration>(out m_chromaticAberration);
+        
         //Commencer avec vision flou
         if (m_isStartBlur)
         {
@@ -428,12 +437,26 @@ public class PlayerManager : Singleton<PlayerManager>
         }
     }
 
+    public void ActiveHookEffect(bool p_active)
+    {
+        float value = 0.05f;
+        
+        if (p_active)
+        {
+            value = 1;
+        }
+
+        m_chromaticAberration.intensity.value = value;
+    }
+
     public void Death()
     {
         m_visionScript.ResetCurrentBV();
         
         //Fade in
         Debug.Log("Fade In Death");
+        
+        ActiveHookEffect(false);
         
         m_fadeAnimator.ResetTrigger(m_fadeOut);
         m_fadeAnimator.SetTrigger(m_fadeIn);

@@ -21,6 +21,7 @@ public class Hook : BaseState
         Debug.Log("HOOK");
         
         PlayerManager.Instance.m_isHooked = true;
+        PlayerManager.Instance.ActiveHookEffect(true);
 
         m_playerInitRot = PlayerManager.Instance.transform.rotation;
         
@@ -75,9 +76,9 @@ public class Hook : BaseState
     public override void Exit()
     {
         m_sm.m_hookEmitter.Stop();
-        
         m_sm.m_lastState = this;
         
+        PlayerManager.Instance.ActiveHookEffect(false);
         PlayerManager.Instance.m_isHooked = false ;
         
         //PlayerManager.Instance.transform.rotation = m_playerInitRot;
