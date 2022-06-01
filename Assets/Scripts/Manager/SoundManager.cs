@@ -50,6 +50,13 @@ public class SoundManager : Singleton<SoundManager>
         m_vfx = RuntimeManager.GetBus("bus:/Master/SFX");
     }
 
+    private void Start()
+    {
+        m_soundGlobal.SetValue(m_soundGlobal.m_valueInit);
+        m_soundMusique.SetValue(m_soundMusique.m_valueInit);
+        m_soundVFX.SetValue(m_soundVFX.m_valueInit);
+    }
+
     private void UpdateSoundVolumeGlobal()
     {
         m_globalVolume = (float)m_soundGlobal.GetIntValue() / 100;

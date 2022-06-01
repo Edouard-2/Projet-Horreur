@@ -49,13 +49,13 @@ public class TimerManager : Singleton<TimerManager>
     private void OnEnable()
     {
         if (m_event == null) return;
-        m_event.OnTrigger += StartOrStopTimer;
+        //m_event.OnTrigger += StartOrStopTimer;
     }
     
     private void OnDisable()
     {
         if (m_event == null) return;
-        m_event.OnTrigger -= StartOrStopTimer;
+        //m_event.OnTrigger -= StartOrStopTimer;
     }
 
     public void StartOrStopTimer(bool p_isStart)
@@ -73,7 +73,7 @@ public class TimerManager : Singleton<TimerManager>
 
     public void ResetTimer()
     {
-        //m_isStart = true;
+        m_isStart = true;
         m_timerHourValue = m_minuteStart;
         m_timerMinuteValue = 0;
     }
@@ -108,7 +108,7 @@ public class TimerManager : Singleton<TimerManager>
 
         m_timerMinuteValue--;
 
-        if (m_timerHourValue == 0 && m_timerMinuteValue <= 55)
+        if (m_timerHourValue == 0 && m_timerMinuteValue <= 20)
         {
             //Lancer le son de l'alarm
             if (!m_isAlarmRun)
