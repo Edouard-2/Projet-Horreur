@@ -108,7 +108,7 @@ public class TimerManager : Singleton<TimerManager>
 
         m_timerMinuteValue--;
 
-        if (m_timerHourValue == 0 && m_timerMinuteValue <= 20)
+        if (m_timerHourValue == 0 && m_timerMinuteValue <= 55)
         {
             //Lancer le son de l'alarm
             if (!m_isAlarmRun)

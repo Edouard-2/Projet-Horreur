@@ -490,8 +490,14 @@ public class PlayerManager : Singleton<PlayerManager>
     {
         yield return m_waitFade;
         
+        TimerManager.Instance.PauseOrRestartTimer(false);
         //Death Screen
         m_deathUI.SetActive(true);
+        
+        //Enlever le blind time
+        m_visionScript.m_postProcessScript.m_depthStrenght = 0;
+        m_visionScript.m_postProcessScript.m_vignetteStrength = m_visionScript.m_postProcessScript.m_vignetteInitValue;
+        StartCoroutine(m_visionScript.ActiveBlindEffectDepth(1,0));
         
         //Vider son inventaire
         m_interactionsScript.EjectKey();

@@ -310,7 +310,7 @@ public class PlayerVision : MonoBehaviour
         LaunchCoroutineEffects(-1,0.0008f);
     }
 
-    IEnumerator ActiveBlindEffectDepth(float p_dir, float p_step)
+    public IEnumerator ActiveBlindEffectDepth(float p_dir, float p_step)
     {
         yield return m_waitDepthVignette;
         
