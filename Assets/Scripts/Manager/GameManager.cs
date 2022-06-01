@@ -41,7 +41,7 @@ public class GameManager : Singleton<GameManager>
         
         if (m_state == States.PLAYING)
         {
-            TimerManager.Instance.PauseOrRestartTimer(false);
+            //TimerManager.Instance.PauseOrRestartTimer(false);
             
             PlayerManager.Instance.m_visionScript.StopAllCoroutines();
             PlayerManager.Instance.m_visionScript.m_timeStopBlind = Time.time;
@@ -52,7 +52,7 @@ public class GameManager : Singleton<GameManager>
             return;
         }
         
-        TimerManager.Instance.PauseOrRestartTimer(true);
+        //TimerManager.Instance.PauseOrRestartTimer(true);
         
         PlayerManager.Instance.m_visionScript.StopOrStartBlindEffects();
         

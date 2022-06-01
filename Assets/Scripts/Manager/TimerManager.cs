@@ -73,7 +73,7 @@ public class TimerManager : Singleton<TimerManager>
 
     public void ResetTimer()
     {
-        m_isStart = true;
+        //m_isStart = true;
         m_timerHourValue = m_minuteStart;
         m_timerMinuteValue = 0;
     }
