@@ -103,6 +103,9 @@ public class MonsterSM : StateMachine
     
     //--------------Other--------------//
     [Header("Sound")]
+    [SerializeField, Tooltip("Son de crie du monstre")]
+    public StudioEventEmitter m_screamSound;
+    
     [SerializeField, Tooltip("Son générale du monstre")]
     public StudioEventEmitter m_idleSound;
     

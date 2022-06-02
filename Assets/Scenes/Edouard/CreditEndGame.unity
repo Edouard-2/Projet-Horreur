@@ -1652,6 +1652,100 @@ PrefabInstance:
       propertyPath: m_fontMaterial
       value: 
       objectReference: {fileID: 592043069}
+    - target: {fileID: 1652030650368560082, guid: f414dc7c3bb687943bb0e99ac394a05b, type: 3}
+      propertyPath: m_textMeshProMatiere
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 1652030650368560082, guid: f414dc7c3bb687943bb0e99ac394a05b, type: 3}
+      propertyPath: m_textMeshProNomPrenom
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 1652030650368560082, guid: f414dc7c3bb687943bb0e99ac394a05b, type: 3}
+      propertyPath: m_matiereText.Array.size
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 1652030650368560082, guid: f414dc7c3bb687943bb0e99ac394a05b, type: 3}
+      propertyPath: m_nomPrenomText.Array.size
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 1652030650368560082, guid: f414dc7c3bb687943bb0e99ac394a05b, type: 3}
+      propertyPath: m_matiereText.Array.data[0]
+      value: Narrative Design
+      objectReference: {fileID: 0}
+    - target: {fileID: 1652030650368560082, guid: f414dc7c3bb687943bb0e99ac394a05b, type: 3}
+      propertyPath: m_matiereText.Array.data[2]
+      value: Level Art
+      objectReference: {fileID: 0}
+    - target: {fileID: 1652030650368560082, guid: f414dc7c3bb687943bb0e99ac394a05b, type: 3}
+      propertyPath: m_matiereText.Array.data[3]
+      value: Chara Design
+      objectReference: {fileID: 0}
+    - target: {fileID: 1652030650368560082, guid: f414dc7c3bb687943bb0e99ac394a05b, type: 3}
+      propertyPath: m_matiereText.Array.data[4]
+      value: Modelisation
+      objectReference: {fileID: 0}
+    - target: {fileID: 1652030650368560082, guid: f414dc7c3bb687943bb0e99ac394a05b, type: 3}
+      propertyPath: m_matiereText.Array.data[5]
+      value: Texturing
+      objectReference: {fileID: 0}
+    - target: {fileID: 1652030650368560082, guid: f414dc7c3bb687943bb0e99ac394a05b, type: 3}
+      propertyPath: m_matiereText.Array.data[6]
+      value: Animation
+      objectReference: {fileID: 0}
+    - target: {fileID: 1652030650368560082, guid: f414dc7c3bb687943bb0e99ac394a05b, type: 3}
+      propertyPath: m_matiereText.Array.data[7]
+      value: Programmation
+      objectReference: {fileID: 0}
+    - target: {fileID: 1652030650368560082, guid: f414dc7c3bb687943bb0e99ac394a05b, type: 3}
+      propertyPath: m_matiereText.Array.data[8]
+      value: VFX
+      objectReference: {fileID: 0}
+    - target: {fileID: 1652030650368560082, guid: f414dc7c3bb687943bb0e99ac394a05b, type: 3}
+      propertyPath: m_matiereText.Array.data[9]
+      value: Sound Design
+      objectReference: {fileID: 0}
+    - target: {fileID: 1652030650368560082, guid: f414dc7c3bb687943bb0e99ac394a05b, type: 3}
+      propertyPath: m_nomPrenomText.Array.data[0]
+      value: "DELVALL\xC9E  Sami "
+      objectReference: {fileID: 0}
+    - target: {fileID: 1652030650368560082, guid: f414dc7c3bb687943bb0e99ac394a05b, type: 3}
+      propertyPath: m_nomPrenomText.Array.data[1]
+      value: CZULOWSKI Arsen
+      objectReference: {fileID: 0}
+    - target: {fileID: 1652030650368560082, guid: f414dc7c3bb687943bb0e99ac394a05b, type: 3}
+      propertyPath: m_nomPrenomText.Array.data[2]
+      value: BEAUCHAMP Leo
+      objectReference: {fileID: 0}
+    - target: {fileID: 1652030650368560082, guid: f414dc7c3bb687943bb0e99ac394a05b, type: 3}
+      propertyPath: m_nomPrenomText.Array.data[3]
+      value: "DELVALL\xC9E Sami \nCHEVALIER Vincenzo "
+      objectReference: {fileID: 0}
+    - target: {fileID: 1652030650368560082, guid: f414dc7c3bb687943bb0e99ac394a05b, type: 3}
+      propertyPath: m_nomPrenomText.Array.data[4]
+      value: "DELVALL\xC9E Sami\nBEAUCHAMP L\xE9o"
+      objectReference: {fileID: 0}
+    - target: {fileID: 1652030650368560082, guid: f414dc7c3bb687943bb0e99ac394a05b, type: 3}
+      propertyPath: m_nomPrenomText.Array.data[5]
+      value: "DELVALL\xC9E Sami \nCHEVALIER Vincenzo \nBEAUCHAMP L\xE9o "
+      objectReference: {fileID: 0}
+    - target: {fileID: 1652030650368560082, guid: f414dc7c3bb687943bb0e99ac394a05b, type: 3}
+      propertyPath: m_nomPrenomText.Array.data[6]
+      value: BEAUCHAMP Leo
+      objectReference: {fileID: 0}
+    - target: {fileID: 1652030650368560082, guid: f414dc7c3bb687943bb0e99ac394a05b, type: 3}
+      propertyPath: m_nomPrenomText.Array.data[7]
+      value: MORDANT Edouard
+      objectReference: {fileID: 0}
+    - target: {fileID: 1652030650368560082, guid: f414dc7c3bb687943bb0e99ac394a05b, type: 3}
+      propertyPath: m_nomPrenomText.Array.data[8]
+      value: MORDANT Edouard
+      objectReference: {fileID: 0}
+    - target: {fileID: 1652030650368560082, guid: f414dc7c3bb687943bb0e99ac394a05b, type: 3}
+      propertyPath: m_nomPrenomText.Array.data[9]
+      value: 'BEAUCHAMP Leo
+
+        MORDANT Edouard'
+      objectReference: {fileID: 0}
     - target: {fileID: 2550526992886850272, guid: f414dc7c3bb687943bb0e99ac394a05b, type: 3}
       propertyPath: m_isButton
       value: 1

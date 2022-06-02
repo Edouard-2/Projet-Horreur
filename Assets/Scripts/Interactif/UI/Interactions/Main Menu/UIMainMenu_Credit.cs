@@ -25,12 +25,12 @@ public class UIMainMenu_Credit : MonoBehaviour
     private UIMainMenu_Credit m_creditParent;
     
     [Header("Credit Text")]
-    [TextArea, SerializeField, Tooltip("Index de la scene pour commencer le jeu")] 
-    private List<string> m_nomPrenomText;
-    
     [TextArea,SerializeField, Tooltip("Index de la scene pour commencer le jeu")] 
     private List<string> m_matiereText;
 
+    [TextArea, SerializeField, Tooltip("Index de la scene pour commencer le jeu")] 
+    private List<string> m_nomPrenomText;
+    
     [Header("MainMenu")]
     [SerializeField, Tooltip("Index de la scene pour commencer le jeu")] 
     private GameObject m_mainMenu;

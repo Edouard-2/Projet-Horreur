@@ -17,6 +17,8 @@ public class AlertSound : BaseState
         Debug.Log("Alert");
         m_sm.m_navMeshAgent.speed *= 1.5f;
         
+        m_sm.m_screamSound.Play();
+        
         m_sm.SetNewAnimation(m_sm.m_bruitHash);
         m_sm.SetNewAnimation(m_sm.m_movingHash);
         

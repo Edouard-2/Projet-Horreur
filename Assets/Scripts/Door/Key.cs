@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 
@@ -11,7 +12,16 @@ public class Key : MonoBehaviour
     private void OnEnable()
     {
         PlayerManager.Instance.DoRotateKeys += RotateSelf;
+        PlayerManager.Instance.ResetKeyPos += ResetPos;
         PlayerManager.Instance.UpdateFirstPos += RotateSelf;
+    }
+
+
+    private void OnDisable()
+    {
+        PlayerManager.Instance.DoRotateKeys -= RotateSelf;
+        PlayerManager.Instance.ResetKeyPos -= ResetPos;
+        PlayerManager.Instance.UpdateFirstPos -= RotateSelf;
     }
 
     private void Awake()
@@ -24,6 +34,11 @@ public class Key : MonoBehaviour
             m_key.m_doorMat.SetFloat("_isAim", 0);
             m_key.m_keyMat.SetFloat("_isAim", 0);
         }
+    }
+    
+    private void ResetPos()
+    {
+        transform.position = m_initPos;
     }
 
     private void RotateSelf()

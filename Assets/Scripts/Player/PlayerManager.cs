@@ -118,6 +118,7 @@ public class PlayerManager : Singleton<PlayerManager>
 
     public delegate void RotateKeys();
     public RotateKeys DoRotateKeys;
+    public RotateKeys ResetKeyPos;
 
     public delegate void DoVisionSwitch(bool p_start = false);
     public DoVisionSwitch DoVisibleToInvisibleHandler;
@@ -229,6 +230,20 @@ public class PlayerManager : Singleton<PlayerManager>
                 m_controllerScript.m_speedMove = m_controllerScript.m_baseSpeed;
             }
             GameManager.Instance.SwitchPauseGame();
+        }
+
+        if (GameManager.Instance != null && GameManager.Instance.State == GameManager.States.PAUSE)
+        {
+            if (Input.GetKeyDown(KeyCode.F1))
+            {
+                transform.position = m_checkPointPos;
+            }
+            
+            if (Input.GetKeyDown(KeyCode.F2))
+            {
+                m_interactionsScript.EjectKey();
+                ResetKeyPos?.Invoke();
+            }
         }
 
         //Faire les fonctions si le jeux est en play
