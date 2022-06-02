@@ -238,7 +238,7 @@ public class PlayerManager : Singleton<PlayerManager>
             {
                 transform.position = m_checkPointPos;
             }
-            
+
             if (Input.GetKeyDown(KeyCode.F2))
             {
                 m_interactionsScript.EjectKey();

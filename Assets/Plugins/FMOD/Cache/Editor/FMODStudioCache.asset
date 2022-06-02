@@ -107,7 +107,7 @@ MonoBehaviour:
   Parameters: []
   MinDistance: 1
   MaxDistance: 20
-  Length: 9000
+  Length: 10500
 --- !u!114 &-7142701423372978856
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -162,6 +162,33 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 4328
+--- !u!114 &-6638287900110460181
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Scream1
+  m_EditorClassIdentifier: 
+  Path: event:/Scream1
+  Guid:
+    Data1: 726458069
+    Data2: 1105561833
+    Data3: -2129967948
+    Data4: -1827523034
+  Banks:
+  - {fileID: -567523314520762633}
+  IsStream: 1
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 4000
 --- !u!114 &-5512559808694738473
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -252,10 +279,10 @@ MonoBehaviour:
   Path: ProjetHorreurFmod/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 637897237089760788
+  lastModified: 637897581357262024
   FileSizes:
   - Name: Desktop
-    Value: 3374
+    Value: 3510
   Exists: 1
 --- !u!114 &-4269173989650992211
 MonoBehaviour:
@@ -496,7 +523,7 @@ MonoBehaviour:
   Parameters: []
   MinDistance: 1
   MaxDistance: 20
-  Length: 5800
+  Length: 10000
 --- !u!114 &-1532056551452100889
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -648,10 +675,10 @@ MonoBehaviour:
   Path: ProjetHorreurFmod/Build/Desktop/SFX.bank
   Name: SFX
   StudioPath: bank:/SFX
-  lastModified: 637897237090403492
+  lastModified: 637897581357970161
   FileSizes:
   - Name: Desktop
-    Value: 1659104
+    Value: 1862176
   Exists: 1
 --- !u!114 &11400000
 MonoBehaviour:
@@ -719,12 +746,15 @@ MonoBehaviour:
   - {fileID: 8903011438645811207}
   - {fileID: -590674779671457999}
   - {fileID: 2696961196475310991}
+  - {fileID: 4285031504621066844}
+  - {fileID: 3695887046048643919}
+  - {fileID: -6638287900110460181}
   EditorParameters: []
   MasterBanks:
   - {fileID: 4726995918373350990}
   StringsBanks:
   - {fileID: -4550200417294855588}
-  cacheTime: 637897237090403492
+  cacheTime: 637897581357970161
   cacheVersion: 10
 --- !u!114 &250855454199517988
 MonoBehaviour:
@@ -1050,7 +1080,7 @@ MonoBehaviour:
   - {fileID: 250855454199517988}
   MinDistance: 1
   MaxDistance: 20
-  Length: 10000
+  Length: 142000
 --- !u!114 &2696961196475310991
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1132,6 +1162,33 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 297264
+--- !u!114 &3695887046048643919
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/RandomScream
+  m_EditorClassIdentifier: 
+  Path: event:/RandomScream
+  Guid:
+    Data1: -882764332
+    Data2: 1101491805
+    Data3: 2112813486
+    Data4: -1583069566
+  Banks:
+  - {fileID: -567523314520762633}
+  IsStream: 1
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 4000
 --- !u!114 &4193675513901570464
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1159,6 +1216,33 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 350
+--- !u!114 &4285031504621066844
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Scream2
+  m_EditorClassIdentifier: 
+  Path: event:/Scream2
+  Guid:
+    Data1: -1577233095
+    Data2: 1264188467
+    Data3: 1546354567
+    Data4: -73944750
+  Banks:
+  - {fileID: -567523314520762633}
+  IsStream: 1
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 4000
 --- !u!114 &4726995918373350990
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1174,7 +1258,7 @@ MonoBehaviour:
   Path: ProjetHorreurFmod/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 637897237089740783
+  lastModified: 637897581357212164
   FileSizes:
   - Name: Desktop
     Value: 9397056
@@ -1302,10 +1386,10 @@ MonoBehaviour:
   Path: ProjetHorreurFmod/Build/Desktop/Ambiance.bank
   Name: Ambiance
   StudioPath: bank:/Ambiance
-  lastModified: 637897237088750425
+  lastModified: 637897581356184892
   FileSizes:
   - Name: Desktop
-    Value: 32909344
+    Value: 32909920
   Exists: 1
 --- !u!114 &6960334920206270141
 MonoBehaviour:
