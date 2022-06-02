@@ -216,7 +216,6 @@ public class PlayerVision : MonoBehaviour
                 }
                 return;
             }
-
             BlindMoment();
         }
     }

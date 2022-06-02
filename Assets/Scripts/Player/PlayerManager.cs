@@ -281,7 +281,6 @@ public class PlayerManager : Singleton<PlayerManager>
         m_visionScript.m_postProcessScript.m_lutTransition = 0;
         m_visionScript.m_postProcessScript.m_vignetteStrength = m_visionScript.m_postProcessScript.m_vignetteInitValue;
         m_visionScript.m_postProcessScript.m_depthStrenght = 0;
-        m_visionScript.m_timeLaunchBlind = 0;
         m_visionScript.m_postProcessScript.UpdateVignette();
         m_visionScript.m_postProcessScript.UpdateDepth();
         m_visionScript.m_postProcessScript.UpdateLutTable();
@@ -542,7 +541,8 @@ public class PlayerManager : Singleton<PlayerManager>
         m_visionScript.m_postProcessScript.m_lutTransition = 0;
         m_visionScript.m_postProcessScript.UpdateLutTable();
         m_visionScript.m_postProcessScript.UpdateVignette();
-
+        m_visionScript.m_uiBv.fillAmount = 0;
+        
         StartCoroutine(m_visionScript.ActiveBlindEffectDepth(1,0));
         
         //Vider son inventaire
