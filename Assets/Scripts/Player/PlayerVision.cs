@@ -69,7 +69,7 @@ public class PlayerVision : MonoBehaviour
 
     private bool m_isVariableReady = true;
 
-    private float m_timeLaunchBlind;
+    [HideInInspector] public float m_timeLaunchBlind;
     [HideInInspector] public float m_timeStopBlind;
 
     private WaitForSeconds m_waitDepthVignette = new WaitForSeconds(0.01f);

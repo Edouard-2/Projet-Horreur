@@ -281,6 +281,7 @@ public class PlayerManager : Singleton<PlayerManager>
         m_visionScript.m_postProcessScript.m_lutTransition = 0;
         m_visionScript.m_postProcessScript.m_vignetteStrength = m_visionScript.m_postProcessScript.m_vignetteInitValue;
         m_visionScript.m_postProcessScript.m_depthStrenght = 0;
+        m_visionScript.m_timeLaunchBlind = 0;
         m_visionScript.m_postProcessScript.UpdateVignette();
         m_visionScript.m_postProcessScript.UpdateDepth();
         m_visionScript.m_postProcessScript.UpdateLutTable();
@@ -466,6 +467,8 @@ public class PlayerManager : Singleton<PlayerManager>
 
     public void Death()
     {
+        if(m_visionScript.m_isBlurVision == 0) InitVariableChangement();
+        
         m_visionScript.ResetCurrentBV();
         
         //Fade in
@@ -533,8 +536,12 @@ public class PlayerManager : Singleton<PlayerManager>
         m_deathUI.SetActive(true);
         
         //Enlever le blind time
+        m_visionScript.IncreaseOrDecreaseMat(1);
         m_visionScript.m_postProcessScript.m_depthStrenght = 0;
-        //m_visionScript.m_postProcessScript.m_vignetteStrength = m_visionScript.m_postProcessScript.m_vignetteInitValue;
+        m_visionScript.m_postProcessScript.m_vignetteStrength = m_visionScript.m_postProcessScript.m_vignetteInitValue;
+        m_visionScript.m_postProcessScript.m_lutTransition = 0;
+        m_visionScript.m_postProcessScript.UpdateLutTable();
+        m_visionScript.m_postProcessScript.UpdateVignette();
 
         StartCoroutine(m_visionScript.ActiveBlindEffectDepth(1,0));
         
