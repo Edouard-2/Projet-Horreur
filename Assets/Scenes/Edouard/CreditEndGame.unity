@@ -1222,6 +1222,59 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 956050538432318789, guid: f414dc7c3bb687943bb0e99ac394a05b, type: 3}
   m_PrefabInstance: {fileID: 1435708445309712037}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1438403151
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1438403149}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3002f7b051be56f4d90a5eddb4068fdc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_isLeaveCredit: 0
+  m_isUpCredit: 0
+  m_isDownCredit: 0
+  m_waitSwitchValue: 2
+  m_longWaitSwitchValue: 5
+  m_creditParent: {fileID: 0}
+  m_matiereText:
+  - Narrative Design
+  - Level Design
+  - Level Art
+  - Chara Design
+  - Modelisation
+  - Texturing
+  - Animation
+  - Programmation
+  - VFX
+  - Sound Design
+  - Musique & SFX
+  - Fond Video
+  - External Help
+  m_nomPrenomText:
+  - "DELVALL\xC9E  Sami "
+  - CZULOWSKI Arsen
+  - BEAUCHAMP Leo
+  - "DELVALL\xC9E Sami \nCHEVALIER Vincenzo "
+  - "DELVALL\xC9E Sami\nBEAUCHAMP L\xE9o"
+  - "DELVALL\xC9E Sami \nCHEVALIER Vincenzo \nBEAUCHAMP L\xE9o "
+  - BEAUCHAMP Leo
+  - MORDANT Edouard
+  - MORDANT Edouard
+  - 'BEAUCHAMP Leo
+
+    MORDANT Edouard'
+  - 'Zapsplat.com
+
+    Youtube.com'
+  - Concept Laboratoire Dexter
+  - CABANIE Eve
+  m_mainMenu: {fileID: 0}
+  m_textMeshProNomPrenom: {fileID: 1365789941}
+  m_textMeshProMatiere: {fileID: 218448433}
 --- !u!114 &1438403152
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2442,7 +2495,8 @@ PrefabInstance:
       propertyPath: m_isButton
       value: 1
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 1652030650368560082, guid: f414dc7c3bb687943bb0e99ac394a05b, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: f414dc7c3bb687943bb0e99ac394a05b, type: 3}
 --- !u!4 &1435708445309712038 stripped
 Transform:
