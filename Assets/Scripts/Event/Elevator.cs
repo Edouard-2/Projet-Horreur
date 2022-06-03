@@ -81,11 +81,10 @@ public class Elevator : MonoBehaviour
 
         if (!m_isTeleport)
         {
-            m_colliderBlock.SetActive(true);
             gameObject.SetActive(false);
             return;
         }
-
+        m_colliderBlock.SetActive(true);
         StartCoroutine(WaitBeforeTP());
     }
 
