@@ -43126,7 +43126,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3835051038264179947}
   m_LocalRotation: {x: -0.6734261, y: 0.21563236, z: 0.21563236, w: 0.6734261}
-  m_LocalPosition: {x: -24.171007, y: -1.7130007, z: -13.62}
+  m_LocalPosition: {x: -24.171007, y: -1.751, z: -13.62}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 5329309968002870375}
@@ -96114,6 +96114,8 @@ MonoBehaviour:
   m_retractHash: 0
   m_mesmerHash: 0
   m_bruitHash: 0
+  m_defenseEmitter: {fileID: 0}
+  m_screamSound: {fileID: 0}
   m_idleSound: {fileID: 0}
   m_patrolEmitter: {fileID: 0}
   m_chaseEmitter: {fileID: 0}
