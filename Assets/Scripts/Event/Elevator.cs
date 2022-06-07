@@ -84,6 +84,14 @@ public class Elevator : MonoBehaviour
             gameObject.SetActive(false);
             return;
         }
+
+        if (PlayerManager.Instance.m_visionScript.m_isBlurVision == 0)
+        {
+            PlayerManager.Instance.InitVariableChangement();
+        }
+        
+        PlayerManager.Instance.m_readySwitchVision = false;
+        
         m_colliderBlock.SetActive(true);
         StartCoroutine(WaitBeforeTP());
     }
@@ -112,6 +120,7 @@ public class Elevator : MonoBehaviour
         m_currentLevel.SetActive(false);
         
         PlayerManager.Instance.m_controllerScript.m_charaController.enabled = false;
+        PlayerManager.Instance.m_readySwitchVision = true;
         PlayerManager.Instance.transform.position =  m_newPosElevator.position + (PlayerManager.Instance.transform.position - m_currentPosElevator.position);
         
         

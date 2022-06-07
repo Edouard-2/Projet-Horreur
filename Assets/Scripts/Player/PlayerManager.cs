@@ -78,6 +78,8 @@ public class PlayerManager : Singleton<PlayerManager>
     [SerializeField, Tooltip("True: Le joueur commence en flou")]
     public bool m_isStartBlur;
     
+    [HideInInspector]public bool m_readySwitchVision = true;
+    
     [Range(0,100), Tooltip("Radius de vision du joueur")]
     public float m_radiusVision;
     
@@ -184,7 +186,7 @@ public class PlayerManager : Singleton<PlayerManager>
     private void Start()
     {
         m_postProcess.profile.TryGet<ChromaticAberration>(out m_chromaticAberration);
-        
+        m_readySwitchVision = true;
         //Commencer avec vision flou
         if (m_isStartBlur)
         {
@@ -405,7 +407,8 @@ public class PlayerManager : Singleton<PlayerManager>
         //Input changement de vision
         if (Input.GetKeyDown(KeyCode.Space) 
             && !m_visionScript.m_resetTimeVisionComp 
-            && !m_visionScript.m_resetTimeVisionMat)
+            && !m_visionScript.m_resetTimeVisionMat
+            && m_readySwitchVision)
         {
             m_isStartBlur = false;
             
