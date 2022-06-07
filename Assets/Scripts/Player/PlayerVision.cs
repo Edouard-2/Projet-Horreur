@@ -63,6 +63,9 @@ public class PlayerVision : MonoBehaviour
     [Header("Sound")]
     [SerializeField, Tooltip("Emitter du blind moment")]
     public StudioEventEmitter m_blindEmitter;
+    
+    [SerializeField, Tooltip("Emitter du stop blind moment")]
+    public StudioEventEmitter m_emitterStopBlind;
 
     public delegate void ChangeMaterial(float p_time);
     public ChangeMaterial DoChangeMaterial;
@@ -272,7 +275,7 @@ public class PlayerVision : MonoBehaviour
             m_blindCoroutine = StartCoroutine(WaitStopBlind(m_blindTime));
             
             PlayerManager.Instance.DoSwitchLayer(true);
-            LaunchCoroutineEffects(1, 0.02f);
+            LaunchCoroutineEffects(1, 0.01f);
         }
     }
 
@@ -323,6 +326,7 @@ public class PlayerVision : MonoBehaviour
         else if( m_postProcessScript.m_depthStrenght <= 0.25f )
         {
             Debug.Log("RemmettreTout");
+            m_emitterStopBlind.Play();
             PlayerManager.Instance.DoSwitchLayer(false);
             m_postProcessScript.m_depthStrenght = 0;
             m_postProcessScript.UpdateDepth();
