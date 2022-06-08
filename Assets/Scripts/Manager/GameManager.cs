@@ -53,8 +53,16 @@ public class GameManager : Singleton<GameManager>
         }
         
         //TimerManager.Instance.PauseOrRestartTimer(true);
-        
-        PlayerManager.Instance.m_visionScript.StopOrStartBlindEffects();
+        if (!PlayerManager.Instance.m_visionScript.m_blindActive)
+        {
+            PlayerManager.Instance.m_visionScript.StopOrStartBlindEffects();
+        }
+        else
+        {
+            StartCoroutine(PlayerManager.Instance.m_visionScript.ActiveBlindEffectDepth(-1, 0.0008f));
+            
+            PlayerManager.Instance.m_visionScript.m_postProcessScript.m_vignetteStrength = PlayerManager.Instance.m_visionScript.m_postProcessScript.m_vignetteStartValue;
+        }
         
         MonsterSM.Instance.Relaunch();
         m_state = States.PLAYING;

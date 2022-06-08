@@ -79,6 +79,8 @@ public class PlayerVision : MonoBehaviour
     private Coroutine m_blindCoroutine;
     private List<Coroutine> m_listCoroutine;
 
+    [HideInInspector]public bool m_blindActive;
+    
     private void Awake()
     {
         if (m_uiBv == null)
@@ -251,9 +253,11 @@ public class PlayerVision : MonoBehaviour
     {
         if (m_isVariableReady)
         {
+            m_blindActive = true;
+            
             m_blindEmitter.Play();
             
-            Debug.Log("BlindMoment");
+            Debug.Log(m_blindActive);
             
             m_soundEvent.Raise(PlayerManager.Instance.transform.position);
             
@@ -285,17 +289,17 @@ public class PlayerVision : MonoBehaviour
         {
             if (m_timeStopBlind - m_timeLaunchBlind < m_blindTime)
             {
-                //Debug.Log("Setp 1");
+                Debug.Log("Setp 1");
                 LaunchCoroutineEffects(1, 0.02f);
                 StartCoroutine(WaitStopBlind(m_timeStopBlind - m_timeLaunchBlind));
                 return;
             }
-            //Debug.Log("Setp 2");
+            Debug.Log("Setp 2");
             LaunchCoroutineEffects(-1, 0.0008f);
         }
     }
 
-    private void LaunchCoroutineEffects(float p_dir, float p_stepDepth)
+    public void LaunchCoroutineEffects(float p_dir, float p_stepDepth)
     {
         StartCoroutine(ActiveBlindEffectDepth(p_dir, p_stepDepth));
         StartCoroutine(ActiveBlindEffectVignette(-p_dir));
@@ -319,7 +323,7 @@ public class PlayerVision : MonoBehaviour
         if (m_postProcessScript.m_depthStrenght < 0.9f && p_dir > 0 
             ||m_postProcessScript.m_depthStrenght > 0.25f && p_dir < 0 )
         {
-            m_postProcessScript.m_depthStrenght += p_step * p_dir;
+            m_postProcessScript.m_depthStrenght += p_step * 2 * p_dir;
             m_postProcessScript.UpdateDepth();
             StartCoroutine(ActiveBlindEffectDepth(p_dir, p_step));
         }
@@ -327,11 +331,13 @@ public class PlayerVision : MonoBehaviour
         {
             Debug.Log("RemmettreTout");
             m_emitterStopBlind.Play();
+            m_blindActive = false;
             PlayerManager.Instance.DoSwitchLayer(false);
             m_postProcessScript.m_depthStrenght = 0;
             m_postProcessScript.UpdateDepth();
             m_timeLaunchBlind = 0;
             m_readyInitVision = true;
+            Debug.Log(m_blindActive);
         }
     }
 
