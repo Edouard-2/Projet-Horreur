@@ -24,8 +24,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1301434123049758575}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.52, y: 0.062000036, z: 0.21100044}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0.52, y: 0.062000036, z: 0.5447627}
+  m_LocalScale: {x: 1, y: 1, z: 0.7377173}
   m_Children:
   - {fileID: 1550687487286814438}
   m_Father: {fileID: 1301434123417997985}
@@ -109,6 +109,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 422670f09ad1e6f44bb9d5f2e55b17c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_nextLevel: {fileID: 0}
+  m_currentLevel: {fileID: 0}
   m_colliderBlock: {fileID: 1301434124843986763}
   m_currentPosElevator: {fileID: 1550687486974521654}
   m_newPosElevator: {fileID: 0}
@@ -234,6 +236,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 422670f09ad1e6f44bb9d5f2e55b17c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_nextLevel: {fileID: 0}
+  m_currentLevel: {fileID: 0}
   m_colliderBlock: {fileID: 1301434124843986763}
   m_currentPosElevator: {fileID: 1550687486974521654}
   m_newPosElevator: {fileID: 0}
@@ -483,8 +487,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1301434124929708876}
   m_LocalRotation: {x: -0, y: 1, z: -0, w: -0.00000025331974}
-  m_LocalPosition: {x: 1.076, y: 0.062, z: 2.41}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 1.076, y: 0.062, z: 2.167}
+  m_LocalScale: {x: 1, y: 1, z: 0.7377173}
   m_Children:
   - {fileID: 1550687487970030839}
   m_Father: {fileID: 1301434123417997985}
