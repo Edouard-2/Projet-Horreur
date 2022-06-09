@@ -10,11 +10,11 @@ public class UpdateTextTimer : MonoBehaviour
     
     private void OnEnable()
     {
-        TimerManager.Instance.UpdateTextHandler += UpdateText;
+        //TimerManager.Instance.UpdateTextHandler += UpdateText;
     }
     private void OnDisable()
     {
-        TimerManager.Instance.UpdateTextHandler -= UpdateText;
+        //TimerManager.Instance.UpdateTextHandler -= UpdateText;
     }
 
     private void Awake()

@@ -4,6 +4,8 @@ using FMODUnity;
 using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.Playables;
+using UnityEngine.Rendering;
+using UnityEngine.Rendering.Universal;
 using UnityEngine.SceneManagement;
 
 public class PlayerManager : Singleton<PlayerManager>
@@ -62,6 +64,11 @@ public class PlayerManager : Singleton<PlayerManager>
     //Other
     [Header("Other")]
     [SerializeField, Tooltip("UISwitxhScene Comlponent (menu)")]
+    private Volume m_postProcess;
+
+    private ChromaticAberration m_chromaticAberration;
+    
+    [SerializeField, Tooltip("UISwitxhScene Comlponent (menu)")]
     private UISwitchScene m_switchScene;
     [SerializeField, Tooltip("Monstre pour la cinématique de fin")]
     private GameObject m_monsterEnd;
@@ -70,6 +77,8 @@ public class PlayerManager : Singleton<PlayerManager>
     
     [SerializeField, Tooltip("True: Le joueur commence en flou")]
     public bool m_isStartBlur;
+    
+    [HideInInspector]public bool m_readySwitchVision = true;
     
     [Range(0,100), Tooltip("Radius de vision du joueur")]
     public float m_radiusVision;
@@ -111,6 +120,7 @@ public class PlayerManager : Singleton<PlayerManager>
 
     public delegate void RotateKeys();
     public RotateKeys DoRotateKeys;
+    public RotateKeys ResetKeyPos;
 
     public delegate void DoVisionSwitch(bool p_start = false);
     public DoVisionSwitch DoVisibleToInvisibleHandler;
@@ -175,6 +185,8 @@ public class PlayerManager : Singleton<PlayerManager>
 
     private void Start()
     {
+        m_postProcess.profile.TryGet<ChromaticAberration>(out m_chromaticAberration);
+        m_readySwitchVision = true;
         //Commencer avec vision flou
         if (m_isStartBlur)
         {
@@ -220,6 +232,20 @@ public class PlayerManager : Singleton<PlayerManager>
                 m_controllerScript.m_speedMove = m_controllerScript.m_baseSpeed;
             }
             GameManager.Instance.SwitchPauseGame();
+        }
+
+        if (GameManager.Instance != null && GameManager.Instance.State == GameManager.States.PAUSE)
+        {
+            if (Input.GetKeyDown(KeyCode.F1))
+            {
+                transform.position = m_checkPointPos;
+            }
+
+            if (Input.GetKeyDown(KeyCode.F2))
+            {
+                m_interactionsScript.EjectKey();
+                ResetKeyPos?.Invoke();
+            }
         }
 
         //Faire les fonctions si le jeux est en play
@@ -381,7 +407,8 @@ public class PlayerManager : Singleton<PlayerManager>
         //Input changement de vision
         if (Input.GetKeyDown(KeyCode.Space) 
             && !m_visionScript.m_resetTimeVisionComp 
-            && !m_visionScript.m_resetTimeVisionMat)
+            && !m_visionScript.m_resetTimeVisionMat
+            && m_readySwitchVision)
         {
             m_isStartBlur = false;
             
@@ -428,12 +455,28 @@ public class PlayerManager : Singleton<PlayerManager>
         }
     }
 
+    public void ActiveHookEffect(bool p_active)
+    {
+        float value = 0.05f;
+        
+        if (p_active)
+        {
+            value = 1;
+        }
+
+        m_chromaticAberration.intensity.value = value;
+    }
+
     public void Death()
     {
+        if(m_visionScript.m_isBlurVision == 0) InitVariableChangement();
+        
         m_visionScript.ResetCurrentBV();
         
         //Fade in
         Debug.Log("Fade In Death");
+        
+        ActiveHookEffect(false);
         
         m_fadeAnimator.ResetTrigger(m_fadeOut);
         m_fadeAnimator.SetTrigger(m_fadeIn);
@@ -490,8 +533,20 @@ public class PlayerManager : Singleton<PlayerManager>
     {
         yield return m_waitFade;
         
+        //TimerManager.Instance.PauseOrRestartTimer(false);
         //Death Screen
         m_deathUI.SetActive(true);
+        
+        //Enlever le blind time
+        m_visionScript.IncreaseOrDecreaseMat(1);
+        m_visionScript.m_postProcessScript.m_depthStrenght = 0;
+        m_visionScript.m_postProcessScript.m_vignetteStrength = m_visionScript.m_postProcessScript.m_vignetteInitValue;
+        m_visionScript.m_postProcessScript.m_lutTransition = 0;
+        m_visionScript.m_postProcessScript.UpdateLutTable();
+        m_visionScript.m_postProcessScript.UpdateVignette();
+        m_visionScript.m_uiBv.fillAmount = 0;
+        
+        StartCoroutine(m_visionScript.ActiveBlindEffectDepth(1,0));
         
         //Vider son inventaire
         m_interactionsScript.EjectKey();
@@ -513,8 +568,8 @@ public class PlayerManager : Singleton<PlayerManager>
         
         SoundManager.Instance.UpdateSoundVolumeMusique();
         
-        TimerManager.Instance.ResetTimer();
-        TimerManager.Instance.PauseOrRestartTimer(true);
+        //TimerManager.Instance.ResetTimer();
+        //TimerManager.Instance.PauseOrRestartTimer(true);
         
         //Mettre les clés et le monstre à leurs emplacements de base
         UpdateFirstPos?.Invoke();

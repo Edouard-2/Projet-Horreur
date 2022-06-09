@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class Recepteur : MonoBehaviour
 {
+    [SerializeField, Tooltip("Gameobject de l'Outline")]
+    public GameObject m_outline;
+    
     [SerializeField, Tooltip("Material global du transvaseur")]
     public Material m_material;
     
@@ -42,6 +45,7 @@ public class Recepteur : MonoBehaviour
     public void TeleportObject(Transform p_target)
     {
         GetComponent<BoxCollider>().enabled = false;
+        m_outline.SetActive(false);
         m_soundAlert.Raise(PlayerManager.Instance.transform.position);
         m_transvaseurEmitter.Play();
         m_travelEmitter.Play();

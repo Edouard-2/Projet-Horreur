@@ -278,15 +278,6 @@ public class PlayerInteractions : MonoBehaviour
             {
                 Debug.Log("je reset ma poisition");
                 m_keyObject.transform.position = gameObject.transform.position - new Vector3(0,1,0);
-
-                RaycastHit hitInteract;
-                Ray rayInteract = PlayerManager.Instance.m_camera.ScreenPointToRay(Input.mousePosition);
-
-                //Changement de materiaux si l'obj est interactif et visé par le joueur
-                if (!Physics.Raycast(rayInteract, out hitInteract, 1, m_targetLayer))
-                {
-                    m_keyObject.transform.position += transform.forward;
-                }
             }
 
             m_trousseauKey = null;

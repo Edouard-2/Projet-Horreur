@@ -28,7 +28,6 @@ Shader "Hidden/Luminosity"
 
         Pass
         {
-            
             CGPROGRAM
             #pragma vertex vert
             #pragma fragment frag

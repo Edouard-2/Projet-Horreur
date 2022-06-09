@@ -52,8 +52,8 @@ public class ScreenVideo : MonoBehaviour
                 m_newVideoClip = null;
                 m_waitUntilReplaceVideo = new WaitForSeconds((float)m_videoPlayer.clip.length);
                 m_videoPlayer.frame = 0;
-                m_videoPlayer.Play();
-                StartCoroutine(ReplaceVideo());
+                //m_videoPlayer.Play();
+                //StartCoroutine(ReplaceVideo());
             }
         }
         

@@ -63,19 +63,24 @@ public class PlayerVision : MonoBehaviour
     [Header("Sound")]
     [SerializeField, Tooltip("Emitter du blind moment")]
     public StudioEventEmitter m_blindEmitter;
+    
+    [SerializeField, Tooltip("Emitter du stop blind moment")]
+    public StudioEventEmitter m_emitterStopBlind;
 
     public delegate void ChangeMaterial(float p_time);
     public ChangeMaterial DoChangeMaterial;
 
     private bool m_isVariableReady = true;
 
-    private float m_timeLaunchBlind;
+    [HideInInspector] public float m_timeLaunchBlind;
     [HideInInspector] public float m_timeStopBlind;
 
     private WaitForSeconds m_waitDepthVignette = new WaitForSeconds(0.01f);
     private Coroutine m_blindCoroutine;
     private List<Coroutine> m_listCoroutine;
 
+    [HideInInspector]public bool m_blindActive;
+    
     private void Awake()
     {
         if (m_uiBv == null)
@@ -216,7 +221,6 @@ public class PlayerVision : MonoBehaviour
                 }
                 return;
             }
-
             BlindMoment();
         }
     }
@@ -249,9 +253,11 @@ public class PlayerVision : MonoBehaviour
     {
         if (m_isVariableReady)
         {
+            m_blindActive = true;
+            
             m_blindEmitter.Play();
             
-            Debug.Log("BlindMoment");
+            Debug.Log(m_blindActive);
             
             m_soundEvent.Raise(PlayerManager.Instance.transform.position);
             
@@ -273,7 +279,7 @@ public class PlayerVision : MonoBehaviour
             m_blindCoroutine = StartCoroutine(WaitStopBlind(m_blindTime));
             
             PlayerManager.Instance.DoSwitchLayer(true);
-            LaunchCoroutineEffects(1, 0.02f);
+            LaunchCoroutineEffects(1, 0.01f);
         }
     }
 
@@ -283,17 +289,17 @@ public class PlayerVision : MonoBehaviour
         {
             if (m_timeStopBlind - m_timeLaunchBlind < m_blindTime)
             {
-                //Debug.Log("Setp 1");
+                Debug.Log("Setp 1");
                 LaunchCoroutineEffects(1, 0.02f);
                 StartCoroutine(WaitStopBlind(m_timeStopBlind - m_timeLaunchBlind));
                 return;
             }
-            //Debug.Log("Setp 2");
+            Debug.Log("Setp 2");
             LaunchCoroutineEffects(-1, 0.0008f);
         }
     }
 
-    private void LaunchCoroutineEffects(float p_dir, float p_stepDepth)
+    public void LaunchCoroutineEffects(float p_dir, float p_stepDepth)
     {
         StartCoroutine(ActiveBlindEffectDepth(p_dir, p_stepDepth));
         StartCoroutine(ActiveBlindEffectVignette(-p_dir));
@@ -310,23 +316,28 @@ public class PlayerVision : MonoBehaviour
         LaunchCoroutineEffects(-1,0.0008f);
     }
 
-    IEnumerator ActiveBlindEffectDepth(float p_dir, float p_step)
+    public IEnumerator ActiveBlindEffectDepth(float p_dir, float p_step)
     {
         yield return m_waitDepthVignette;
         
         if (m_postProcessScript.m_depthStrenght < 0.9f && p_dir > 0 
             ||m_postProcessScript.m_depthStrenght > 0.25f && p_dir < 0 )
         {
-            m_postProcessScript.m_depthStrenght += p_step * p_dir;
+            m_postProcessScript.m_depthStrenght += p_step * 2 * p_dir;
             m_postProcessScript.UpdateDepth();
             StartCoroutine(ActiveBlindEffectDepth(p_dir, p_step));
         }
         else if( m_postProcessScript.m_depthStrenght <= 0.25f )
         {
             Debug.Log("RemmettreTout");
+            m_emitterStopBlind.Play();
+            m_blindActive = false;
             PlayerManager.Instance.DoSwitchLayer(false);
+            m_postProcessScript.m_depthStrenght = 0;
+            m_postProcessScript.UpdateDepth();
             m_timeLaunchBlind = 0;
             m_readyInitVision = true;
+            Debug.Log(m_blindActive);
         }
     }
 
