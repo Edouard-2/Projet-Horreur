@@ -269,7 +269,7 @@ public class PlayerVision : MonoBehaviour
             float t = Mathf.InverseLerp(0,1,1 - m_currentBvMax);
             float value = Mathf.Lerp(m_postProcessScript.m_vignetteInitValue,m_postProcessScript.m_vignetteStepMax,t);
             
-            m_postProcessScript.m_vignetteStartValue = value;
+            m_postProcessScript.m_vignetteInitValue = value;
             
             m_uiBv.fillAmount = m_currentBvMax;
             m_postProcessScript.m_lutTransition = m_currentBvMax;
@@ -344,12 +344,9 @@ public class PlayerVision : MonoBehaviour
     IEnumerator ActiveBlindEffectVignette(float p_dir)
     {
         yield return m_waitDepthVignette;
-        
-        if (m_postProcessScript.m_vignetteStrength > m_postProcessScript.m_vignetteStartValue)
-        {
-            m_postProcessScript.m_vignetteStrength += m_speedDecreaseBV * 0.02f * p_dir;
-            m_postProcessScript.UpdateVignette();
-            StartCoroutine(ActiveBlindEffectVignette(p_dir));
-        }
+
+        m_postProcessScript.m_vignetteStrength = m_postProcessScript.m_vignetteInitValue;
+        m_postProcessScript.UpdateVignette();
+
     }
 }
