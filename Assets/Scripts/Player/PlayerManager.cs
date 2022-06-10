@@ -540,11 +540,17 @@ public class PlayerManager : Singleton<PlayerManager>
         //Enlever le blind time
         m_visionScript.IncreaseOrDecreaseMat(1);
         m_visionScript.m_postProcessScript.m_depthStrenght = 0;
+        m_visionScript.m_timeLaunchBlind = 0;
+        m_visionScript.m_readyInitVision = true;
+        m_visionScript.m_blindActive = false;
+        
+        m_visionScript.m_uiBv.fillAmount = m_visionScript.m_currentBvMax;
+        
         m_visionScript.m_postProcessScript.m_vignetteStrength = m_visionScript.m_postProcessScript.m_vignetteInitValue;
         m_visionScript.m_postProcessScript.m_lutTransition = 0;
         m_visionScript.m_postProcessScript.UpdateLutTable();
         m_visionScript.m_postProcessScript.UpdateVignette();
-        m_visionScript.m_uiBv.fillAmount = 0;
+        m_visionScript.m_postProcessScript.UpdateDepth();
         
         StartCoroutine(m_visionScript.ActiveBlindEffectDepth(1,0));
         

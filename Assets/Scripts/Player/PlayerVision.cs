@@ -331,12 +331,13 @@ public class PlayerVision : MonoBehaviour
         {
             Debug.Log("RemmettreTout");
             m_emitterStopBlind.Play();
-            m_blindActive = false;
+            
             PlayerManager.Instance.DoSwitchLayer(false);
             m_postProcessScript.m_depthStrenght = 0;
             m_postProcessScript.UpdateDepth();
             m_timeLaunchBlind = 0;
             m_readyInitVision = true;
+            m_blindActive = false;
             Debug.Log(m_blindActive);
         }
     }
